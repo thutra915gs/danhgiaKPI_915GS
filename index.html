@@ -11,7 +11,6 @@
 
   <style>
     :root {
-      /* TÔNG MÀU XANH LỤC VÀ CAM CHỦ ĐẠO */
       --green-dark: #064e3b;
       --green-main: #047857;
       --green-light: #059669;
@@ -49,7 +48,6 @@
       min-height: 100vh;
     }
 
-    /* ĐẦU TRANG: NỀN XANH LỤC - CHỮ VÀ VIỀN MÀU CAM */
     header {
       background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-main) 60%, #065f46 100%);
       color: var(--orange-light);
@@ -181,7 +179,6 @@
       padding: 0 16px;
     }
 
-    /* BANNER BÁO VAI TRÒ DUYỆT */
     .flow-badge-banner {
       background: #fff7ed;
       border: 2px dashed var(--orange-main);
@@ -427,7 +424,6 @@
       outline: none;
     }
 
-    /* ĐỊNH DẠNG KHÓA VÀ NỔI BẬT THEO CẤP */
     .input-score.locked-score {
       background-color: #f1f5f9 !important;
       color: #334155 !important;
@@ -548,7 +544,6 @@
       margin: 0 auto;
     }
 
-    /* CHÂN TRANG: NỀN XANH LỤC SẪM - CHỮ MÀU CAM THEO ẢNH YÊU CẦU */
     footer.site-footer {
       background-color: var(--green-dark);
       color: var(--orange-light);
@@ -757,12 +752,10 @@
 </head>
 <body>
 
-  <!-- HEADER NỀN XANH LỤC - CHỮ CAM -->
   <header>
     <div class="header-container">
       <div class="brand-box">
         <div class="brand-logo">
-          <!-- TỰ ĐỘNG TÌM KIẾM CÁC TÊN FILE ẢNH LOGO -->
           <img id="schoolLogoImg" src="LOGO OK.jpg" alt="Logo Trường TH & THCS 915 Gia Sàng" onerror="detectSchoolLogo(this)" />
         </div>
         <div class="brand-text">
@@ -793,7 +786,6 @@
 
   <main>
 
-    <!-- BANNER TRẠNG THÁI VAI TRÒ DUYỆT -->
     <div id="flowBanner" class="flow-badge-banner no-print" style="display: none;">
       <div class="flow-badge-title" id="flowBannerText">
         <i class="fa-solid fa-circle-check"></i> Đang tải dữ liệu...
@@ -805,7 +797,6 @@
       </div>
     </div>
 
-    <!-- TIÊU ĐỀ IN ẤN CHUẨN A4 -->
     <div class="print-header-admin">
       <table style="width: 100%; border: none; margin-bottom: 16px;">
         <tr style="border: none;">
@@ -829,7 +820,6 @@
       </div>
     </div>
 
-    <!-- TAB ĐỐI TƯỢNG -->
     <div class="object-selector no-print">
       <div class="object-pill active" id="tab-gvcn" onclick="switchRole('gvcn')">
         <i class="fa-solid fa-chalkboard-user"></i> 1. Giáo Viên Chủ Nhiệm (GVCN)
@@ -842,7 +832,6 @@
       </div>
     </div>
 
-    <!-- THÔNG TIN VIÊN CHỨC -->
     <section class="card">
       <div class="card-title">
         <i class="fa-solid fa-id-card-clip"></i> Thông Tin Viên Chức Tự Đánh Giá
@@ -850,7 +839,138 @@
       <div class="grid-4">
         <div class="form-group">
           <label>Họ và tên viên chức:</label>
-          <input type="text" id="empName" class="form-control" value="Nguyễn Thị Thu Trà" placeholder="Nhập họ tên...">
+          <!-- BẢNG CHỌN DANH SÁCH CBGV THEO ĐÚNG DANH SÁCH NHÀ TRƯỜNG -->
+          <select id="empName" class="form-control" onchange="handleNameChange(this.value)">
+            <option value="Chu Hải Anh">Chu Hải Anh</option>
+            <option value="Dương Ngọc Ánh">Dương Ngọc Ánh</option>
+            <option value="Dương Thị Kiều Anh">Dương Thị Kiều Anh</option>
+            <option value="Lê Quỳnh Anh">Lê Quỳnh Anh</option>
+            <option value="Nguyễn Ngọc Anh">Nguyễn Ngọc Anh</option>
+            <option value="Nguyễn Quỳnh Anh">Nguyễn Quỳnh Anh</option>
+            <option value="Trần Thị Anh">Trần Thị Anh</option>
+            <option value="Trần Thị Hồng Anh">Trần Thị Hồng Anh</option>
+            <option value="Đào Thị Vân Anh">Đào Thị Vân Anh</option>
+            <option value="Nguyễn Ngọc Bích">Nguyễn Ngọc Bích</option>
+            <option value="Hứa Kim Chi">Hứa Kim Chi</option>
+            <option value="Nguyễn Thị Chiên">Nguyễn Thị Chiên</option>
+            <option value="Ân Tiến Dũng">Ân Tiến Dũng</option>
+            <option value="Nông Văn Dương">Nông Văn Dương</option>
+            <option value="Nguyễn Thị Hà Giang">Nguyễn Thị Hà Giang</option>
+            <option value="Nguyễn Thị Thu Hà">Nguyễn Thị Thu Hà</option>
+            <option value="Phan Thị Hà">Phan Thị Hà</option>
+            <option value="Nguyễn Thị Hải">Nguyễn Thị Hải</option>
+            <option value="Trần Thị Thanh Hải">Trần Thị Thanh Hải</option>
+            <option value="Hoàng Thị Thu Hằng">Hoàng Thị Thu Hằng</option>
+            <option value="Nguyễn Thị Thu Hằng">Nguyễn Thị Thu Hằng</option>
+            <option value="Nguyễn Thu Hằng">Nguyễn Thu Hằng</option>
+            <option value="Bùi Thị Hảo">Bùi Thị Hảo</option>
+            <option value="Hứa Thu Hiền">Hứa Thu Hiền</option>
+            <option value="Nguyễn Thị Hiền">Nguyễn Thị Hiền</option>
+            <option value="Nguyễn Thị Khánh Hiền">Nguyễn Thị Khánh Hiền</option>
+            <option value="Đỗ Thị Thu Hiền">Đỗ Thị Thu Hiền</option>
+            <option value="Vũ Minh Hiếu">Vũ Minh Hiếu</option>
+            <option value="Nguyễn Thị Kim Hoa">Nguyễn Thị Kim Hoa</option>
+            <option value="Trần Thị Thu Hoài">Trần Thị Thu Hoài</option>
+            <option value="Trần Thu Hoài">Trần Thu Hoài</option>
+            <option value="Bùi Thị Thanh Hoàn">Bùi Thị Thanh Hoàn</option>
+            <option value="Nguyễn Huy Hoàng">Nguyễn Huy Hoàng</option>
+            <option value="Lê Thị Hồng">Lê Thị Hồng</option>
+            <option value="Phan Thị Hồng">Phan Thị Hồng</option>
+            <option value="Hoàng Minh Huệ">Hoàng Minh Huệ</option>
+            <option value="Hoàng Thị Huệ">Hoàng Thị Huệ</option>
+            <option value="Lưu Thị Huệ">Lưu Thị Huệ</option>
+            <option value="Nguyễn Thị Minh Huệ">Nguyễn Thị Minh Huệ</option>
+            <option value="Cao Thu Hương">Cao Thu Hương</option>
+            <option value="Dương Thị Hương">Dương Thị Hương</option>
+            <option value="Dương Thu Hường">Dương Thu Hường</option>
+            <option value="Lê Thanh Hương">Lê Thanh Hương</option>
+            <option value="Nguyễn Thị Liên Hương">Nguyễn Thị Liên Hương</option>
+            <option value="Thân Thị Hường">Thân Thị Hường</option>
+            <option value="Hà Thanh Huyền">Hà Thanh Huyền</option>
+            <option value="Nguyễn Thị Huyền">Nguyễn Thị Huyền</option>
+            <option value="Trần Văn Khánh">Trần Văn Khánh</option>
+            <option value="Nguyễn Thị Kiều">Nguyễn Thị Kiều</option>
+            <option value="Nguyễn Đàm Lâm">Nguyễn Đàm Lâm</option>
+            <option value="Dương Ngọc Lan">Dương Ngọc Lan</option>
+            <option value="Dương Thị Lan">Dương Thị Lan</option>
+            <option value="Nguyễn Thị Cẩm Lệ">Nguyễn Thị Cẩm Lệ</option>
+            <option value="Nguyễn Thị Thuỳ Linh">Nguyễn Thị Thuỳ Linh</option>
+            <option value="Nguyễn Thùy Linh">Nguyễn Thùy Linh</option>
+            <option value="Hà Thị Phương Loan">Hà Thị Phương Loan</option>
+            <option value="Phạm Thị Loan">Phạm Thị Loan</option>
+            <option value="Vũ Thị Loan">Vũ Thị Loan</option>
+            <option value="Ninh Thị Bích Lụa">Ninh Thị Bích Lụa</option>
+            <option value="Dương Ngọc Mai">Dương Ngọc Mai</option>
+            <option value="Phạm Thị Mơ">Phạm Thị Mơ</option>
+            <option value="Đinh Thị Thanh Nam">Đinh Thị Thanh Nam</option>
+            <option value="Nguyễn Thị Nga">Nguyễn Thị Nga</option>
+            <option value="Vi Thị Nga">Vi Thị Nga</option>
+            <option value="Đào Thị Ngát">Đào Thị Ngát</option>
+            <option value="Lê Minh Ngọc">Lê Minh Ngọc</option>
+            <option value="Nguyễn Thị Anh Ngọc">Nguyễn Thị Anh Ngọc</option>
+            <option value="Nguyễn Thị Hoàng Nguyên">Nguyễn Thị Hoàng Nguyên</option>
+            <option value="Đặng Thị Nguyệt">Đặng Thị Nguyệt</option>
+            <option value="Lê Thị Nhàn">Lê Thị Nhàn</option>
+            <option value="Chu Yến Nhi">Chu Yến Nhi</option>
+            <option value="Bùi Thị Nhíp">Bùi Thị Nhíp</option>
+            <option value="Lưu Vũ Huyền Nhung">Lưu Vũ Huyền Nhung</option>
+            <option value="Trương Thị Hồng Nhung">Trương Thị Hồng Nhung</option>
+            <option value="Vũ Thị Tuyết Nhung">Vũ Thị Tuyết Nhung</option>
+            <option value="Đào Thị Phương Nhung">Đào Thị Phương Nhung</option>
+            <option value="Bạch Thị Kim Oanh">Bạch Thị Kim Oanh</option>
+            <option value="Lê Khắc Phúc">Lê Khắc Phúc</option>
+            <option value="Phạm Hữu Phúc">Phạm Hữu Phúc</option>
+            <option value="Lê Thị Phương">Lê Thị Phương</option>
+            <option value="Nguyễn Thị Thu Phương">Nguyễn Thị Thu Phương</option>
+            <option value="Trần Lan Phương">Trần Lan Phương</option>
+            <option value="Trương Minh Quang">Trương Minh Quang</option>
+            <option value="Bùi Văn Quý">Bùi Văn Quý</option>
+            <option value="Trần Xuân Quý">Trần Xuân Quý</option>
+            <option value="Nguyễn Lệ Quyên">Nguyễn Lệ Quyên</option>
+            <option value="Nguyễn Thị Quỳnh">Nguyễn Thị Quỳnh</option>
+            <option value="Trường Thcs Gia Sàng">Trường Thcs Gia Sàng</option>
+            <option value="Ngô Mạnh Tấn">Ngô Mạnh Tấn</option>
+            <option value="Ngô Thị Tân">Ngô Thị Tân</option>
+            <option value="Dương Thị Thái">Dương Thị Thái</option>
+            <option value="Lý Thu Thảo">Lý Thu Thảo</option>
+            <option value="Mai Phương Thảo">Mai Phương Thảo</option>
+            <option value="Nguyễn Thị Thanh Thảo">Nguyễn Thị Thanh Thảo</option>
+            <option value="Trần Thị Thu Thảo">Trần Thị Thu Thảo</option>
+            <option value="Sầm Thị Thi">Sầm Thị Thi</option>
+            <option value="Vũ Thị Thi">Vũ Thị Thi</option>
+            <option value="Nguyễn Thị Thơm">Nguyễn Thị Thơm</option>
+            <option value="Nguyễn Hà Thu">Nguyễn Hà Thu</option>
+            <option value="Nguyễn Thị Thu">Nguyễn Thị Thu</option>
+            <option value="Trần Lệ Thu">Trần Lệ Thu</option>
+            <option value="Luân Thị Hoài Thương">Luân Thị Hoài Thương</option>
+            <option value="Lương Thị Thu Thương">Lương Thị Thu Thương</option>
+            <option value="Hoàng Hồng Thúy">Hoàng Hồng Thúy</option>
+            <option value="Lê Thị Thanh Thủy">Lê Thị Thanh Thủy</option>
+            <option value="Ngô Minh Thùy">Ngô Minh Thùy</option>
+            <option value="Ngô Thị Thu Thuỷ">Ngô Thị Thu Thuỷ</option>
+            <option value="Vương Thị Thủy">Vương Thị Thủy</option>
+            <option value="Hạng Minh Tiến">Hạng Minh Tiến</option>
+            <option value="Nguyễn Thị Thu Trà" selected>Nguyễn Thị Thu Trà</option>
+            <option value="Hoàng Thị Ngọc Trâm">Hoàng Thị Ngọc Trâm</option>
+            <option value="Lý Thị Trang">Lý Thị Trang</option>
+            <option value="Nguyễn Thị Huyền Trang">Nguyễn Thị Huyền Trang</option>
+            <option value="Nguyễn Thị Đoan Trang">Nguyễn Thị Đoan Trang</option>
+            <option value="Trần Thu Trang">Trần Thu Trang</option>
+            <option value="Đặng Thị Tranh">Đặng Thị Tranh</option>
+            <option value="Hoàng Anh Tuấn">Hoàng Anh Tuấn</option>
+            <option value="Đoàn Thanh Tuấn">Đoàn Thanh Tuấn</option>
+            <option value="Dương Thị Uyên">Dương Thị Uyên</option>
+            <option value="Ma Thị Uyên">Ma Thị Uyên</option>
+            <option value="Dương Thị Vân">Dương Thị Vân</option>
+            <option value="Nguyễn Thị Hồng Vân">Nguyễn Thị Hồng Vân</option>
+            <option value="Bùi Ngọc Viễn">Bùi Ngọc Viễn</option>
+            <option value="Đặng Thị Xiêm">Đặng Thị Xiêm</option>
+            <option value="Nguyễn Thị Thanh Xuân">Nguyễn Thị Thanh Xuân</option>
+            <option value="Trần Thị Thanh Xuyên">Trần Thị Thanh Xuyên</option>
+            <option value="Nguyễn Hải Yến">Nguyễn Hải Yến</option>
+            <option value="Phạm Thị Bảo Yến">Phạm Thị Bảo Yến</option>
+            <option value="Tô Thị Đông">Tô Thị Đông</option>
+          </select>
         </div>
         <div class="form-group">
           <label>Chức vụ / Vị trí việc làm:</label>
@@ -874,7 +994,6 @@
       </div>
     </section>
 
-    <!-- METRICS DASHBOARD: TỔNG ĐIỂM CHUẨN 100 -->
     <div class="metrics-grid">
       <div class="metric-card">
         <div class="metric-title" id="lbl-col1">Trụ cột I (Đạo đức)</div>
@@ -905,7 +1024,6 @@
       </div>
     </div>
 
-    <!-- BẢNG ĐIỂM CHI TIẾT -->
     <section class="card">
       <div class="card-title">
         <i class="fa-solid fa-list-check"></i> 
@@ -930,7 +1048,6 @@
       </div>
     </section>
 
-    <!-- ĐIỂM THƯỞNG BONUS -->
     <section class="card">
       <div class="bonus-box">
         <div class="bonus-header">
@@ -941,7 +1058,6 @@
       </div>
     </section>
 
-    <!-- CHỮ KÝ PHÊ DUYỆT -->
     <section class="card">
       <div class="signature-grid">
         <div>
@@ -966,7 +1082,6 @@
 
   </main>
 
-  <!-- CHÂN TRANG: NỀN XANH LỤC SẪM - CHỮ MÀU CAM THEO ẢNH YÊU CẦU -->
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-left">
@@ -984,7 +1099,7 @@
           <i class="fa-solid fa-address-book icon-contact"></i> KÊNH HỖ TRỢ &amp; LIÊN HỆ:
         </div>
         <p class="contact-item">
-          <i class="fa-solid fa-phone"></i> Điện thoại: <strong class="phone-val">01971785999</strong>
+          <i class="fa-solid fa-phone"></i> Điện thoại: <strong class="phone-val"><a href="tel:0971785999" style="color: inherit; text-decoration: none;">0971.785.999</a></strong>
         </p>
         <p class="contact-item">
           <i class="fa-solid fa-envelope"></i> Email: <a href="mailto:trantt.915giasang.tn@gmail.com">trantt.915giasang.tn@gmail.com</a>
@@ -995,7 +1110,6 @@
   </footer>
 
   <script>
-    // TỰ ĐỘNG THỬ CÁC TÊN FILE ẢNH PHỔ BIẾN NẾU SAI TÊN/CHỮ HOA THƯỜNG
     const candidateLogos = ['LOGO OK.jpg', 'logo.jpg', 'LOGO.jpg', 'logo.png', 'LOGO OK.png', 'Logo.jpg', 'logo.jpeg'];
     let candidateIdx = 0;
 
@@ -1010,7 +1124,6 @@
     }
 
     const KPI_DATA = {
-      // 1. GIÁO VIÊN CHỦ NHIỆM
       gvcn: {
         title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - GIÁO VIÊN CHỦ NHIỆM (GVCN)",
         col1: { name: "Trụ cột I (Đạo đức)", max: 20 },
@@ -1037,7 +1150,6 @@
         ]
       },
 
-      // 2. GIÁO VIÊN BỘ MÔN
       gvbm: {
         title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - GIÁO VIÊN BỘ MÔN (GVBM)",
         col1: { name: "Trụ cột I (Đạo đức)", max: 20 },
@@ -1062,7 +1174,6 @@
         ]
       },
 
-      // 3. KHỐI NHÂN VIÊN
       nv: {
         title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - KHỐI NHÂN VIÊN (HÀNH CHÍNH - VĂN PHÒNG)",
         col1: { name: "Trụ cột I (Kỷ luật)", max: 20 },
@@ -1092,9 +1203,13 @@
     let currentRole = "gvcn";
     let currentScores = {};
     let activeBonuses = new Set();
-    let currentWorkflow = "self"; // 'self' (GV), 'lead' (Tổ trưởng), 'bgh' (BGH)
+    let currentWorkflow = "self";
 
-    // MÃ HÓA/GIẢI MÃ UNICODE URL-SAFE BASE64 KHÔNG BỊ LỖI FONT
+    function handleNameChange(selectedName) {
+      document.getElementById("sigSelfName").textContent = selectedName || "....................................................";
+      autoSave();
+    }
+
     function encodeDataToUrl(obj) {
       const jsonStr = JSON.stringify(obj);
       const bytes = new TextEncoder().encode(jsonStr);
@@ -1123,14 +1238,8 @@
         loadSavedData();
       }
       renderApp();
-
-      document.getElementById("empName").addEventListener("input", (e) => {
-        document.getElementById("sigSelfName").textContent = e.target.value || "....................................................";
-        autoSave();
-      });
     });
 
-    // NHẬN DIỆN VAI TRÒ TỪ ĐƯỜNG LINK
     function checkUrlWorkflow() {
       const urlParams = new URLSearchParams(window.location.search);
       const mode = urlParams.get("mode");
@@ -1144,8 +1253,10 @@
           currentWorkflow = mode;
           currentRole = decoded.role || "gvcn";
           
-          document.getElementById("empName").value = decoded.empName || "";
-          document.getElementById("sigSelfName").textContent = decoded.empName || "........................";
+          if (decoded.empName) {
+            document.getElementById("empName").value = decoded.empName;
+            document.getElementById("sigSelfName").textContent = decoded.empName;
+          }
           document.getElementById("empPosition").value = decoded.empPosition || "";
           document.getElementById("empDepartment").value = decoded.empDepartment || "Tổ Khoa học Tự nhiên";
           document.getElementById("evalPeriod").value = decoded.evalPeriod || "";
@@ -1156,7 +1267,6 @@
             document.getElementById("leadApproverName").value = decoded.leadName;
           }
 
-          // KHI TỔ TRƯỞNG MỞ: ĐIỀN SẴN ĐIỂM TỔ THẨM ĐỊNH BẰNG ĐIỂM GV ĐỂ CHỈ CẦN CHỈNH SỬA NHANH
           if (mode === "lead") {
             const cfg = KPI_DATA[currentRole];
             cfg.items.forEach(item => {
@@ -1168,7 +1278,6 @@
             });
           }
 
-          // KHI BGH MỞ: ĐIỀN SẴN CỘT BGH DUYỆT THEO ĐIỂM TỔ THẨM ĐỊNH
           if (mode === "bgh") {
             const cfg = KPI_DATA[currentRole];
             cfg.items.forEach(item => {
@@ -1180,10 +1289,8 @@
             });
           }
 
-          // LƯU NGAY VÀO MÁY NGƯỜI NHẬN ĐỂ TRÁNH MẤT DỮ LIỆU
           localStorage.setItem(`KPI_915_RECEIVED_${mode.toUpperCase()}`, JSON.stringify(decoded));
 
-          // BANNER HƯỚNG DẪN TỪNG VAI TRÒ
           const banner = document.getElementById("flowBanner");
           const bannerText = document.getElementById("flowBannerText");
           banner.style.display = "flex";
@@ -1213,7 +1320,6 @@
       window.location.href = window.location.pathname;
     }
 
-    // TẠO LINK GỬI QUA ZALO
     function generateShareLink(target) {
       const cfg = KPI_DATA[currentRole];
       cfg.items.forEach(item => {
@@ -1234,7 +1340,7 @@
       };
 
       if (!dataToPack.empName) {
-        alert("Vui lòng nhập họ và tên viên chức trước khi tạo link!");
+        alert("Vui lòng chọn họ và tên viên chức trước khi tạo link!");
         return;
       }
 
@@ -1310,7 +1416,6 @@
         const scoreObj = currentScores[item.code] || { self: item.max, lead: item.max, bgh: item.max, note: "" };
         const tr = document.createElement("tr");
 
-        // KHÓA Ô TỰ CHẤM KHI TỔ TRƯỞNG HOẶC BGH MỞ
         const isSelfLocked = (currentWorkflow === 'lead' || currentWorkflow === 'bgh');
         const isLeadActive = (currentWorkflow === 'lead');
         const isBghActive = (currentWorkflow === 'bgh');
@@ -1326,7 +1431,6 @@
           <td style="text-align: center; vertical-align: middle; font-weight: 700; color: #475569;">
             ${item.max}
           </td>
-          <!-- CỘT 1: GV TỰ CHẤM (ĐÃ KHÓA AN TOÀN KHI TỔ TRƯỞNG XEM) -->
           <td style="text-align: center; vertical-align: middle;">
             <input type="number" step="0.5" min="0" max="${item.max}" 
               class="input-score ${isSelfLocked ? 'locked-score' : ''}" 
@@ -1334,7 +1438,6 @@
               ${isSelfLocked ? 'readonly title="Điểm do giáo viên tự chấm (Đã khóa)"' : ''}
               oninput="handleScoreChange('${item.code}', 'self', this.value, ${item.max})" />
           </td>
-          <!-- CỘT 2: TỔ THẨM ĐỊNH (NỔI BẬT ĐỂ TỔ TRƯỞNG CHẤM) -->
           <td style="text-align: center; vertical-align: middle;">
             <input type="number" step="0.5" min="0" max="${item.max}" 
               class="input-score ${isLeadActive ? 'highlight-lead' : (currentWorkflow === 'bgh' ? 'locked-score' : '')}" 
@@ -1342,7 +1445,6 @@
               ${currentWorkflow === 'bgh' ? 'readonly title="Điểm Tổ thẩm định (Đã khóa)"' : ''}
               oninput="handleScoreChange('${item.code}', 'lead', this.value, ${item.max})" />
           </td>
-          <!-- CỘT 3: BGH DUYỆT -->
           <td style="text-align: center; vertical-align: middle;">
             <input type="number" step="0.5" min="0" max="${item.max}" 
               class="input-score ${isBghActive ? 'highlight-bgh' : ''}" 
@@ -1359,7 +1461,6 @@
         tbody.appendChild(tr);
       });
 
-      // DANH MỤC BONUS
       const bonusContainer = document.getElementById("bonusListContainer");
       bonusContainer.innerHTML = "";
       cfg.bonuses.forEach(b => {
@@ -1408,7 +1509,6 @@
       autoSave();
     }
 
-    // TÍNH TOÁN ĐIỂM CHUẨN (KHỐNG CHẾ MAX 100 ĐIỂM)
     function calculateTotals() {
       const cfg = KPI_DATA[currentRole];
       let p1 = 0, p2 = 0, p3 = 0;
@@ -1438,7 +1538,6 @@
       const totalStandard = p1 + p2 + p3;
       let finalTotal = totalStandard + bonusScore;
       
-      // KHỐNG CHẾ ĐIỂM TỔNG TỐI ĐA 100 ĐIỂM
       if (finalTotal > 100) finalTotal = 100;
 
       document.getElementById("val-col1").textContent = p1.toFixed(1);
