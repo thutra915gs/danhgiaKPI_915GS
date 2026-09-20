@@ -48,7 +48,7 @@
     header {
       background: linear-gradient(135deg, #991b1b 0%, #b91c1c 60%, #c2410c 100%);
       color: white;
-      padding: 20px 16px;
+      padding: 18px 16px;
       box-shadow: var(--shadow-md);
       position: sticky;
       top: 0;
@@ -72,8 +72,8 @@
     }
 
     .brand-logo {
-      width: 72px;
-      height: 72px;
+      width: 70px;
+      height: 70px;
       background: white;
       border-radius: 50%;
       display: flex;
@@ -102,7 +102,7 @@
     }
 
     .brand-text h1 {
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 800;
       margin: 2px 0;
       text-transform: uppercase;
@@ -123,8 +123,8 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 8px 14px;
-      font-size: 0.85rem;
+      padding: 8px 13px;
+      font-size: 0.84rem;
       font-weight: 600;
       border-radius: 8px;
       cursor: pointer;
@@ -150,6 +150,14 @@
       background: rgba(255, 255, 255, 0.25);
     }
 
+    .btn-share {
+      background: #0284c7;
+      color: white;
+    }
+    .btn-share:hover {
+      background: #0369a1;
+    }
+
     .btn-cloud {
       background: #10b981;
       color: white;
@@ -164,6 +172,29 @@
       width: 100%;
       margin: 20px auto;
       padding: 0 16px;
+    }
+
+    /* BANNER CHẾ ĐỘ THẨM ĐỊNH */
+    .flow-badge-banner {
+      background: #eff6ff;
+      border: 2px dashed #3b82f6;
+      border-radius: var(--radius);
+      padding: 14px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .flow-badge-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #1e40af;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .card {
@@ -388,6 +419,16 @@
       outline: none;
     }
 
+    .input-score.highlight-lead {
+      border: 2px solid #0284c7 !important;
+      background-color: #f0f9ff;
+    }
+
+    .input-score.highlight-bgh {
+      border: 2px solid #b91c1c !important;
+      background-color: #fef2f2;
+    }
+
     .input-score.under-warning {
       border-color: #f59e0b;
       background: #fffbeb;
@@ -494,7 +535,7 @@
       font-size: 0.78rem;
       color: #64748b;
       font-style: italic;
-      margin-bottom: 60px;
+      margin-bottom: 50px;
     }
 
     .sig-name {
@@ -503,7 +544,18 @@
       color: var(--gray-800);
     }
 
-    /* CHÂN TRANG ĐƯỢC THIẾT KẾ ĐỒNG BỘ THEO ẢNH YÊU CẦU */
+    .sig-input-name {
+      border: 1px dashed #cbd5e1;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 0.9rem;
+      text-align: center;
+      font-weight: 600;
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    /* FOOTER TỐI MÀU CHUẨN */
     footer.site-footer {
       background-color: #0b1329;
       color: #cbd5e1;
@@ -647,7 +699,7 @@
         color: black;
         padding: 0;
       }
-      header, .header-actions, .object-selector, .bonus-box, footer.site-footer, .no-print {
+      header, .header-actions, .object-selector, .bonus-box, footer.site-footer, .flow-badge-banner, .no-print {
         display: none !important;
       }
       main {
@@ -697,6 +749,9 @@
       .sig-sub {
         margin-bottom: 70px;
       }
+      .sig-input-name {
+        border: none !important;
+      }
     }
 
     .print-header-admin {
@@ -711,7 +766,6 @@
     <div class="header-container">
       <div class="brand-box">
         <div class="brand-logo">
-          <!-- Hiển thị Logo trường từ file logo.jpg -->
           <img src="logo.jpg" alt="Logo Trường TH & THCS 915 Gia Sàng" onerror="this.src='https://placehold.co/100x100?text=915+GS'" />
         </div>
         <div class="brand-text">
@@ -721,16 +775,42 @@
         </div>
       </div>
       <div class="header-actions">
-        <button class="btn btn-cloud" onclick="submitToGoogleSheet()"><i class="fa-solid fa-paper-plane"></i> Gửi kết quả về Nhà trường</button>
-        <button class="btn btn-light" onclick="quickFill100()"><i class="fa-solid fa-wand-magic-sparkles"></i> Tự chấm 100%</button>
-        <button class="btn btn-outline-light" onclick="window.print()"><i class="fa-solid fa-print"></i> In / Xuất PDF (A4)</button>
-        <button class="btn btn-outline-light" onclick="exportCSV()"><i class="fa-solid fa-file-excel"></i> Xuất Excel</button>
-        <button class="btn btn-outline-light" onclick="resetForm()"><i class="fa-solid fa-rotate-left"></i> Làm mới</button>
+        <!-- CÁC NÚT ĐIỀU HƯỚNG QUY TRÌNH DUYỆT -->
+        <button id="btnShareLead" class="btn btn-share" onclick="generateShareLink('lead')">
+          <i class="fa-solid fa-share-nodes"></i> Gửi link cho Tổ trưởng
+        </button>
+        <button id="btnShareBGH" class="btn btn-share" style="display: none; background: #7c3aed;" onclick="generateShareLink('bgh')">
+          <i class="fa-solid fa-share-nodes"></i> Gửi link cho BGH
+        </button>
+        <button class="btn btn-cloud" onclick="submitToGoogleSheet()">
+          <i class="fa-solid fa-paper-plane"></i> Gửi kết quả về Nhà trường
+        </button>
+        <button class="btn btn-light" onclick="quickFill100()">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> Điền 100%
+        </button>
+        <button class="btn btn-outline-light" onclick="window.print()">
+          <i class="fa-solid fa-print"></i> In / Xuất PDF (A4)
+        </button>
+        <button class="btn btn-outline-light" onclick="resetForm()">
+          <i class="fa-solid fa-rotate-left"></i> Làm mới
+        </button>
       </div>
     </div>
   </header>
 
   <main>
+
+    <!-- BANNER BÁO TRẠNG THÁI QUY TRÌNH DUYỆT -->
+    <div id="flowBanner" class="flow-badge-banner no-print" style="display: none;">
+      <div class="flow-badge-title" id="flowBannerText">
+        <i class="fa-solid fa-circle-check"></i> Đang tải dữ liệu...
+      </div>
+      <div>
+        <button class="btn btn-outline-light" style="color: #1e40af; border-color: #bfdbfe; background: white;" onclick="clearWorkflowMode()">
+          <i class="fa-solid fa-arrow-left"></i> Về chế độ tự chấm thông thường
+        </button>
+      </div>
+    </div>
 
     <!-- THỂ THỨC HÀNH CHÍNH KHI IN ẤN RA BẢN A4 -->
     <div class="print-header-admin">
@@ -850,8 +930,7 @@
       <div class="alert-box alert-info no-print">
         <i class="fa-solid fa-circle-info"></i>
         <div>
-          <strong>Nguyên tắc công bằng thi đua:</strong> Cùng quy về thang điểm chuẩn 100 điểm + Thưởng cống hiến Max +15đ. 
-          Giáo viên được <strong>Miễn trừ rủi ro</strong> đối với các sự cố khách quan nếu đã xử lý đúng quy trình sư phạm và báo cáo BGH kịp thời.
+          <strong>Quy trình số hóa 3 cấp:</strong> Giáo viên tự chấm $\rightarrow$ Bấm <em>"Gửi link cho Tổ trưởng"</em> để gửi qua Zalo. Tổ trưởng mở link, thẩm định và ký tên $\rightarrow$ Bấm <em>"Gửi kết quả về Nhà trường / BGH"</em>.
         </div>
       </div>
 
@@ -898,7 +977,9 @@
         <div>
           <div class="sig-role">Tổ Trưởng Thẩm Định</div>
           <div class="sig-sub">(Ký nhận xét và đánh giá)</div>
-          <div class="sig-name" id="sigLeadName">....................................................</div>
+          <div>
+            <input type="text" id="leadApproverName" class="sig-input-name" placeholder="Nhập họ tên Tổ trưởng..." value="" oninput="autoSave()">
+          </div>
         </div>
         <div>
           <div class="sig-role">Hiệu Trưởng Phê Duyệt</div>
@@ -910,7 +991,7 @@
 
   </main>
 
-  <!-- CHÂN TRANG ĐƯỢC CHỈNH GIỐNG HỆT ẢNH MẪU -->
+  <!-- CHÂN TRANG TỐI MÀU -->
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-left">
@@ -939,11 +1020,10 @@
   </footer>
 
   <script>
-    // URL GOOGLE APPS SCRIPT ĐỂ NHẬN DỮ LIỆU TỰ ĐỘNG
+    // Dán URL Google Apps Script của chị vào đây nếu muốn tự động gửi về Google Sheets:
     const GOOGLE_SCRIPT_URL = ""; 
 
     const KPI_DATA = {
-      // 1. GIÁO VIÊN CHỦ NHIỆM
       gvcn: {
         title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - GIÁO VIÊN CHỦ NHIỆM (GVCN)",
         col1: { name: "Trụ cột I (Đạo đức)", max: 20 },
@@ -969,8 +1049,6 @@
           { id: "BONUS-04", text: "Xung kích hỗ trợ đột xuất (CĐS, thiên tai, tổ chức hội thi lớn)", pts: 5 }
         ]
       },
-
-      // 2. GIÁO VIÊN BỘ MÔN
       gvbm: {
         title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - GIÁO VIÊN BỘ MÔN (GVBM)",
         col1: { name: "Trụ cột I (Đạo đức)", max: 20 },
@@ -994,8 +1072,6 @@
           { id: "BONUS-04", text: "Xung kích hỗ trợ đột xuất (Chuyển đổi số, hội thi, thiên tai)", pts: 5 }
         ]
       },
-
-      // 3. KHỐI NHÂN VIÊN
       nv: {
         title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - KHỐI NHÂN VIÊN (HÀNH CHÍNH - VĂN PHÒNG)",
         col1: { name: "Trụ cột I (Kỷ luật)", max: 20 },
@@ -1025,9 +1101,14 @@
     let currentRole = "gvcn";
     let currentScores = {};
     let activeBonuses = new Set();
+    let currentWorkflow = "self"; // 'self', 'lead', 'bgh'
 
     window.addEventListener("DOMContentLoaded", () => {
-      loadSavedData();
+      // 1. Kiểm tra xem có nhận dữ liệu từ URL không (Tổ trưởng / BGH mở link)
+      const isFromUrl = checkUrlWorkflow();
+      if (!isFromUrl) {
+        loadSavedData();
+      }
       renderApp();
 
       document.getElementById("empName").addEventListener("input", (e) => {
@@ -1035,6 +1116,95 @@
         autoSave();
       });
     });
+
+    // BẬT CHẾ ĐỘ QUY TRÌNH DUYỆT THEO LINK URL
+    function checkUrlWorkflow() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const mode = urlParams.get("mode");
+      const dataStr = urlParams.get("data");
+
+      if (mode && dataStr) {
+        try {
+          const decoded = JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(dataStr)))));
+          currentWorkflow = mode;
+          currentRole = decoded.role || "gvcn";
+          document.getElementById("empName").value = decoded.empName || "";
+          document.getElementById("sigSelfName").textContent = decoded.empName || "........................";
+          document.getElementById("empPosition").value = decoded.empPosition || "";
+          document.getElementById("empDepartment").value = decoded.empDepartment || "Tổ Khoa học Tự nhiên";
+          document.getElementById("evalPeriod").value = decoded.evalPeriod || "";
+          currentScores = decoded.scores || {};
+          activeBonuses = new Set(decoded.bonuses || []);
+          if (decoded.leadName) {
+            document.getElementById("leadApproverName").value = decoded.leadName;
+          }
+
+          // Cập nhật Banner quy trình
+          const banner = document.getElementById("flowBanner");
+          const bannerText = document.getElementById("flowBannerText");
+          banner.style.display = "flex";
+
+          if (mode === "lead") {
+            bannerText.innerHTML = `<i class="fa-solid fa-user-check" style="font-size: 1.3rem;"></i> <div><strong>CHẾ ĐỘ TỔ TRƯỞNG THẨM ĐỊNH:</strong> Đang thẩm định phiếu của đ/c <strong>${decoded.empName}</strong> (${decoded.empDepartment}).</div>`;
+            document.getElementById("btnShareLead").style.display = "none";
+            document.getElementById("btnShareBGH").style.display = "inline-flex";
+          } else if (mode === "bgh") {
+            bannerText.innerHTML = `<i class="fa-solid fa-stamp" style="font-size: 1.3rem;"></i> <div><strong>CHẾ ĐỘ BGH PHÊ DUYỆT:</strong> Đang xem duyệt kết quả của đ/c <strong>${decoded.empName}</strong> (Tổ trưởng: <em>${decoded.leadName || 'Chưa ký'}</em>).</div>`;
+            document.getElementById("btnShareLead").style.display = "none";
+            document.getElementById("btnShareBGH").style.display = "none";
+          }
+
+          document.querySelectorAll(".object-pill").forEach(el => el.classList.remove("active"));
+          const activePill = document.getElementById(`tab-${currentRole}`);
+          if (activePill) activePill.classList.add("active");
+          return true;
+        } catch (e) {
+          console.error("Lỗi giải mã URL:", e);
+        }
+      }
+      return false;
+    }
+
+    function clearWorkflowMode() {
+      window.location.href = window.location.pathname;
+    }
+
+    // TẠO LINK CHUYỂN GIAO SỐ HÓA
+    function generateShareLink(target) {
+      const dataToPack = {
+        role: currentRole,
+        empName: document.getElementById("empName").value,
+        empPosition: document.getElementById("empPosition").value,
+        empDepartment: document.getElementById("empDepartment").value,
+        evalPeriod: document.getElementById("evalPeriod").value,
+        scores: currentScores,
+        bonuses: Array.from(activeBonuses),
+        leadName: document.getElementById("leadApproverName").value
+      };
+
+      if (!dataToPack.empName) {
+        alert("Vui lòng nhập họ và tên viên chức trước khi tạo link!");
+        return;
+      }
+
+      if (target === "bgh" && !dataToPack.leadName) {
+        alert("Đồng chí Tổ trưởng vui lòng nhập họ tên ở ô 'Tổ trưởng thẩm định' trước khi gửi cho BGH!");
+        document.getElementById("leadApproverName").focus();
+        return;
+      }
+
+      // Mã hóa dữ liệu Base64 an toàn cho URL tiếng Việt
+      const encoded = encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(dataToPack)))));
+      const fullUrl = `${window.location.origin}${window.location.pathname}?mode=${target}&data=${encoded}`;
+
+      // Tự động Copy vào khay nhớ tạm
+      navigator.clipboard.writeText(fullUrl).then(() => {
+        const roleLabel = target === "lead" ? "Tổ trưởng chuyên môn" : "Ban Giám hiệu";
+        alert(`✅ ĐÃ SAO CHÉP LINK BÀN GIAO!\n\nĐồng chí chỉ cần dán (Paste / Ctrl+V) link này gửi qua Zalo cho ${roleLabel} để thẩm định và phê duyệt tiếp.`);
+      }).catch(() => {
+        prompt("Sao chép đường link bên dưới để gửi qua Zalo:", fullUrl);
+      });
+    }
 
     function switchRole(role) {
       currentRole = role;
@@ -1104,15 +1274,16 @@
           <td style="text-align: center; vertical-align: middle;">
             <input type="number" step="0.5" min="0" max="${item.max}" class="input-score" 
               id="score-self-${item.code}" value="${scoreObj.self}" 
+              ${currentWorkflow === 'lead' || currentWorkflow === 'bgh' ? 'title="Điểm do giáo viên tự chấm"' : ''}
               oninput="handleScoreChange('${item.code}', 'self', this.value, ${item.max})" />
           </td>
           <td style="text-align: center; vertical-align: middle;">
-            <input type="number" step="0.5" min="0" max="${item.max}" class="input-score" 
+            <input type="number" step="0.5" min="0" max="${item.max}" class="input-score ${currentWorkflow === 'lead' ? 'highlight-lead' : ''}" 
               id="score-lead-${item.code}" value="${scoreObj.lead}" 
               oninput="handleScoreChange('${item.code}', 'lead', this.value, ${item.max})" />
           </td>
           <td style="text-align: center; vertical-align: middle;">
-            <input type="number" step="0.5" min="0" max="${item.max}" class="input-score" 
+            <input type="number" step="0.5" min="0" max="${item.max}" class="input-score ${currentWorkflow === 'bgh' ? 'highlight-bgh' : ''}" 
               id="score-bgh-${item.code}" value="${scoreObj.bgh}" 
               oninput="handleScoreChange('${item.code}', 'bgh', this.value, ${item.max})" />
           </td>
@@ -1186,8 +1357,12 @@
       let hasUnder70 = false;
       let under70Items = [];
 
+      // Ưu tiên hiển thị tổng theo vai trò đang xem: Tổ trưởng xem điểm Tổ chấm, GV xem điểm Tự chấm
+      const evalColKey = (currentWorkflow === 'lead') ? 'lead' : (currentWorkflow === 'bgh' ? 'bgh' : 'self');
+
       cfg.items.forEach(item => {
-        const sc = currentScores[item.code] ? currentScores[item.code].self : item.max;
+        const sc = (currentScores[item.code] && currentScores[item.code][evalColKey] !== undefined) 
+                   ? currentScores[item.code][evalColKey] : item.max;
         if (sc < item.max * 0.7) {
           hasUnder70 = true;
           under70Items.push(`${item.code} (${sc}/${item.max}đ)`);
@@ -1265,12 +1440,12 @@
     function resetForm() {
       if (confirm("Chị có chắc muốn làm mới lại dữ liệu chấm điểm?")) {
         localStorage.removeItem("KPI_915_V2");
-        initDefaultScores();
-        renderApp();
+        window.location.href = window.location.pathname;
       }
     }
 
     function autoSave() {
+      if (currentWorkflow !== "self") return; // Không ghi đè LocalStorage cá nhân khi đang mở link người khác
       const data = {
         role: currentRole,
         empName: document.getElementById("empName").value,
@@ -1278,7 +1453,8 @@
         empDepartment: document.getElementById("empDepartment").value,
         evalPeriod: document.getElementById("evalPeriod").value,
         scores: currentScores,
-        bonuses: Array.from(activeBonuses)
+        bonuses: Array.from(activeBonuses),
+        leadName: document.getElementById("leadApproverName").value
       };
       localStorage.setItem("KPI_915_V2", JSON.stringify(data));
     }
@@ -1298,6 +1474,7 @@
           if (data.evalPeriod) document.getElementById("evalPeriod").value = data.evalPeriod;
           if (data.scores) currentScores = data.scores;
           if (data.bonuses) activeBonuses = new Set(data.bonuses);
+          if (data.leadName) document.getElementById("leadApproverName").value = data.leadName;
 
           document.querySelectorAll(".object-pill").forEach(el => el.classList.remove("active"));
           document.getElementById(`tab-${currentRole}`).classList.add("active");
@@ -1307,28 +1484,18 @@
       initDefaultScores();
     }
 
-    function exportCSV() {
-      const cfg = KPI_DATA[currentRole];
-      let csv = "\uFEFF";
-      csv += `UBND PHƯỜNG GIA SÀNG - TRƯỜNG TH & THCS 915 GIA SÀNG\n`;
-      csv += `PHIẾU ĐÁNH GIÁ KPI: ${cfg.title}\n`;
-      csv += `Họ tên: ${document.getElementById("empName").value},Tổ: ${document.getElementById("empDepartment").value},Kỳ: ${document.getElementById("evalPeriod").value}\n\n`;
-      csv += `Mã KPI,Tiêu chí,Điểm chuẩn,Cá nhân tự chấm,Tổ thẩm định,BGH duyệt,Ghi chú\n`;
-
-      cfg.items.forEach(item => {
-        const sc = currentScores[item.code] || { self: item.max, lead: item.max, bgh: item.max, note: "" };
-        csv += `"${item.code}","${item.title.replace(/"/g, '""')}",${item.max},${sc.self},${sc.lead},${sc.bgh},"${(sc.note || '').replace(/"/g, '""')}"\n`;
-      });
-      csv += `\nTổng điểm tự chấm:,,${document.getElementById("val-total").textContent},Xếp loại:,,${document.getElementById("badge-rank").textContent}\n`;
-
-      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = `KPI_915_${document.getElementById("empName").value}_${document.getElementById("evalPeriod").value}.csv`;
-      link.click();
-    }
-
+    // GỬI KẾT QUẢ ĐẦY ĐỦ VỀ GOOGLE SHEETS
     function submitToGoogleSheet() {
+      const cfg = KPI_DATA[currentRole];
+      let sumSelf = 0, sumLead = 0, sumBgh = 0;
+      cfg.items.forEach(item => {
+        const sc = currentScores[item.code] || { self: item.max, lead: item.max, bgh: item.max };
+        sumSelf += Number(sc.self || 0);
+        sumLead += Number(sc.lead || 0);
+        sumBgh += Number(sc.bgh || 0);
+      });
+      const bonusPts = Number(document.getElementById("val-bonus").textContent || 0);
+
       const payload = {
         timestamp: new Date().toLocaleString("vi-VN"),
         empName: document.getElementById("empName").value,
@@ -1336,16 +1503,15 @@
         empDepartment: document.getElementById("empDepartment").value,
         evalPeriod: document.getElementById("evalPeriod").value,
         role: currentRole.toUpperCase(),
-        pillar1: document.getElementById("val-col1").textContent,
-        pillar2: document.getElementById("val-col2").textContent,
-        pillar3: document.getElementById("val-col3").textContent,
-        bonus: document.getElementById("val-bonus").textContent,
-        total: document.getElementById("val-total").textContent,
-        rank: document.getElementById("badge-rank").textContent
+        totalSelf: (sumSelf + bonusPts).toFixed(1),
+        totalLead: (sumLead + bonusPts).toFixed(1),
+        leadApprover: document.getElementById("leadApproverName").value || "Chưa ký",
+        bonus: bonusPts.toFixed(1),
+        finalRank: document.getElementById("badge-rank").textContent
       };
 
       if (!GOOGLE_SCRIPT_URL) {
-        alert("Thông báo: Kết quả tự đánh giá của đồng chí " + payload.empName + " (" + payload.total + " điểm - " + payload.rank + ") đã sẵn sàng!\n\nNhà trường có thể kết nối link Google Apps Script để nhận tự động vào bảng tính, hoặc bấm 'In / Xuất PDF (A4)' để nộp bản ký giấy.");
+        alert(`THÔNG BÁO KẾT QUẢ ĐÁNH GIÁ KPI:\n- Viên chức: ${payload.empName}\n- Điểm Tự chấm: ${payload.totalSelf}đ\n- Điểm Tổ thẩm định: ${payload.totalLead}đ (${payload.leadApprover})\n- Xếp loại: ${payload.finalRank}\n\n👉 Chị có thể bấm 'Gửi link cho BGH' để chuyển tiếp, hoặc bấm 'In / Xuất PDF (A4)' để lưu hồ sơ bản ký giấy!`);
         return;
       }
 
@@ -1360,11 +1526,11 @@
         body: JSON.stringify(payload)
       })
       .then(() => {
-        alert("Đã gửi thành công kết quả tự đánh giá KPI về hệ thống nhà trường!");
+        alert("Đã gửi thành công toàn bộ kết quả tự chấm và thẩm định về hệ thống nhà trường!");
         btn.innerHTML = `<i class="fa-solid fa-check"></i> Đã gửi thành công`;
       })
       .catch(err => {
-        alert("Có lỗi khi gửi dữ liệu: " + err);
+        alert("Có lỗi kết nối: " + err);
         btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Gửi lại`;
         btn.disabled = false;
       });
