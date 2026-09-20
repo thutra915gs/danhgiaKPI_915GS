@@ -174,7 +174,6 @@
       padding: 0 16px;
     }
 
-    /* BANNER CHẾ ĐỘ THẨM ĐỊNH */
     .flow-badge-banner {
       background: #eff6ff;
       border: 2px dashed #3b82f6;
@@ -775,7 +774,6 @@
         </div>
       </div>
       <div class="header-actions">
-        <!-- CÁC NÚT ĐIỀU HƯỚNG QUY TRÌNH DUYỆT -->
         <button id="btnShareLead" class="btn btn-share" onclick="generateShareLink('lead')">
           <i class="fa-solid fa-share-nodes"></i> Gửi link cho Tổ trưởng
         </button>
@@ -905,7 +903,8 @@
       </div>
       <div class="metric-card success">
         <div class="metric-title">TỔNG ĐIỂM KPI</div>
-        <div class="metric-value"><span id="val-total" style="color: var(--primary);">100.0</span> <span>/ 115</span></div>
+        <!-- Đã sửa về thang điểm chuẩn / 100 -->
+        <div class="metric-value"><span id="val-total" style="color: var(--primary);">100.0</span> <span>/ 100</span></div>
         <div>
           <span id="badge-rank" class="rank-badge rank-a">Loại A (Xuất sắc)</span>
         </div>
@@ -930,7 +929,7 @@
       <div class="alert-box alert-info no-print">
         <i class="fa-solid fa-circle-info"></i>
         <div>
-          <strong>Quy trình số hóa 3 cấp:</strong> Giáo viên tự chấm $\rightarrow$ Bấm <em>"Gửi link cho Tổ trưởng"</em> để gửi qua Zalo. Tổ trưởng mở link, thẩm định và ký tên $\rightarrow$ Bấm <em>"Gửi kết quả về Nhà trường / BGH"</em>.
+          <strong>Quy trình số hóa 3 cấp:</strong> Giáo viên tự chấm $\rightarrow$ Bấm <em>"Gửi link cho Tổ trưởng"</em> để gửi qua Zalo. Tổ trưởng mở link, thẩm định và ký tên $\rightarrow$ Bấm <em>"Gửi kết quả về Nhà trường / BGH"</em>. Tổng điểm chuẩn tối đa là 100 điểm.
         </div>
       </div>
 
@@ -1020,7 +1019,6 @@
   </footer>
 
   <script>
-    // Dán URL Google Apps Script của chị vào đây nếu muốn tự động gửi về Google Sheets:
     const GOOGLE_SCRIPT_URL = ""; 
 
     const KPI_DATA = {
@@ -1101,10 +1099,9 @@
     let currentRole = "gvcn";
     let currentScores = {};
     let activeBonuses = new Set();
-    let currentWorkflow = "self"; // 'self', 'lead', 'bgh'
+    let currentWorkflow = "self";
 
     window.addEventListener("DOMContentLoaded", () => {
-      // 1. Kiểm tra xem có nhận dữ liệu từ URL không (Tổ trưởng / BGH mở link)
       const isFromUrl = checkUrlWorkflow();
       if (!isFromUrl) {
         loadSavedData();
@@ -1117,7 +1114,6 @@
       });
     });
 
-    // BẬT CHẾ ĐỘ QUY TRÌNH DUYỆT THEO LINK URL
     function checkUrlWorkflow() {
       const urlParams = new URLSearchParams(window.location.search);
       const mode = urlParams.get("mode");
@@ -1139,7 +1135,6 @@
             document.getElementById("leadApproverName").value = decoded.leadName;
           }
 
-          // Cập nhật Banner quy trình
           const banner = document.getElementById("flowBanner");
           const bannerText = document.getElementById("flowBannerText");
           banner.style.display = "flex";
@@ -1169,7 +1164,6 @@
       window.location.href = window.location.pathname;
     }
 
-    // TẠO LINK CHUYỂN GIAO SỐ HÓA
     function generateShareLink(target) {
       const dataToPack = {
         role: currentRole,
@@ -1193,11 +1187,9 @@
         return;
       }
 
-      // Mã hóa dữ liệu Base64 an toàn cho URL tiếng Việt
       const encoded = encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(dataToPack)))));
       const fullUrl = `${window.location.origin}${window.location.pathname}?mode=${target}&data=${encoded}`;
 
-      // Tự động Copy vào khay nhớ tạm
       navigator.clipboard.writeText(fullUrl).then(() => {
         const roleLabel = target === "lead" ? "Tổ trưởng chuyên môn" : "Ban Giám hiệu";
         alert(`✅ ĐÃ SAO CHÉP LINK BÀN GIAO!\n\nĐồng chí chỉ cần dán (Paste / Ctrl+V) link này gửi qua Zalo cho ${roleLabel} để thẩm định và phê duyệt tiếp.`);
@@ -1274,7 +1266,6 @@
           <td style="text-align: center; vertical-align: middle;">
             <input type="number" step="0.5" min="0" max="${item.max}" class="input-score" 
               id="score-self-${item.code}" value="${scoreObj.self}" 
-              ${currentWorkflow === 'lead' || currentWorkflow === 'bgh' ? 'title="Điểm do giáo viên tự chấm"' : ''}
               oninput="handleScoreChange('${item.code}', 'self', this.value, ${item.max})" />
           </td>
           <td style="text-align: center; vertical-align: middle;">
@@ -1351,13 +1342,13 @@
       autoSave();
     }
 
+    // TÍNH TOÁN VỚI MỨC KHỐNG CHẾ TỐI ĐA 100 ĐIỂM
     function calculateTotals() {
       const cfg = KPI_DATA[currentRole];
       let p1 = 0, p2 = 0, p3 = 0;
       let hasUnder70 = false;
       let under70Items = [];
 
-      // Ưu tiên hiển thị tổng theo vai trò đang xem: Tổ trưởng xem điểm Tổ chấm, GV xem điểm Tự chấm
       const evalColKey = (currentWorkflow === 'lead') ? 'lead' : (currentWorkflow === 'bgh' ? 'bgh' : 'self');
 
       cfg.items.forEach(item => {
@@ -1380,7 +1371,9 @@
 
       const totalStandard = p1 + p2 + p3;
       let finalTotal = totalStandard + bonusScore;
-      if (finalTotal > 115) finalTotal = 115;
+      
+      // Khống chế điểm tổng không vượt quá 100 điểm
+      if (finalTotal > 100) finalTotal = 100;
 
       document.getElementById("val-col1").textContent = p1.toFixed(1);
       document.getElementById("val-col2").textContent = p2.toFixed(1);
@@ -1445,7 +1438,7 @@
     }
 
     function autoSave() {
-      if (currentWorkflow !== "self") return; // Không ghi đè LocalStorage cá nhân khi đang mở link người khác
+      if (currentWorkflow !== "self") return;
       const data = {
         role: currentRole,
         empName: document.getElementById("empName").value,
@@ -1484,17 +1477,21 @@
       initDefaultScores();
     }
 
-    // GỬI KẾT QUẢ ĐẦY ĐỦ VỀ GOOGLE SHEETS
     function submitToGoogleSheet() {
       const cfg = KPI_DATA[currentRole];
-      let sumSelf = 0, sumLead = 0, sumBgh = 0;
+      let sumSelf = 0, sumLead = 0;
       cfg.items.forEach(item => {
         const sc = currentScores[item.code] || { self: item.max, lead: item.max, bgh: item.max };
         sumSelf += Number(sc.self || 0);
         sumLead += Number(sc.lead || 0);
-        sumBgh += Number(sc.bgh || 0);
       });
       const bonusPts = Number(document.getElementById("val-bonus").textContent || 0);
+
+      let finalSelf = sumSelf + bonusPts;
+      if (finalSelf > 100) finalSelf = 100;
+
+      let finalLead = sumLead + bonusPts;
+      if (finalLead > 100) finalLead = 100;
 
       const payload = {
         timestamp: new Date().toLocaleString("vi-VN"),
@@ -1503,15 +1500,15 @@
         empDepartment: document.getElementById("empDepartment").value,
         evalPeriod: document.getElementById("evalPeriod").value,
         role: currentRole.toUpperCase(),
-        totalSelf: (sumSelf + bonusPts).toFixed(1),
-        totalLead: (sumLead + bonusPts).toFixed(1),
+        totalSelf: finalSelf.toFixed(1),
+        totalLead: finalLead.toFixed(1),
         leadApprover: document.getElementById("leadApproverName").value || "Chưa ký",
         bonus: bonusPts.toFixed(1),
         finalRank: document.getElementById("badge-rank").textContent
       };
 
       if (!GOOGLE_SCRIPT_URL) {
-        alert(`THÔNG BÁO KẾT QUẢ ĐÁNH GIÁ KPI:\n- Viên chức: ${payload.empName}\n- Điểm Tự chấm: ${payload.totalSelf}đ\n- Điểm Tổ thẩm định: ${payload.totalLead}đ (${payload.leadApprover})\n- Xếp loại: ${payload.finalRank}\n\n👉 Chị có thể bấm 'Gửi link cho BGH' để chuyển tiếp, hoặc bấm 'In / Xuất PDF (A4)' để lưu hồ sơ bản ký giấy!`);
+        alert(`THÔNG BÁO KẾT QUẢ ĐÁNH GIÁ KPI:\n- Viên chức: ${payload.empName}\n- Điểm Tự chấm: ${payload.totalSelf}/100đ\n- Điểm Tổ thẩm định: ${payload.totalLead}/100đ (${payload.leadApprover})\n- Xếp loại: ${payload.finalRank}\n\n👉 Chị có thể bấm 'Gửi link cho BGH' để chuyển tiếp, hoặc bấm 'In / Xuất PDF (A4)' để lưu hồ sơ bản ký giấy!`);
         return;
       }
 
