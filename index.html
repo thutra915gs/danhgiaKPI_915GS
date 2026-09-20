@@ -11,7 +11,7 @@
 
   <style>
     :root {
-      /* TÔNG MÀU XANH LỤC VÀ CAM THEO YÊU CẦU */
+      /* TÔNG MÀU XANH LỤC VÀ CAM CHỦ ĐẠO */
       --green-dark: #064e3b;
       --green-main: #047857;
       --green-light: #059669;
@@ -49,7 +49,7 @@
       min-height: 100vh;
     }
 
-    /* HEADER: NỀN XANH LỤC - CHỮ VÀ NÚT MÀU CAM */
+    /* ĐẦU TRANG: NỀN XANH LỤC - CHỮ VÀ VIỀN MÀU CAM */
     header {
       background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-main) 60%, #065f46 100%);
       color: var(--orange-light);
@@ -78,8 +78,8 @@
     }
 
     .brand-logo {
-      width: 72px;
-      height: 72px;
+      width: 74px;
+      height: 74px;
       background: white;
       border-radius: 50%;
       display: flex;
@@ -113,7 +113,7 @@
       margin: 2px 0;
       text-transform: uppercase;
       color: #ffffff;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
     }
 
     .brand-text h1 span {
@@ -427,7 +427,7 @@
       outline: none;
     }
 
-    /* ĐỊNH DẠNG KHÓA VÀ NỔI BẬT THEO TỪNG CẤP */
+    /* ĐỊNH DẠNG KHÓA VÀ NỔI BẬT THEO CẤP */
     .input-score.locked-score {
       background-color: #f1f5f9 !important;
       color: #334155 !important;
@@ -548,7 +548,7 @@
       margin: 0 auto;
     }
 
-    /* CHÂN TRANG: NỀN XANH LỤC SẪM - CHỮ MÀU CAM */
+    /* CHÂN TRANG: NỀN XANH LỤC SẪM - CHỮ MÀU CAM THEO ẢNH YÊU CẦU */
     footer.site-footer {
       background-color: var(--green-dark);
       color: var(--orange-light);
@@ -762,7 +762,8 @@
     <div class="header-container">
       <div class="brand-box">
         <div class="brand-logo">
-          <img src="logo.jpg" alt="Logo Trường TH & THCS 915 Gia Sàng" onerror="this.src='https://placehold.co/100x100?text=915+GS'" />
+          <!-- TỰ ĐỘNG TÌM KIẾM CÁC TÊN FILE ẢNH LOGO -->
+          <img id="schoolLogoImg" src="LOGO OK.jpg" alt="Logo Trường TH & THCS 915 Gia Sàng" onerror="detectSchoolLogo(this)" />
         </div>
         <div class="brand-text">
           <span>ỦY BAN NHÂN DÂN PHƯỜNG GIA SÀNG</span>
@@ -771,7 +772,6 @@
         </div>
       </div>
       <div class="header-actions">
-        <!-- NÚT GỬI LINK ĐIỀU HÀNH 3 CẤP -->
         <button id="btnShareLead" class="btn btn-orange-primary" onclick="generateShareLink('lead')">
           <i class="fa-solid fa-share-nodes"></i> Gửi link cho Tổ trưởng
         </button>
@@ -995,6 +995,20 @@
   </footer>
 
   <script>
+    // TỰ ĐỘNG THỬ CÁC TÊN FILE ẢNH PHỔ BIẾN NẾU SAI TÊN/CHỮ HOA THƯỜNG
+    const candidateLogos = ['LOGO OK.jpg', 'logo.jpg', 'LOGO.jpg', 'logo.png', 'LOGO OK.png', 'Logo.jpg', 'logo.jpeg'];
+    let candidateIdx = 0;
+
+    function detectSchoolLogo(imgElement) {
+      candidateIdx++;
+      if (candidateIdx < candidateLogos.length) {
+        imgElement.src = candidateLogos[candidateIdx];
+      } else {
+        imgElement.onerror = null;
+        imgElement.src = 'https://placehold.co/100x100?text=915+GS';
+      }
+    }
+
     const KPI_DATA = {
       // 1. GIÁO VIÊN CHỦ NHIỆM
       gvcn: {
@@ -1080,7 +1094,7 @@
     let activeBonuses = new Set();
     let currentWorkflow = "self"; // 'self' (GV), 'lead' (Tổ trưởng), 'bgh' (BGH)
 
-    // THUẬT TOÁN MÃ HÓA / GIẢI MÃ UNICODE BASE64 AN TOÀN TUYỆT ĐỐI CHO LINK ZALO
+    // MÃ HÓA/GIẢI MÃ UNICODE URL-SAFE BASE64 KHÔNG BỊ LỖI FONT
     function encodeDataToUrl(obj) {
       const jsonStr = JSON.stringify(obj);
       const bytes = new TextEncoder().encode(jsonStr);
@@ -1116,7 +1130,7 @@
       });
     });
 
-    // KIỂM TRA LINK NHẬN ĐƯỢC TỪ TỔ TRƯỞNG HOẶC BGH
+    // NHẬN DIỆN VAI TRÒ TỪ ĐƯỜNG LINK
     function checkUrlWorkflow() {
       const urlParams = new URLSearchParams(window.location.search);
       const mode = urlParams.get("mode");
@@ -1142,7 +1156,7 @@
             document.getElementById("leadApproverName").value = decoded.leadName;
           }
 
-          // NẾU TỔ TRƯỞNG MỞ LẦN ĐẦU: ĐIỀN SẴN CỘT TỔ THẨM ĐỊNH BẰNG ĐIỂM TỰ CHẤM CỦA GV ĐỂ DUYỆT NHANH
+          // KHI TỔ TRƯỞNG MỞ: ĐIỀN SẴN ĐIỂM TỔ THẨM ĐỊNH BẰNG ĐIỂM GV ĐỂ CHỈ CẦN CHỈNH SỬA NHANH
           if (mode === "lead") {
             const cfg = KPI_DATA[currentRole];
             cfg.items.forEach(item => {
@@ -1154,7 +1168,7 @@
             });
           }
 
-          // NẾU BGH MỞ: ĐIỀN SẴN CỘT BGH DUYỆT THEO ĐIỂM TỔ THẨM ĐỊNH
+          // KHI BGH MỞ: ĐIỀN SẴN CỘT BGH DUYỆT THEO ĐIỂM TỔ THẨM ĐỊNH
           if (mode === "bgh") {
             const cfg = KPI_DATA[currentRole];
             cfg.items.forEach(item => {
@@ -1166,16 +1180,16 @@
             });
           }
 
-          // LƯU NGAY VÀO BỘ NHỚ LOCALSTORAGE CỦA NGƯỜI NHẬN ĐỂ KHÔNG BỊ MẤT KHI TẢI LẠI
+          // LƯU NGAY VÀO MÁY NGƯỜI NHẬN ĐỂ TRÁNH MẤT DỮ LIỆU
           localStorage.setItem(`KPI_915_RECEIVED_${mode.toUpperCase()}`, JSON.stringify(decoded));
 
-          // HIỂN THỊ BANNER THÔNG BÁO CHẾ ĐỘ
+          // BANNER HƯỚNG DẪN TỪNG VAI TRÒ
           const banner = document.getElementById("flowBanner");
           const bannerText = document.getElementById("flowBannerText");
           banner.style.display = "flex";
 
           if (mode === "lead") {
-            bannerText.innerHTML = `<i class="fa-solid fa-user-check" style="font-size: 1.4rem; color: var(--orange-main);"></i> <div><strong>CHẾ ĐỘ TỔ TRƯỞNG THẨM ĐỊNH:</strong> Điểm tự chấm của đ/c <strong>${decoded.empName}</strong> (${decoded.empDepartment}) đã được lưu và khóa cố định. Đồng chí chấm điểm ở cột <strong>2. Tổ thẩm định</strong>.</div>`;
+            bannerText.innerHTML = `<i class="fa-solid fa-user-check" style="font-size: 1.4rem; color: var(--orange-main);"></i> <div><strong>CHẾ ĐỘ TỔ TRƯỞNG THẨM ĐỊNH:</strong> Điểm tự chấm của đ/c <strong>${decoded.empName}</strong> (${decoded.empDepartment}) đã được lưu và khóa an toàn. Đồng chí thẩm định điểm ở cột <strong>2. Tổ thẩm định</strong>.</div>`;
             document.getElementById("btnShareLead").style.display = "none";
             document.getElementById("btnShareBGH").style.display = "inline-flex";
           } else if (mode === "bgh") {
@@ -1199,11 +1213,9 @@
       window.location.href = window.location.pathname;
     }
 
-    // TẠO ĐƯỜNG LINK BÀN GIAO GỬI ZALO
+    // TẠO LINK GỬI QUA ZALO
     function generateShareLink(target) {
       const cfg = KPI_DATA[currentRole];
-      
-      // Đồng bộ dữ liệu hiện thời
       cfg.items.forEach(item => {
         if (!currentScores[item.code]) {
           currentScores[item.code] = { self: item.max, lead: item.max, bgh: item.max, note: "" };
@@ -1227,7 +1239,7 @@
       }
 
       if (target === "bgh" && !dataToPack.leadName) {
-        alert("Đồng chí Tổ trưởng vui lòng ghi họ tên ở ô 'Tổ trưởng thẩm định' trước khi gửi cho BGH!");
+        alert("Đồng chí Tổ trưởng vui lòng nhập họ tên ở ô 'Tổ trưởng thẩm định' trước khi gửi cho BGH!");
         document.getElementById("leadApproverName").focus();
         return;
       }
@@ -1298,7 +1310,7 @@
         const scoreObj = currentScores[item.code] || { self: item.max, lead: item.max, bgh: item.max, note: "" };
         const tr = document.createElement("tr");
 
-        // ĐIỀU KHIỂN KHÓA Ô THEO VAI TRÒ
+        // KHÓA Ô TỰ CHẤM KHI TỔ TRƯỞNG HOẶC BGH MỞ
         const isSelfLocked = (currentWorkflow === 'lead' || currentWorkflow === 'bgh');
         const isLeadActive = (currentWorkflow === 'lead');
         const isBghActive = (currentWorkflow === 'bgh');
@@ -1314,20 +1326,20 @@
           <td style="text-align: center; vertical-align: middle; font-weight: 700; color: #475569;">
             ${item.max}
           </td>
-          <!-- CỘT 1: GV TỰ CHẤM (KHÓA KHI TỔ TRƯỞNG / BGH XEM) -->
+          <!-- CỘT 1: GV TỰ CHẤM (ĐÃ KHÓA AN TOÀN KHI TỔ TRƯỞNG XEM) -->
           <td style="text-align: center; vertical-align: middle;">
             <input type="number" step="0.5" min="0" max="${item.max}" 
               class="input-score ${isSelfLocked ? 'locked-score' : ''}" 
               id="score-self-${item.code}" value="${scoreObj.self !== undefined ? scoreObj.self : item.max}" 
-              ${isSelfLocked ? 'readonly title="Điểm do giáo viên tự chấm (Đã khóa an toàn)"' : ''}
+              ${isSelfLocked ? 'readonly title="Điểm do giáo viên tự chấm (Đã khóa)"' : ''}
               oninput="handleScoreChange('${item.code}', 'self', this.value, ${item.max})" />
           </td>
-          <!-- CỘT 2: TỔ THẨM ĐỊNH (NỔI BẬT KHI TỔ TRƯỞNG MỞ LINK) -->
+          <!-- CỘT 2: TỔ THẨM ĐỊNH (NỔI BẬT ĐỂ TỔ TRƯỞNG CHẤM) -->
           <td style="text-align: center; vertical-align: middle;">
             <input type="number" step="0.5" min="0" max="${item.max}" 
               class="input-score ${isLeadActive ? 'highlight-lead' : (currentWorkflow === 'bgh' ? 'locked-score' : '')}" 
               id="score-lead-${item.code}" value="${scoreObj.lead !== undefined ? scoreObj.lead : (scoreObj.self !== undefined ? scoreObj.self : item.max)}" 
-              ${currentWorkflow === 'bgh' ? 'readonly title="Điểm do Tổ trưởng thẩm định (Đã khóa)"' : ''}
+              ${currentWorkflow === 'bgh' ? 'readonly title="Điểm Tổ thẩm định (Đã khóa)"' : ''}
               oninput="handleScoreChange('${item.code}', 'lead', this.value, ${item.max})" />
           </td>
           <!-- CỘT 3: BGH DUYỆT -->
@@ -1347,7 +1359,7 @@
         tbody.appendChild(tr);
       });
 
-      // RENDER DANH MỤC BONUS
+      // DANH MỤC BONUS
       const bonusContainer = document.getElementById("bonusListContainer");
       bonusContainer.innerHTML = "";
       cfg.bonuses.forEach(b => {
@@ -1396,14 +1408,13 @@
       autoSave();
     }
 
-    // TÍNH TOÁN ĐIỂM CHUẨN (TỐI ĐA 100 ĐIỂM)
+    // TÍNH TOÁN ĐIỂM CHUẨN (KHỐNG CHẾ MAX 100 ĐIỂM)
     function calculateTotals() {
       const cfg = KPI_DATA[currentRole];
       let p1 = 0, p2 = 0, p3 = 0;
       let hasUnder70 = false;
       let under70Items = [];
 
-      // Hiển thị tổng điểm theo vai trò người đang xem
       const evalColKey = (currentWorkflow === 'lead') ? 'lead' : (currentWorkflow === 'bgh' ? 'bgh' : 'self');
 
       cfg.items.forEach(item => {
@@ -1427,7 +1438,7 @@
       const totalStandard = p1 + p2 + p3;
       let finalTotal = totalStandard + bonusScore;
       
-      // KHỐNG CHẾ TỐI ĐA 100 ĐIỂM
+      // KHỐNG CHẾ ĐIỂM TỔNG TỐI ĐA 100 ĐIỂM
       if (finalTotal > 100) finalTotal = 100;
 
       document.getElementById("val-col1").textContent = p1.toFixed(1);
