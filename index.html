@@ -11,13 +11,17 @@
 
   <style>
     :root {
-      --primary: #b91c1c;
-      --primary-dark: #991b1b;
+      /* TÔNG MÀU XANH LỤC VÀ CAM THEO YÊU CẦU */
+      --green-dark: #064e3b;
+      --green-main: #047857;
+      --green-light: #059669;
+      --orange-main: #ea580c;
+      --orange-bright: #ff7a00;
+      --orange-light: #fed7aa;
+      --orange-hover: #c2410c;
+      
       --secondary: #1e3a8a;
-      --accent: #d97706;
       --success: #059669;
-      --warning: #d97706;
-      --danger: #dc2626;
       --gray-50: #f8fafc;
       --gray-100: #f1f5f9;
       --gray-200: #e2e8f0;
@@ -45,14 +49,16 @@
       min-height: 100vh;
     }
 
+    /* HEADER: NỀN XANH LỤC - CHỮ VÀ NÚT MÀU CAM */
     header {
-      background: linear-gradient(135deg, #991b1b 0%, #b91c1c 60%, #c2410c 100%);
-      color: white;
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-main) 60%, #065f46 100%);
+      color: var(--orange-light);
       padding: 18px 16px;
       box-shadow: var(--shadow-md);
       position: sticky;
       top: 0;
       z-index: 50;
+      border-bottom: 3px solid var(--orange-main);
     }
 
     .header-container {
@@ -72,15 +78,15 @@
     }
 
     .brand-logo {
-      width: 70px;
-      height: 70px;
+      width: 72px;
+      height: 72px;
       background: white;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 2px;
-      box-shadow: var(--shadow-md);
+      box-shadow: 0 0 0 3px var(--orange-main);
       flex-shrink: 0;
       overflow: hidden;
     }
@@ -97,7 +103,7 @@
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: #fef08a;
+      color: var(--orange-light);
       font-weight: 700;
     }
 
@@ -106,11 +112,17 @@
       font-weight: 800;
       margin: 2px 0;
       text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    .brand-text h1 span {
+      color: var(--orange-bright);
     }
 
     .brand-text p {
       font-size: 0.85rem;
-      opacity: 0.92;
+      color: var(--orange-light);
     }
 
     .header-actions {
@@ -123,9 +135,9 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 8px 13px;
+      padding: 8px 14px;
       font-size: 0.84rem;
-      font-weight: 600;
+      font-weight: 700;
       border-radius: 8px;
       cursor: pointer;
       border: none;
@@ -133,37 +145,32 @@
       text-decoration: none;
     }
 
-    .btn-light {
+    .btn-orange-primary {
+      background: var(--orange-main);
+      color: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .btn-orange-primary:hover {
+      background: var(--orange-hover);
+    }
+
+    .btn-orange-outline {
+      background: rgba(0, 0, 0, 0.2);
+      color: var(--orange-light);
+      border: 1px solid var(--orange-main);
+    }
+    .btn-orange-outline:hover {
+      background: var(--orange-main);
+      color: white;
+    }
+
+    .btn-white {
       background: white;
-      color: var(--primary-dark);
+      color: var(--green-dark);
     }
-    .btn-light:hover {
-      background: #fee2e2;
-    }
-
-    .btn-outline-light {
-      background: rgba(255, 255, 255, 0.15);
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-    .btn-outline-light:hover {
-      background: rgba(255, 255, 255, 0.25);
-    }
-
-    .btn-share {
-      background: #0284c7;
-      color: white;
-    }
-    .btn-share:hover {
-      background: #0369a1;
-    }
-
-    .btn-cloud {
-      background: #10b981;
-      color: white;
-    }
-    .btn-cloud:hover {
-      background: #059669;
+    .btn-white:hover {
+      background: var(--orange-light);
+      color: var(--orange-hover);
     }
 
     main {
@@ -174,9 +181,10 @@
       padding: 0 16px;
     }
 
+    /* BANNER BÁO VAI TRÒ DUYỆT */
     .flow-badge-banner {
-      background: #eff6ff;
-      border: 2px dashed #3b82f6;
+      background: #fff7ed;
+      border: 2px dashed var(--orange-main);
       border-radius: var(--radius);
       padding: 14px 20px;
       margin-bottom: 20px;
@@ -190,7 +198,7 @@
     .flow-badge-title {
       font-size: 0.95rem;
       font-weight: 700;
-      color: #1e40af;
+      color: #9a3412;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -208,7 +216,7 @@
     .card-title {
       font-size: 1.1rem;
       font-weight: 700;
-      color: var(--gray-800);
+      color: var(--green-dark);
       display: flex;
       align-items: center;
       gap: 10px;
@@ -218,7 +226,7 @@
     }
 
     .card-title i {
-      color: var(--primary);
+      color: var(--orange-main);
     }
 
     .grid-4 {
@@ -248,8 +256,8 @@
     }
 
     .form-control:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.15);
+      border-color: var(--orange-main);
+      box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
     }
 
     .object-selector {
@@ -280,7 +288,8 @@
 
     .object-pill.active {
       background: white;
-      color: var(--primary);
+      color: var(--green-dark);
+      border: 1px solid var(--gray-300);
       box-shadow: var(--shadow-sm);
     }
 
@@ -308,12 +317,11 @@
       left: 0;
       width: 4px;
       height: 100%;
-      background: var(--primary);
+      background: var(--green-main);
     }
 
-    .metric-card.success::before { background: var(--success); }
-    .metric-card.accent::before { background: var(--accent); }
-    .metric-card.blue::before { background: var(--secondary); }
+    .metric-card.orange-bar::before { background: var(--orange-main); }
+    .metric-card.blue-bar::before { background: var(--secondary); }
 
     .metric-title {
       font-size: 0.78rem;
@@ -370,7 +378,7 @@
 
     th {
       background: var(--gray-100);
-      color: var(--gray-700);
+      color: var(--green-dark);
       padding: 10px 12px;
       font-weight: 700;
       border-bottom: 2px solid var(--gray-200);
@@ -389,11 +397,12 @@
     .badge-code {
       display: inline-block;
       padding: 2px 6px;
-      background: #e0f2fe;
-      color: #0369a1;
+      background: #ecfdf5;
+      color: var(--green-dark);
       font-weight: 700;
       border-radius: 4px;
       font-size: 0.75rem;
+      border: 1px solid #a7f3d0;
     }
 
     .rule-note {
@@ -405,33 +414,37 @@
 
     .input-score {
       width: 75px;
-      padding: 5px 8px;
+      padding: 6px 8px;
       border-radius: 6px;
       border: 1px solid var(--gray-300);
       text-align: center;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
     }
 
     .input-score:focus {
-      border-color: var(--primary);
+      border-color: var(--orange-main);
       outline: none;
     }
 
+    /* ĐỊNH DẠNG KHÓA VÀ NỔI BẬT THEO TỪNG CẤP */
+    .input-score.locked-score {
+      background-color: #f1f5f9 !important;
+      color: #334155 !important;
+      cursor: not-allowed;
+      border: 1px dashed #cbd5e1 !important;
+    }
+
     .input-score.highlight-lead {
-      border: 2px solid #0284c7 !important;
-      background-color: #f0f9ff;
+      border: 2px solid var(--orange-main) !important;
+      background-color: #fff7ed;
+      color: #9a3412;
     }
 
     .input-score.highlight-bgh {
-      border: 2px solid #b91c1c !important;
-      background-color: #fef2f2;
-    }
-
-    .input-score.under-warning {
-      border-color: #f59e0b;
-      background: #fffbeb;
-      color: #b45309;
+      border: 2px solid var(--green-main) !important;
+      background-color: #ecfdf5;
+      color: var(--green-dark);
     }
 
     .input-text-sm {
@@ -479,6 +492,7 @@
       margin-top: 3px;
       width: 16px;
       height: 16px;
+      accent-color: var(--orange-main);
       cursor: pointer;
     }
 
@@ -493,28 +507,6 @@
       white-space: nowrap;
     }
 
-    .alert-box {
-      padding: 12px 16px;
-      border-radius: 8px;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.85rem;
-    }
-
-    .alert-info {
-      background: #eff6ff;
-      border-left: 4px solid #3b82f6;
-      color: #1e40af;
-    }
-
-    .alert-warning {
-      background: #fffbeb;
-      border-left: 4px solid #f59e0b;
-      color: #92400e;
-    }
-
     .signature-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -527,14 +519,14 @@
       font-weight: 700;
       font-size: 0.9rem;
       text-transform: uppercase;
-      color: var(--gray-800);
+      color: var(--green-dark);
     }
 
     .sig-sub {
       font-size: 0.78rem;
       color: #64748b;
       font-style: italic;
-      margin-bottom: 50px;
+      margin-bottom: 40px;
     }
 
     .sig-name {
@@ -544,24 +536,26 @@
     }
 
     .sig-input-name {
-      border: 1px dashed #cbd5e1;
-      border-radius: 4px;
-      padding: 4px 8px;
+      border: 1px dashed var(--orange-main);
+      background: #fff7ed;
+      border-radius: 6px;
+      padding: 6px 10px;
       font-size: 0.9rem;
       text-align: center;
-      font-weight: 600;
-      width: 80%;
+      font-weight: 700;
+      color: #9a3412;
+      width: 85%;
       margin: 0 auto;
     }
 
-    /* FOOTER TỐI MÀU CHUẨN */
+    /* CHÂN TRANG: NỀN XANH LỤC SẪM - CHỮ MÀU CAM */
     footer.site-footer {
-      background-color: #0b1329;
-      color: #cbd5e1;
+      background-color: var(--green-dark);
+      color: var(--orange-light);
       font-size: 0.88rem;
       padding: 28px 16px;
       margin-top: 40px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 3px solid var(--orange-main);
     }
 
     .footer-inner {
@@ -582,7 +576,7 @@
     .footer-heading {
       font-size: 0.95rem;
       font-weight: 800;
-      color: #ffffff;
+      color: var(--orange-bright);
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-bottom: 6px;
@@ -592,29 +586,29 @@
     }
 
     .footer-heading .icon-cap {
-      color: #f59e0b;
-      font-size: 1.1rem;
+      color: var(--orange-bright);
+      font-size: 1.15rem;
     }
 
     .footer-author {
       font-size: 0.95rem;
-      color: #f1f5f9;
+      color: #ffffff;
       margin-bottom: 4px;
     }
 
     .footer-author strong {
-      color: #f59e0b;
-      font-weight: 700;
+      color: var(--orange-bright);
+      font-weight: 800;
     }
 
     .footer-school {
-      color: #94a3b8;
+      color: var(--orange-light);
       font-size: 0.85rem;
       margin-bottom: 5px;
     }
 
     .footer-specialty {
-      color: #94a3b8;
+      color: var(--orange-light);
       font-size: 0.85rem;
       display: flex;
       align-items: center;
@@ -622,18 +616,18 @@
     }
 
     .footer-specialty .icon-medal {
-      color: #38bdf8;
-      font-size: 0.95rem;
+      color: var(--orange-bright);
+      font-size: 1rem;
     }
 
     .footer-specialty strong {
-      color: #f1f5f9;
-      font-weight: 600;
+      color: #ffffff;
+      font-weight: 700;
     }
 
     .footer-right-box {
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--orange-main);
+      background: rgba(0, 0, 0, 0.2);
       border-radius: 10px;
       padding: 14px 20px;
       min-width: 340px;
@@ -641,8 +635,8 @@
 
     .contact-heading {
       font-size: 0.9rem;
-      font-weight: 700;
-      color: #ffffff;
+      font-weight: 800;
+      color: var(--orange-bright);
       text-transform: uppercase;
       margin-bottom: 8px;
       display: flex;
@@ -651,13 +645,13 @@
     }
 
     .contact-heading .icon-contact {
-      color: #10b981;
+      color: var(--orange-bright);
       font-size: 1rem;
     }
 
     .contact-item {
       font-size: 0.85rem;
-      color: #94a3b8;
+      color: var(--orange-light);
       margin-bottom: 4px;
       display: flex;
       align-items: center;
@@ -666,29 +660,30 @@
 
     .contact-item i {
       width: 14px;
-      color: #94a3b8;
+      color: var(--orange-bright);
       text-align: center;
     }
 
     .contact-item strong.phone-val {
-      color: #f59e0b;
-      font-size: 0.92rem;
-      font-weight: 700;
+      color: var(--orange-bright);
+      font-size: 0.95rem;
+      font-weight: 800;
     }
 
     .contact-item a {
-      color: #e2e8f0;
+      color: #ffffff;
       text-decoration: none;
     }
 
     .contact-item a:hover {
       text-decoration: underline;
-      color: #f59e0b;
+      color: var(--orange-bright);
     }
 
     .contact-desc {
       font-size: 0.8rem;
-      color: #64748b;
+      color: var(--orange-light);
+      opacity: 0.85;
       margin-top: 6px;
     }
 
@@ -750,6 +745,8 @@
       }
       .sig-input-name {
         border: none !important;
+        background: transparent !important;
+        color: black !important;
       }
     }
 
@@ -760,7 +757,7 @@
 </head>
 <body>
 
-  <!-- HEADER TRƯỜNG -->
+  <!-- HEADER NỀN XANH LỤC - CHỮ CAM -->
   <header>
     <div class="header-container">
       <div class="brand-box">
@@ -769,27 +766,25 @@
         </div>
         <div class="brand-text">
           <span>ỦY BAN NHÂN DÂN PHƯỜNG GIA SÀNG</span>
-          <h1>HỆ THỐNG ĐÁNH GIÁ, XẾP LOẠI KPI VIÊN CHỨC</h1>
+          <h1>HỆ THỐNG ĐÁNH GIÁ, XẾP LOẠI <span>KPI VIÊN CHỨC</span></h1>
           <p>Trường Tiểu học & THCS 915 Gia Sàng | Năm học 2026 - 2027</p>
         </div>
       </div>
       <div class="header-actions">
-        <button id="btnShareLead" class="btn btn-share" onclick="generateShareLink('lead')">
+        <!-- NÚT GỬI LINK ĐIỀU HÀNH 3 CẤP -->
+        <button id="btnShareLead" class="btn btn-orange-primary" onclick="generateShareLink('lead')">
           <i class="fa-solid fa-share-nodes"></i> Gửi link cho Tổ trưởng
         </button>
-        <button id="btnShareBGH" class="btn btn-share" style="display: none; background: #7c3aed;" onclick="generateShareLink('bgh')">
+        <button id="btnShareBGH" class="btn btn-orange-primary" style="display: none;" onclick="generateShareLink('bgh')">
           <i class="fa-solid fa-share-nodes"></i> Gửi link cho BGH
         </button>
-        <button class="btn btn-cloud" onclick="submitToGoogleSheet()">
-          <i class="fa-solid fa-paper-plane"></i> Gửi kết quả về Nhà trường
-        </button>
-        <button class="btn btn-light" onclick="quickFill100()">
+        <button class="btn btn-white" onclick="quickFill100()">
           <i class="fa-solid fa-wand-magic-sparkles"></i> Điền 100%
         </button>
-        <button class="btn btn-outline-light" onclick="window.print()">
+        <button class="btn btn-orange-outline" onclick="window.print()">
           <i class="fa-solid fa-print"></i> In / Xuất PDF (A4)
         </button>
-        <button class="btn btn-outline-light" onclick="resetForm()">
+        <button class="btn btn-orange-outline" onclick="resetForm()">
           <i class="fa-solid fa-rotate-left"></i> Làm mới
         </button>
       </div>
@@ -798,19 +793,19 @@
 
   <main>
 
-    <!-- BANNER BÁO TRẠNG THÁI QUY TRÌNH DUYỆT -->
+    <!-- BANNER TRẠNG THÁI VAI TRÒ DUYỆT -->
     <div id="flowBanner" class="flow-badge-banner no-print" style="display: none;">
       <div class="flow-badge-title" id="flowBannerText">
         <i class="fa-solid fa-circle-check"></i> Đang tải dữ liệu...
       </div>
       <div>
-        <button class="btn btn-outline-light" style="color: #1e40af; border-color: #bfdbfe; background: white;" onclick="clearWorkflowMode()">
-          <i class="fa-solid fa-arrow-left"></i> Về chế độ tự chấm thông thường
+        <button class="btn btn-orange-outline" style="background: white; color: var(--orange-main);" onclick="clearWorkflowMode()">
+          <i class="fa-solid fa-arrow-left"></i> Về phiếu tự chấm cá nhân
         </button>
       </div>
     </div>
 
-    <!-- THỂ THỨC HÀNH CHÍNH KHI IN ẤN RA BẢN A4 -->
+    <!-- TIÊU ĐỀ IN ẤN CHUẨN A4 -->
     <div class="print-header-admin">
       <table style="width: 100%; border: none; margin-bottom: 16px;">
         <tr style="border: none;">
@@ -834,7 +829,7 @@
       </div>
     </div>
 
-    <!-- CHỌN ĐỐI TƯỢNG ĐÁNH GIÁ -->
+    <!-- TAB ĐỐI TƯỢNG -->
     <div class="object-selector no-print">
       <div class="object-pill active" id="tab-gvcn" onclick="switchRole('gvcn')">
         <i class="fa-solid fa-chalkboard-user"></i> 1. Giáo Viên Chủ Nhiệm (GVCN)
@@ -879,14 +874,14 @@
       </div>
     </section>
 
-    <!-- METRICS DASHBOARD -->
+    <!-- METRICS DASHBOARD: TỔNG ĐIỂM CHUẨN 100 -->
     <div class="metrics-grid">
       <div class="metric-card">
         <div class="metric-title" id="lbl-col1">Trụ cột I (Đạo đức)</div>
         <div class="metric-value"><span id="val-col1">20.0</span> / <span id="max-col1">20</span></div>
         <div class="metric-desc">Kỷ luật, tác phong sư phạm</div>
       </div>
-      <div class="metric-card blue">
+      <div class="metric-card blue-bar">
         <div class="metric-title" id="lbl-col2">Trụ cột II (Chuyên môn)</div>
         <div class="metric-value"><span id="val-col2">40.0</span> / <span id="max-col2">40</span></div>
         <div class="metric-desc">Hồ sơ, giáo án, giờ dạy</div>
@@ -896,26 +891,17 @@
         <div class="metric-value"><span id="val-col3">40.0</span> / <span id="max-col3">40</span></div>
         <div class="metric-desc" id="desc-col3">Quản lý lớp & Giáo dục toàn diện</div>
       </div>
-      <div class="metric-card accent">
+      <div class="metric-card orange-bar">
         <div class="metric-title">Điểm Thưởng (Bonus)</div>
-        <div class="metric-value">+<span id="val-bonus">0.0</span> <span>/ 15</span></div>
+        <div class="metric-value" style="color: var(--orange-main);">+<span id="val-bonus">0.0</span> <span>/ 15</span></div>
         <div class="metric-desc">Cống hiến, vượt chỉ tiêu</div>
       </div>
-      <div class="metric-card success">
+      <div class="metric-card">
         <div class="metric-title">TỔNG ĐIỂM KPI</div>
-        <!-- Đã sửa về thang điểm chuẩn / 100 -->
-        <div class="metric-value"><span id="val-total" style="color: var(--primary);">100.0</span> <span>/ 100</span></div>
+        <div class="metric-value"><span id="val-total" style="color: var(--green-dark);">100.0</span> <span>/ 100</span></div>
         <div>
           <span id="badge-rank" class="rank-badge rank-a">Loại A (Xuất sắc)</span>
         </div>
-      </div>
-    </div>
-
-    <!-- CẢNH BÁO ĐIỀU KIỆN KHỐNG CHẾ LOẠI A -->
-    <div id="rankWarningBox" class="alert-box alert-warning" style="display: none;">
-      <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2rem;"></i>
-      <div>
-        <strong>Lưu ý điều kiện xếp loại:</strong> <span id="rankWarningMsg"></span>
       </div>
     </div>
 
@@ -923,14 +909,7 @@
     <section class="card">
       <div class="card-title">
         <i class="fa-solid fa-list-check"></i> 
-        <span id="tableHeaderTitle">BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI CHI TIẾT - GIÁO VIÊN CHỦ NHIỆM</span>
-      </div>
-
-      <div class="alert-box alert-info no-print">
-        <i class="fa-solid fa-circle-info"></i>
-        <div>
-          <strong>Quy trình số hóa 3 cấp:</strong> Giáo viên tự chấm $\rightarrow$ Bấm <em>"Gửi link cho Tổ trưởng"</em> để gửi qua Zalo. Tổ trưởng mở link, thẩm định và ký tên $\rightarrow$ Bấm <em>"Gửi kết quả về Nhà trường / BGH"</em>. Tổng điểm chuẩn tối đa là 100 điểm.
-        </div>
+        <span id="tableHeaderTitle">BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI CHI TIẾT</span>
       </div>
 
       <div class="table-container">
@@ -940,9 +919,9 @@
               <th style="width: 85px; text-align: center;">Mã KPI</th>
               <th style="min-width: 250px;">Tiêu chí đánh giá & Quy định trừ điểm</th>
               <th style="width: 85px; text-align: center;">Điểm chuẩn</th>
-              <th style="width: 95px; text-align: center;">Cá nhân tự chấm</th>
-              <th style="width: 95px; text-align: center;">Tổ thẩm định</th>
-              <th style="width: 95px; text-align: center;">BGH duyệt</th>
+              <th style="width: 100px; text-align: center;" id="th-self">1. GV tự chấm</th>
+              <th style="width: 100px; text-align: center;" id="th-lead">2. Tổ thẩm định</th>
+              <th style="width: 100px; text-align: center;" id="th-bgh">3. BGH duyệt</th>
               <th style="min-width: 180px;">Minh chứng / Ghi chú</th>
             </tr>
           </thead>
@@ -951,16 +930,13 @@
       </div>
     </section>
 
-    <!-- TRỤ CỘT IV: ĐIỂM THƯỞNG -->
+    <!-- ĐIỂM THƯỞNG BONUS -->
     <section class="card">
       <div class="bonus-box">
         <div class="bonus-header">
           <div><i class="fa-solid fa-medal"></i> TRỤ CỘT IV: ĐIỂM THƯỞNG KPI CỐNG HIẾN ĐỘT XUẤT (TỐI ĐA +15 ĐIỂM)</div>
-          <div>Điểm thưởng đạt: <span id="bonusScoreText" style="font-size: 1.15rem;">0</span>/15 đ</div>
+          <div>Điểm thưởng đạt: <span id="bonusScoreText" style="font-size: 1.15rem; color: var(--orange-main);">0</span>/15 đ</div>
         </div>
-        <p style="font-size: 0.8rem; color: #78350f; margin-bottom: 10px;">
-          Tích chọn các thành tích vượt mức đạt được trong kỳ đánh giá theo Quy chế số QĐ-TH&THCS915:
-        </p>
         <div class="bonus-list" id="bonusListContainer"></div>
       </div>
     </section>
@@ -977,7 +953,7 @@
           <div class="sig-role">Tổ Trưởng Thẩm Định</div>
           <div class="sig-sub">(Ký nhận xét và đánh giá)</div>
           <div>
-            <input type="text" id="leadApproverName" class="sig-input-name" placeholder="Nhập họ tên Tổ trưởng..." value="" oninput="autoSave()">
+            <input type="text" id="leadApproverName" class="sig-input-name" placeholder="Nhập tên Tổ trưởng..." value="" oninput="autoSave()">
           </div>
         </div>
         <div>
@@ -990,7 +966,7 @@
 
   </main>
 
-  <!-- CHÂN TRANG TỐI MÀU -->
+  <!-- CHÂN TRANG: NỀN XANH LỤC SẪM - CHỮ MÀU CAM THEO ẢNH YÊU CẦU -->
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-left">
@@ -1019,9 +995,8 @@
   </footer>
 
   <script>
-    const GOOGLE_SCRIPT_URL = ""; 
-
     const KPI_DATA = {
+      // 1. GIÁO VIÊN CHỦ NHIỆM
       gvcn: {
         title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - GIÁO VIÊN CHỦ NHIỆM (GVCN)",
         col1: { name: "Trụ cột I (Đạo đức)", max: 20 },
@@ -1047,6 +1022,8 @@
           { id: "BONUS-04", text: "Xung kích hỗ trợ đột xuất (CĐS, thiên tai, tổ chức hội thi lớn)", pts: 5 }
         ]
       },
+
+      // 2. GIÁO VIÊN BỘ MÔN
       gvbm: {
         title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - GIÁO VIÊN BỘ MÔN (GVBM)",
         col1: { name: "Trụ cột I (Đạo đức)", max: 20 },
@@ -1070,6 +1047,8 @@
           { id: "BONUS-04", text: "Xung kích hỗ trợ đột xuất (Chuyển đổi số, hội thi, thiên tai)", pts: 5 }
         ]
       },
+
+      // 3. KHỐI NHÂN VIÊN
       nv: {
         title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - KHỐI NHÂN VIÊN (HÀNH CHÍNH - VĂN PHÒNG)",
         col1: { name: "Trụ cột I (Kỷ luật)", max: 20 },
@@ -1099,7 +1078,30 @@
     let currentRole = "gvcn";
     let currentScores = {};
     let activeBonuses = new Set();
-    let currentWorkflow = "self";
+    let currentWorkflow = "self"; // 'self' (GV), 'lead' (Tổ trưởng), 'bgh' (BGH)
+
+    // THUẬT TOÁN MÃ HÓA / GIẢI MÃ UNICODE BASE64 AN TOÀN TUYỆT ĐỐI CHO LINK ZALO
+    function encodeDataToUrl(obj) {
+      const jsonStr = JSON.stringify(obj);
+      const bytes = new TextEncoder().encode(jsonStr);
+      let binary = '';
+      for (let i = 0; i < bytes.length; i++) {
+        binary += String.fromCharCode(bytes[i]);
+      }
+      return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    }
+
+    function decodeDataFromUrl(str) {
+      if (!str) return null;
+      str = str.replace(/-/g, '+').replace(/_/g, '/');
+      while (str.length % 4) str += '=';
+      const binary = atob(str);
+      const bytes = new Uint8Array(binary.length);
+      for (let i = 0; i < binary.length; i++) {
+        bytes[i] = binary.charCodeAt(i);
+      }
+      return JSON.parse(new TextDecoder().decode(bytes));
+    }
 
     window.addEventListener("DOMContentLoaded", () => {
       const isFromUrl = checkUrlWorkflow();
@@ -1114,37 +1116,70 @@
       });
     });
 
+    // KIỂM TRA LINK NHẬN ĐƯỢC TỪ TỔ TRƯỞNG HOẶC BGH
     function checkUrlWorkflow() {
       const urlParams = new URLSearchParams(window.location.search);
       const mode = urlParams.get("mode");
-      const dataStr = urlParams.get("data");
+      const dataStr = urlParams.get("d");
 
       if (mode && dataStr) {
         try {
-          const decoded = JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(dataStr)))));
+          const decoded = decodeDataFromUrl(dataStr);
+          if (!decoded) return false;
+
           currentWorkflow = mode;
           currentRole = decoded.role || "gvcn";
+          
           document.getElementById("empName").value = decoded.empName || "";
           document.getElementById("sigSelfName").textContent = decoded.empName || "........................";
           document.getElementById("empPosition").value = decoded.empPosition || "";
           document.getElementById("empDepartment").value = decoded.empDepartment || "Tổ Khoa học Tự nhiên";
           document.getElementById("evalPeriod").value = decoded.evalPeriod || "";
+          
           currentScores = decoded.scores || {};
           activeBonuses = new Set(decoded.bonuses || []);
           if (decoded.leadName) {
             document.getElementById("leadApproverName").value = decoded.leadName;
           }
 
+          // NẾU TỔ TRƯỞNG MỞ LẦN ĐẦU: ĐIỀN SẴN CỘT TỔ THẨM ĐỊNH BẰNG ĐIỂM TỰ CHẤM CỦA GV ĐỂ DUYỆT NHANH
+          if (mode === "lead") {
+            const cfg = KPI_DATA[currentRole];
+            cfg.items.forEach(item => {
+              if (!currentScores[item.code]) {
+                currentScores[item.code] = { self: item.max, lead: item.max, bgh: item.max, note: "" };
+              } else if (currentScores[item.code].lead === undefined) {
+                currentScores[item.code].lead = currentScores[item.code].self;
+              }
+            });
+          }
+
+          // NẾU BGH MỞ: ĐIỀN SẴN CỘT BGH DUYỆT THEO ĐIỂM TỔ THẨM ĐỊNH
+          if (mode === "bgh") {
+            const cfg = KPI_DATA[currentRole];
+            cfg.items.forEach(item => {
+              if (currentScores[item.code]) {
+                if (currentScores[item.code].bgh === undefined) {
+                  currentScores[item.code].bgh = currentScores[item.code].lead;
+                }
+              }
+            });
+          }
+
+          // LƯU NGAY VÀO BỘ NHỚ LOCALSTORAGE CỦA NGƯỜI NHẬN ĐỂ KHÔNG BỊ MẤT KHI TẢI LẠI
+          localStorage.setItem(`KPI_915_RECEIVED_${mode.toUpperCase()}`, JSON.stringify(decoded));
+
+          // HIỂN THỊ BANNER THÔNG BÁO CHẾ ĐỘ
           const banner = document.getElementById("flowBanner");
           const bannerText = document.getElementById("flowBannerText");
           banner.style.display = "flex";
 
           if (mode === "lead") {
-            bannerText.innerHTML = `<i class="fa-solid fa-user-check" style="font-size: 1.3rem;"></i> <div><strong>CHẾ ĐỘ TỔ TRƯỞNG THẨM ĐỊNH:</strong> Đang thẩm định phiếu của đ/c <strong>${decoded.empName}</strong> (${decoded.empDepartment}).</div>`;
+            bannerText.innerHTML = `<i class="fa-solid fa-user-check" style="font-size: 1.4rem; color: var(--orange-main);"></i> <div><strong>CHẾ ĐỘ TỔ TRƯỞNG THẨM ĐỊNH:</strong> Điểm tự chấm của đ/c <strong>${decoded.empName}</strong> (${decoded.empDepartment}) đã được lưu và khóa cố định. Đồng chí chấm điểm ở cột <strong>2. Tổ thẩm định</strong>.</div>`;
             document.getElementById("btnShareLead").style.display = "none";
             document.getElementById("btnShareBGH").style.display = "inline-flex";
           } else if (mode === "bgh") {
-            bannerText.innerHTML = `<i class="fa-solid fa-stamp" style="font-size: 1.3rem;"></i> <div><strong>CHẾ ĐỘ BGH PHÊ DUYỆT:</strong> Đang xem duyệt kết quả của đ/c <strong>${decoded.empName}</strong> (Tổ trưởng: <em>${decoded.leadName || 'Chưa ký'}</em>).</div>`;
+            bannerText.innerHTML = `<i class="fa-solid fa-stamp" style="font-size: 1.4rem; color: var(--green-main);"></i> <div><strong>CHẾ ĐỘ BGH PHÊ DUYỆT:</strong> Đang xem kết quả của đ/c <strong>${decoded.empName}</strong> (Tổ trưởng: <em>${decoded.leadName || 'Đã thẩm định'}</em>).</div>`;
             document.getElementById("btnShareLead").style.display = "none";
             document.getElementById("btnShareBGH").style.display = "none";
           }
@@ -1164,7 +1199,17 @@
       window.location.href = window.location.pathname;
     }
 
+    // TẠO ĐƯỜNG LINK BÀN GIAO GỬI ZALO
     function generateShareLink(target) {
+      const cfg = KPI_DATA[currentRole];
+      
+      // Đồng bộ dữ liệu hiện thời
+      cfg.items.forEach(item => {
+        if (!currentScores[item.code]) {
+          currentScores[item.code] = { self: item.max, lead: item.max, bgh: item.max, note: "" };
+        }
+      });
+
       const dataToPack = {
         role: currentRole,
         empName: document.getElementById("empName").value,
@@ -1182,17 +1227,17 @@
       }
 
       if (target === "bgh" && !dataToPack.leadName) {
-        alert("Đồng chí Tổ trưởng vui lòng nhập họ tên ở ô 'Tổ trưởng thẩm định' trước khi gửi cho BGH!");
+        alert("Đồng chí Tổ trưởng vui lòng ghi họ tên ở ô 'Tổ trưởng thẩm định' trước khi gửi cho BGH!");
         document.getElementById("leadApproverName").focus();
         return;
       }
 
-      const encoded = encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(dataToPack)))));
-      const fullUrl = `${window.location.origin}${window.location.pathname}?mode=${target}&data=${encoded}`;
+      const encoded = encodeDataToUrl(dataToPack);
+      const fullUrl = `${window.location.origin}${window.location.pathname}?mode=${target}&d=${encoded}`;
 
       navigator.clipboard.writeText(fullUrl).then(() => {
         const roleLabel = target === "lead" ? "Tổ trưởng chuyên môn" : "Ban Giám hiệu";
-        alert(`✅ ĐÃ SAO CHÉP LINK BÀN GIAO!\n\nĐồng chí chỉ cần dán (Paste / Ctrl+V) link này gửi qua Zalo cho ${roleLabel} để thẩm định và phê duyệt tiếp.`);
+        alert(`✅ ĐÃ SAO CHÉP LINK BÀN GIAO THÀNH CÔNG!\n\nToàn bộ điểm số đã được đóng gói an toàn. Đồng chí chỉ cần dán (Paste / Ctrl+V) gửi link này qua Zalo cho ${roleLabel}.`);
       }).catch(() => {
         prompt("Sao chép đường link bên dưới để gửi qua Zalo:", fullUrl);
       });
@@ -1243,8 +1288,8 @@
           currentPillar = item.pillar;
           const headerTr = document.createElement("tr");
           headerTr.innerHTML = `
-            <td colspan="7" style="background: #f8fafc; font-weight: 800; color: #1e3a8a; padding: 8px 12px; text-transform: uppercase;">
-              <i class="fa-solid fa-bookmark" style="color: var(--primary); margin-right: 6px;"></i> ${item.pillarName}
+            <td colspan="7" style="background: #f8fafc; font-weight: 800; color: var(--green-dark); padding: 8px 12px; text-transform: uppercase; border-left: 4px solid var(--orange-main);">
+              <i class="fa-solid fa-bookmark" style="color: var(--orange-main); margin-right: 6px;"></i> ${item.pillarName}
             </td>
           `;
           tbody.appendChild(headerTr);
@@ -1252,6 +1297,12 @@
 
         const scoreObj = currentScores[item.code] || { self: item.max, lead: item.max, bgh: item.max, note: "" };
         const tr = document.createElement("tr");
+
+        // ĐIỀU KHIỂN KHÓA Ô THEO VAI TRÒ
+        const isSelfLocked = (currentWorkflow === 'lead' || currentWorkflow === 'bgh');
+        const isLeadActive = (currentWorkflow === 'lead');
+        const isBghActive = (currentWorkflow === 'bgh');
+
         tr.innerHTML = `
           <td style="text-align: center; vertical-align: middle;">
             <span class="badge-code">${item.code}</span>
@@ -1263,23 +1314,32 @@
           <td style="text-align: center; vertical-align: middle; font-weight: 700; color: #475569;">
             ${item.max}
           </td>
+          <!-- CỘT 1: GV TỰ CHẤM (KHÓA KHI TỔ TRƯỞNG / BGH XEM) -->
           <td style="text-align: center; vertical-align: middle;">
-            <input type="number" step="0.5" min="0" max="${item.max}" class="input-score" 
-              id="score-self-${item.code}" value="${scoreObj.self}" 
+            <input type="number" step="0.5" min="0" max="${item.max}" 
+              class="input-score ${isSelfLocked ? 'locked-score' : ''}" 
+              id="score-self-${item.code}" value="${scoreObj.self !== undefined ? scoreObj.self : item.max}" 
+              ${isSelfLocked ? 'readonly title="Điểm do giáo viên tự chấm (Đã khóa an toàn)"' : ''}
               oninput="handleScoreChange('${item.code}', 'self', this.value, ${item.max})" />
           </td>
+          <!-- CỘT 2: TỔ THẨM ĐỊNH (NỔI BẬT KHI TỔ TRƯỞNG MỞ LINK) -->
           <td style="text-align: center; vertical-align: middle;">
-            <input type="number" step="0.5" min="0" max="${item.max}" class="input-score ${currentWorkflow === 'lead' ? 'highlight-lead' : ''}" 
-              id="score-lead-${item.code}" value="${scoreObj.lead}" 
+            <input type="number" step="0.5" min="0" max="${item.max}" 
+              class="input-score ${isLeadActive ? 'highlight-lead' : (currentWorkflow === 'bgh' ? 'locked-score' : '')}" 
+              id="score-lead-${item.code}" value="${scoreObj.lead !== undefined ? scoreObj.lead : (scoreObj.self !== undefined ? scoreObj.self : item.max)}" 
+              ${currentWorkflow === 'bgh' ? 'readonly title="Điểm do Tổ trưởng thẩm định (Đã khóa)"' : ''}
               oninput="handleScoreChange('${item.code}', 'lead', this.value, ${item.max})" />
           </td>
+          <!-- CỘT 3: BGH DUYỆT -->
           <td style="text-align: center; vertical-align: middle;">
-            <input type="number" step="0.5" min="0" max="${item.max}" class="input-score ${currentWorkflow === 'bgh' ? 'highlight-bgh' : ''}" 
-              id="score-bgh-${item.code}" value="${scoreObj.bgh}" 
+            <input type="number" step="0.5" min="0" max="${item.max}" 
+              class="input-score ${isBghActive ? 'highlight-bgh' : ''}" 
+              id="score-bgh-${item.code}" value="${scoreObj.bgh !== undefined ? scoreObj.bgh : (scoreObj.lead !== undefined ? scoreObj.lead : item.max)}" 
+              ${!isBghActive && currentWorkflow !== 'self' ? 'readonly' : ''}
               oninput="handleScoreChange('${item.code}', 'bgh', this.value, ${item.max})" />
           </td>
           <td style="vertical-align: middle;">
-            <input type="text" class="input-text-sm" placeholder="Ghi minh chứng / giải trình..." 
+            <input type="text" class="input-text-sm" placeholder="Minh chứng / Ghi chú..." 
               value="${scoreObj.note || ''}" 
               oninput="handleNoteChange('${item.code}', this.value)" />
           </td>
@@ -1287,6 +1347,7 @@
         tbody.appendChild(tr);
       });
 
+      // RENDER DANH MỤC BONUS
       const bonusContainer = document.getElementById("bonusListContainer");
       bonusContainer.innerHTML = "";
       cfg.bonuses.forEach(b => {
@@ -1315,13 +1376,6 @@
       if (!currentScores[code]) currentScores[code] = { self: maxVal, lead: maxVal, bgh: maxVal, note: "" };
       currentScores[code][roleKey] = num;
 
-      const inputEl = document.getElementById(`score-${roleKey}-${code}`);
-      if (num < maxVal * 0.7) {
-        inputEl.classList.add("under-warning");
-      } else {
-        inputEl.classList.remove("under-warning");
-      }
-
       calculateTotals();
       autoSave();
     }
@@ -1342,13 +1396,14 @@
       autoSave();
     }
 
-    // TÍNH TOÁN VỚI MỨC KHỐNG CHẾ TỐI ĐA 100 ĐIỂM
+    // TÍNH TOÁN ĐIỂM CHUẨN (TỐI ĐA 100 ĐIỂM)
     function calculateTotals() {
       const cfg = KPI_DATA[currentRole];
       let p1 = 0, p2 = 0, p3 = 0;
       let hasUnder70 = false;
       let under70Items = [];
 
+      // Hiển thị tổng điểm theo vai trò người đang xem
       const evalColKey = (currentWorkflow === 'lead') ? 'lead' : (currentWorkflow === 'bgh' ? 'bgh' : 'self');
 
       cfg.items.forEach(item => {
@@ -1372,7 +1427,7 @@
       const totalStandard = p1 + p2 + p3;
       let finalTotal = totalStandard + bonusScore;
       
-      // Khống chế điểm tổng không vượt quá 100 điểm
+      // KHỐNG CHẾ TỐI ĐA 100 ĐIỂM
       if (finalTotal > 100) finalTotal = 100;
 
       document.getElementById("val-col1").textContent = p1.toFixed(1);
@@ -1383,9 +1438,6 @@
       document.getElementById("val-total").textContent = finalTotal.toFixed(1);
 
       const badge = document.getElementById("badge-rank");
-      const warningBox = document.getElementById("rankWarningBox");
-      const warningMsg = document.getElementById("rankWarningMsg");
-
       let rank = "";
       let badgeClass = "";
 
@@ -1393,25 +1445,19 @@
         if (hasUnder70) {
           rank = "Loại B (Hạ bậc do tiêu chí < 70%)";
           badgeClass = "rank-b";
-          warningBox.style.display = "flex";
-          warningMsg.innerHTML = `Điểm đạt <strong>${finalTotal.toFixed(1)}</strong>, nhưng bị hạ bậc do có tiêu chí dưới 70% chuẩn: <em>${under70Items.join(", ")}</em>.`;
         } else {
           rank = "Loại A (Hoàn thành xuất sắc)";
           badgeClass = "rank-a";
-          warningBox.style.display = "none";
         }
       } else if (finalTotal >= 75) {
         rank = "Loại B (Hoàn thành tốt)";
         badgeClass = "rank-b";
-        warningBox.style.display = "none";
       } else if (finalTotal >= 55) {
         rank = "Loại C (Hoàn thành)";
         badgeClass = "rank-c";
-        warningBox.style.display = "none";
       } else {
         rank = "Loại D (Không hoàn thành)";
         badgeClass = "rank-d";
-        warningBox.style.display = "none";
       }
 
       badge.className = `rank-badge ${badgeClass}`;
@@ -1422,23 +1468,22 @@
       const cfg = KPI_DATA[currentRole];
       cfg.items.forEach(item => {
         if (!currentScores[item.code]) currentScores[item.code] = {};
-        currentScores[item.code].self = item.max;
-        currentScores[item.code].lead = item.max;
-        currentScores[item.code].bgh = item.max;
+        if (currentWorkflow === 'self') currentScores[item.code].self = item.max;
+        if (currentWorkflow === 'lead') currentScores[item.code].lead = item.max;
+        if (currentWorkflow === 'bgh') currentScores[item.code].bgh = item.max;
       });
       renderApp();
       autoSave();
     }
 
     function resetForm() {
-      if (confirm("Chị có chắc muốn làm mới lại dữ liệu chấm điểm?")) {
+      if (confirm("Chị có chắc chắn muốn làm mới lại dữ liệu chấm điểm?")) {
         localStorage.removeItem("KPI_915_V2");
         window.location.href = window.location.pathname;
       }
     }
 
     function autoSave() {
-      if (currentWorkflow !== "self") return;
       const data = {
         role: currentRole,
         empName: document.getElementById("empName").value,
@@ -1449,7 +1494,12 @@
         bonuses: Array.from(activeBonuses),
         leadName: document.getElementById("leadApproverName").value
       };
-      localStorage.setItem("KPI_915_V2", JSON.stringify(data));
+      
+      if (currentWorkflow === "self") {
+        localStorage.setItem("KPI_915_V2", JSON.stringify(data));
+      } else {
+        localStorage.setItem(`KPI_915_${currentWorkflow.toUpperCase()}_SAVED`, JSON.stringify(data));
+      }
     }
 
     function loadSavedData() {
@@ -1475,62 +1525,6 @@
         } catch (e) {}
       }
       initDefaultScores();
-    }
-
-    function submitToGoogleSheet() {
-      const cfg = KPI_DATA[currentRole];
-      let sumSelf = 0, sumLead = 0;
-      cfg.items.forEach(item => {
-        const sc = currentScores[item.code] || { self: item.max, lead: item.max, bgh: item.max };
-        sumSelf += Number(sc.self || 0);
-        sumLead += Number(sc.lead || 0);
-      });
-      const bonusPts = Number(document.getElementById("val-bonus").textContent || 0);
-
-      let finalSelf = sumSelf + bonusPts;
-      if (finalSelf > 100) finalSelf = 100;
-
-      let finalLead = sumLead + bonusPts;
-      if (finalLead > 100) finalLead = 100;
-
-      const payload = {
-        timestamp: new Date().toLocaleString("vi-VN"),
-        empName: document.getElementById("empName").value,
-        empPosition: document.getElementById("empPosition").value,
-        empDepartment: document.getElementById("empDepartment").value,
-        evalPeriod: document.getElementById("evalPeriod").value,
-        role: currentRole.toUpperCase(),
-        totalSelf: finalSelf.toFixed(1),
-        totalLead: finalLead.toFixed(1),
-        leadApprover: document.getElementById("leadApproverName").value || "Chưa ký",
-        bonus: bonusPts.toFixed(1),
-        finalRank: document.getElementById("badge-rank").textContent
-      };
-
-      if (!GOOGLE_SCRIPT_URL) {
-        alert(`THÔNG BÁO KẾT QUẢ ĐÁNH GIÁ KPI:\n- Viên chức: ${payload.empName}\n- Điểm Tự chấm: ${payload.totalSelf}/100đ\n- Điểm Tổ thẩm định: ${payload.totalLead}/100đ (${payload.leadApprover})\n- Xếp loại: ${payload.finalRank}\n\n👉 Chị có thể bấm 'Gửi link cho BGH' để chuyển tiếp, hoặc bấm 'In / Xuất PDF (A4)' để lưu hồ sơ bản ký giấy!`);
-        return;
-      }
-
-      const btn = document.querySelector(".btn-cloud");
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Đang gửi...`;
-      btn.disabled = true;
-
-      fetch(GOOGLE_SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      })
-      .then(() => {
-        alert("Đã gửi thành công toàn bộ kết quả tự chấm và thẩm định về hệ thống nhà trường!");
-        btn.innerHTML = `<i class="fa-solid fa-check"></i> Đã gửi thành công`;
-      })
-      .catch(err => {
-        alert("Có lỗi kết nối: " + err);
-        btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Gửi lại`;
-        btn.disabled = false;
-      });
     }
   </script>
 </body>
