@@ -11,6 +11,7 @@
 
   <style>
     :root {
+      /* TÔNG MÀU XANH LỤC VÀ CAM CHỦ ĐẠO */
       --green-dark: #064e3b;
       --green-main: #047857;
       --green-light: #059669;
@@ -48,6 +49,7 @@
       min-height: 100vh;
     }
 
+    /* ĐẦU TRANG: NỀN XANH LỤC - CHỮ VÀ VIỀN MÀU CAM */
     header {
       background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-main) 60%, #065f46 100%);
       color: var(--orange-light);
@@ -179,6 +181,7 @@
       padding: 0 16px;
     }
 
+    /* BANNER BÁO VAI TRÒ DUYỆT */
     .flow-badge-banner {
       background: #fff7ed;
       border: 2px dashed var(--orange-main);
@@ -424,6 +427,7 @@
       outline: none;
     }
 
+    /* ĐỊNH DẠNG KHÓA VÀ NỔI BẬT THEO CẤP */
     .input-score.locked-score {
       background-color: #f1f5f9 !important;
       color: #334155 !important;
@@ -544,6 +548,7 @@
       margin: 0 auto;
     }
 
+    /* CHÂN TRANG: NỀN XANH LỤC SẪM - CHỮ MÀU CAM */
     footer.site-footer {
       background-color: var(--green-dark);
       color: var(--orange-light);
@@ -756,6 +761,7 @@
     <div class="header-container">
       <div class="brand-box">
         <div class="brand-logo">
+          <!-- TỰ ĐỘNG TÌM KIẾM CÁC TÊN FILE ẢNH LOGO -->
           <img id="schoolLogoImg" src="LOGO OK.jpg" alt="Logo Trường TH & THCS 915 Gia Sàng" onerror="detectSchoolLogo(this)" />
         </div>
         <div class="brand-text">
@@ -839,7 +845,6 @@
       <div class="grid-4">
         <div class="form-group">
           <label>Họ và tên viên chức:</label>
-          <!-- BẢNG CHỌN DANH SÁCH CBGV THEO ĐÚNG DANH SÁCH NHÀ TRƯỜNG -->
           <select id="empName" class="form-control" onchange="handleNameChange(this.value)">
             <option value="Chu Hải Anh">Chu Hải Anh</option>
             <option value="Dương Ngọc Ánh">Dương Ngọc Ánh</option>
@@ -994,6 +999,7 @@
       </div>
     </section>
 
+    <!-- METRICS DASHBOARD: ĐÃ SỬA THÀNH TỔNG ĐIỂM / 115 -->
     <div class="metrics-grid">
       <div class="metric-card">
         <div class="metric-title" id="lbl-col1">Trụ cột I (Đạo đức)</div>
@@ -1017,7 +1023,8 @@
       </div>
       <div class="metric-card">
         <div class="metric-title">TỔNG ĐIỂM KPI</div>
-        <div class="metric-value"><span id="val-total" style="color: var(--green-dark);">100.0</span> <span>/ 100</span></div>
+        <!-- HIỂN THỊ TỔNG ĐIỂM TRÊN THANG 115 -->
+        <div class="metric-value"><span id="val-total" style="color: var(--green-dark);">100.0</span> <span>/ 115</span></div>
         <div>
           <span id="badge-rank" class="rank-badge rank-a">Loại A (Xuất sắc)</span>
         </div>
@@ -1124,6 +1131,7 @@
     }
 
     const KPI_DATA = {
+      // 1. GIÁO VIÊN CHỦ NHIỆM
       gvcn: {
         title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - GIÁO VIÊN CHỦ NHIỆM (GVCN)",
         col1: { name: "Trụ cột I (Đạo đức)", max: 20 },
@@ -1150,6 +1158,7 @@
         ]
       },
 
+      // 2. GIÁO VIÊN BỘ MÔN
       gvbm: {
         title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - GIÁO VIÊN BỘ MÔN (GVBM)",
         col1: { name: "Trụ cột I (Đạo đức)", max: 20 },
@@ -1174,6 +1183,7 @@
         ]
       },
 
+      // 3. KHỐI NHÂN VIÊN
       nv: {
         title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - KHỐI NHÂN VIÊN (HÀNH CHÍNH - VĂN PHÒNG)",
         col1: { name: "Trụ cột I (Kỷ luật)", max: 20 },
@@ -1509,6 +1519,7 @@
       autoSave();
     }
 
+    // TÍNH TOÁN ĐIỂM TỔNG TỐI ĐA 115 ĐIỂM (100Đ CHUẨN + 15Đ THƯỞNG)
     function calculateTotals() {
       const cfg = KPI_DATA[currentRole];
       let p1 = 0, p2 = 0, p3 = 0;
@@ -1538,7 +1549,8 @@
       const totalStandard = p1 + p2 + p3;
       let finalTotal = totalStandard + bonusScore;
       
-      if (finalTotal > 100) finalTotal = 100;
+      // KHỐNG CHẾ ĐIỂM TỔNG TỐI ĐA 115 ĐIỂM (THEO CHƯƠNG IV KPI-915)
+      if (finalTotal > 115) finalTotal = 115;
 
       document.getElementById("val-col1").textContent = p1.toFixed(1);
       document.getElementById("val-col2").textContent = p2.toFixed(1);
