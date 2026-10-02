@@ -11,7 +11,6 @@
 
   <style>
     :root {
-      /* TÔNG MÀU XANH LỤC VÀ CAM CHỦ ĐẠO */
       --green-dark: #064e3b;
       --green-main: #047857;
       --green-light: #059669;
@@ -49,7 +48,6 @@
       min-height: 100vh;
     }
 
-    /* ĐẦU TRANG: NỀN XANH LỤC - CHỮ VÀ VIỀN MÀU CAM */
     header {
       background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-main) 60%, #065f46 100%);
       color: var(--orange-light);
@@ -62,7 +60,7 @@
     }
 
     .header-container {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -175,13 +173,12 @@
 
     main {
       flex: 1;
-      max-width: 1200px;
+      max-width: 1240px;
       width: 100%;
       margin: 20px auto;
       padding: 0 16px;
     }
 
-    /* BANNER BÁO VAI TRÒ DUYỆT */
     .flow-badge-banner {
       background: #fff7ed;
       border: 2px dashed var(--orange-main);
@@ -262,15 +259,17 @@
 
     .object-selector {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       background: var(--gray-100);
       padding: 6px;
       border-radius: 10px;
       margin-bottom: 20px;
+      flex-wrap: wrap;
     }
 
     .object-pill {
       flex: 1;
+      min-width: 190px;
       text-align: center;
       padding: 10px 14px;
       border-radius: 8px;
@@ -283,7 +282,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
 
     .object-pill.active {
@@ -291,6 +290,17 @@
       color: var(--green-dark);
       border: 1px solid var(--gray-300);
       box-shadow: var(--shadow-sm);
+    }
+
+    .subrole-box {
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
     .metrics-grid {
@@ -406,10 +416,10 @@
     }
 
     .rule-note {
-      font-size: 0.78rem;
-      color: #64748b;
-      margin-top: 3px;
-      font-style: italic;
+      font-size: 0.8rem;
+      color: #334155;
+      margin-top: 4px;
+      line-height: 1.45;
     }
 
     .input-score {
@@ -427,7 +437,6 @@
       outline: none;
     }
 
-    /* ĐỊNH DẠNG KHÓA VÀ NỔI BẬT THEO CẤP */
     .input-score.locked-score {
       background-color: #f1f5f9 !important;
       color: #334155 !important;
@@ -447,12 +456,86 @@
       color: var(--green-dark);
     }
 
+    .evidence-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 220px;
+    }
+
     .input-text-sm {
       width: 100%;
-      padding: 5px 8px;
+      padding: 6px 8px;
       border-radius: 6px;
       border: 1px solid var(--gray-300);
       font-size: 0.82rem;
+    }
+
+    .file-attach-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .btn-attach-file {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      width: fit-content;
+      transition: all 0.2s;
+    }
+
+    .btn-attach-file:hover {
+      background: #e2e8f0;
+      color: var(--orange-main);
+      border-color: var(--orange-main);
+    }
+
+    .btn-attach-file input[type="file"] {
+      display: none;
+    }
+
+    .file-badge-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .file-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #e0f2fe;
+      border: 1px solid #bae6fd;
+      color: #0369a1;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 0.74rem;
+      max-width: 100%;
+    }
+
+    .file-tag-name {
+      max-width: 140px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .file-tag-remove {
+      color: #ef4444;
+      cursor: pointer;
+      font-weight: bold;
+      margin-left: 2px;
     }
 
     .bonus-box {
@@ -548,7 +631,6 @@
       margin: 0 auto;
     }
 
-    /* CHÂN TRANG: NỀN XANH LỤC SẪM - CHỮ MÀU CAM */
     footer.site-footer {
       background-color: var(--green-dark);
       color: var(--orange-light);
@@ -559,7 +641,7 @@
     }
 
     .footer-inner {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -687,13 +769,67 @@
       margin-top: 6px;
     }
 
+    /* CUSTOM POPUP THÔNG BÁO THAY THẾ CHO ALERT CỦA TRÌNH DUYỆT */
+    .custom-modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      padding: 16px;
+    }
+
+    .custom-modal-box {
+      background: white;
+      border-radius: 12px;
+      max-width: 500px;
+      width: 100%;
+      padding: 22px 24px;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.25);
+      border-top: 5px solid var(--orange-main);
+      animation: modalFadeIn 0.2s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(-12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .custom-modal-header {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--green-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .custom-modal-header i {
+      color: var(--orange-main);
+    }
+
+    .custom-modal-body {
+      font-size: 0.92rem;
+      color: #334155;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      white-space: pre-line;
+    }
+
+    .custom-modal-footer {
+      text-align: right;
+    }
+
     @media print {
       body {
         background: white;
         color: black;
         padding: 0;
       }
-      header, .header-actions, .object-selector, .bonus-box, footer.site-footer, .flow-badge-banner, .no-print {
+      header, .header-actions, .object-selector, .subrole-box, .bonus-box, footer.site-footer, .flow-badge-banner, .btn-attach-file, .no-print, .custom-modal-overlay {
         display: none !important;
       }
       main {
@@ -719,7 +855,7 @@
       }
       table {
         border: 1px solid black;
-        font-size: 10pt;
+        font-size: 9pt;
       }
       th, td {
         border: 1px solid black;
@@ -748,6 +884,9 @@
         background: transparent !important;
         color: black !important;
       }
+      .file-tag-remove {
+        display: none !important;
+      }
     }
 
     .print-header-admin {
@@ -757,25 +896,23 @@
 </head>
 <body>
 
+  <!-- HEADER NỀN XANH LỤC - CHỮ CAM -->
   <header>
     <div class="header-container">
       <div class="brand-box">
         <div class="brand-logo">
-          <!-- TỰ ĐỘNG TÌM KIẾM CÁC TÊN FILE ẢNH LOGO -->
           <img id="schoolLogoImg" src="LOGO OK.jpg" alt="Logo Trường Tiểu học và THCS 915 Gia Sàng" onerror="detectSchoolLogo(this)" />
         </div>
         <div class="brand-text">
-          <span>ỦY BAN NHÂN DÂN PHƯỜNG GIA SÀNG</span>
+          <span>UBND PHƯỜNG GIA SÀNG</span>
           <h1>HỆ THỐNG ĐÁNH GIÁ, XẾP LOẠI <span>KPI VIÊN CHỨC</span></h1>
           <p>Trường Tiểu học và THCS 915 Gia Sàng | Năm học 2026 - 2027</p>
         </div>
       </div>
       <div class="header-actions">
-        <button id="btnShareLead" class="btn btn-orange-primary" onclick="generateShareLink('lead')">
-          <i class="fa-solid fa-share-nodes"></i> Gửi link cho Tổ trưởng
-        </button>
-        <button id="btnShareBGH" class="btn btn-orange-primary" style="display: none;" onclick="generateShareLink('bgh')">
-          <i class="fa-solid fa-share-nodes"></i> Gửi link cho BGH
+        <!-- NÚT GỬI LINK ĐIỀU HƯỚNG THEO VỊ TRÍ VIỆC LÀM -->
+        <button id="btnShareLead" class="btn btn-orange-primary" onclick="handleShareButtonAction()">
+          <i class="fa-solid fa-share-nodes"></i> <span id="btnShareLeadText">Gửi link cho tổ trưởng</span>
         </button>
         <button class="btn btn-white" onclick="quickFill100()">
           <i class="fa-solid fa-wand-magic-sparkles"></i> Điền 100%
@@ -792,6 +929,7 @@
 
   <main>
 
+    <!-- BANNER TRẠNG THÁI VAI TRÒ DUYỆT -->
     <div id="flowBanner" class="flow-badge-banner no-print" style="display: none;">
       <div class="flow-badge-title" id="flowBannerText">
         <i class="fa-solid fa-circle-check"></i> Đang tải dữ liệu...
@@ -803,44 +941,80 @@
       </div>
     </div>
 
+    <!-- TIÊU ĐỀ IN ẤN CHUẨN A4 -->
     <div class="print-header-admin">
       <table style="width: 100%; border: none; margin-bottom: 16px;">
         <tr style="border: none;">
           <td style="width: 45%; border: none; text-align: center; vertical-align: top;">
             <strong>UBND PHƯỜNG GIA SÀNG</strong><br>
-            <strong>TRƯỜNG Tiểu học và THCS 915 GIA SÀNG</strong><br>
-            <span style="font-size: 0.85em;">Số: ....../QĐ-TH&THCS915</span>
+            <strong>TRƯỜNG TIỂU HỌC VÀ THCS 915 GIA SÀNG</strong><br>
+            <span style="font-size: 0.85em;">Số: ...../QĐ-TH&THCS915</span>
             <div style="width: 100px; height: 1px; background: black; margin: 3px auto;"></div>
           </td>
           <td style="width: 55%; border: none; text-align: center; vertical-align: top;">
             <strong>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</strong><br>
             <strong>Độc lập - Tự do - Hạnh phúc</strong>
             <div style="width: 140px; height: 1px; background: black; margin: 3px auto;"></div>
-            <p style="font-style: italic; font-size: 0.85em; margin-top: 3px;">Gia Sàng, ngày ...... tháng ...... năm 2026</p>
+            <p style="font-style: italic; font-size: 0.85em; margin-top: 3px;">Gia Sàng, ngày 15 tháng 9 năm 2026</p>
           </td>
         </tr>
       </table>
       <div style="text-align: center; margin-bottom: 12px;">
         <h2 style="font-size: 13pt; font-weight: bold; text-transform: uppercase;">PHIẾU ĐÁNH GIÁ, XẾP LOẠI MỨC ĐỘ HOÀN THÀNH NHIỆM VỤ THEO CHỈ SỐ KPI</h2>
-        <p style="font-style: italic; font-size: 9.5pt;">(Ban hành kèm theo Quyết định số QĐ-TH&THCS915 ngày 11/9/2026 của Hiệu trưởng)</p>
+        <p style="font-style: italic; font-size: 9.5pt;">(Ban hành kèm theo Quyết định số ...../QĐ-TH&THCS915 ngày 15/9/2026 của Hiệu trưởng Trường Tiểu học và THCS 915 Gia Sàng)</p>
       </div>
     </div>
 
+    <!-- 4 TAB ĐỐI TƯỢNG ĐÁNH GIÁ -->
     <div class="object-selector no-print">
       <div class="object-pill active" id="tab-gvcn" onclick="switchRole('gvcn')">
-        <i class="fa-solid fa-chalkboard-user"></i> 1. Giáo Viên Chủ Nhiệm (GVCN)
+        <i class="fa-solid fa-chalkboard-user"></i> 1. GV chủ nhiệm
       </div>
       <div class="object-pill" id="tab-gvbm" onclick="switchRole('gvbm')">
-        <i class="fa-solid fa-book-open-reader"></i> 2. Giáo Viên Bộ Môn (GVBM)
+        <i class="fa-solid fa-book-open-reader"></i> 2. GV bộ môn
+      </div>
+      <div class="object-pill" id="tab-bgh" onclick="switchRole('bgh')">
+        <i class="fa-solid fa-user-gear"></i> 3. Ban giám hiệu
       </div>
       <div class="object-pill" id="tab-nv" onclick="switchRole('nv')">
-        <i class="fa-solid fa-user-tie"></i> 3. Khối Nhân Viên (Hành chính - Văn phòng)
+        <i class="fa-solid fa-user-tie"></i> 4. Khối nhân viên và người lao động
       </div>
     </div>
 
+    <!-- HỘP CHỌN CHỨC DANH BGH -->
+    <div id="bghSubRoleBox" class="subrole-box no-print" style="display: none;">
+      <label style="font-weight: 700; color: var(--green-dark);">
+        <i class="fa-solid fa-user-shield"></i> Chọn Chức danh Ban giám hiệu:
+      </label>
+      <select id="bghPositionSelect" class="form-control" style="width: auto; flex: 1; font-weight: 600;" onchange="switchBGHPosition(this.value)">
+        <option value="pht" selected>Phó Hiệu trưởng (Phụ trách Phân hiệu / Khối)</option>
+        <option value="ht">Hiệu trưởng (Quản trị toàn diện)</option>
+      </select>
+    </div>
+
+    <!-- HỘP CHỌN VỊ TRÍ VIỆC LÀM CHO KHỐI NHÂN VIÊN & NLĐ -->
+    <div id="staffSubRoleBox" class="subrole-box no-print" style="display: none;">
+      <label style="font-weight: 700; color: var(--green-dark);">
+        <i class="fa-solid fa-briefcase"></i> Chọn Vị trí việc làm / Chức danh:
+      </label>
+      <select id="staffPositionSelect" class="form-control" style="width: auto; flex: 1; font-weight: 600;" onchange="switchStaffPosition(this.value)">
+        <option value="ketoan">1. Nhân viên Kế toán</option>
+        <option value="thuvien">2. Nhân viên Thư viện</option>
+        <option value="yte">3. Nhân viên Y tế học đường</option>
+        <option value="thietbi">4. Nhân viên Thiết bị - Thí nghiệm</option>
+        <option value="tuvan">5. Nhân viên Tư vấn học đường</option>
+        <option value="quantri">6. Nhân viên Quản trị/CNTT & CSVC</option>
+        <option value="vanthu">7. Nhân viên Văn thư</option>
+        <option value="thuquy">8. Thủ quỹ (Kiêm nhiệm)</option>
+        <option value="baove">9. Nhân viên Bảo vệ (HĐLĐ)</option>
+        <option value="laocong">10. Nhân viên Lao công (HĐLĐ)</option>
+      </select>
+    </div>
+
+    <!-- THÔNG TIN VIÊN CHỨC -->
     <section class="card">
       <div class="card-title">
-        <i class="fa-solid fa-id-card-clip"></i> Thông Tin Viên Chức Tự Đánh Giá
+        <i class="fa-solid fa-id-card-clip"></i> Thông Tin Viên Chức / Người Lao Động Tự Đánh Giá
       </div>
       <div class="grid-4">
         <div class="form-group">
@@ -979,7 +1153,18 @@
         </div>
         <div class="form-group">
           <label>Chức vụ / Vị trí việc làm:</label>
-          <input type="text" id="empPosition" class="form-control" value="Giáo viên Tin học" placeholder="VD: GVCN Lớp 9A, Kế toán...">
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="empPosition" class="form-control" value="Phó Hiệu trưởng" placeholder="Nhập chức vụ..." oninput="handlePositionInputChange(this.value)">
+            <select id="quickPositionSelect" class="form-control" style="width: 140px; font-size: 0.82rem; font-weight: 600;" onchange="applyQuickPosition(this.value)">
+              <option value="">-- Chọn nhanh --</option>
+              <option value="Giáo viên">Giáo viên</option>
+              <option value="Tổ trưởng">Tổ trưởng</option>
+              <option value="Tổ phó">Tổ phó</option>
+              <option value="Phó Hiệu trưởng">Phó Hiệu trưởng</option>
+              <option value="Hiệu trưởng">Hiệu trưởng</option>
+              <option value="Nhân viên">Nhân viên</option>
+            </select>
+          </div>
         </div>
         <div class="form-group">
           <label>Tổ Chuyên môn / Bộ phận:</label>
@@ -990,6 +1175,7 @@
             <option value="Tổ Khoa học Xã hội">Tổ Khoa học Xã hội</option>
             <option value="Tổ Nghệ thuật">Tổ Nghệ thuật</option>
             <option value="Tổ Văn phòng">Tổ Văn phòng</option>
+            <option value="Ban Giám hiệu">Ban Giám hiệu</option>
           </select>
         </div>
         <div class="form-group">
@@ -999,22 +1185,17 @@
       </div>
     </section>
 
-    <!-- METRICS DASHBOARD: ĐÃ SỬA THÀNH TỔNG ĐIỂM / 115 -->
+    <!-- METRICS DASHBOARD -->
     <div class="metrics-grid">
       <div class="metric-card">
-        <div class="metric-title" id="lbl-col1">Trụ cột I (Đạo đức)</div>
-        <div class="metric-value"><span id="val-col1">20.0</span> / <span id="max-col1">20</span></div>
-        <div class="metric-desc">Kỷ luật, tác phong sư phạm</div>
+        <div class="metric-title" id="lbl-col1">Phần I (Tiêu chí chung)</div>
+        <div class="metric-value"><span id="val-col1">30.0</span> / <span id="max-col1">30</span></div>
+        <div class="metric-desc">Đạo đức, tác phong & nguyên tắc 6 rõ</div>
       </div>
       <div class="metric-card blue-bar">
-        <div class="metric-title" id="lbl-col2">Trụ cột II (Chuyên môn)</div>
-        <div class="metric-value"><span id="val-col2">40.0</span> / <span id="max-col2">40</span></div>
-        <div class="metric-desc">Hồ sơ, giáo án, giờ dạy</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-title" id="lbl-col3">Trụ cột III (Đặc thù)</div>
-        <div class="metric-value"><span id="val-col3">40.0</span> / <span id="max-col3">40</span></div>
-        <div class="metric-desc" id="desc-col3">Quản lý lớp & Giáo dục toàn diện</div>
+        <div class="metric-title" id="lbl-col2">Phần II (Chuyên môn VTVL)</div>
+        <div class="metric-value"><span id="val-col2">70.0</span> / <span id="max-col2">70</span></div>
+        <div class="metric-desc" id="desc-col2">Hiệu suất và sản phẩm thực tế</div>
       </div>
       <div class="metric-card orange-bar">
         <div class="metric-title">Điểm Thưởng (Bonus)</div>
@@ -1022,15 +1203,15 @@
         <div class="metric-desc">Cống hiến, vượt chỉ tiêu</div>
       </div>
       <div class="metric-card">
-        <div class="metric-title">TỔNG ĐIỂM KPI</div>
-        <!-- HIỂN THỊ TỔNG ĐIỂM TRÊN THANG 115 -->
+        <div class="metric-title">TỔNG ĐIỂM KPI THÁNG</div>
         <div class="metric-value"><span id="val-total" style="color: var(--green-dark);">100.0</span> <span>/ 115</span></div>
         <div>
-          <span id="badge-rank" class="rank-badge rank-a">Loại A (Xuất sắc)</span>
+          <span id="badge-rank" class="rank-badge rank-a">Mức 1 (Xuất sắc)</span>
         </div>
       </div>
     </div>
 
+    <!-- BẢNG ĐIỂM CHI TIẾT (TỰ ĐỘNG CHUYỂN 2 CỘT HOẶC 3 CỘT THEO VỊ TRÍ) -->
     <section class="card">
       <div class="card-title">
         <i class="fa-solid fa-list-check"></i> 
@@ -1041,13 +1222,13 @@
         <table>
           <thead>
             <tr>
-              <th style="width: 85px; text-align: center;">Mã KPI</th>
-              <th style="min-width: 250px;">Tiêu chí đánh giá & Quy định trừ điểm</th>
-              <th style="width: 85px; text-align: center;">Điểm chuẩn</th>
-              <th style="width: 100px; text-align: center;" id="th-self">1. GV tự chấm</th>
+              <th style="width: 80px; text-align: center;">Mã KPI</th>
+              <th style="min-width: 280px;">Nội dung công việc, tiêu chí & Hướng dẫn định lượng</th>
+              <th style="width: 80px; text-align: center;">Điểm chuẩn</th>
+              <th style="width: 100px; text-align: center;" id="th-self">1. Tự chấm</th>
               <th style="width: 100px; text-align: center;" id="th-lead">2. Tổ thẩm định</th>
               <th style="width: 100px; text-align: center;" id="th-bgh">3. BGH duyệt</th>
-              <th style="min-width: 180px;">Minh chứng / Ghi chú</th>
+              <th style="min-width: 240px;">Minh chứng & Đính kèm tệp</th>
             </tr>
           </thead>
           <tbody id="kpiTableBody"></tbody>
@@ -1055,24 +1236,26 @@
       </div>
     </section>
 
+    <!-- ĐIỂM THƯỞNG BONUS -->
     <section class="card">
       <div class="bonus-box">
         <div class="bonus-header">
-          <div><i class="fa-solid fa-medal"></i> TRỤ CỘT IV: ĐIỂM THƯỞNG KPI CỐNG HIẾN ĐỘT XUẤT (TỐI ĐA +15 ĐIỂM)</div>
+          <div><i class="fa-solid fa-medal"></i> CHƯƠNG III: TIÊU CHÍ ĐIỂM THƯỞNG CỐNG HIẾN VƯỢT MỨC (BONUS KPI - TỐI ĐA +15 ĐIỂM)</div>
           <div>Điểm thưởng đạt: <span id="bonusScoreText" style="font-size: 1.15rem; color: var(--orange-main);">0</span>/15 đ</div>
         </div>
         <div class="bonus-list" id="bonusListContainer"></div>
       </div>
     </section>
 
+    <!-- CHỮ KÝ PHÊ DUYỆT (TỰ ĐỘNG ĐIỀU CHỈNH 2 HOẶC 3 CỘT) -->
     <section class="card">
-      <div class="signature-grid">
+      <div class="signature-grid" id="signatureGrid">
         <div>
           <div class="sig-role">Người Tự Đánh Giá</div>
           <div class="sig-sub">(Ký và ghi rõ họ tên)</div>
           <div class="sig-name" id="sigSelfName">Nguyễn Thị Thu Trà</div>
         </div>
-        <div>
+        <div id="sigColLead">
           <div class="sig-role">Tổ Trưởng Thẩm Định</div>
           <div class="sig-sub">(Ký nhận xét và đánh giá)</div>
           <div>
@@ -1089,6 +1272,7 @@
 
   </main>
 
+  <!-- CHÂN TRANG TỈNH THÁI NGUYÊN -->
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-left">
@@ -1096,7 +1280,7 @@
           <i class="fa-solid fa-graduation-cap icon-cap"></i> BẢN QUYỀN SẢN PHẨM THUỘC VỀ:
         </div>
         <p class="footer-author">Cô giáo: <strong>NGUYỄN THỊ THU TRÀ</strong></p>
-        <p class="footer-school">Giáo viên Tin học - Trường Tiểu học và THCS 915 Gia Sàng, Tỉnh Thái Nguyên</p>
+        <p class="footer-school">Phó Hiệu trưởng / Giáo viên Tin học - Trường Tiểu học và THCS 915 Gia Sàng, Tỉnh Thái Nguyên</p>
         <p class="footer-specialty">
           <i class="fa-solid fa-award icon-medal"></i> Chuyên môn: <strong>Đại học Công nghệ Thông tin</strong> &amp; <strong>Đại học Sư phạm Giáo dục Tiểu học</strong>
         </p>
@@ -1116,6 +1300,19 @@
     </div>
   </footer>
 
+  <!-- MODAL THÔNG BÁO TÙY BIẾN (KHÔNG BỊ TRÌNH DUYỆT CHÈN DOMAIN) -->
+  <div id="customModal" class="custom-modal-overlay" style="display: none;">
+    <div class="custom-modal-box">
+      <div class="custom-modal-header">
+        <i class="fa-solid fa-circle-check"></i> THÔNG BÁO
+      </div>
+      <div class="custom-modal-body" id="customModalMessage"></div>
+      <div class="custom-modal-footer">
+        <button class="btn btn-orange-primary" onclick="closeCustomModal()">Đã hiểu</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     const candidateLogos = ['LOGO OK.jpg', 'logo.jpg', 'LOGO.jpg', 'logo.png', 'LOGO OK.png', 'Logo.jpg', 'logo.jpeg'];
     let candidateIdx = 0;
@@ -1130,90 +1327,306 @@
       }
     }
 
-    const KPI_DATA = {
-      // 1. GIÁO VIÊN CHỦ NHIỆM
+    // HÀM HIỂN THỊ MODAL THÔNG BÁO CHUẨN
+    function showCustomModal(msg) {
+      document.getElementById("customModalMessage").innerHTML = msg;
+      document.getElementById("customModal").style.display = "flex";
+    }
+
+    function closeCustomModal() {
+      document.getElementById("customModal").style.display = "none";
+    }
+
+    // TIÊU CHÍ CHUNG PHẦN I (30 ĐIỂM)
+    const COMMON_PILLAR_ITEMS = [
+      { 
+        pillar: 1, 
+        pillarName: "PHẦN I: TIÊU CHÍ CHUNG (30 ĐIỂM - ÁP DỤNG CHO 100% CBGVNV & NLĐ)", 
+        code: "TC-01", 
+        title: "Tư tưởng chính trị, đạo đức nhà giáo, lối sống", 
+        max: 15, 
+        note: "Chấp hành đường lối của Đảng, pháp luật Nhà nước; tác phong sư phạm chuẩn mực.<br>• Phát ngôn lệch chuẩn, vi phạm kỷ luật phát ngôn (kể cả văn hóa sử dụng MXH): Trừ 5 - 10 điểm.<br>• Gây mất đoàn kết nội bộ, biểu hiện tiêu cực: Trừ 5 - 10 điểm." 
+      },
+      { 
+        pillar: 1, 
+        pillarName: "PHẦN I: TIÊU CHÍ CHUNG (30 ĐIỂM - ÁP DỤNG CHO 100% CBGVNV & NLĐ)", 
+        code: "TC-02", 
+        title: "Kỷ luật kỷ cương công vụ, văn hóa công sở và Nguyên tắc \"6 rõ\"", 
+        max: 15, 
+        note: "Tuân thủ ngày giờ công, thời khóa biểu, lịch trực, họp hành; thực hiện nghiêm túc nguyên tắc \"6 rõ\".<br>• Đi muộn, về sớm không phép: Trừ 3 điểm/lần.<br>• Bỏ giờ dạy, bỏ ca trực không phép: Trừ 10 điểm/lần.<br>• Nộp báo cáo chuyên môn chậm hạn: Trừ 2 điểm/ngày muộn.<br>• Trang phục không đúng quy định: Trừ 2 điểm/lần." 
+      }
+    ];
+
+    // BỘ TIÊU CHÍ VỊ TRÍ VIỆC LÀM THEO VĂN BẢN HIỆU TRƯỞNG DUYỆT
+    const KPI_ROLES = {
       gvcn: {
         title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - GIÁO VIÊN CHỦ NHIỆM (GVCN)",
-        col1: { name: "Trụ cột I (Đạo đức)", max: 20 },
-        col2: { name: "Trụ cột II (Chuyên môn)", max: 40 },
-        col3: { name: "Trụ cột III (Quản lý lớp)", max: 40, desc: "Quản lý lớp & Giáo dục toàn diện" },
         items: [
-          { pillar: 1, pillarName: "TRỤ CỘT I: ĐẠO ĐỨC NGHỀ NGHIỆP, KỶ CƯƠNG VÀ TÁC PHONG (20 ĐIỂM)", code: "KPI-A1", title: "Chấp hành giờ giấc, thời khóa biểu, hội họp", max: 8, note: "Đi muộn <15p: còn 5đ; ≥2 lần: 0đ. Bỏ giờ/họp không phép: 0đ & hạ bậc thi đua." },
-          { pillar: 1, pillarName: "TRỤ CỘT I: ĐẠO ĐỨC NGHỀ NGHIỆP, KỶ CƯƠNG VÀ TÁC PHONG (20 ĐIỂM)", code: "KPI-A2", title: "Văn hóa công sở, tác phong, ngôn từ sư phạm", max: 6, note: "Bị nhắc nhở trang phục: -2đ/lần. Phát ngôn lệch chuẩn (kể cả trên MXH): 0đ." },
-          { pillar: 1, pillarName: "TRỤ CỘT I: ĐẠO ĐỨC NGHỀ NGHIỆP, KỶ CƯƠNG VÀ TÁC PHONG (20 ĐIỂM)", code: "KPI-A3", title: "Tiến độ báo cáo và tham gia phong trào tập thể", max: 6, note: "Nộp chậm 1 ngày: -2đ. Không tham gia hoạt động chung không lý do: 0đ." },
-          { pillar: 2, pillarName: "TRỤ CỘT II: HIỆU QUẢ CHUYÊN MÔN, GIẢNG DẠY VÀ HỒ SƠ ĐIỆN TỬ (40 ĐIỂM)", code: "KPI-B1", title: "Kế hoạch bài dạy & Tiến độ chương trình", max: 12, note: "Nộp duyệt muộn 1-2 ngày: -3đ. Không giáo án/cắt xén tiết: 0đ." },
-          { pillar: 2, pillarName: "TRỤ CỘT II: HIỆU QUẢ CHUYÊN MÔN, GIẢNG DẠY VÀ HỒ SƠ ĐIỆN TỬ (40 ĐIỂM)", code: "KPI-B2", title: "Đổi mới PPDH, CNTT, Bài giảng số/STEM", max: 8, note: "Có ít nhất 02 tiết/tháng ứng dụng CNTT. Dạy chay: -50% điểm." },
-          { pillar: 2, pillarName: "TRỤ CỘT II: HIỆU QUẢ CHUYÊN MÔN, GIẢNG DẠY VÀ HỒ SƠ ĐIỆN TỬ (40 ĐIỂM)", code: "KPI-B3", title: "Đánh giá học sinh, Học bạ điện tử & CSDL", max: 12, note: "Chậm nộp: -3đ/ngày. Sửa điểm trái quy chế: -5đ/lần." },
-          { pillar: 2, pillarName: "TRỤ CỘT II: HIỆU QUẢ CHUYÊN MÔN, GIẢNG DẠY VÀ HỒ SƠ ĐIỆN TỬ (40 ĐIỂM)", code: "KPI-B4", title: "Chất lượng giờ dạy & Quản lý kỷ luật phòng học", max: 8, note: "Giờ dạy đạt loại Tốt: Max điểm. Để học sinh mất trật tự nghiêm trọng: -50% điểm." },
-          { pillar: 3, pillarName: "TRỤ CỘT III.B: QUẢN LÝ LỚP & GIÁO DỤC TOÀN DIỆN (40 ĐIỂM)", code: "KPI-C.CN1", title: "Quản lý nền nếp, sĩ số, phong trào thi đua của lớp", max: 10, note: "Lớp xếp cuối tuần do lỗi GVCN: 5đ. (Miễn trừ rủi ro nếu chứng minh đã xử lý đúng quy trình)." },
-          { pillar: 3, pillarName: "TRỤ CỘT III.B: QUẢN LÝ LỚP & GIÁO DỤC TOÀN DIỆN (40 ĐIỂM)", code: "KPI-C.CN2", title: "Hồ sơ chủ nhiệm, phối hợp Ban CMHS, thu nộp các khoản", max: 10, note: "Chậm nộp hoặc thiếu minh chứng: -3đ/lần." },
-          { pillar: 3, pillarName: "TRỤ CỘT III.B: QUẢN LÝ LỚP & GIÁO DỤC TOÀN DIỆN (40 ĐIỂM)", code: "KPI-C.CN3", title: "Giáo dục học sinh cá biệt, phòng chống bạo lực học đường", max: 10, note: "Xảy ra đánh nhau do buông lỏng: 0-3đ. Kịp thời phát hiện, xử lý sư phạm: Điểm tối đa." },
-          { pillar: 3, pillarName: "TRỤ CỘT III.B: QUẢN LÝ LỚP & GIÁO DỤC TOÀN DIỆN (40 ĐIỂM)", code: "KPI-C.CN4", title: "Tổ chức sinh hoạt lớp sáng tạo, phong trào Liên đội", max: 10, note: "Sáng tạo, rèn kỹ năng tốt: 10đ; Tham gia đối phó: 5đ." }
-        ],
-        bonuses: [
-          { id: "BONUS-01", text: "Bồi dưỡng HSG đạt giải (Thành phố/Tỉnh/Quốc gia)", pts: 8 },
-          { id: "BONUS-02", text: "Bài giảng điện tử / SKKN / Thao giảng đạt giải xuất sắc", pts: 6 },
-          { id: "BONUS-03", text: "Lớp chủ nhiệm Nhất bảng thi đua tuần/tháng toàn trường", pts: 5 },
-          { id: "BONUS-04", text: "Xung kích hỗ trợ đột xuất (CĐS, thiên tai, tổ chức hội thi lớn)", pts: 5 }
+          ...COMMON_PILLAR_ITEMS,
+          { 
+            pillar: 2, 
+            pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", 
+            code: "CN-01", 
+            title: "Định mức giờ dạy & tiến độ chương trình", 
+            max: 15, 
+            note: "Dạy đủ số tiết theo Thời khóa biểu và định mức quy định (GVCN áp dụng định mức tiết đã được giảm trừ). Thực hiện đúng phân phối chương trình môn học, không tự ý dồn tiết, cắt xén chương trình." 
+          },
+          { 
+            pillar: 2, 
+            pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", 
+            code: "CN-02", 
+            title: "Hồ sơ bài dạy, CNTT và bài học STEM", 
+            max: 10, 
+            note: "1. Kế hoạch bài dạy (KHBD) & Duyệt điện tử (6đ): KHDH phải đúng thống nhất tổ CM, duyệt đúng thời gian (CV 2345 với Tiểu học, CV 5512 với THCS).<br>2. Ứng dụng CNTT & STEM (4đ): Triển khai tối thiểu ≥ 2 tiết/tháng có ứng dụng CNTT/học liệu số tương tác hoặc bài học STEM." 
+          },
+          { 
+            pillar: 2, 
+            pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", 
+            code: "CN-03", 
+            title: "Kiểm tra đánh giá, Học bạ số và CSDL", 
+            max: 10, 
+            note: "1. Đánh giá thường xuyên & Tương tác (6đ): Thực hiện đánh giá thường xuyên vì sự tiến bộ của HS (TT 27 / TT 22); cập nhật ClassDojo, phản hồi kịp thời cho HS/phụ huynh.<br>2. Cập nhật CSDL & Học bạ số (4đ): Cập nhật đánh giá định kỳ trên VnEdu; hoàn tất ký số học bạ số đúng hạn." 
+          },
+          { 
+            pillar: 2, 
+            pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", 
+            code: "CN-04", 
+            title: "Quản lý nền nếp, sĩ số & đạo đức học sinh", 
+            max: 15, 
+            note: "Thực hiện 2 nội dung chính:<br>• Duy trì tốt sĩ số, tỷ lệ chuyên cần; lớp xếp loại thi đua Khá/Tốt (10đ).<br>• Ngăn ngừa bạo lực học đường hiệu quả, xây dựng lớp học thân thiện (5đ) - Áp dụng cơ chế miễn trừ nếu đã xử lý, báo cáo kịp thời và đúng quy trình." 
+          },
+          { 
+            pillar: 2, 
+            pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", 
+            code: "CN-05", 
+            title: "Phối hợp CMHS & Hồ sơ chủ nhiệm", 
+            max: 10, 
+            note: "Thực hiện 2 nội dung:<br>• Giữ mối liên lạc thường xuyên, chuẩn mực với Cha mẹ học sinh; giải quyết thỏa đáng phản ánh của Cha mẹ học sinh (5đ).<br>• Hoàn thành đầy đủ sổ chủ nhiệm, theo dõi và đôn đốc các khoản thu nộp đúng tiến độ (5đ)." 
+          },
+          { 
+            pillar: 2, 
+            pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", 
+            code: "CN-06", 
+            title: "Cảm hóa HS cá biệt & Phong trào Đội", 
+            max: 10, 
+            note: "Thực hiện 2 nội dung:<br>• Có kế hoạch theo dõi, hỗ trợ, cảm hóa học sinh cá biệt/học sinh có hoàn cảnh khó khăn (5đ).<br>• Tổ chức tốt hoạt động trải nghiệm, phong trào Đội TNTP Hồ Chí Minh (5đ)." 
+          }
         ]
       },
-
-      // 2. GIÁO VIÊN BỘ MÔN
       gvbm: {
         title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - GIÁO VIÊN BỘ MÔN (GVBM)",
-        col1: { name: "Trụ cột I (Đạo đức)", max: 20 },
-        col2: { name: "Trụ cột II (Chuyên môn)", max: 50 },
-        col3: { name: "Trụ cột III (Hỗ trợ trường)", max: 30, desc: "Chuyên môn nâng cao & Trách nhiệm hỗ trợ" },
         items: [
-          { pillar: 1, pillarName: "TRỤ CỘT I: ĐẠO ĐỨC NGHỀ NGHIỆP, KỶ CƯƠNG VÀ TÁC PHONG (20 ĐIỂM)", code: "KPI-A1", title: "Chấp hành giờ giấc, thời khóa biểu, hội họp", max: 8, note: "Đi muộn <15p: còn 5đ; ≥2 lần: 0đ. Bỏ giờ/họp không phép: 0đ & hạ bậc thi đua." },
-          { pillar: 1, pillarName: "TRỤ CỘT I: ĐẠO ĐỨC NGHỀ NGHIỆP, KỶ CƯƠNG VÀ TÁC PHONG (20 ĐIỂM)", code: "KPI-A2", title: "Văn hóa công sở, tác phong, ngôn từ sư phạm", max: 6, note: "Bị nhắc nhở trang phục: -2đ/lần. Phát ngôn lệch chuẩn (kể cả MXH): 0đ." },
-          { pillar: 1, pillarName: "TRỤ CỘT I: ĐẠO ĐỨC NGHỀ NGHIỆP, KỶ CƯƠNG VÀ TÁC PHONG (20 ĐIỂM)", code: "KPI-A3", title: "Tiến độ báo cáo và tham gia phong trào tập thể", max: 6, note: "Nộp chậm 1 ngày: -2đ. Không tham gia hoạt động chung không lý do: 0đ." },
-          { pillar: 2, pillarName: "TRỤ CỘT II: HIỆU QUẢ CHUYÊN MÔN, GIẢNG DẠY VÀ HỒ SƠ ĐIỆN TỬ (50 ĐIỂM)", code: "KPI-B1", title: "Kế hoạch bài dạy & Tiến độ chương trình", max: 15, note: "Nộp duyệt muộn 1-2 ngày: -3đ. Không giáo án/cắt xén tiết: 0đ." },
-          { pillar: 2, pillarName: "TRỤ CỘT II: HIỆU QUẢ CHUYÊN MÔN, GIẢNG DẠY VÀ HỒ SƠ ĐIỆN TỬ (50 ĐIỂM)", code: "KPI-B2", title: "Đổi mới PPDH, CNTT, Bài giảng số/STEM", max: 10, note: "Có ít nhất 02 tiết/tháng ứng dụng CNTT. Dạy chay: -50% điểm." },
-          { pillar: 2, pillarName: "TRỤ CỘT II: HIỆU QUẢ CHUYÊN MÔN, GIẢNG DẠY VÀ HỒ SƠ ĐIỆN TỬ (50 ĐIỂM)", code: "KPI-B3", title: "Đánh giá học sinh, Học bạ điện tử & CSDL", max: 15, note: "Chậm nộp: -3đ/ngày. Sửa điểm trái quy chế: -5đ/lần." },
-          { pillar: 2, pillarName: "TRỤ CỘT II: HIỆU QUẢ CHUYÊN MÔN, GIẢNG DẠY VÀ HỒ SƠ ĐIỆN TỬ (50 ĐIỂM)", code: "KPI-B4", title: "Chất lượng giờ dạy & Quản lý kỷ luật phòng học", max: 10, note: "Giờ dạy đạt loại Tốt: Max điểm. Để học sinh mất trật tự: -50% điểm." },
-          { pillar: 3, pillarName: "TRỤ CỘT III.A: CHUYÊN MÔN NÂNG CAO & HỖ TRỢ TRƯỜNG LỚP (30 ĐIỂM)", code: "KPI-C.BM1", title: "Phụ đạo học sinh yếu, bồi dưỡng học sinh giỏi", max: 10, note: "Có kế hoạch và học sinh yếu tiến bộ rõ rệt: 10đ. Không thực hiện: 0đ." },
-          { pillar: 3, pillarName: "TRỤ CỘT III.A: CHUYÊN MÔN NÂNG CAO & HỖ TRỢ TRƯỜNG LỚP (30 ĐIỂM)", code: "KPI-C.BM2", title: "Đóng góp ngân hàng học liệu, ma trận đề thi, chuyên đề cấp tổ", max: 10, note: "Chất lượng cao, đúng hạn: 10đ. Nộp chậm/kém chất lượng: 5đ." },
-          { pillar: 3, pillarName: "TRỤ CỘT III.A: CHUYÊN MÔN NÂNG CAO & HỖ TRỢ TRƯỜNG LỚP (30 ĐIỂM)", code: "KPI-C.BM3", title: "Trực giám sát nền nếp giờ chơi, hỗ trợ Đoàn Đội & sự kiện nhà trường", max: 10, note: "Có mặt đúng vị trí, duy trì kỷ luật: 10đ. Lơ là ca trực: 5đ; Bỏ trực: 0đ." }
-        ],
-        bonuses: [
-          { id: "BONUS-01", text: "Bồi dưỡng HSG đạt giải (Thành phố/Tỉnh/Quốc gia)", pts: 8 },
-          { id: "BONUS-02", text: "Bài giảng điện tử / SKKN / Thao giảng xuất sắc", pts: 6 },
-          { id: "BONUS-04", text: "Xung kích hỗ trợ đột xuất (Chuyển đổi số, hội thi, thiên tai)", pts: 5 }
+          ...COMMON_PILLAR_ITEMS,
+          { 
+            pillar: 2, 
+            pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", 
+            code: "BM-01", 
+            title: "Định mức giờ dạy & tiến độ chương trình", 
+            max: 25, 
+            note: "Dạy đủ số tiết theo Thời khóa biểu và định mức quy định cho GVBM. Thực hiện đúng phân phối chương trình môn học, không tự ý dồn tiết, cắt xén chương trình." 
+          },
+          { 
+            pillar: 2, 
+            pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", 
+            code: "BM-02", 
+            title: "Hồ sơ bài dạy, CNTT và bài học STEM", 
+            max: 15, 
+            note: "1. Kế hoạch bài dạy (KHBD) & Duyệt điện tử (8đ): KHDH phải đúng thống nhất tổ CM, duyệt đúng thời gian (Tiểu học: CV 2345; THCS: CV 5512).<br>2. Ứng dụng CNTT & STEM (7đ): Triển khai tối thiểu ≥ 2 tiết/tháng có ứng dụng CNTT/học liệu số tương tác hoặc bài học STEM." 
+          },
+          { 
+            pillar: 2, 
+            pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", 
+            code: "BM-03", 
+            title: "Kiểm tra đánh giá, Học bạ số và CSDL", 
+            max: 15, 
+            note: "1. Đánh giá thường xuyên & Tương tác (10đ): Đánh giá thường xuyên vì sự tiến bộ của HS (TT 27 / TT 22); phản hồi kịp thời cho HS/phụ huynh.<br>2. Cập nhật CSDL & Học bạ số (5đ): Cập nhật đánh giá và điểm thi định kỳ trên VnEdu; hoàn tất ký số học bạ số đúng hạn." 
+          },
+          { 
+            pillar: 2, 
+            pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", 
+            code: "BM-04", 
+            title: "Nhiệm vụ nâng cao & hỗ trợ trường lớp", 
+            max: 15, 
+            note: "Thực hiện 3 nội dung trọng tâm:<br>• Phụ đạo học sinh còn hạn chế / Bồi dưỡng học sinh năng khiếu, HSG (5đ).<br>• Xây dựng học liệu số, tham gia chuyên đề, thao giảng, dự giờ để nâng cao nghiệp vụ (5đ).<br>• Quản lý nề nếp, kỷ luật phòng học; tham gia trực tuần, hỗ trợ hoạt động Đội (5đ)." 
+          }
         ]
       },
-
-      // 3. KHỐI NHÂN VIÊN
-      nv: {
-        title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - KHỐI NHÂN VIÊN (HÀNH CHÍNH - VĂN PHÒNG)",
-        col1: { name: "Trụ cột I (Kỷ luật)", max: 20 },
-        col2: { name: "Trụ cột II (Nghiệp vụ)", max: 80 },
-        col3: { name: "Trụ cột III (Đặc thù)", max: 0, desc: "Đã tích hợp vào Nghiệp vụ 80đ" },
+      bgh_pht: {
+        title: "BẢNG TIÊU CHÍ ĐIỀU HÀNH HOẠT ĐỘNG GIÁO DỤC - PHÓ HIỆU TRƯỞNG",
         items: [
-          { pillar: 1, pillarName: "TRỤ CỘT I: KỶ LUẬT LAO ĐỘNG, TÁC PHONG VĂN HÓA CÔNG SỞ (20 ĐIỂM)", code: "NV-A1", title: "Chấp hành giờ giấc, ngày công, trực cơ quan, hội họp", max: 8, note: "Đi muộn/về sớm: -2đ/lần. Bỏ vị trí làm việc trong ca trực: 0đ." },
-          { pillar: 1, pillarName: "TRỤ CỘT I: KỶ LUẬT LAO ĐỘNG, TÁC PHONG VĂN HÓA CÔNG SỞ (20 ĐIỂM)", code: "NV-A2", title: "Văn hóa công sở, giao tiếp hòa nhã, chuẩn mực phục vụ GV & HS", max: 6, note: "Gây phiền hà, sách nhiễu hoặc to tiếng: 0đ." },
-          { pillar: 1, pillarName: "TRỤ CỘT I: KỶ LUẬT LAO ĐỘNG, TÁC PHONG VĂN HÓA CÔNG SỞ (20 ĐIỂM)", code: "NV-A3", title: "Chấp hành phân công điều động, tham gia phong trào nhà trường", max: 6, note: "Không phối hợp hoặc thoái thác nhiệm vụ chung: 0đ." },
-          { pillar: 2, pillarName: "TRỤ CỘT II: NGHIỆP VỤ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (80 ĐIỂM)", code: "NV-B1", title: "Khối lượng và chất lượng hoàn thành công việc chuyên môn", max: 25, note: "Hoàn thành 100% nhiệm vụ theo phân công: 25đ. Tồn đọng công việc: -5đ/vụ việc." },
-          { pillar: 2, pillarName: "TRỤ CỘT II: NGHIỆP VỤ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (80 ĐIỂM)", code: "NV-B2", title: "Tiến độ xử lý, quản lý hồ sơ, sổ sách điện tử & cơ sở dữ liệu", max: 25, note: "Báo cáo, cập nhật dữ liệu đúng hạn: 25đ. Chậm trễ: -3đ/ngày." },
-          { pillar: 2, pillarName: "TRỤ CỘT II: NGHIỆP VỤ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (80 ĐIỂM)", code: "NV-B3", title: "Tính chính xác, an toàn, bảo mật thông tin, tài sản nhà trường", max: 15, note: "Để xảy ra sai sót dữ liệu, thất thoát tài sản: trừ 50% đến 100% điểm." },
-          { pillar: 2, pillarName: "TRỤ CỘT II: NGHIỆP VỤ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (80 ĐIỂM)", code: "NV-B4", title: "Chủ động tham mưu, cải tiến phương pháp phục vụ dạy & học", max: 15, note: "Có sáng kiến, giải pháp cải tiến: 15đ; Làm việc thụ động, đợi nhắc nhở: 8đ." }
-        ],
-        bonuses: [
-          { id: "BONUS-KT", text: "Kế toán: Quyết toán trước hạn, tham mưu tiết kiệm ngân sách, thuế", pts: 8 },
-          { id: "BONUS-VT", text: "Văn thư - Thủ quỹ: Số hóa 100% hồ sơ, thu nộp không tiền mặt >98%", pts: 5 },
-          { id: "BONUS-YT", text: "Y tế: 100% an toàn VSTP, không dịch bệnh, sơ cấp cứu kịp thời", pts: 5 },
-          { id: "BONUS-TB", text: "Thiết bị - Thư viện: Tự sửa chữa thiết bị, ngày hội đọc sách >85% HS", pts: 6 },
-          { id: "BONUS-IT", text: "Quản trị hệ thống: Khắc phục sự cố mạng/máy <30p, hỗ trợ sự kiện tốt", pts: 5 },
-          { id: "BONUS-BV", text: "Bảo vệ - Phục vụ: Giữ vững an ninh trật tự, trường học xanh - sạch - đẹp", pts: 5 },
-          { id: "BONUS-ALL", text: "Đạt Chiến sĩ thi đua cơ sở, Giấy khen TP trở lên, SKKN công nhận", pts: 10 }
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "PHT-01", title: "Năng lực xây dựng kế hoạch và chỉ đạo thực hiện các hoạt động giáo dục phân hiệu phụ trách", max: 20, note: "Chủ động giải quyết công việc theo thẩm quyền tại phân hiệu phụ trách (10đ). Chỉ đạo các bộ phận hoàn thành 100% chỉ tiêu (10đ)." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "PHT-02", title: "Quản lý sinh hoạt chuyên môn, đổi mới PPDH và chuyển đổi số", max: 20, note: "Chỉ đạo, chủ trì các cuộc SHCM hiệu quả, tích cực ≥ 1 buổi/tháng (10đ). Kết quả triển khai KH, chuyển đổi số và các yêu cầu cấp trên (10đ)." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "PHT-03", title: "Đôn đốc công việc, kiểm tra hồ sơ và CSDL ngành", max: 15, note: "Kiểm tra, duyệt hồ sơ điện tử đúng hạn theo phân hiệu (5đ). Không để xảy ra sai phạm chuyên môn (5đ). Điều hành cập nhật CSDL ngành đúng tiến độ (5đ)." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "PHT-04", title: "Đánh giá thi đua công bằng, xây dựng văn hóa nề nếp và tập thể đoàn kết", max: 15, note: "Điều hành tổ chuyên môn chấm KPI công tâm, dân chủ, không nể nang (5đ). Phối hợp tốt giữa các đoàn thể, phân hiệu (5đ). Giáo viên và học sinh thực hiện tốt nề nếp, văn hóa theo quy định (5đ)." }
+        ]
+      },
+      bgh_ht: {
+        title: "BẢNG TIÊU CHÍ QUẢN TRỊ TOÀN DIỆN - HIỆU TRƯỞNG",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "HT-01", title: "Quản trị chiến lược và thống nhất bộ máy", max: 20, note: "Xây dựng quy chế tinh gọn, phân công rõ người, rõ việc, đồng bộ văn hóa giữa các phân hiệu sau sáp nhập (10đ). Chỉ đạo các bộ phận hoàn thành 100% chỉ tiêu (10đ)." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "HT-02", title: "An toàn học đường và bán trú, học sinh, giáo viên vào nề nếp", max: 20, note: "Trực tiếp giám sát bếp bán trú, thực hiện các hồ sơ bếp bán trú, ATTP (10đ). Nề nếp học sinh, giáo viên (10đ)." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "HT-03", title: "Minh bạch về tài chính, cầu thị, gương mẫu và lắng nghe", max: 15, note: "Thực hiện công khai các khoản thu, chi theo quy định (5đ). Duy trì kênh đối thoại hai chiều và xử lý dứt điểm 100% kiến nghị của GV, NV, phụ huynh (5đ). Phối hợp tốt giữa các đoàn thể, phân hiệu, tổ tư vấn (5đ)." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "HT-04", title: "Đoàn kết nội bộ, động viên đội ngũ, tiên phong đổi mới & chuyển đổi số", max: 15, note: "Lắng nghe đảm bảo chế độ công bằng, giữ vững chỉ số hạnh phúc của CBGVNV, PH, HS (5đ). Hiện đại hóa quá trình quản trị, ứng dụng CNTT vào quản trị nhà trường (5đ). Xây dựng mô hình điểm về ứng dụng CNTT, chuyển đổi số (5đ)." }
+        ]
+      },
+      nv_ketoan: {
+        title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - NHÂN VIÊN KẾ TOÁN",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "KT-01", title: "Lập dự toán, chi trả lương/chế độ đầy đủ, đúng hạn", max: 25, note: "Lập dự toán chính xác; chi trả lương và các chế độ chính sách cho CBGVNV đầy đủ, kịp thời và đúng hạn." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "KT-02", title: "Quyết toán đúng quy định, đối chiếu khớp 100% Kho bạc", max: 20, note: "Thực hiện quyết toán đúng niên độ tài chính, đối chiếu khớp 100% số liệu với Kho bạc Nhà nước." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "KT-03", title: "Tham mưu Quy chế chi tiêu nội bộ, quản lý tài sản trong sổ và PM", max: 15, note: "Tham mưu Quy chế chi tiêu nội bộ phù hợp; quản lý tài sản công đầy đủ trên sổ tài sản và phần mềm quản lý." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "KT-04", title: "Báo cáo tài chính đúng hạn, 100% hóa đơn điện tử, số hóa", max: 10, note: "Báo cáo tài chính đúng hạn; quản lý 100% hóa đơn điện tử, số hóa chứng từ kế toán theo quy định." }
+        ]
+      },
+      nv_thuvien: {
+        title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - NHÂN VIÊN THƯ VIỆN",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "TV-01", title: "Đăng ký cá biệt, bảo quản sách báo không mối mọt", max: 20, note: "Đăng ký cá biệt sách báo mới đầy đủ; bảo quản sách báo sạch đẹp, không mối mọt, rách nát." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "TV-02", title: "Phục vụ mượn/trả sách đúng lịch, đạt chỉ tiêu bạn đọc", max: 20, note: "Mở cửa phục vụ mượn/trả sách đúng lịch; thu hút và đạt chỉ tiêu lượt bạn đọc giáo viên, học sinh." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "TV-03", title: "Tổ chức ngày hội đọc sách/giới thiệu sách dưới nhiều hình thức", max: 10, note: "Tổ chức ngày hội đọc sách hoặc các buổi giới thiệu sách hay dưới nhiều hình thức phong phú." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "TV-04", title: "Cập nhật phần mềm thư viện số, thư mục phục vụ giảng dạy", max: 10, note: "Cập nhật 100% dữ liệu vào phần mềm thư viện số; biên soạn thư mục chuyên đề phục vụ dạy học." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "TV-05", title: "Phụ trách chuyên mục “Câu chuyện cuối tuần” 02 số/tháng", max: 10, note: "Biên tập và phát thanh chuyên mục “Câu chuyện cuối tuần” định kỳ 02 số/tháng." }
+        ]
+      },
+      nv_yte: {
+        title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - NHÂN VIÊN Y TẾ HỌC ĐƯỜNG",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "YT-01", title: "Sơ cấp cứu, xử lý 100% sự cố sức khỏe, tủ thuốc đầy đủ", max: 25, note: "Sơ cấp cứu, xử lý 100% sự cố sức khỏe ban đầu của GV, HS; bổ sung thuốc và vật tư y tế đầy đủ." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "YT-02", title: "Giám sát ATVSTP bếp bán trú, kiểm tra vệ sinh trường lớp, PCCC & dữ liệu y tế", max: 20, note: "Giám sát ATVSTP bếp bán trú; kiểm tra vệ sinh nhà vệ sinh, lớp học, khuôn viên; đăng tải công khai thực đơn; phối hợp PCCC; cập nhật dữ liệu y tế lên hệ thống của Bộ." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "YT-03", title: "Phòng chống dịch bệnh học đường, chăm sóc sức khỏe, tuyên truyền", max: 15, note: "Chủ động phòng chống dịch bệnh; chăm sóc sức khỏe CBGVNV, HS; tuyên truyền bảo vệ sức khỏe theo mùa." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "YT-04", title: "Đôn đốc BHYT học sinh đạt 100%, phối hợp khám sức khỏe", max: 10, note: "Đôn đốc 100% học sinh tham gia BHYT; phối hợp với cơ sở y tế khám sức khỏe định kỳ cho học sinh." }
+        ]
+      },
+      nv_thietbi: {
+        title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - NHÂN VIÊN THIẾT BỊ - THÍ NGHIỆM",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "TB-01", title: "Chuẩn bị thiết bị/hóa chất thực hành trước 24h theo đăng kí", max: 25, note: "Chuẩn bị đầy đủ thiết bị, dụng cụ, hóa chất thực hành trước 24 giờ theo đúng lịch đăng ký của giáo viên." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "TB-02", title: "Quản lý an toàn phòng bộ môn, hóa chất, thiết bị", max: 20, note: "Quản lý, bảo quản an toàn tuyệt đối các phòng bộ môn, hóa chất và trang thiết bị thực hành." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "TB-03", title: "Bảo dưỡng, tự sửa chữa hỏng hóc nhỏ tái sử dụng", max: 15, note: "Chủ động bảo dưỡng định kỳ, tự tay sửa chữa hỏng hóc nhỏ để tái sử dụng, tiết kiệm ngân sách." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "TB-04", title: "Cập nhật sổ mượn/trả hằng ngày, kiểm kê tài sản", max: 10, note: "Cập nhật sổ theo dõi mượn/trả thiết bị hằng ngày; thực hiện kiểm kê tài sản định kỳ theo quy định." }
+        ]
+      },
+      nv_tuvan: {
+        title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - NHÂN VIÊN TƯ VẤN HỌC ĐƯỜNG",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "TL-01", title: "Trực phòng tư vấn, tham vấn tâm lý, bảo mật thông tin", max: 25, note: "Trực phòng tư vấn đúng lịch; thực hiện tham vấn tâm lý cho HS, phụ huynh; bảo mật tuyệt đối thông tin." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "TL-02", title: "Sàng lọc, can thiệp sớm bạo lực học đường, áp lực tâm lý", max: 20, note: "Kịp thời sàng lọc, phát hiện và can thiệp sớm các trường hợp bạo lực học đường, khủng hoảng tâm lý." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "TL-03", title: "Truyền thông chuyên đề kỹ năng sống/sức khỏe lứa tuổi", max: 15, note: "Tổ chức các buổi truyền thông, diễn đàn chuyên đề về kỹ năng sống, sức khỏe tâm thần lứa tuổi học đường." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "TL-04", title: "Lập hồ sơ tham vấn chuyên sâu, kết nối phụ huynh", max: 10, note: "Lập hồ sơ theo dõi ca tham vấn chuyên sâu; duy trì kết nối chặt chẽ với giáo viên chủ nhiệm và phụ huynh." }
+        ]
+      },
+      nv_quantri: {
+        title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - NHÂN VIÊN QUẢN TRỊ/CNTT & CSVC",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "IT-01", title: "Mạng Internet thông suốt, cập nhật website, CSDL/VnEdu", max: 25, note: "Bảo đảm mạng Internet thông suốt; cập nhật website thường xuyên; hỗ trợ quản trị CSDL ngành và VnEdu." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "IT-02", title: "Đảm bảo kỹ thuật âm thanh, máy chiếu sự kiện", max: 20, note: "Bảo đảm kỹ thuật âm thanh, máy chiếu, thiết bị trình chiếu tại 100% các sự kiện, hội nghị của trường." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "IT-03", title: "Kiểm tra an toàn điện, quạt, bàn ghế, CSVC hằng tuần", max: 15, note: "Kiểm tra định kỳ hằng tuần hệ thống điện, quạt, bàn ghế, CSVC phòng học, phòng chức năng." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "IT-04", title: "Hỗ trợ giáo viên số hóa kế hoạch bài dạy, chuyển đổi số", max: 10, note: "Hỗ trợ giáo viên số hóa kế hoạch bài dạy; hướng dẫn ứng dụng công nghệ thông tin và chuyển đổi số." }
+        ]
+      },
+      nv_vanthu: {
+        title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - NHÂN VIÊN VĂN THƯ",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "VT-01", title: "Xử lý văn bản đến/đi đúng thể thức Nghị định 30/2020/NĐ-CP", max: 25, note: "Xử lý, tiếp nhận và chuyển giao văn bản đến/đi đúng thể thức quy định tại Nghị định 30/2020/NĐ-CP." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "VT-02", title: "Quản lý con dấu, chữ ký số, bảo mật thông tin", max: 25, note: "Quản lý con dấu, chứng thư số đúng quy chế; bảo đảm tuyệt đối tính an toàn, bảo mật thông tin tài liệu." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "VT-03", title: "Lưu trữ hồ sơ, cấp phát bằng cấp/học bạ đúng quy trình", max: 10, note: "Sắp xếp, lưu trữ hồ sơ ngăn nắp; cấp phát văn bằng, học bạ cho học sinh đúng quy trình, nhanh chóng." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "VT-04", title: "Nhập báo cáo các đường link về cơ sở dữ liệu…", max: 10, note: "Cập nhật, tổng hợp và nhập báo cáo các đường link về cơ sở dữ liệu ngành đúng thời hạn quy định." }
+        ]
+      },
+      nv_thuquy: {
+        title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - THỦ QUỸ (KIÊM NHIỆM)",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "TQ-01", title: "Thu/chi Tiền mặt đúng phiếu duyệt, không thâm hụt; chốt sổ hằng ngày", max: 35, note: "Thực hiện thu/chi tiền mặt đúng phiếu thu, chi đã ký duyệt; quản lý quỹ an toàn, không để thâm hụt, chốt sổ quỹ hằng ngày." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "TQ-02", title: "Hoàn thiện đầy đủ hồ sơ chứng từ theo quy định, đúng thời gian", max: 35, note: "Lưu trữ và hoàn thiện đầy đủ hồ sơ chứng từ thanh quyết toán theo đúng quy định, bàn giao kịp thời cho kế toán." }
+        ]
+      },
+      nv_baove: {
+        title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - NHÂN VIÊN BẢO VỆ (HĐLĐ)",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "BV-01", title: "Trực gác cổng 24/24, kiểm soát người ra/vào, bảo đảm ANTT", max: 25, note: "Túc trực gác cổng 24/24 nghiêm túc; kiểm soát chặt chẽ người ra/vào trường; bảo đảm an ninh trật tự khuôn viên." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "BV-02", title: "Tuần tra ban đêm, kiểm tra khóa cửa, thiết bị PCCC", max: 20, note: "Tuần tra ban đêm theo lịch; kiểm tra kỹ khóa cửa các phòng học, phòng chức năng và bảo dưỡng thiết bị PCCC." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "BV-03", title: "Mở/đóng cổng đúng giờ, đánh trống báo giờ chuẩn xác", max: 15, note: "Mở và đóng cổng trường đúng giờ quy định; đánh trống báo giờ vào lớp, ra chơi, tan học chuẩn xác." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "BV-04", title: "Tác phong giao tiếp chuẩn mực, bình tĩnh xử lý sự cố", max: 10, note: "Tác phong giao tiếp hòa nhã, đúng mực với phụ huynh, học sinh và khách; bình tĩnh xử lý các sự cố phát sinh." }
+        ]
+      },
+      nv_laocong: {
+        title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - NHÂN VIÊN LAO CÔNG (HĐLĐ)",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "LC-01", title: "Dọn rửa khu nhà vệ sinh thường xuyên, tuyệt đối không có mùi hôi", max: 30, note: "Lau dọn, cọ rửa các khu nhà vệ sinh học sinh và giáo viên thường xuyên; tuyệt đối bảo đảm khô ráo, không có mùi hôi." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "LC-02", title: "Quét dọn sân trường, hành lang, cầu thang, cổng trường sạch sẽ", max: 20, note: "Quét dọn toàn bộ sân trường, hành lang, cầu thang, cổng trường và các khu vực được phân công luôn sạch sẽ." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "LC-03", title: "Thu gom, phân loại rác thải, không để tồn đọng", max: 10, note: "Thu gom và phân loại rác thải tại các lớp, sân trường; chuyển đến nơi tập kết đúng giờ, không để rác ứ đọng." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN THEO VỊ TRÍ VIỆC LÀM (70 ĐIỂM)", code: "LC-04", title: "Sử dụng hóa chất tiết kiệm, báo cáo hư hỏng điện nước", max: 10, note: "Quản lý và sử dụng hóa chất tẩy rửa tiết kiệm, đúng hướng dẫn an toàn; kịp thời báo cáo các hư hỏng điện nước." }
         ]
       }
     };
 
-    let currentRole = "gvcn";
+    const BONUS_KPI_LIST = [
+      { id: "BONUS-01", text: "Bồi dưỡng học sinh giỏi đạt giải: Cấp Phường (+3đ/giải), Cấp Tỉnh (+5đ/giải), Cấp Quốc gia (+8đ/giải)", pts: 5 },
+      { id: "BONUS-02", text: "Đạt danh hiệu GVDG/Thao giảng xuất sắc: Cấp trường (+3đ), Cấp Phường/Tỉnh (+5đ)", pts: 5 },
+      { id: "BONUS-03", text: "Lớp chủ nhiệm Nhất bảng thi đua theo Phân hiệu (+3đ); Cảm hóa thành công 01 học sinh cá biệt (+3đ)", pts: 3 },
+      { id: "BONUS-04", text: "Có Sáng kiến kinh nghiệm / KHDH số được phê duyệt, công nhận (+3 đến +5đ)", pts: 4 },
+      { id: "BONUS-05", text: "CB, GV, NV có đóng góp xuất sắc ngoài nhiệm vụ, tự sửa chữa lớn CSVC/CNTT (+3 đến +5đ)", pts: 4 },
+      { id: "BONUS-06", text: "Xung kích phòng chống thiên tai, hoàn thành xuất sắc nhiệm vụ đột xuất (+2 đến +4đ)", pts: 3 }
+    ];
+
+    let currentMainTab = "gvcn";
+    let currentRoleKey = "gvcn";
     let currentScores = {};
     let activeBonuses = new Set();
     let currentWorkflow = "self";
+
+    // HÀM KIỂM TRA CHỨC VỤ ĐẶC THÙ
+    function isToTruong() {
+      const pos = (document.getElementById("empPosition").value || "").toLowerCase();
+      return pos.includes("tổ trưởng") || pos.includes("to truong");
+    }
+
+    function isPhoHieuTruong() {
+      const pos = (document.getElementById("empPosition").value || "").toLowerCase();
+      return currentMainTab === "bgh" || pos.includes("phó hiệu trưởng") || pos.includes("pho hieu truong") || pos.includes("pht");
+    }
+
+    function isTwoColumns() {
+      return isToTruong() || isPhoHieuTruong();
+    }
+
+    function updateActionButtons() {
+      const btnLeadText = document.getElementById("btnShareLeadText");
+      if (isToTruong()) {
+        btnLeadText.textContent = "Gửi link cho BGH";
+      } else if (isPhoHieuTruong() || currentMainTab === "bgh") {
+        btnLeadText.textContent = "GỬI LINK CHO HIỆU TRƯỞNG";
+      } else {
+        btnLeadText.textContent = "Gửi link cho tổ trưởng";
+      }
+    }
+
+    function handlePositionInputChange(val) {
+      updateActionButtons();
+      renderApp();
+      autoSave();
+    }
+
+    function applyQuickPosition(val) {
+      if (!val) return;
+      document.getElementById("empPosition").value = val;
+      if (val === "Phó Hiệu trưởng" || val === "Hiệu trưởng") {
+        document.getElementById("empDepartment").value = "Ban Giám hiệu";
+      }
+      handlePositionInputChange(val);
+    }
 
     function handleNameChange(selectedName) {
       document.getElementById("sigSelfName").textContent = selectedName || "....................................................";
@@ -1247,6 +1660,7 @@
       if (!isFromUrl) {
         loadSavedData();
       }
+      updateActionButtons();
       renderApp();
     });
 
@@ -1261,7 +1675,7 @@
           if (!decoded) return false;
 
           currentWorkflow = mode;
-          currentRole = decoded.role || "gvcn";
+          currentRoleKey = decoded.role || "gvcn";
           
           if (decoded.empName) {
             document.getElementById("empName").value = decoded.empName;
@@ -1277,23 +1691,22 @@
             document.getElementById("leadApproverName").value = decoded.leadName;
           }
 
+          const cfg = KPI_ROLES[currentRoleKey] || KPI_ROLES["gvcn"];
           if (mode === "lead") {
-            const cfg = KPI_DATA[currentRole];
             cfg.items.forEach(item => {
               if (!currentScores[item.code]) {
-                currentScores[item.code] = { self: item.max, lead: item.max, bgh: item.max, note: "" };
+                currentScores[item.code] = { self: item.max, lead: item.max, bgh: item.max, note: "", files: [] };
               } else if (currentScores[item.code].lead === undefined) {
                 currentScores[item.code].lead = currentScores[item.code].self;
               }
             });
           }
 
-          if (mode === "bgh") {
-            const cfg = KPI_DATA[currentRole];
+          if (mode === "bgh" || mode === "ht") {
             cfg.items.forEach(item => {
               if (currentScores[item.code]) {
                 if (currentScores[item.code].bgh === undefined) {
-                  currentScores[item.code].bgh = currentScores[item.code].lead;
+                  currentScores[item.code].bgh = currentScores[item.code].lead !== undefined ? currentScores[item.code].lead : currentScores[item.code].self;
                 }
               }
             });
@@ -1306,18 +1719,28 @@
           banner.style.display = "flex";
 
           if (mode === "lead") {
-            bannerText.innerHTML = `<i class="fa-solid fa-user-check" style="font-size: 1.4rem; color: var(--orange-main);"></i> <div><strong>CHẾ ĐỘ TỔ TRƯỞNG THẨM ĐỊNH:</strong> Điểm tự chấm của đ/c <strong>${decoded.empName}</strong> (${decoded.empDepartment}) đã được lưu và khóa an toàn. Đồng chí thẩm định điểm ở cột <strong>2. Tổ thẩm định</strong>.</div>`;
-            document.getElementById("btnShareLead").style.display = "none";
-            document.getElementById("btnShareBGH").style.display = "inline-flex";
-          } else if (mode === "bgh") {
-            bannerText.innerHTML = `<i class="fa-solid fa-stamp" style="font-size: 1.4rem; color: var(--green-main);"></i> <div><strong>CHẾ ĐỘ BGH PHÊ DUYỆT:</strong> Đang xem kết quả của đ/c <strong>${decoded.empName}</strong> (Tổ trưởng: <em>${decoded.leadName || 'Đã thẩm định'}</em>).</div>`;
-            document.getElementById("btnShareLead").style.display = "none";
-            document.getElementById("btnShareBGH").style.display = "none";
+            bannerText.innerHTML = `<i class="fa-solid fa-user-check" style="font-size: 1.4rem; color: var(--orange-main);"></i> <div><strong>CHẾ ĐỘ TỔ TRƯỞNG THẨM ĐỊNH:</strong> Điểm tự chấm của đ/c <strong>${decoded.empName}</strong> (${decoded.empDepartment}) đã được khóa an toàn. Đồng chí thẩm định điểm ở cột <strong>2. Tổ thẩm định</strong>.</div>`;
+          } else if (mode === "ht" || mode === "bgh") {
+            bannerText.innerHTML = `<i class="fa-solid fa-stamp" style="font-size: 1.4rem; color: var(--green-main);"></i> <div><strong>CHẾ ĐỘ HIỆU TRƯỞNG PHÊ DUYỆT:</strong> Đang xem duyệt kết quả của đ/c <strong>${decoded.empName}</strong>...</div>`;
+          }
+
+          if (currentRoleKey.startsWith("bgh_")) {
+            currentMainTab = "bgh";
+            document.getElementById("bghSubRoleBox").style.display = "flex";
+            document.getElementById("bghPositionSelect").value = currentRoleKey.replace("bgh_", "");
+          } else if (currentRoleKey.startsWith("nv_")) {
+            currentMainTab = "nv";
+            document.getElementById("staffSubRoleBox").style.display = "flex";
+            document.getElementById("staffPositionSelect").value = currentRoleKey.replace("nv_", "");
+          } else {
+            currentMainTab = currentRoleKey;
           }
 
           document.querySelectorAll(".object-pill").forEach(el => el.classList.remove("active"));
-          const activePill = document.getElementById(`tab-${currentRole}`);
+          const activePill = document.getElementById(`tab-${currentMainTab}`);
           if (activePill) activePill.classList.add("active");
+
+          updateActionButtons();
           return true;
         } catch (e) {
           console.error("Lỗi giải mã URL:", e);
@@ -1330,16 +1753,27 @@
       window.location.href = window.location.pathname;
     }
 
+    // XỬ LÝ HÀNH ĐỘNG KHI BẤM NÚT CHIA SẺ LINK
+    function handleShareButtonAction() {
+      if (isToTruong()) {
+        generateShareLink('bgh');
+      } else if (isPhoHieuTruong() || currentMainTab === "bgh") {
+        generateShareLink('ht');
+      } else {
+        generateShareLink('lead');
+      }
+    }
+
     function generateShareLink(target) {
-      const cfg = KPI_DATA[currentRole];
+      const cfg = KPI_ROLES[currentRoleKey] || KPI_ROLES["gvcn"];
       cfg.items.forEach(item => {
         if (!currentScores[item.code]) {
-          currentScores[item.code] = { self: item.max, lead: item.max, bgh: item.max, note: "" };
+          currentScores[item.code] = { self: item.max, lead: item.max, bgh: item.max, note: "", files: [] };
         }
       });
 
       const dataToPack = {
-        role: currentRole,
+        role: currentRoleKey,
         empName: document.getElementById("empName").value,
         empPosition: document.getElementById("empPosition").value,
         empDepartment: document.getElementById("empDepartment").value,
@@ -1350,13 +1784,7 @@
       };
 
       if (!dataToPack.empName) {
-        alert("Vui lòng chọn họ và tên viên chức trước khi tạo link!");
-        return;
-      }
-
-      if (target === "bgh" && !dataToPack.leadName) {
-        alert("Đồng chí Tổ trưởng vui lòng nhập họ tên ở ô 'Tổ trưởng thẩm định' trước khi gửi cho BGH!");
-        document.getElementById("leadApproverName").focus();
+        showCustomModal("Vui lòng chọn họ và tên viên chức trước khi tạo link bàn giao!");
         return;
       }
 
@@ -1364,17 +1792,72 @@
       const fullUrl = `${window.location.origin}${window.location.pathname}?mode=${target}&d=${encoded}`;
 
       navigator.clipboard.writeText(fullUrl).then(() => {
-        const roleLabel = target === "lead" ? "Tổ trưởng chuyên môn" : "Ban Giám hiệu";
-        alert(`✅ ĐÃ SAO CHÉP LINK BÀN GIAO THÀNH CÔNG!\n\nToàn bộ điểm số đã được đóng gói an toàn. Đồng chí chỉ cần dán (Paste / Ctrl+V) gửi link này qua Zalo cho ${roleLabel}.`);
+        let msg = "";
+        if (target === "bgh") {
+          msg = "THÔNG BÁO:\nĐã sao chép link bàn giao thành công. Toàn bộ điểm số và tệp minh chứng đã được đóng gói an toàn. Đồng chí chỉ cần dán (Paste/Ctrl+V) gửi link này cho Ban giám hiệu.";
+        } else if (target === "ht") {
+          msg = "THÔNG BÁO:\nĐã sao chép link bàn giao thành công. Toàn bộ điểm số và tệp minh chứng đã được đóng gói an toàn. Đồng chí chỉ cần dán (Paste/Ctrl+V) gửi link này cho Hiệu trưởng.";
+        } else {
+          msg = "THÔNG BÁO:\nĐã sao chép link bàn giao thành công. Toàn bộ điểm số và tệp minh chứng đã được đóng gói an toàn. Đồng chí chỉ cần dán (Paste/Ctrl+V) gửi link này cho Tổ trưởng chuyên môn.";
+        }
+        showCustomModal(msg);
       }).catch(() => {
         prompt("Sao chép đường link bên dưới để gửi qua Zalo:", fullUrl);
       });
     }
 
-    function switchRole(role) {
-      currentRole = role;
+    function switchRole(tabType) {
+      currentMainTab = tabType;
       document.querySelectorAll(".object-pill").forEach(el => el.classList.remove("active"));
-      document.getElementById(`tab-${role}`).classList.add("active");
+      document.getElementById(`tab-${tabType}`).classList.add("active");
+
+      const bghBox = document.getElementById("bghSubRoleBox");
+      const staffBox = document.getElementById("staffSubRoleBox");
+
+      if (tabType === "bgh") {
+        bghBox.style.display = "flex";
+        staffBox.style.display = "none";
+        const selectedBgh = document.getElementById("bghPositionSelect").value;
+        currentRoleKey = `bgh_${selectedBgh}`;
+        document.getElementById("empPosition").value = selectedBgh === "ht" ? "Hiệu trưởng" : "Phó Hiệu trưởng";
+        document.getElementById("empDepartment").value = "Ban Giám hiệu";
+      } else if (tabType === "nv") {
+        bghBox.style.display = "none";
+        staffBox.style.display = "flex";
+        const selectedStaff = document.getElementById("staffPositionSelect").value;
+        currentRoleKey = `nv_${selectedStaff}`;
+        document.getElementById("empPosition").value = document.getElementById("staffPositionSelect").selectedOptions[0].text;
+        document.getElementById("empDepartment").value = "Tổ Văn phòng";
+      } else {
+        bghBox.style.display = "none";
+        staffBox.style.display = "none";
+        currentRoleKey = tabType;
+        if (tabType === "gvcn") {
+          document.getElementById("empPosition").value = "Giáo viên chủ nhiệm";
+        } else {
+          document.getElementById("empPosition").value = "Giáo viên Tin học";
+        }
+      }
+
+      updateActionButtons();
+      initDefaultScores();
+      renderApp();
+      autoSave();
+    }
+
+    function switchBGHPosition(posKey) {
+      currentRoleKey = `bgh_${posKey}`;
+      document.getElementById("empPosition").value = posKey === "ht" ? "Hiệu trưởng" : "Phó Hiệu trưởng";
+      updateActionButtons();
+      initDefaultScores();
+      renderApp();
+      autoSave();
+    }
+
+    function switchStaffPosition(posKey) {
+      currentRoleKey = `nv_${posKey}`;
+      document.getElementById("empPosition").value = document.getElementById("staffPositionSelect").selectedOptions[0].text;
+      updateActionButtons();
       initDefaultScores();
       renderApp();
       autoSave();
@@ -1383,28 +1866,37 @@
     function initDefaultScores() {
       currentScores = {};
       activeBonuses.clear();
-      const cfg = KPI_DATA[currentRole];
+      const cfg = KPI_ROLES[currentRoleKey] || KPI_ROLES["gvcn"];
       cfg.items.forEach(item => {
-        currentScores[item.code] = { self: item.max, lead: item.max, bgh: item.max, note: "" };
+        currentScores[item.code] = { self: item.max, lead: item.max, bgh: item.max, note: "", files: [] };
       });
     }
 
     function renderApp() {
-      const cfg = KPI_DATA[currentRole];
+      const cfg = KPI_ROLES[currentRoleKey] || KPI_ROLES["gvcn"];
       document.getElementById("tableHeaderTitle").textContent = cfg.title;
-      document.getElementById("lbl-col1").textContent = cfg.col1.name;
-      document.getElementById("max-col1").textContent = cfg.col1.max;
-      document.getElementById("lbl-col2").textContent = cfg.col2.name;
-      document.getElementById("max-col2").textContent = cfg.col2.max;
 
-      const col3Card = document.getElementById("lbl-col3").closest(".metric-card");
-      if (cfg.col3.max > 0) {
-        col3Card.style.display = "block";
-        document.getElementById("lbl-col3").textContent = cfg.col3.name;
-        document.getElementById("max-col3").textContent = cfg.col3.max;
-        document.getElementById("desc-col3").textContent = cfg.col3.desc;
+      const twoCols = isTwoColumns();
+      const thLead = document.getElementById("th-lead");
+      const thSelf = document.getElementById("th-self");
+      const thBgh = document.getElementById("th-bgh");
+      const sigColLead = document.getElementById("sigColLead");
+      const sigGrid = document.getElementById("signatureGrid");
+
+      // CẤU HÌNH GIAO DIỆN 2 CỘT HOẶC 3 CỘT
+      if (twoCols) {
+        thLead.style.display = "none";
+        thSelf.textContent = "1. Cá nhân tự đánh giá";
+        thBgh.textContent = isToTruong() ? "2. BGH phê duyệt" : "2. Hiệu trưởng phê duyệt";
+        if (sigColLead) sigColLead.style.display = "none";
+        if (sigGrid) sigGrid.style.gridTemplateColumns = "repeat(2, 1fr)";
       } else {
-        col3Card.style.display = "none";
+        thLead.style.display = "";
+        thSelf.textContent = "1. Tự chấm";
+        thLead.textContent = "2. Tổ thẩm định";
+        thBgh.textContent = "3. BGH duyệt";
+        if (sigColLead) sigColLead.style.display = "";
+        if (sigGrid) sigGrid.style.gridTemplateColumns = "repeat(3, 1fr)";
       }
 
       const tbody = document.getElementById("kpiTableBody");
@@ -1416,45 +1908,60 @@
           currentPillar = item.pillar;
           const headerTr = document.createElement("tr");
           headerTr.innerHTML = `
-            <td colspan="7" style="background: #f8fafc; font-weight: 800; color: var(--green-dark); padding: 8px 12px; text-transform: uppercase; border-left: 4px solid var(--orange-main);">
+            <td colspan="${twoCols ? 6 : 7}" style="background: #f8fafc; font-weight: 800; color: var(--green-dark); padding: 8px 12px; text-transform: uppercase; border-left: 4px solid var(--orange-main);">
               <i class="fa-solid fa-bookmark" style="color: var(--orange-main); margin-right: 6px;"></i> ${item.pillarName}
             </td>
           `;
           tbody.appendChild(headerTr);
         }
 
-        const scoreObj = currentScores[item.code] || { self: item.max, lead: item.max, bgh: item.max, note: "" };
+        const scoreObj = currentScores[item.code] || { self: item.max, lead: item.max, bgh: item.max, note: "", files: [] };
         const tr = document.createElement("tr");
 
-        const isSelfLocked = (currentWorkflow === 'lead' || currentWorkflow === 'bgh');
+        const isSelfLocked = (currentWorkflow === 'lead' || currentWorkflow === 'ht' || currentWorkflow === 'bgh');
         const isLeadActive = (currentWorkflow === 'lead');
-        const isBghActive = (currentWorkflow === 'bgh');
+        const isBghActive = (currentWorkflow === 'ht' || currentWorkflow === 'bgh');
+
+        let filesHtml = "";
+        if (scoreObj.files && scoreObj.files.length > 0) {
+          filesHtml = scoreObj.files.map((f, fIdx) => `
+            <span class="file-tag">
+              <i class="fa-solid fa-file-lines"></i>
+              <span class="file-tag-name" title="${f.name}" onclick="previewFile('${item.code}', ${fIdx})">${f.name}</span>
+              ${!isSelfLocked ? `<span class="file-tag-remove" onclick="removeFile('${item.code}',${fIdx})">✕</span>` : ''}
+            </span>
+          `).join("");
+        }
 
         tr.innerHTML = `
           <td style="text-align: center; vertical-align: middle;">
             <span class="badge-code">${item.code}</span>
           </td>
           <td>
-            <strong>${item.title}</strong>
-            <div class="rule-note"><i class="fa-solid fa-triangle-exclamation"></i> ${item.note}</div>
+            <strong style="color: #0f172a; font-size: 0.92rem;">${item.title}</strong>
+            <div class="rule-note">${item.note}</div>
           </td>
           <td style="text-align: center; vertical-align: middle; font-weight: 700; color: #475569;">
             ${item.max}
           </td>
+          <!-- 1. TỰ CHẤM -->
           <td style="text-align: center; vertical-align: middle;">
             <input type="number" step="0.5" min="0" max="${item.max}" 
               class="input-score ${isSelfLocked ? 'locked-score' : ''}" 
               id="score-self-${item.code}" value="${scoreObj.self !== undefined ? scoreObj.self : item.max}" 
-              ${isSelfLocked ? 'readonly title="Điểm do giáo viên tự chấm (Đã khóa)"' : ''}
+              ${isSelfLocked ? 'readonly title="Điểm tự chấm đã khóa"' : ''}
               oninput="handleScoreChange('${item.code}', 'self', this.value, ${item.max})" />
           </td>
+          <!-- 2. TỔ THẨM ĐỊNH (ẨN ĐỐI VỚI TỔ TRƯỞNG & PHÓ HIỆU TRƯỞNG) -->
+          ${!twoCols ? `
           <td style="text-align: center; vertical-align: middle;">
             <input type="number" step="0.5" min="0" max="${item.max}" 
-              class="input-score ${isLeadActive ? 'highlight-lead' : (currentWorkflow === 'bgh' ? 'locked-score' : '')}" 
+              class="input-score ${isLeadActive ? 'highlight-lead' : (currentWorkflow === 'ht' || currentWorkflow === 'bgh' ? 'locked-score' : '')}" 
               id="score-lead-${item.code}" value="${scoreObj.lead !== undefined ? scoreObj.lead : (scoreObj.self !== undefined ? scoreObj.self : item.max)}" 
-              ${currentWorkflow === 'bgh' ? 'readonly title="Điểm Tổ thẩm định (Đã khóa)"' : ''}
+              ${currentWorkflow === 'ht' || currentWorkflow === 'bgh' ? 'readonly title="Điểm thẩm định đã khóa"' : ''}
               oninput="handleScoreChange('${item.code}', 'lead', this.value, ${item.max})" />
-          </td>
+          </td>` : ''}
+          <!-- 3. BGH / HIỆU TRƯỞNG PHÊ DUYỆT -->
           <td style="text-align: center; vertical-align: middle;">
             <input type="number" step="0.5" min="0" max="${item.max}" 
               class="input-score ${isBghActive ? 'highlight-bgh' : ''}" 
@@ -1462,10 +1969,22 @@
               ${!isBghActive && currentWorkflow !== 'self' ? 'readonly' : ''}
               oninput="handleScoreChange('${item.code}', 'bgh', this.value, ${item.max})" />
           </td>
+          <!-- MINH CHỨNG & TỆP ĐÍNH KÈM -->
           <td style="vertical-align: middle;">
-            <input type="text" class="input-text-sm" placeholder="Minh chứng / Ghi chú..." 
-              value="${scoreObj.note || ''}" 
-              oninput="handleNoteChange('${item.code}', this.value)" />
+            <div class="evidence-cell">
+              <input type="text" class="input-text-sm" placeholder="Ghi chú / Link Driver, vnEdu..." 
+                value="${scoreObj.note || ''}" 
+                oninput="handleNoteChange('${item.code}', this.value)" />
+              <div class="file-attach-wrapper">
+                ${!isSelfLocked ? `
+                  <label class="btn-attach-file" title="Tải lên tệp ảnh, Word, Excel, PDF...">
+                    <i class="fa-solid fa-paperclip"></i> Đính kèm tệp
+                    <input type="file" multiple onchange="handleFileAttachment('${item.code}', this.files)" />
+                  </label>
+                ` : ''}
+                <div id="file-list-${item.code}" class="file-badge-list">${filesHtml}</div>
+              </div>
+            </div>
           </td>
         `;
         tbody.appendChild(tr);
@@ -1473,7 +1992,7 @@
 
       const bonusContainer = document.getElementById("bonusListContainer");
       bonusContainer.innerHTML = "";
-      cfg.bonuses.forEach(b => {
+      BONUS_KPI_LIST.forEach(b => {
         const isChecked = activeBonuses.has(b.id);
         const itemDiv = document.createElement("div");
         itemDiv.className = "bonus-item";
@@ -1490,13 +2009,49 @@
       calculateTotals();
     }
 
+    function handleFileAttachment(code, fileList) {
+      if (!fileList || fileList.length === 0) return;
+      if (!currentScores[code]) currentScores[code] = { self: 0, lead: 0, bgh: 0, note: "", files: [] };
+      if (!currentScores[code].files) currentScores[code].files = [];
+
+      Array.from(fileList).forEach(file => {
+        const fileObj = {
+          name: file.name,
+          size: (file.size / 1024).toFixed(1) + " KB",
+          type: file.type,
+          url: URL.createObjectURL(file)
+        };
+        currentScores[code].files.push(fileObj);
+      });
+
+      renderApp();
+      autoSave();
+    }
+
+    function removeFile(code, fIdx) {
+      if (currentScores[code] && currentScores[code].files) {
+        currentScores[code].files.splice(fIdx, 1);
+        renderApp();
+        autoSave();
+      }
+    }
+
+    function previewFile(code, fIdx) {
+      const f = currentScores[code].files[fIdx];
+      if (f && f.url) {
+        window.open(f.url, "_blank");
+      } else {
+        alert("Tệp minh chứng: " + f.name);
+      }
+    }
+
     function handleScoreChange(code, roleKey, val, maxVal) {
       let num = parseFloat(val);
       if (isNaN(num)) num = 0;
       if (num > maxVal) num = maxVal;
       if (num < 0) num = 0;
 
-      if (!currentScores[code]) currentScores[code] = { self: maxVal, lead: maxVal, bgh: maxVal, note: "" };
+      if (!currentScores[code]) currentScores[code] = { self: maxVal, lead: maxVal, bgh: maxVal, note: "", files: [] };
       currentScores[code][roleKey] = num;
 
       calculateTotals();
@@ -1504,7 +2059,7 @@
     }
 
     function handleNoteChange(code, val) {
-      if (!currentScores[code]) currentScores[code] = {};
+      if (!currentScores[code]) currentScores[code] = { self: 0, lead: 0, bgh: 0, note: "", files: [] };
       currentScores[code].note = val;
       autoSave();
     }
@@ -1519,14 +2074,13 @@
       autoSave();
     }
 
-    // TÍNH TOÁN ĐIỂM TỔNG TỐI ĐA 115 ĐIỂM (100Đ CHUẨN + 15Đ THƯỞNG)
     function calculateTotals() {
-      const cfg = KPI_DATA[currentRole];
-      let p1 = 0, p2 = 0, p3 = 0;
+      const cfg = KPI_ROLES[currentRoleKey] || KPI_ROLES["gvcn"];
+      let p1 = 0, p2 = 0;
       let hasUnder70 = false;
       let under70Items = [];
 
-      const evalColKey = (currentWorkflow === 'lead') ? 'lead' : (currentWorkflow === 'bgh' ? 'bgh' : 'self');
+      const evalColKey = (currentWorkflow === 'lead') ? 'lead' : ((currentWorkflow === 'ht' || currentWorkflow === 'bgh') ? 'bgh' : 'self');
 
       cfg.items.forEach(item => {
         const sc = (currentScores[item.code] && currentScores[item.code][evalColKey] !== undefined) 
@@ -1537,24 +2091,20 @@
         }
         if (item.pillar === 1) p1 += sc;
         else if (item.pillar === 2) p2 += sc;
-        else if (item.pillar === 3) p3 += sc;
       });
 
       let bonusScore = 0;
-      cfg.bonuses.forEach(b => {
+      BONUS_KPI_LIST.forEach(b => {
         if (activeBonuses.has(b.id)) bonusScore += b.pts;
       });
       if (bonusScore > 15) bonusScore = 15;
 
-      const totalStandard = p1 + p2 + p3;
+      const totalStandard = p1 + p2;
       let finalTotal = totalStandard + bonusScore;
-      
-      // KHỐNG CHẾ ĐIỂM TỔNG TỐI ĐA 115 ĐIỂM (THEO CHƯƠNG IV KPI-915)
       if (finalTotal > 115) finalTotal = 115;
 
       document.getElementById("val-col1").textContent = p1.toFixed(1);
       document.getElementById("val-col2").textContent = p2.toFixed(1);
-      document.getElementById("val-col3").textContent = p3.toFixed(1);
       document.getElementById("val-bonus").textContent = bonusScore.toFixed(1);
       document.getElementById("bonusScoreText").textContent = bonusScore.toFixed(1);
       document.getElementById("val-total").textContent = finalTotal.toFixed(1);
@@ -1565,20 +2115,20 @@
 
       if (finalTotal >= 90) {
         if (hasUnder70) {
-          rank = "Loại B (Hạ bậc do tiêu chí < 70%)";
+          rank = "Mức 2 (Hạ bậc do tiêu chí < 70%)";
           badgeClass = "rank-b";
         } else {
-          rank = "Loại A (Hoàn thành xuất sắc)";
+          rank = "Mức 1 (Xuất sắc)";
           badgeClass = "rank-a";
         }
-      } else if (finalTotal >= 75) {
-        rank = "Loại B (Hoàn thành tốt)";
+      } else if (finalTotal >= 70) {
+        rank = "Mức 2 (Tốt)";
         badgeClass = "rank-b";
-      } else if (finalTotal >= 55) {
-        rank = "Loại C (Hoàn thành)";
+      } else if (finalTotal >= 50) {
+        rank = "Mức 3 (Đạt yêu cầu)";
         badgeClass = "rank-c";
       } else {
-        rank = "Loại D (Không hoàn thành)";
+        rank = "Mức 4 (Cần cố gắng)";
         badgeClass = "rank-d";
       }
 
@@ -1587,12 +2137,12 @@
     }
 
     function quickFill100() {
-      const cfg = KPI_DATA[currentRole];
+      const cfg = KPI_ROLES[currentRoleKey] || KPI_ROLES["gvcn"];
       cfg.items.forEach(item => {
-        if (!currentScores[item.code]) currentScores[item.code] = {};
+        if (!currentScores[item.code]) currentScores[item.code] = { files: [] };
         if (currentWorkflow === 'self') currentScores[item.code].self = item.max;
         if (currentWorkflow === 'lead') currentScores[item.code].lead = item.max;
-        if (currentWorkflow === 'bgh') currentScores[item.code].bgh = item.max;
+        if (currentWorkflow === 'ht' || currentWorkflow === 'bgh') currentScores[item.code].bgh = item.max;
       });
       renderApp();
       autoSave();
@@ -1607,7 +2157,7 @@
 
     function autoSave() {
       const data = {
-        role: currentRole,
+        role: currentRoleKey,
         empName: document.getElementById("empName").value,
         empPosition: document.getElementById("empPosition").value,
         empDepartment: document.getElementById("empDepartment").value,
@@ -1629,7 +2179,7 @@
       if (raw) {
         try {
           const data = JSON.parse(raw);
-          if (data.role && KPI_DATA[data.role]) currentRole = data.role;
+          if (data.role && KPI_ROLES[data.role]) currentRoleKey = data.role;
           if (data.empName) {
             document.getElementById("empName").value = data.empName;
             document.getElementById("sigSelfName").textContent = data.empName;
@@ -1641,8 +2191,22 @@
           if (data.bonuses) activeBonuses = new Set(data.bonuses);
           if (data.leadName) document.getElementById("leadApproverName").value = data.leadName;
 
+          if (currentRoleKey.startsWith("bgh_")) {
+            currentMainTab = "bgh";
+            document.getElementById("bghSubRoleBox").style.display = "flex";
+            document.getElementById("bghPositionSelect").value = currentRoleKey.replace("bgh_", "");
+          } else if (currentRoleKey.startsWith("nv_")) {
+            currentMainTab = "nv";
+            document.getElementById("staffSubRoleBox").style.display = "flex";
+            document.getElementById("staffPositionSelect").value = currentRoleKey.replace("nv_", "");
+          } else {
+            currentMainTab = currentRoleKey;
+          }
+
           document.querySelectorAll(".object-pill").forEach(el => el.classList.remove("active"));
-          document.getElementById(`tab-${currentRole}`).classList.add("active");
+          const activePill = document.getElementById(`tab-${currentMainTab}`);
+          if (activePill) activePill.classList.add("active");
+          updateActionButtons();
           return;
         } catch (e) {}
       }
