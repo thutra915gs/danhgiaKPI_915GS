@@ -1721,27 +1721,31 @@
       if (bonusScore > 10) bonusScore = 10;
 
       const getRank = (total, under70) => {
-        if (total >= 90) return under70 ? "Hoàn thành tốt nhiệm vụ" : "Hoàn thành xuất sắc nhiệm vụ";
-        if (total >= 70) return "Hoàn thành tốt nhiệm vụ";
-        if (total >= 50) return "Hoàn thành nhiệm vụ";
-        return "Không hoàn thành nhiệm vụ";
+        if (total >= 90) return under70 ? "Mức 2 (Tốt)" : "Mức 1 (Xuất sắc)";
+        if (total >= 70) return "Mức 2 (Tốt)";
+        if (total >= 50) return "Mức 3 (Đạt yêu cầu)";
+        return "Mức 4 (Cần cố gắng)";
       };
 
       const selfTotal = Math.min(110, selfSum + bonusScore);
       const leadTotal = hasLeadInput ? Math.min(110, leadSum + bonusScore) : null;
       const bghTotal = hasBghInput ? Math.min(110, bghSum + bonusScore) : null;
 
+      const selfRank = getRank(selfTotal, selfUnder70);
+      const leadRank = leadTotal !== null ? getRank(leadTotal, leadUnder70) : selfRank;
+      const bghRank = bghTotal !== null ? getRank(bghTotal, bghUnder70) : (leadTotal !== null ? leadRank : selfRank);
+
       let activeTotal = selfTotal;
-      let activeRank = getRank(selfTotal, selfUnder70);
+      let activeRank = selfRank;
       if (currentAuthRole === "tt" && leadTotal !== null) {
         activeTotal = leadTotal;
-        activeRank = getRank(leadTotal, leadUnder70);
+        activeRank = leadRank;
       } else if (currentAuthRole === "bgh") {
         activeTotal = bghTotal !== null ? bghTotal : (leadTotal !== null ? leadTotal : selfTotal);
-        activeRank = getRank(activeTotal, bghTotal !== null ? bghUnder70 : (leadTotal !== null ? leadUnder70 : selfUnder70));
+        activeRank = bghRank;
       }
 
-      return { selfTotal, leadTotal, bghTotal, activeTotal, activeRank };
+      return { selfTotal, leadTotal, bghTotal, selfRank, leadRank, bghRank, activeTotal, activeRank };
     }
 
     function saveCurrentRecordToUnit(silent = false) {
@@ -1754,6 +1758,9 @@
         selfScore: scores3.selfTotal,
         leadScore: scores3.leadTotal,
         bghScore: scores3.bghTotal,
+        selfRank: scores3.selfRank,
+        leadRank: scores3.leadRank,
+        bghRank: scores3.bghRank,
         totalScore: scores3.activeTotal,
         rank: scores3.activeRank
       };
@@ -1841,15 +1848,33 @@
         const bghPt  = r.bghScore  !== undefined && r.bghScore  !== null ? Number(r.bghScore).toFixed(1)  : Number(r.totalScore).toFixed(1);
 
         let officialPt = selfPt;
-        if (isTT) officialPt = leadPt;
-        if (isBGH) officialPt = bghPt;
+        let rankText = r.selfRank || "";
+        if (isTT) {
+          officialPt = leadPt;
+          rankText = r.leadRank || "";
+        } else if (isBGH) {
+          officialPt = bghPt;
+          rankText = r.bghRank || "";
+        }
 
         const ptNum = parseFloat(officialPt);
-        let rankText = r.rank || "";
-        if (ptNum >= 90) { xs++; if (!rankText) rankText = "Mức 1 (Xuất sắc)"; }
-        else if (ptNum >= 70) { tot++; if (!rankText) rankText = "Mức 2 (Tốt)"; }
-        else if (ptNum >= 50) { ht++; if (!rankText) rankText = "Mức 3 (Đạt yêu cầu)"; }
-        else { kht++; if (!rankText) rankText = "Mức 4 (Cần cố gắng)"; }
+        if (!rankText) {
+          if (ptNum >= 90) rankText = "Mức 1 (Xuất sắc)";
+          else if (ptNum >= 70) rankText = "Mức 2 (Tốt)";
+          else if (ptNum >= 50) rankText = "Mức 3 (Đạt yêu cầu)";
+          else rankText = "Mức 4 (Cần cố gắng)";
+        } else {
+          // Chuẩn hóa nếu dữ liệu cũ còn lưu tên mức cũ
+          if (rankText.includes("xuất sắc")) rankText = "Mức 1 (Xuất sắc)";
+          else if (rankText.includes("tốt")) rankText = "Mức 2 (Tốt)";
+          else if (rankText.includes("Không")) rankText = "Mức 4 (Cần cố gắng)";
+          else if (rankText.includes("Hoàn thành nhiệm vụ")) rankText = "Mức 3 (Đạt yêu cầu)";
+        }
+
+        if (rankText.includes("Mức 1")) xs++;
+        else if (rankText.includes("Mức 2")) tot++;
+        else if (rankText.includes("Mức 3")) ht++;
+        else kht++;
 
         let scoreColsHtml = `<td style="text-align:center; font-weight:bold;">${selfPt}</td>`;
         if (isTT) {
@@ -2011,7 +2036,27 @@
       };
       const fullUrl = `${window.location.origin}${window.location.pathname}?mode=${target}&d=${encodeDataToUrl(dataToPack)}`;
       navigator.clipboard.writeText(fullUrl).then(() => {
-        showCustomModal(`✅ Đã sao chép link bàn giao thành công! Chị có thể dán (Ctrl+V) để gửi qua Zalo hoặc Email.`);
+        if (target === "lead") {
+          const empDept = dataToPack.empDepartment;
+          const leadEmail = DEPT_EMAILS[empDept] || "ngocbichgstn@gmail.com";
+          const subject = `[KPI 915] Phiếu đánh giá KPI - ${dataToPack.empName} (${empDept})`;
+          const body = `Kính gửi Đ/c Tổ trưởng ${empDept},\n\nTôi đã hoàn thành tự đánh giá KPI (${dataToPack.evalPeriod}). Kính gửi đường link dữ liệu để Tổ thẩm định:\n\n${fullUrl}\n\nKính đề nghị Đ/c xem xét và thẩm định kết quả.\nTrân trọng!`;
+          const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(leadEmail)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          setTimeout(() => { window.location.href = `mailto:${leadEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`; }, 400);
+          const modalMsg = `✅ Đã sao chép link bàn giao thành công!<br>📧 Hệ thống đang mở hòm thư gửi trực tiếp đến Tổ trưởng (${empDept}):<br>👉 <strong>${leadEmail}</strong><br><br>Đồng chí cũng có thể dán (Ctrl+V) link này để gửi qua Zalo cho Tổ trưởng.`;
+          const modalBtns = `<a href="${gmailWebUrl}" target="_blank" class="btn btn-orange-primary" style="text-decoration:none;"><i class="fa-solid fa-envelope"></i> Mở Gmail gửi ngay</a> <button class="btn btn-orange-outline" style="color:var(--gray-700); background:white;" onclick="closeCustomModal()">Đã hiểu</button>`;
+          showCustomModal(modalMsg, modalBtns);
+        } else if (target === "thu_ky") {
+          const subject = `[KPI 915 - KẾT QUẢ DUYỆT BGH] ${dataToPack.empName} (${dataToPack.evalPeriod})`;
+          const body = `Kính gửi Thư ký hội đồng (Đ/c Lê Thị Thu Thủy),\n\nBan Giám hiệu đã hoàn thành phê duyệt kết quả đánh giá KPI của đ/c ${dataToPack.empName} (${dataToPack.evalPeriod}). Kính gửi đường link dữ liệu kết quả:\n\n${fullUrl}\n\nTrân trọng!`;
+          const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(THU_KY_EMAIL)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          setTimeout(() => { window.location.href = `mailto:${THU_KY_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`; }, 400);
+          const modalMsg = `✅ Đã sao chép link kết quả duyệt của BGH thành công!<br>📧 Hệ thống đang mở hòm thư gửi trực tiếp đến Thư ký hội đồng:<br>👉 <strong>${THU_KY_EMAIL}</strong><br><br>Đồng chí cũng có thể dán (Ctrl+V) link này để gửi qua Zalo cho Thư ký.`;
+          const modalBtns = `<a href="${gmailWebUrl}" target="_blank" class="btn btn-orange-primary" style="text-decoration:none;"><i class="fa-solid fa-envelope"></i> Mở Gmail gửi ngay</a> <button class="btn btn-orange-outline" style="color:var(--gray-700); background:white;" onclick="closeCustomModal()">Đã hiểu</button>`;
+          showCustomModal(modalMsg, modalBtns);
+        } else {
+          showCustomModal(`✅ Đã sao chép link bàn giao cho Ban Giám hiệu thành công! Chị chỉ cần dán (Ctrl+V) để gửi qua Zalo hoặc Email.`);
+        }
       }).catch(() => {
         showCustomModal(`Link bàn giao:<br><input type="text" class="form-control" value="${fullUrl}" onclick="this.select()">`);
       });
