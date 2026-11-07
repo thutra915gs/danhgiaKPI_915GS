@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>915 GS – Hệ Thống Quản Lý Và Đánh Giá KPI Viên Chức</title>
+  <title>Đánh Giá & Xếp Loại KPI - Trường Tiểu học và THCS 915 Gia Sàng</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
@@ -33,10 +33,11 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
     body { background-color: #f3f4f6; color: var(--gray-800); line-height: 1.5; display: flex; flex-direction: column; min-height: 100vh; }
 
+    /* HEADER */
     header {
       background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-main) 60%, #065f46 100%);
       color: var(--orange-light);
-      padding: 16px;
+      padding: 16px 16px;
       box-shadow: var(--shadow-md);
       position: sticky;
       top: 0;
@@ -45,20 +46,1924 @@
     }
 
     .header-container {
-      max-width: 1350px;
+      max-width: 1280px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 14px;
     }
 
     .brand-box { display: flex; align-items: center; gap: 14px; }
     .brand-logo {
-      width: 65px; height: 65px; background: white; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; padding: 2px;
-      box-shadow: 0 0 0 3px var(--orange-main); flex-shrink: 0; overflow: hidden;
+      width: 68px;
+      height: 68px;
+      background: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3px;
+      box-shadow: 0 0 0 3px var(--orange-main);
+      flex-shrink: 0;
+      overflow: hidden;
     }
     .brand-logo img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
-    .brand-text span { display: inline-block; font-size: 0.75rem; text-transform: uppercase;
+    .brand-text span { display: inline-block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; color: var(--orange-light); font-weight: 700; }
+    .brand-text h1 { font-size: 1.25rem; font-weight: 800; margin: 2px 0; text-transform: uppercase; color: #ffffff; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35); }
+    .brand-text h1 span { color: var(--orange-bright); }
+    .brand-text p { font-size: 0.82rem; color: var(--orange-light); }
+    .header-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px;
+      font-size: 0.83rem; font-weight: 700; border-radius: 8px; cursor: pointer;
+      border: none; transition: all 0.2s ease; text-decoration: none;
+    }
+    .btn-orange-primary { background: var(--orange-main); color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+    .btn-orange-primary:hover { background: var(--orange-hover); transform: translateY(-1px); }
+    .btn-orange-outline { background: rgba(0, 0, 0, 0.2); color: var(--orange-light); border: 1px solid var(--orange-main); }
+    .btn-orange-outline:hover { background: var(--orange-main); color: white; }
+    .btn-green-primary { background: var(--green-main); color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.15); }
+    .btn-green-primary:hover { background: var(--green-dark); }
+    .btn-danger-outline { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+    .btn-danger-outline:hover { background: #ef4444; color: white; }
+
+    /* MAIN NAVIGATION BAR (5 PHÂN HỆ) */
+    .main-nav-bar {
+      background: white;
+      border-bottom: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+      padding: 0 16px;
+    }
+    .main-nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 10px 0;
+    }
+    .nav-module-btn {
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--gray-700);
+      background: var(--gray-100);
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .nav-module-btn:hover { background: #fff7ed; color: var(--orange-main); border-color: var(--orange-light); }
+    .nav-module-btn.active {
+      background: linear-gradient(135deg, var(--green-dark), var(--green-main));
+      color: white;
+      box-shadow: 0 4px 10px rgba(4, 120, 87, 0.25);
+    }
+    .nav-module-btn.active i { color: var(--orange-bright); }
+
+    main { flex: 1; max-width: 1280px; width: 100%; margin: 20px auto; padding: 0 16px; }
+
+    .flow-badge-banner {
+      background: #fff7ed; border: 2px dashed var(--orange-main); border-radius: var(--radius);
+      padding: 14px 20px; margin-bottom: 20px; display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .flow-badge-title { font-size: 0.92rem; font-weight: 700; color: #9a3412; display: flex; align-items: center; gap: 10px; }
+
+    .card { background: white; border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200); margin-bottom: 20px; }
+    .card-title {
+      font-size: 1.08rem; font-weight: 700; color: var(--green-dark); display: flex;
+      align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+      border-bottom: 2px solid var(--gray-100); padding-bottom: 12px; margin-bottom: 16px;
+    }
+    .card-title-left { display: flex; align-items: center; gap: 10px; }
+    .card-title i { color: var(--orange-main); }
+
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--gray-700); }
+    .form-control { padding: 9px 12px; border-radius: 8px; border: 1px solid var(--gray-300); font-size: 0.9rem; outline: none; background: white; }
+    .form-control:focus { border-color: var(--orange-main); box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15); }
+
+    .object-selector { display: flex; gap: 8px; background: var(--gray-100); padding: 6px; border-radius: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+    .object-pill {
+      flex: 1; min-width: 190px; text-align: center; padding: 10px 14px; border-radius: 8px;
+      font-weight: 700; cursor: pointer; color: var(--gray-700); transition: all 0.2s; user-select: none;
+      display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.88rem;
+    }
+    .object-pill.active { background: white; color: var(--green-dark); border: 1px solid var(--gray-300); box-shadow: var(--shadow-sm); }
+    .subrole-box { margin-bottom: 16px; padding: 12px 16px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 8px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+    .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 20px; }
+    .metric-card { background: white; padding: 16px; border-radius: var(--radius); border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm); position: relative; overflow: hidden; }
+    .metric-card::before { content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--green-main); }
+    .metric-card.orange-bar::before { background: var(--orange-main); }
+    .metric-card.blue-bar::before { background: var(--secondary); }
+    .metric-card.red-bar::before { background: #dc2626; }
+    .metric-title { font-size: 0.78rem; font-weight: 700; color: #64748b; text-transform: uppercase; }
+    .metric-value { font-size: 1.65rem; font-weight: 800; margin: 4px 0; color: var(--gray-800); }
+    .metric-value span { font-size: 0.9rem; font-weight: 500; color: #94a3b8; }
+    .metric-desc { font-size: 0.75rem; color: #64748b; }
+
+    .rank-badge { display: inline-block; padding: 4px 10px; border-radius: 9999px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; }
+    .rank-a { background: #dcfce7; color: #15803d; }
+    .rank-b { background: #dbeafe; color: #1d4ed8; }
+    .rank-c { background: #fef9c3; color: #a16207; }
+    .rank-d { background: #fee2e2; color: #b91c1c; }
+
+    .table-container { overflow-x: auto; border-radius: 8px; border: 1px solid var(--gray-200); margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem; background: white; }
+    th { background: var(--gray-100); color: var(--green-dark); padding: 10px 12px; font-weight: 700; border-bottom: 2px solid var(--gray-200); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--gray-200); vertical-align: top; }
+    tbody tr:hover { background-color: var(--gray-50); }
+
+    .badge-code { display: inline-block; padding: 2px 6px; background: #ecfdf5; color: var(--green-dark); font-weight: 700; border-radius: 4px; font-size: 0.75rem; border: 1px solid #a7f3d0; }
+    .rule-note { font-size: 0.8rem; color: #334155; margin-top: 4px; line-height: 1.45; }
+
+    .input-score { width: 75px; padding: 6px 8px; border-radius: 6px; border: 1px solid var(--gray-300); text-align: center; font-weight: 700; font-size: 0.92rem; }
+    .input-score:focus { border-color: var(--orange-main); outline: none; }
+    .input-score.locked-score { background-color: #f1f5f9 !important; color: #64748b !important; cursor: not-allowed; border: 1px dashed #cbd5e1 !important; }
+    .input-score.highlight-lead { border: 2px solid var(--orange-main) !important; background-color: #fff7ed; color: #9a3412; }
+    .input-score.highlight-bgh { border: 2px solid var(--green-main) !important; background-color: #ecfdf5; color: var(--green-dark); }
+    .input-score.empty-input { border: 1px dashed var(--orange-main) !important; background-color: #fff7ed; color: #9a3412; }
+
+    .evidence-cell { display: flex; flex-direction: column; gap: 6px; min-width: 220px; }
+    .input-text-sm { width: 100%; padding: 6px 8px; border-radius: 6px; border: 1px solid var(--gray-300); font-size: 0.82rem; }
+    .file-attach-wrapper { display: flex; flex-direction: column; gap: 4px; }
+    .btn-attach-file {
+      display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; background: #f1f5f9;
+      border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.76rem; font-weight: 600; color: #334155;
+      cursor: pointer; width: fit-content; transition: all 0.2s;
+    }
+    .btn-attach-file:hover { background: #e2e8f0; color: var(--orange-main); border-color: var(--orange-main); }
+    .btn-attach-file input[type="file"] { display: none; }
+    .file-badge-list { display: flex; flex-wrap: wrap; gap: 4px; }
+    .file-tag {
+      display: inline-flex; align-items: center; gap: 5px; background: #e0f2fe; border: 1px solid #bae6fd;
+      color: #0369a1; padding: 2px 7px; border-radius: 4px; font-size: 0.74rem; max-width: 100%;
+    }
+    .file-tag-name { max-width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; text-decoration: underline; }
+    .file-tag-remove { color: #ef4444; cursor: pointer; font-weight: bold; margin-left: 2px; }
+
+    .bonus-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 14px; }
+    .bonus-header { display: flex; justify-content: space-between; align-items: center; font-weight: 700; color: #92400e; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+    .bonus-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    @media (max-width: 640px) { .bonus-list { grid-template-columns: 1fr; } }
+    .bonus-item { background: white; padding: 10px; border-radius: 8px; border: 1px solid #fef08a; display: flex; align-items: flex-start; gap: 8px; cursor: pointer; }
+    .bonus-item input[type="checkbox"] { margin-top: 3px; width: 16px; height: 16px; accent-color: var(--orange-main); cursor: pointer; }
+    .bonus-item-desc { font-size: 0.82rem; color: var(--gray-800); }
+    .bonus-pts { font-weight: 700; color: #b45309; white-space: nowrap; }
+
+    .comment-box-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 16px; }
+    .comment-panel { background: #f8fafc; border: 1px solid var(--gray-200); border-radius: 10px; padding: 14px; }
+    .comment-panel label { display: block; font-weight: 700; font-size: 0.88rem; color: var(--green-dark); margin-bottom: 8px; }
+    .comment-panel textarea { width: 100%; min-height: 82px; padding: 10px; border-radius: 8px; border: 1px solid var(--gray-300); font-size: 0.86rem; resize: vertical; outline: none; }
+    .comment-panel textarea:focus { border-color: var(--orange-main); }
+    .comment-panel textarea[readonly] { background: #f1f5f9; color: #64748b; cursor: not-allowed; }
+
+    .signature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; text-align: center; }
+    .sig-role { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; color: var(--green-dark); }
+    .sig-sub { font-size: 0.78rem; color: #64748b; font-style: italic; margin-bottom: 40px; }
+    .sig-name { font-weight: 700; font-size: 0.9rem; color: var(--gray-800); }
+    .sig-input-name {
+      border: 1px dashed var(--orange-main); background: #fff7ed; border-radius: 6px; padding: 6px 10px;
+      font-size: 0.9rem; text-align: center; font-weight: 700; color: #9a3412; width: 85%; margin: 0 auto;
+    }
+
+    footer.site-footer {
+      background-color: var(--green-dark); color: var(--orange-light); font-size: 0.88rem;
+      padding: 28px 16px; margin-top: 40px; border-top: 3px solid var(--orange-main);
+    }
+    .footer-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+    .footer-left { flex: 1; min-width: 300px; }
+    .footer-heading { font-size: 0.95rem; font-weight: 800; color: var(--orange-bright); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .footer-author { font-size: 0.95rem; color: #ffffff; margin-bottom: 4px; }
+    .footer-author strong { color: var(--orange-bright); font-weight: 800; }
+    .footer-school { color: var(--orange-light); font-size: 0.85rem; margin-bottom: 5px; }
+    .footer-right-box { border: 1px solid var(--orange-main); background: rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 14px 20px; min-width: 320px; }
+    .contact-heading { font-size: 0.9rem; font-weight: 800; color: var(--orange-bright); text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .contact-item { font-size: 0.85rem; color: var(--orange-light); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+    .contact-item strong.phone-val { color: var(--orange-bright); font-size: 0.95rem; font-weight: 800; }
+    .contact-item a { color: #ffffff; text-decoration: none; }
+    .contact-desc { font-size: 0.8rem; color: var(--orange-light); opacity: 0.85; margin-top: 6px; }
+
+    /* MODAL */
+    .custom-modal-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.55);
+      display: flex; align-items: center; justify-content: center; z-index: 99999; padding: 16px;
+    }
+    .custom-modal-box {
+      background: white; border-radius: 12px; max-width: 560px; width: 100%; padding: 22px 24px;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.25); border-top: 5px solid var(--orange-main);
+      max-height: 90vh; overflow-y: auto;
+    }
+    .custom-modal-box.wide-modal { max-width: 900px; }
+    .custom-modal-header { font-size: 1.15rem; font-weight: 800; color: var(--green-dark); display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .custom-modal-header i { color: var(--orange-main); }
+    .custom-modal-body { font-size: 0.92rem; color: #334155; line-height: 1.6; margin-bottom: 20px; }
+    .custom-modal-footer { text-align: right; display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap; }
+
+    /* ROLE BADGE ON HEADER */
+    .user-pill-header {
+      display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(254, 215, 170, 0.4); padding: 5px 12px; border-radius: 9999px;
+      color: #ffffff; font-size: 0.8rem; font-weight: 700;
+    }
+    .role-tag-header {
+      background: var(--orange-main); color: white; padding: 2px 8px; border-radius: 9999px;
+      font-size: 0.72rem; font-weight: 800; text-transform: uppercase;
+    }
+    .btn-logout-header {
+      background: rgba(239, 68, 68, 0.22); border: 1px solid rgba(239, 68, 68, 0.55);
+      color: #fee2e2; padding: 6px 12px; border-radius: 8px; font-size: 0.8rem;
+      font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;
+    }
+    .btn-logout-header:hover { background: #ef4444; color: white; border-color: #ef4444; }
+
+    /* PORTAL LOGIN */
+    #portalLoginOverlay {
+      position: fixed; inset: 0; z-index: 999999;
+      background: radial-gradient(circle at 50% 20%, #065f46 0%, #064e3b 45%, #022c22 100%);
+      display: flex; align-items: center; justify-content: center; padding: 20px; overflow-y: auto;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+    #portalLoginOverlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .portal-decor-glow { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; opacity: 0.35; }
+    .portal-glow-1 { width: 380px; height: 380px; background: var(--orange-main); top: -60px; right: 10%; }
+    .portal-glow-2 { width: 420px; height: 420px; background: #10b981; bottom: -80px; left: 8%; }
+    .portal-card {
+      position: relative; max-width: 540px; width: 100%; background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(16px); border-radius: 24px; padding: 32px 28px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45); border-top: 5px solid var(--orange-main);
+      z-index: 10;
+    }
+    .portal-header { text-align: center; margin-bottom: 20px; }
+    .portal-logo-wrap {
+      width: 90px; height: 90px; margin: 0 auto 12px; border-radius: 50%; background: #ffffff;
+      padding: 4px; box-shadow: 0 8px 24px rgba(234, 88, 12, 0.35), 0 0 0 3px var(--orange-main);
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .portal-logo-wrap img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
+    .portal-badge-gov { display: inline-block; font-size: 0.74rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #9a3412; background: #ffedd5; padding: 3px 12px; border-radius: 9999px; margin-bottom: 6px; }
+    .portal-title-main { font-size: 1.26rem; font-weight: 800; color: var(--green-dark); text-transform: uppercase; line-height: 1.35; margin-bottom: 4px; }
+    .portal-title-main span { color: var(--orange-main); }
+    .portal-sub { font-size: 0.84rem; color: #64748b; font-weight: 600; }
+    .portal-form-group { margin-bottom: 14px; }
+    .portal-form-group label { display: block; font-size: 0.83rem; font-weight: 700; color: var(--gray-700); margin-bottom: 6px; }
+    .portal-input-wrap { position: relative; display: flex; align-items: center; }
+    .portal-input-icon { position: absolute; left: 14px; color: #94a3b8; font-size: 0.95rem; pointer-events: none; }
+    .portal-control { width: 100%; padding: 11px 14px 11px 40px; border-radius: 12px; border: 1.5px solid var(--gray-300); font-size: 0.9rem; font-weight: 600; color: var(--gray-800); background: #f8fafc; outline: none; }
+    .portal-control:focus { background: #ffffff; border-color: var(--orange-main); box-shadow: 0 0 0 4px rgba(234, 88, 12, 0.15); }
+    .portal-toggle-pwd { position: absolute; right: 14px; color: #94a3b8; cursor: pointer; font-size: 1rem; padding: 4px; }
+
+    .portal-auth-roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+    .portal-auth-btn {
+      padding: 10px 6px; border: 1.5px solid var(--gray-200); border-radius: 10px; background: #f8fafc;
+      font-size: 0.78rem; font-weight: 700; color: var(--gray-700); text-align: center; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; transition: all 0.2s;
+    }
+    .portal-auth-btn i { font-size: 1.1rem; color: var(--green-main); }
+    .portal-auth-btn.active { border-color: var(--orange-main); background: #fff7ed; color: var(--orange-main); box-shadow: 0 2px 6px rgba(234, 88, 12, 0.15); }
+    .portal-auth-btn.active i { color: var(--orange-main); }
+
+    .portal-btn-login {
+      width: 100%; padding: 13px; background: linear-gradient(135deg, var(--orange-main) 0%, var(--orange-bright) 100%);
+      color: white; font-size: 0.96rem; font-weight: 800; border: none; border-radius: 12px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 8px 20px rgba(234, 88, 12, 0.35);
+      text-transform: uppercase;
+    }
+    .portal-error-msg { margin-top: 12px; padding: 10px 14px; border-radius: 8px; background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; font-size: 0.84rem; font-weight: 700; display: none; align-items: center; gap: 8px; }
+    .portal-footer-info { margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--gray-200); text-align: center; font-size: 0.78rem; color: #64748b; }
+
+    /* BIÊN BẢN HỌP XEM TRƯỚC & IN A4 */
+    .minutes-paper {
+      background: white; padding: 28px; border: 1px solid #cbd5e1; border-radius: 8px;
+      color: #0f172a; font-size: 0.92rem; line-height: 1.6;
+    }
+    .minutes-paper table { border: 1px solid #334155; margin: 12px 0; }
+    .minutes-paper th, .minutes-paper td { border: 1px solid #334155; padding: 6px 8px; font-size: 0.84rem; }
+
+    @media print {
+      body { background: white; color: black; padding: 0; }
+      header, .main-nav-bar, .header-actions, .object-selector, .subrole-box, .bonus-box, footer.site-footer, .flow-badge-banner, .btn-attach-file, .no-print { display: none !important; }
+      main { max-width: 100%; margin: 0; padding: 0; }
+      .card { border: none; box-shadow: none; padding: 0; margin-bottom: 10px; }
+      .metrics-grid { display: flex; justify-content: space-between; margin-bottom: 12px; }
+      .metric-card { border: 1px solid #ccc; box-shadow: none; padding: 8px; }
+      table { border: 1px solid black; font-size: 9pt; }
+      th, td { border: 1px solid black; padding: 5px 6px; color: black; }
+      .print-header-admin { display: block !important; margin-bottom: 16px; }
+      .input-score, .input-text-sm { border: none !important; background: transparent !important; font-weight: bold; text-align: center; }
+      .signature-grid { margin-top: 30px; page-break-inside: avoid; }
+      .sig-sub { margin-bottom: 70px; }
+      .sig-input-name { border: none !important; background: transparent !important; color: black !important; }
+      .file-tag-remove { display: none !important; }
+      body.printing-minutes #mainAppContent { display: none !important; }
+      body.printing-minutes #customModal { position: static !important; background: white !important; padding: 0 !important; display: block !important; }
+      body.printing-minutes .custom-modal-box { box-shadow: none !important; border: none !important; max-width: 100% !important; padding: 0 !important; max-height: none !important; }
+      body.printing-minutes .custom-modal-header, body.printing-minutes .custom-modal-footer { display: none !important; }
+      body.printing-minutes .minutes-paper { border: none !important; padding: 0 !important; }
+    }
+    .print-header-admin { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- MÀN HÌNH ĐĂNG NHẬP PORTAL -->
+  <div id="portalLoginOverlay">
+    <div class="portal-decor-glow portal-glow-1"></div>
+    <div class="portal-decor-glow portal-glow-2"></div>
+
+    <div class="portal-card">
+      <div class="portal-header">
+        <div class="portal-logo-wrap">
+          <img src="LOGO.jpg" alt="Logo Trường 915 Gia Sàng" onerror="this.onerror=null; this.src=EMBEDDED_SCHOOL_LOGO;" />
+        </div>
+        <div class="portal-badge-gov"><i class="fa-solid fa-landmark"></i> UBND PHƯỜNG GIA SÀNG</div>
+        <h2 class="portal-title-main">HỆ THỐNG ĐÁNH GIÁ, XẾP LOẠI<br><span>KPI VIÊN CHỨC</span></h2>
+        <p class="portal-sub">Trường Tiểu học và THCS 915 Gia Sàng | Năm học 2026 - 2027</p>
+      </div>
+
+      <div class="portal-form-group">
+        <label><i class="fa-solid fa-user-shield" style="color: var(--orange-main); margin-right: 4px;"></i> 1. Chọn Vai trò quyền hạn đăng nhập:</label>
+        <div class="portal-auth-roles">
+          <div class="portal-auth-btn active" id="authrole-vc" onclick="selectPortalAuthRole('vc')">
+            <i class="fa-solid fa-user"></i>
+            <span>Viên chức / NLĐ</span>
+          </div>
+          <div class="portal-auth-btn" id="authrole-tt" onclick="selectPortalAuthRole('tt')">
+            <i class="fa-solid fa-user-check"></i>
+            <span>Tổ trưởng CM</span>
+          </div>
+          <div class="portal-auth-btn" id="authrole-bgh" onclick="selectPortalAuthRole('bgh')">
+            <i class="fa-solid fa-crown"></i>
+            <span>Ban Giám hiệu</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="portal-form-group">
+        <label><i class="fa-solid fa-user-check" style="color: var(--orange-main); margin-right: 4px;"></i> 2. Chọn Cán bộ / Giáo viên / Nhân viên:</label>
+        <div class="portal-input-wrap">
+          <i class="fa-solid fa-chalkboard-user portal-input-icon"></i>
+          <select id="portalUserSelect" class="portal-control" onchange="syncPortalUserToApp(this.value)"></select>
+        </div>
+      </div>
+
+      <div class="portal-form-group">
+        <label><i class="fa-solid fa-lock" style="color: var(--orange-main); margin-right: 4px;"></i> 3. Mật khẩu truy cập nội bộ:</label>
+        <div class="portal-input-wrap">
+          <i class="fa-solid fa-key portal-input-icon"></i>
+          <input type="password" id="portalPasswordInput" class="portal-control" placeholder="Nhập mật khẩu trường cấp (01112026)..." onkeydown="if(event.key==='Enter') submitPortalLogin()" />
+          <i class="fa-solid fa-eye portal-toggle-pwd" id="portalPwdToggle" onclick="togglePortalPwdVisibility()" title="Ẩn/Hiện mật khẩu"></i>
+        </div>
+      </div>
+
+      <button type="button" class="portal-btn-login" onclick="submitPortalLogin()">
+        <i class="fa-solid fa-arrow-right-to-bracket"></i> ĐĂNG NHẬP HỆ THỐNG
+      </button>
+
+      <div id="portalErrorBox" class="portal-error-msg">
+        <i class="fa-solid fa-circle-exclamation"></i> <span id="portalErrorText">Mật khẩu không đúng!</span>
+      </div>
+
+      <div class="portal-footer-info">
+        Bản quyền sản phẩm: <strong style="color: var(--green-dark);">BÙI THỊ THANH HOÀN - NGUYỄN THỊ THU TRÀ</strong><br>
+        Hỗ trợ kỹ thuật nội bộ: <strong style="color: var(--orange-main);">0971.785.999</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-container">
+      <div class="brand-box">
+        <div class="brand-logo">
+          <img id="schoolLogoImg" src="LOGO.jpg" alt="Logo Trường 915 Gia Sàng" onerror="this.onerror=null; this.src=EMBEDDED_SCHOOL_LOGO;" />
+        </div>
+        <div class="brand-text">
+          <span>UBND PHƯỜNG GIA SÀNG</span>
+          <h1>HỆ THỐNG ĐÁNH GIÁ, XẾP LOẠI <span>KPI VIÊN CHỨC</span></h1>
+          <p>Trường Tiểu học và THCS 915 Gia Sàng | Năm học 2026 - 2027</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="user-pill-header no-print">
+          <i class="fa-solid fa-circle-user"></i>
+          <span id="headerCurrentUserDisplay">Nguyễn Thị Thu Trà</span>
+          <span class="role-tag-header" id="headerAuthRoleBadge">Viên chức</span>
+        </div>
+        <button id="btnShareLead" class="btn btn-orange-primary" onclick="handleShareButtonAction()">
+          <i class="fa-solid fa-share-nodes"></i> <span id="btnShareLeadText">Gửi link cho tổ trưởng</span>
+        </button>
+        <button class="btn btn-orange-outline" onclick="printEvaluationForm()" title="In phiếu đánh giá A4">
+          <i class="fa-solid fa-print"></i> In A4
+        </button>
+        <button class="btn-logout-header no-print" onclick="logoutPortal()">
+          <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- THANH ĐIỀU HƯỚNG 5 PHÂN HỆ -->
+  <nav class="main-nav-bar no-print">
+    <div class="main-nav-inner">
+      <button class="nav-module-btn active" id="nav-eval" onclick="switchMainModule('eval')">
+        <i class="fa-solid fa-clipboard-check"></i> 1. Chấm điểm & Đánh giá KPI
+      </button>
+      <button class="nav-module-btn" id="nav-config" onclick="switchMainModule('config')">
+        <i class="fa-solid fa-sliders"></i> 2. Cấu hình Tiêu chí & Trọng số KPI
+      </button>
+      <button class="nav-module-btn" id="nav-report" onclick="switchMainModule('report')">
+        <i class="fa-solid fa-chart-pie"></i> 3. Báo cáo & Kết xuất thống kê
+      </button>
+    </div>
+  </nav>
+
+  <main id="mainAppContent">
+    <!-- BANNER CHẾ ĐỘ LUỒNG -->
+    <div id="flowBanner" class="flow-badge-banner no-print" style="display: none;">
+      <div class="flow-badge-title" id="flowBannerText"></div>
+      <button class="btn btn-orange-outline" style="background: white; color: var(--orange-main);" onclick="clearWorkflowMode()">
+        <i class="fa-solid fa-arrow-left"></i> Về chế độ mặc định
+      </button>
+    </div>
+
+    <!-- =========================================================
+         PHÂN HỆ 3 & 4: CHẤM ĐIỂM, TÍNH ĐIỂM & TỰ ĐỘNG XẾP LOẠI
+         ========================================================= -->
+    <div id="module-eval">
+      <div class="print-header-admin">
+        <table style="width: 100%; border: none; margin-bottom: 16px;">
+          <tr style="border: none;">
+            <td style="width: 45%; border: none; text-align: center; vertical-align: top;">
+              <strong>UBND PHƯỜNG GIA SÀNG</strong><br>
+              <strong>TRƯỜNG TIỂU HỌC VÀ THCS 915 GIA SÀNG</strong><br>
+              <span style="font-size: 0.85em;">Số: 55/QĐ-TH&THCS915</span>
+            </td>
+            <td style="width: 55%; border: none; text-align: center; vertical-align: top;">
+              <strong>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</strong><br>
+              <strong>Độc lập - Tự do - Hạnh phúc</strong>
+              <p id="printCurrentDate" style="font-style: italic; font-size: 0.85em; margin-top: 3px;"></p>
+            </td>
+          </tr>
+        </table>
+        <div style="text-align: center; margin-bottom: 12px;">
+          <h2 style="font-size: 13pt; font-weight: bold; text-transform: uppercase;">PHIẾU ĐÁNH GIÁ, XẾP LOẠI MỨC ĐỘ HOÀN THÀNH NHIỆM VỤ THEO CHỈ SỐ KPI</h2>
+          <p style="font-style: italic; font-size: 9.5pt;">(Ban hành kèm theo Quyết định số 55/QĐ-TH&THCS915 của Hiệu trưởng Trường Tiểu học và THCS 915 Gia Sàng)</p>
+        </div>
+      </div>
+
+      <div class="object-selector no-print">
+        <div class="object-pill active" id="tab-gvcn" onclick="switchRole('gvcn')">
+          <i class="fa-solid fa-chalkboard-user"></i> 1. GV chủ nhiệm
+        </div>
+        <div class="object-pill" id="tab-gvbm" onclick="switchRole('gvbm')">
+          <i class="fa-solid fa-book-open-reader"></i> 2. GV bộ môn
+        </div>
+        <div class="object-pill" id="tab-bgh" onclick="switchRole('bgh')">
+          <i class="fa-solid fa-user-gear"></i> 3. Ban giám hiệu
+        </div>
+        <div class="object-pill" id="tab-nv" onclick="switchRole('nv')">
+          <i class="fa-solid fa-user-tie"></i> 4. Khối nhân viên & NLĐ
+        </div>
+      </div>
+
+      <div id="bghSubRoleBox" class="subrole-box no-print" style="display: none;">
+        <label style="font-weight: 700; color: var(--green-dark);"><i class="fa-solid fa-user-shield"></i> Chọn Chức danh Ban giám hiệu:</label>
+        <select id="bghPositionSelect" class="form-control" style="width: auto; flex: 1; font-weight: 600;" onchange="switchBGHPosition(this.value)">
+          <option value="pht" selected>Phó Hiệu trưởng (Phụ trách Phân hiệu / Khối)</option>
+          <option value="ht">Hiệu trưởng (Quản trị toàn diện)</option>
+        </select>
+      </div>
+
+      <div id="staffSubRoleBox" class="subrole-box no-print" style="display: none;">
+        <label style="font-weight: 700; color: var(--green-dark);"><i class="fa-solid fa-briefcase"></i> Chọn Vị trí việc làm / Chức danh:</label>
+        <select id="staffPositionSelect" class="form-control" style="width: auto; flex: 1; font-weight: 600;" onchange="switchStaffPosition(this.value)">
+          <option value="ketoan">1. Nhân viên Kế toán</option>
+          <option value="thuvien">2. Nhân viên Thư viện</option>
+          <option value="yte">3. Nhân viên Y tế học đường</option>
+          <option value="thietbi">4. Nhân viên Thiết bị - Thí nghiệm</option>
+          <option value="tuvan">5. Nhân viên Tư vấn học đường</option>
+          <option value="quantri">6. Nhân viên Quản trị/CNTT & CSVC</option>
+          <option value="vanthu">7. Nhân viên Văn thư</option>
+          <option value="thuquy">8. Thủ quỹ (Kiêm nhiệm)</option>
+          <option value="baove">9. Nhân viên Bảo vệ (HĐLĐ)</option>
+          <option value="laocong">10. Nhân viên Lao công (HĐLĐ)</option>
+        </select>
+      </div>
+
+      <section class="card">
+        <div class="card-title">
+          <div class="card-title-left"><i class="fa-solid fa-id-card-clip"></i> Thông Tin Viên Chức / Người Lao Động</div>
+          <button class="btn btn-green-primary no-print" onclick="saveCurrentRecordToUnit()">
+            <i class="fa-solid fa-floppy-disk"></i> Lưu hồ sơ vào hệ thống
+          </button>
+        </div>
+        <div class="grid-4">
+          <div class="form-group">
+            <label>Họ và tên viên chức:</label>
+            <select id="empName" class="form-control" onchange="handleNameChange(this.value)"></select>
+          </div>
+          <div class="form-group">
+            <label>Chức vụ / Vị trí việc làm:</label>
+            <div style="display: flex; gap: 6px;">
+              <input type="text" id="empPosition" class="form-control" style="flex: 1;" value="Giáo viên chủ nhiệm" oninput="handlePositionInputChange(this.value)">
+              <select class="form-control" style="width: 120px; font-size: 0.8rem;" onchange="applyQuickPosition(this.value)">
+                <option value="">-- Chọn --</option>
+                <option value="Giáo viên">Giáo viên</option>
+                <option value="Tổ trưởng">Tổ trưởng</option>
+                <option value="Phó Hiệu trưởng">Phó Hiệu trưởng</option>
+                <option value="Hiệu trưởng">Hiệu trưởng</option>
+                <option value="Nhân viên">Nhân viên</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Tổ Chuyên môn / Bộ phận:</label>
+            <select id="empDepartment" class="form-control" onchange="handleDepartmentChange(this.value)">
+              <option value="Tổ 1, 2, 3">Tổ 1, 2, 3</option>
+              <option value="Tổ 4, 5">Tổ 4, 5</option>
+              <option value="Tổ Khoa học Tự nhiên" selected>Tổ Khoa học Tự nhiên</option>
+              <option value="Tổ Khoa học Xã hội">Tổ Khoa học Xã hội</option>
+              <option value="Tổ Nghệ thuật">Tổ Nghệ thuật</option>
+              <option value="Tổ Văn phòng">Tổ Văn phòng</option>
+              <option value="Ban Giám hiệu">Ban Giám hiệu</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Kỳ đánh giá:</label>
+            <input type="text" id="evalPeriod" class="form-control" value="Tháng 11/2026" onchange="autoSave()">
+          </div>
+        </div>
+      </section>
+
+      <!-- THẺ TỔNG HỢP ĐIỂM & XẾP LOẠI TỰ ĐỘNG -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-title">Phần I (Định tính - Chung)</div>
+          <div class="metric-value"><span id="val-col1">30.0</span> / <span id="max-col1">30</span></div>
+          <div class="metric-desc">Đạo đức, tác phong & nguyên tắc 6 rõ</div>
+        </div>
+        <div class="metric-card blue-bar">
+          <div class="metric-title">Phần II (Định lượng - VTVL)</div>
+          <div class="metric-value"><span id="val-col2">70.0</span> / <span id="max-col2">70</span></div>
+          <div class="metric-desc">Hiệu suất và sản phẩm thực tế</div>
+        </div>
+        <div class="metric-card orange-bar">
+          <div class="metric-title">Điểm Thưởng (Bonus)</div>
+          <div class="metric-value" style="color: var(--orange-main);">+<span id="val-bonus">0.0</span> <span>/ 10</span></div>
+          <div class="metric-desc">Cống hiến, vượt chỉ tiêu</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">TỔNG ĐIỂM & XẾP LOẠI</div>
+          <div class="metric-value"><span id="val-total" style="color: var(--green-dark);">100.0</span> <span>/ <span id="max-total-base">100</span>+10</span></div>
+          <div>
+            <span id="badge-rank" class="rank-badge rank-a">Hoàn thành xuất sắc nhiệm vụ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BẢNG CHẤM ĐIỂM CHI TIẾT -->
+      <section class="card">
+        <div class="card-title">
+          <div class="card-title-left"><i class="fa-solid fa-list-check"></i> <span id="tableHeaderTitle">BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI CHI TIẾT</span></div>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 80px; text-align: center;">Mã KPI</th>
+                <th style="min-width: 260px;">Nội dung công việc, tiêu chí & Hướng dẫn định lượng</th>
+                <th style="width: 85px; text-align: center;">Trọng số / Điểm chuẩn</th>
+                <th style="width: 95px; text-align: center;" id="th-self">1. Tự chấm</th>
+                <th style="width: 95px; text-align: center;" id="th-lead">2. Tổ thẩm định</th>
+                <th style="width: 95px; text-align: center;" id="th-bgh">3. BGH duyệt</th>
+                <th style="min-width: 220px;">Minh chứng & Đính kèm tệp</th>
+              </tr>
+            </thead>
+            <tbody id="kpiTableBody"></tbody>
+          </table>
+        </div>
+
+        <!-- Ý KIẾN NHẬN XÉT CỦA TỔ TRƯỞNG & BGH -->
+        <div class="comment-box-grid">
+          <div class="comment-panel">
+            <label><i class="fa-solid fa-comment-dots" style="color: var(--orange-main);"></i> Ý kiến nhận xét của Tổ trưởng chuyên môn:</label>
+            <textarea id="leadCommentInput" placeholder="Tổ trưởng chuyên môn ghi nhận xét, thẩm định ưu/khuyết điểm..." oninput="autoSave()"></textarea>
+          </div>
+          <div class="comment-panel">
+            <label><i class="fa-solid fa-stamp" style="color: var(--green-main);"></i> Ý kiến phê duyệt của Ban Giám hiệu:</label>
+            <textarea id="bghCommentInput" placeholder="Ban Giám hiệu ghi ý kiến phê duyệt kết quả xếp loại..." oninput="autoSave()"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- ĐIỂM THƯỞNG BONUS -->
+      <section class="card">
+        <div class="bonus-box">
+          <div class="bonus-header">
+            <div><i class="fa-solid fa-medal"></i> PHẦN III: TIÊU CHÍ ĐIỂM THƯỞNG CỐNG HIẾN VƯỢT MỨC (BONUS KPI - TỐI ĐA +10 ĐIỂM)</div>
+            <div>Điểm thưởng đạt: <span id="bonusScoreText" style="font-size: 1.15rem; color: var(--orange-main);">0</span>/10 đ</div>
+          </div>
+          <div class="bonus-list" id="bonusListContainer"></div>
+        </div>
+      </section>
+
+      <!-- CHỮ KÝ -->
+      <section class="card">
+        <div class="signature-grid" id="signatureGrid">
+          <div>
+            <div class="sig-role">Người Tự Đánh Giá</div>
+            <div class="sig-sub">(Ký số / Ký và ghi rõ họ tên)</div>
+            <div class="sig-name" id="sigSelfName">Nguyễn Thị Thu Trà</div>
+          </div>
+          <div id="sigColLead">
+            <div class="sig-role">Tổ Trưởng Thẩm Định</div>
+            <div class="sig-sub">(Ký số / Ký nhận xét và đánh giá)</div>
+            <div><input type="text" id="leadApproverName" class="sig-input-name" placeholder="Nhập tên Tổ trưởng..." value="Nguyễn Hải Yến" oninput="autoSave()"></div>
+          </div>
+          <div>
+            <div class="sig-role">Hiệu Trưởng Phê Duyệt</div>
+            <div class="sig-sub">(Ký số và đóng dấu điện tử)</div>
+            <div class="sig-name">Bùi Thị Thanh Hoàn</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- =========================================================
+         PHÂN HỆ 2: THIẾT LẬP DANH MỤC & TIÊU CHÍ KPI
+         ========================================================= -->
+    <div id="module-config" style="display: none;">
+      <section class="card">
+        <div class="card-title">
+          <div class="card-title-left"><i class="fa-solid fa-sliders"></i> THIẾT LẬP DANH MỤC, TIÊU CHÍ & TỶ LỆ TRỌNG SỐ KPI</div>
+          <div id="configPermissionBadge"></div>
+        </div>
+
+        <div class="subrole-box" style="background: #fff7ed; border-color: var(--orange-light);">
+          <label style="font-weight: 700; color: #9a3412;"><i class="fa-solid fa-briefcase"></i> Chọn Vị trí công tác cần cấu hình:</label>
+          <select id="configRoleSelect" class="form-control" style="flex: 1; min-width: 240px; font-weight: 700;" onchange="renderConfigTable()">
+            <option value="gvcn">1. Giáo viên chủ nhiệm (GVCN)</option>
+            <option value="gvbm">2. Giáo viên bộ môn (GVBM)</option>
+            <option value="bgh_pht">3. Phó Hiệu trưởng</option>
+            <option value="bgh_ht">4. Hiệu trưởng</option>
+            <option value="nv_ketoan">5. Nhân viên Kế toán</option>
+            <option value="nv_thuvien">6. Nhân viên Thư viện</option>
+            <option value="nv_yte">7. Nhân viên Y tế học đường</option>
+            <option value="nv_thietbi">8. Nhân viên Thiết bị - Thí nghiệm</option>
+            <option value="nv_tuvan">9. Nhân viên Tư vấn học đường</option>
+            <option value="nv_quantri">10. Nhân viên Quản trị/CNTT & CSVC</option>
+            <option value="nv_vanthu">11. Nhân viên Văn thư</option>
+            <option value="nv_thuquy">12. Thủ quỹ (Kiêm nhiệm)</option>
+            <option value="nv_baove">13. Nhân viên Bảo vệ (HĐLĐ)</option>
+            <option value="nv_laocong">14. Nhân viên Lao công (HĐLĐ)</option>
+          </select>
+          <button class="btn btn-green-primary" id="btnAddCriteria" onclick="addNewCriteria()">
+            <i class="fa-solid fa-plus"></i> Thêm tiêu chí mới
+          </button>
+          <button class="btn btn-danger-outline" id="btnResetCriteria" onclick="resetCriteriaToDefault()">
+            <i class="fa-solid fa-rotate-left"></i> Khôi phục mặc định
+          </button>
+        </div>
+
+        <div style="margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div style="font-size: 0.88rem; color: #475569;">
+            Tổng trọng số / điểm chuẩn hiện tại: <strong id="configTotalWeight" style="font-size: 1.05rem; color: var(--green-dark);">100</strong> điểm (Chuẩn khuyến nghị: 100 điểm)
+          </div>
+          <button class="btn btn-orange-primary" id="btnSaveCriteria" onclick="saveCriteriaConfig()">
+            <i class="fa-solid fa-check"></i> Lưu cấu hình & Áp dụng ngay
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 90px;">Mã KPI</th>
+                <th style="width: 170px;">Nhóm tiêu chuẩn</th>
+                <th style="min-width: 220px;">Tên tiêu chí</th>
+                <th style="min-width: 240px;">Mô tả / Hướng dẫn định lượng</th>
+                <th style="width: 110px; text-align: center;">Trọng số (%) / Điểm</th>
+                <th style="width: 70px; text-align: center;">Xóa</th>
+              </tr>
+            </thead>
+            <tbody id="configTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <!-- =========================================================
+         PHÂN HỆ 5: BÁO CÁO & KẾT XUẤT THỐNG KÊ
+         ========================================================= -->
+    <div id="module-report" style="display: none;">
+      <div class="metrics-grid" id="reportMetricsGrid">
+        <div class="metric-card">
+          <div class="metric-title">Hoàn thành xuất sắc</div>
+          <div class="metric-value" id="stat-xs" style="color: #15803d;">0 <span>(0%)</span></div>
+          <div class="metric-desc">Điểm ≥ 90 & không tiêu chí &lt; 70%</div>
+        </div>
+        <div class="metric-card blue-bar">
+          <div class="metric-title">Hoàn thành tốt</div>
+          <div class="metric-value" id="stat-tot" style="color: #1d4ed8;">0 <span>(0%)</span></div>
+          <div class="metric-desc">70 - 89.9đ (hoặc hạ bậc từ XS)</div>
+        </div>
+        <div class="metric-card orange-bar">
+          <div class="metric-title">Hoàn thành</div>
+          <div class="metric-value" id="stat-ht" style="color: #a16207;">0 <span>(0%)</span></div>
+          <div class="metric-desc">50 - 69.9 điểm</div>
+        </div>
+        <div class="metric-card red-bar">
+          <div class="metric-title">Không hoàn thành</div>
+          <div class="metric-value" id="stat-kht" style="color: #b91c1c;">0 <span>(0%)</span></div>
+          <div class="metric-desc">Dưới 50 điểm</div>
+        </div>
+      </div>
+
+      <section class="card">
+        <div class="card-title">
+          <div class="card-title-left"><i class="fa-solid fa-table-list"></i> BẢNG TỔNG HỢP KẾT QUẢ KPI TOÀN ĐƠN VỊ</div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="btn btn-green-primary" onclick="exportReportToCSV()">
+              <i class="fa-solid fa-file-excel"></i> Xuất file Excel (CSV)
+            </button>
+            <button class="btn btn-orange-primary" onclick="openMinutesModal()">
+              <i class="fa-solid fa-file-signature"></i> In Biên bản họp bình xét thi đua
+            </button>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 50px; text-align: center;">STT</th>
+                <th>Họ và tên viên chức</th>
+                <th>Chức vụ / VTVL</th>
+                <th>Tổ chuyên môn</th>
+                <th style="text-align: center;">Kỳ đánh giá</th>
+                <th style="text-align: center;">Tổng điểm</th>
+                <th style="text-align: center;">Xếp loại KPI</th>
+              </tr>
+            </thead>
+            <tbody id="reportTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <div class="footer-heading"><i class="fa-solid fa-graduation-cap"></i> BẢN QUYỀN SẢN PHẨM THUỘC VỀ:</div>
+        <p class="footer-author">Tác giả:<br><strong style="display: inline-block; margin-top: 4px; font-size: 0.98rem; color: var(--orange-bright);">BÙI THỊ THANH HOÀN - NGUYỄN THỊ THU TRÀ</strong></p>
+        <p class="footer-school">Trường Tiểu học và THCS 915 Gia Sàng, Tỉnh Thái Nguyên</p>
+      </div>
+      <div class="footer-right-box">
+        <div class="contact-heading"><i class="fa-solid fa-address-book"></i> KÊNH HỖ TRỢ &amp; LIÊN HỆ:</div>
+        <p class="contact-item"><i class="fa-solid fa-phone"></i> Điện thoại: <strong class="phone-val"><a href="tel:0971785999">0971.785.999</a></strong></p>
+        <p class="contact-item"><i class="fa-solid fa-envelope"></i> Email: <a href="mailto:trantt.915giasang.tn@gmail.com">trantt.915giasang.tn@gmail.com</a></p>
+        <p class="contact-desc">Hệ thống chuẩn hóa phục vụ quản lý chuyên môn nội bộ nhà trường.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL DÙNG CHUNG (THÔNG BÁO / XÁC NHẬN / BIÊN BẢN HỌP) -->
+  <div id="customModal" class="custom-modal-overlay" style="display: none;">
+    <div class="custom-modal-box" id="customModalBox">
+      <div class="custom-modal-header" id="customModalHeader"><i class="fa-solid fa-circle-check"></i> THÔNG BÁO</div>
+      <div class="custom-modal-body" id="customModalMessage"></div>
+      <div class="custom-modal-footer" id="customModalFooter">
+        <button class="btn btn-orange-primary" onclick="closeCustomModal()">Đã hiểu</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const EMBEDDED_SCHOOL_LOGO = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%23064e3b' stroke='%23ea580c' stroke-width='6'/><text x='50' y='57' font-size='28' font-weight='bold' text-anchor='middle' fill='white' font-family='Arial'>915</text></svg>";
+
+    const STAFF_NAMES = [
+      "Chu Hải Anh","Dương Ngọc Ánh","Dương Thị Kiều Anh","Lê Quỳnh Anh","Nguyễn Ngọc Anh",
+      "Nguyễn Quỳnh Anh","Trần Thị Anh","Trần Thị Hồng Anh","Đào Thị Vân Anh","Nguyễn Ngọc Bích",
+      "Trịnh Ngọc Bích","Hứa Kim Chi","Nguyễn Thị Chiên","Ân Tiến Dũng","Nông Văn Dương",
+      "Tô Thị Đông","Nguyễn Thị Hà Giang","Nguyễn Thị Thu Hà","Phan Thị Hà","Nguyễn Thị Hải",
+      "Trần Thị Thanh Hải","Hoàng Thị Thu Hằng","Nguyễn Thị Thu Hằng","Nguyễn Thu Hằng","Bùi Thị Hảo",
+      "Hứa Thu Hiền","Nguyễn Thị Hiền","Nguyễn Thị Khánh Hiền","Đỗ Thị Thu Hiền","Vũ Minh Hiếu",
+      "Nguyễn Thị Kim Hoa","Trần Thị Thu Hoài","Trần Thu Hoài","Bùi Thị Thanh Hoàn","Nguyễn Huy Hoàng",
+      "Lê Thị Hồng","Phan Thị Hồng","Hoàng Minh Huệ","Hoàng Thị Huệ","Lưu Thị Huệ",
+      "Nguyễn Thị Minh Huệ","Nguyễn Thị Hạnh","Dương Thị Hương","Dương Thu Hường","Hoàng Thị Hương",
+      "Lê Thanh Hương","Nguyễn Thị Liên Hương","Thân Thị Hường","Hà Thanh Huyền","Nguyễn Thị Huyền",
+      "Trần Văn Khánh","Nguyễn Thị Kiều","Nguyễn Đàm Lâm","Dương Ngọc Lan","Dương Thị Lan",
+      "Nguyễn Thị Cẩm Lệ","Nguyễn Thị Thuỳ Linh","Nguyễn Thị Liễu","Nguyễn Thùy Linh","Hà Thị Phương Loan",
+      "Phạm Thị Loan","Vũ Thị Loan","Ninh Thị Bích Lụa","Dương Ngọc Mai","Phạm Thị Mơ",
+      "Trần Thảo My","Đinh Thị Thanh Nam","Nguyễn Thị Nga","Vi Thị Nga","Đào Thị Ngát",
+      "Lê Minh Ngọc","Nguyễn Thị Anh Ngọc","Nguyễn Thị Hoàng Nguyên","Đặng Thị Nguyệt","Lê Thị Nhàn",
+      "Chu Yến Nhi","Bùi Thị Nhíp","Lưu Vũ Huyền Nhung","Trương Thị Hồng Nhung","Vũ Thị Tuyết Nhung",
+      "Đào Thị Phương Nhung","Bạch Thị Kim Oanh","Lê Khắc Phúc","Phạm Hữu Phúc","Lê Thị Phương",
+      "Nguyễn Thị Minh Phương","Trần Lan Phương","Trương Minh Quang","Trần Xuân Quý","Nguyễn Lệ Quyên",
+      "Nguyễn Thị Quỳnh","Ngô Mạnh Tấn","Ngô Thị Tân","Dương Thị Thái","Lý Thu Thảo",
+      "Mai Phương Thảo","Nguyễn Thị Thanh Thảo","Trần Thị Thu Thảo","Sầm Thị Thi","Vũ Thị Thi",
+      "Nguyễn Thị Thơm","Nguyễn Hà Thu","Nguyễn Thị Thu","Trần Lệ Thu","Luân Thị Hoài Thương",
+      "Lương Thị Thu Thương","Hoàng Hồng Thúy","Lê Thị Thanh Thủy","Ngô Minh Thùy","Ngô Thị Thu Thuỷ",
+      "Vương Thị Thủy","Kim Thị Tâm","Hạng Minh Tiến","Nguyễn Thị Thu Trà","Lý Thị Trang",
+      "Nguyễn Thị Huyền Trang","Nguyễn Thị Đoan Trang","Trần Thu Trang","Đặng Thị Tranh","Hoàng Anh Tuấn",
+      "Đoàn Thanh Tuấn","Dương Thị Uyên","Ma Thị Uyên","Dương Thị Vân","Nguyễn Thị Hồng Vân",
+      "Bùi Ngọc Viễn","Đặng Thị Xiêm","Nguyễn Thị Thanh Xuân","Trần Thị Thanh Xuyên","Nguyễn Hải Yến",
+      "Phạm Thị Bảo Yến"
+    ];
+
+    const DEPT_LEADERS = {
+      "Tổ 1, 2, 3": "Nguyễn Ngọc Bích",
+      "Tổ 4, 5": "Nguyễn Thị Huyền",
+      "Tổ Khoa học Tự nhiên": "Nguyễn Hải Yến",
+      "Tổ Khoa học Xã hội": "Đào Thị Vân Anh",
+      "Tổ Nghệ thuật": "Ninh Thị Bích Lụa",
+      "Tổ Văn phòng": "Dương Thị Thái",
+      "Ban Giám hiệu": "Bùi Thị Thanh Hoàn"
+    };
+
+    const DEPT_EMAILS = {
+      "Tổ 1, 2, 3": "ngocbichgstn@gmail.com",
+      "Tổ 4, 5": "haihuyendinhhoa@gmail.com",
+      "Tổ Khoa học Tự nhiên": "haiyenxinh86@gmail.com",
+      "Tổ Khoa học Xã hội": "daovananhcvatn@gmail.com",
+      "Tổ Nghệ thuật": "ninhthithulua@gmail.com",
+      "Tổ Văn phòng": "duongthaihuyentt2@gmail.com"
+    };
+
+    const THU_KY_EMAIL = "lethuyk44a@gmail.com";
+    const SYSTEM_PASSWORD = "01112026";
+
+    const COMMON_PILLAR_ITEMS = [
+      { pillar: 1, pillarName: "PHẦN I: TIÊU CHÍ CHUNG (ĐỊNH TÍNH)", code: "TC-01", title: "Tư tưởng chính trị, đạo đức nhà giáo, lối sống", max: 15, note: "Chấp hành đường lối của Đảng, pháp luật Nhà nước; tác phong sư phạm chuẩn mực." },
+      { pillar: 1, pillarName: "PHẦN I: TIÊU CHÍ CHUNG (ĐỊNH TÍNH)", code: "TC-02", title: "Kỷ luật kỷ cương công vụ, văn hóa công sở và Nguyên tắc 6 rõ", max: 15, note: "Tuân thủ ngày giờ công, thời khóa biểu, lịch trực, họp hành; nộp báo cáo đúng hạn." }
+    ];
+
+    const DEFAULT_KPI_ROLES = {
+      gvcn: {
+        title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - GIÁO VIÊN CHỦ NHIỆM (GVCN)",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "CN-01", title: "Định mức giờ dạy & tiến độ chương trình", max: 15, note: "Dạy đủ số tiết theo TKB; thực hiện đúng phân phối chương trình." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "CN-02", title: "Hồ sơ bài dạy, CNTT và bài học STEM", max: 10, note: "KHBD chuẩn (CV 2345/5512), duyệt điện tử đúng hạn; ứng dụng CNTT/STEM ≥ 2 tiết/tháng." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "CN-03", title: "Kiểm tra đánh giá, Học bạ số và CSDL", max: 10, note: "Đánh giá thường xuyên (TT 27/TT 22); cập nhật VnEdu & ký số học bạ đúng hạn." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "CN-04", title: "Quản lý nền nếp, sĩ số & đạo đức học sinh", max: 15, note: "Duy trì sĩ số, chuyên cần; lớp xếp loại thi đua Khá/Tốt; ngăn ngừa bạo lực học đường." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "CN-05", title: "Phối hợp CMHS & Hồ sơ chủ nhiệm", max: 10, note: "Liên lạc thường xuyên với CMHS; hoàn thành đầy đủ sổ chủ nhiệm." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "CN-06", title: "Cảm hóa HS cá biệt & Phong trào Đội", max: 10, note: "Hỗ trợ học sinh cá biệt/khó khăn; tổ chức tốt hoạt động trải nghiệm, Đội TNTP." }
+        ]
+      },
+      gvbm: {
+        title: "BẢNG TIÊU CHÍ CHẤM ĐIỂM KPI - GIÁO VIÊN BỘ MÔN (GVBM)",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "BM-01", title: "Định mức giờ dạy & tiến độ chương trình", max: 25, note: "Dạy đủ số tiết theo TKB và định mức; không cắt xén chương trình." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "BM-02", title: "Hồ sơ bài dạy, CNTT và bài học STEM", max: 15, note: "KHBD đúng quy định; triển khai ≥ 2 tiết/tháng ứng dụng CNTT hoặc STEM." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "BM-03", title: "Kiểm tra đánh giá, Học bạ số và CSDL", max: 15, note: "Đánh giá thường xuyên; cập nhật VnEdu & ký số học bạ đúng hạn." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "BM-04", title: "Nhiệm vụ nâng cao & hỗ trợ trường lớp", max: 15, note: "Phụ đạo HS yếu/Bồi dưỡng HSG; chuyên đề, thao giảng; trực tuần." }
+        ]
+      },
+      bgh_pht: {
+        title: "BẢNG TIÊU CHÍ ĐIỀU HÀNH - PHÓ HIỆU TRƯỞNG",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "PHT-01", title: "Xây dựng kế hoạch & chỉ đạo hoạt động giáo dục", max: 20, note: "Chủ động giải quyết công việc; chỉ đạo hoàn thành 100% chỉ tiêu." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "PHT-02", title: "Quản lý SHCM, đổi mới PPDH và chuyển đổi số", max: 20, note: "Chủ trì SHCM hiệu quả ≥ 1 buổi/tháng; triển khai chuyển đổi số." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "PHT-03", title: "Đôn đốc công việc, kiểm tra hồ sơ và CSDL ngành", max: 15, note: "Kiểm tra, duyệt hồ sơ điện tử đúng hạn; điều hành CSDL ngành." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "PHT-04", title: "Đánh giá thi đua công bằng & tập thể đoàn kết", max: 15, note: "Điều hành chấm KPI công tâm, dân chủ; phối hợp tốt đoàn thể." }
+        ]
+      },
+      bgh_ht: {
+        title: "BẢNG TIÊU CHÍ QUẢN TRỊ TOÀN DIỆN - HIỆU TRƯỞNG",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "HT-01", title: "Quản trị chiến lược và thống nhất bộ máy", max: 20, note: "Xây dựng quy chế tinh gọn, phân công rõ người rõ việc." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "HT-02", title: "An toàn học đường, bán trú và nề nếp", max: 20, note: "Giám sát bếp bán trú, ATTP; giữ vững nề nếp học sinh, giáo viên." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "HT-03", title: "Minh bạch tài chính, cầu thị và lắng nghe", max: 15, note: "Công khai thu chi; giải quyết 100% kiến nghị GV, phụ huynh." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "HT-04", title: "Đoàn kết nội bộ, tiên phong chuyển đổi số", max: 15, note: "Giữ vững chỉ số hạnh phúc nhà trường; xây dựng mô hình điểm CĐS." }
+        ]
+      },
+      nv_ketoan: {
+        title: "BẢNG TIÊU CHÍ KPI - NHÂN VIÊN KẾ TOÁN",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "KT-01", title: "Lập dự toán, chi trả lương/chế độ đúng hạn", max: 25, note: "Lập dự toán chính xác; chi trả lương và chế độ đầy đủ, kịp thời." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "KT-02", title: "Quyết toán đúng quy định, khớp 100% Kho bạc", max: 20, note: "Quyết toán đúng niên độ, đối chiếu khớp 100% số liệu Kho bạc." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "KT-03", title: "Tham mưu Quy chế chi tiêu nội bộ, quản lý tài sản", max: 15, note: "Tham mưu Quy chế chi tiêu nội bộ; quản lý tài sản trong sổ và phần mềm." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "KT-04", title: "Báo cáo tài chính đúng hạn, số hóa chứng từ", max: 10, note: "Báo cáo tài chính đúng hạn; số hóa 100% chứng từ kế toán." }
+        ]
+      },
+      nv_thuvien: {
+        title: "BẢNG TIÊU CHÍ KPI - NHÂN VIÊN THƯ VIỆN",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "TV-01", title: "Đăng ký cá biệt, bảo quản sách báo", max: 20, note: "Đăng ký cá biệt sách mới; bảo quản kho sách ngăn nắp." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "TV-02", title: "Phục vụ mượn/trả sách đúng lịch", max: 20, note: "Mở cửa phục vụ đúng lịch; gia tăng lượt bạn đọc." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "TV-03", title: "Tổ chức ngày hội đọc sách/giới thiệu sách", max: 15, note: "Tổ chức ngày hội đọc sách hoặc giới thiệu sách hay dưới cờ." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "TV-04", title: "Cập nhật phần mềm thư viện số", max: 15, note: "Cập nhật 100% dữ liệu vào phần mềm thư viện số." }
+        ]
+      },
+      nv_yte: {
+        title: "BẢNG TIÊU CHÍ KPI - NHÂN VIÊN Y TẾ HỌC ĐƯỜNG",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "YT-01", title: "Sơ cấp cứu, xử lý sự cố sức khỏe", max: 25, note: "Sơ cấp cứu kịp thời sự cố sức khỏe ban đầu; tủ thuốc đầy đủ." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "YT-02", title: "Giám sát ATVSTP bếp bán trú & vệ sinh", max: 20, note: "Giám sát bán trú, kiểm thực 3 bước; kiểm tra vệ sinh lớp." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "YT-03", title: "Phòng chống dịch bệnh & tuyên truyền", max: 15, note: "Phòng chống dịch bệnh; chăm sóc sức khỏe học đường." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "YT-04", title: "Đôn đốc BHYT học sinh đạt 100%", max: 10, note: "Đôn đốc 100% HS tham gia BHYT; phối hợp khám sức khỏe định kỳ." }
+        ]
+      },
+      nv_thietbi: {
+        title: "BẢNG TIÊU CHÍ KPI - NHÂN VIÊN THIẾT BỊ - THÍ NGHIỆM",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "TB-01", title: "Chuẩn bị thiết bị/hóa chất trước 24h", max: 25, note: "Chuẩn bị đầy đủ thiết bị, dụng cụ, hóa chất theo phiếu mượn." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "TB-02", title: "Quản lý an toàn phòng bộ môn, hóa chất", max: 20, note: "Bảo quản an toàn tuyệt đối các phòng bộ môn, hóa chất." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "TB-03", title: "Bảo dưỡng, tự sửa chữa hỏng hóc nhỏ", max: 15, note: "Chủ động bảo dưỡng, sửa chữa hư hỏng nhỏ." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "TB-04", title: "Cập nhật sổ mượn/trả & kiểm kê tài sản", max: 10, note: "Cập nhật sổ mượn trả hằng ngày; kiểm kê định kỳ." }
+        ]
+      },
+      nv_tuvan: {
+        title: "BẢNG TIÊU CHÍ KPI - NHÂN VIÊN TƯ VẤN HỌC ĐƯỜNG",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "TL-01", title: "Trực phòng tư vấn, tham vấn tâm lý", max: 25, note: "Tham vấn tâm lý cho HS, phụ huynh; bảo mật tuyệt đối hồ sơ." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "TL-02", title: "Sàng lọc, can thiệp sớm bạo lực học đường", max: 20, note: "Phát hiện sớm nguy cơ bạo lực học đường và khủng hoảng tâm lý." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "TL-03", title: "Truyền thông chuyên đề kỹ năng sống", max: 15, note: "Tổ chức truyền thông, diễn đàn chuyên đề kỹ năng sống." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "TL-04", title: "Lập hồ sơ tham vấn, kết nối phụ huynh", max: 10, note: "Lập hồ sơ theo dõi ca tham vấn; kết nối GV và phụ huynh." }
+        ]
+      },
+      nv_quantri: {
+        title: "BẢNG TIÊU CHÍ KPI - NHÂN VIÊN QUẢN TRỊ/CNTT & CSVC",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "IT-01", title: "Mạng Internet thông suốt, quản trị CSDL/VnEdu", max: 25, note: "Mạng thông suốt; cập nhật website; quản trị CSDL ngành." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "IT-02", title: "Đảm bảo kỹ thuật âm thanh, máy chiếu sự kiện", max: 20, note: "Bảo đảm kỹ thuật âm thanh, máy chiếu tại 100% sự kiện." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "IT-03", title: "Kiểm tra an toàn điện, CSVC hằng tuần", max: 15, note: "Kiểm tra định kỳ hệ thống điện, quạt, CSVC phòng học." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "IT-04", title: "Hỗ trợ giáo viên chuyển đổi số", max: 10, note: "Hỗ trợ giáo viên số hóa giáo án, ứng dụng CNTT." }
+        ]
+      },
+      nv_vanthu: {
+        title: "BẢNG TIÊU CHÍ KPI - NHÂN VIÊN VĂN THƯ",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "VT-01", title: "Xử lý văn bản đến/đi đúng thể thức NĐ 30", max: 25, note: "Xử lý văn bản đến/đi đúng thể thức Nghị định 30/2020/NĐ-CP." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "VT-02", title: "Quản lý con dấu, chữ ký số, bảo mật", max: 25, note: "Quản lý con dấu, chứng thư số an toàn, bảo mật tuyệt đối." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "VT-03", title: "Lưu trữ hồ sơ, cấp phát văn bằng/học bạ", max: 10, note: "Lưu trữ hồ sơ ngăn nắp; cấp phát văn bằng nhanh chóng." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "VT-04", title: "Nhập báo cáo các đường link CSDL đúng hạn", max: 10, note: "Tổng hợp và nhập báo cáo các đường link CSDL đúng hạn." }
+        ]
+      },
+      nv_thuquy: {
+        title: "BẢNG TIÊU CHÍ KPI - THỦ QUỸ (KIÊM NHIỆM)",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "TQ-01", title: "Thu/chi Tiền mặt đúng phiếu duyệt, chốt sổ hằng ngày", max: 35, note: "Thu/chi tiền mặt đúng phiếu duyệt; quản lý quỹ an toàn." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "TQ-02", title: "Hoàn thiện đầy đủ hồ sơ chứng từ đúng hạn", max: 35, note: "Hoàn thiện đầy đủ chứng từ thanh quyết toán bàn giao kế toán." }
+        ]
+      },
+      nv_baove: {
+        title: "BẢNG TIÊU CHÍ KPI - NHÂN VIÊN BẢO VỆ (HĐLĐ)",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "BV-01", title: "Trực gác cổng 24/24, bảo đảm ANTT", max: 25, note: "Túc trực gác cổng nghiêm túc; kiểm soát người ra vào." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "BV-02", title: "Tuần tra ban đêm, kiểm tra khóa cửa, PCCC", max: 20, note: "Tuần tra ban đêm; kiểm tra khóa cửa phòng học, PCCC." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "BV-03", title: "Mở/đóng cổng đúng giờ, đánh trống báo giờ", max: 15, note: "Mở đóng cổng trường đúng giờ; đánh trống chuẩn xác." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "BV-04", title: "Tác phong giao tiếp chuẩn mực, xử lý sự cố", max: 10, note: "Thái độ hòa nhã với phụ huynh, HS; bình tĩnh xử lý sự cố." }
+        ]
+      },
+      nv_laocong: {
+        title: "BẢNG TIÊU CHÍ KPI - NHÂN VIÊN LAO CÔNG (HĐLĐ)",
+        items: [
+          ...COMMON_PILLAR_ITEMS,
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "LC-01", title: "Dọn rửa khu nhà vệ sinh thường xuyên", max: 30, note: "Lau dọn khu nhà vệ sinh thường xuyên; khô ráo, không mùi hôi." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "LC-02", title: "Quét dọn sân trường, hành lang, cầu thang", max: 20, note: "Quét dọn toàn bộ sân trường, hành lang, cầu thang sạch sẽ." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "LC-03", title: "Thu gom, phân loại rác thải", max: 10, note: "Thu gom và phân loại rác thải; chuyển đến nơi tập kết đúng giờ." },
+          { pillar: 2, pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)", code: "LC-04", title: "Sử dụng hóa chất tiết kiệm, báo cáo hư hỏng", max: 10, note: "Sử dụng chất tẩy rửa tiết kiệm; báo cáo hư hỏng điện nước." }
+        ]
+      }
+    };
+
+    let KPI_ROLES = JSON.parse(JSON.stringify(DEFAULT_KPI_ROLES));
+
+    const BONUS_KPI_LIST = [
+      { id: "BONUS-01", text: "Giải Nhất (hoặc Huy chương Vàng / Công nhận Đạt cấp Tỉnh/Bộ)", pts: 4 },
+      { id: "BONUS-02", text: "Giải Nhì (hoặc Huy chương Bạc)", pts: 3 },
+      { id: "BONUS-03", text: "Giải Ba (hoặc Huy chương Đồng)", pts: 2 },
+      { id: "BONUS-04", text: "Giải Khuyến khích", pts: 1 }
+    ];
+
+    // DỮ LIỆU MẪU BÁO CÁO ĐƠN VỊ
+    const DEFAULT_UNIT_RECORDS = [
+      { empName: "Bùi Thị Thanh Hoàn", empPosition: "Hiệu trưởng", empDepartment: "Ban Giám hiệu", evalPeriod: "Tháng 11/2026", totalScore: 102.0, rank: "Hoàn thành xuất sắc nhiệm vụ" },
+      { empName: "Nguyễn Thị Thu Trà", empPosition: "Phó Hiệu trưởng", empDepartment: "Ban Giám hiệu", evalPeriod: "Tháng 11/2026", totalScore: 100.0, rank: "Hoàn thành xuất sắc nhiệm vụ" },
+      { empName: "Nguyễn Hải Yến", empPosition: "Tổ trưởng", empDepartment: "Tổ Khoa học Tự nhiên", evalPeriod: "Tháng 11/2026", totalScore: 96.5, rank: "Hoàn thành xuất sắc nhiệm vụ" },
+      { empName: "Nguyễn Ngọc Bích", empPosition: "Tổ trưởng", empDepartment: "Tổ 1, 2, 3", evalPeriod: "Tháng 11/2026", totalScore: 94.0, rank: "Hoàn thành xuất sắc nhiệm vụ" },
+      { empName: "Đào Thị Vân Anh", empPosition: "Tổ trưởng", empDepartment: "Tổ Khoa học Xã hội", evalPeriod: "Tháng 11/2026", totalScore: 88.5, rank: "Hoàn thành tốt nhiệm vụ" },
+      { empName: "Dương Thị Thái", empPosition: "Tổ trưởng", empDepartment: "Tổ Văn phòng", evalPeriod: "Tháng 11/2026", totalScore: 85.0, rank: "Hoàn thành tốt nhiệm vụ" },
+      { empName: "Trần Văn Khánh", empPosition: "Giáo viên", empDepartment: "Tổ Khoa học Tự nhiên", evalPeriod: "Tháng 11/2026", totalScore: 68.0, rank: "Hoàn thành nhiệm vụ" }
+    ];
+
+    let currentMainTab = "gvcn";
+    let currentRoleKey = "gvcn";
+    let currentScores = {};
+    let activeBonuses = new Set();
+    let currentAuthRole = "vc"; // 'vc' | 'tt' | 'bgh'
+    let currentWorkflow = "self"; // 'self' | 'lead' | 'bgh'
+
+    // ============================================================
+    // KHỞI TẠO DỮ LIỆU
+    // ============================================================
+    window.addEventListener("DOMContentLoaded", () => {
+      populateStaffDropdowns();
+      loadCustomCriteriaConfig();
+      updatePrintDate();
+      const isFromUrl = checkUrlWorkflow();
+      if (!isFromUrl) {
+        loadSavedData();
+      }
+      checkPortalAuthOnLoad();
+      updateAuthUI();
+      renderApp();
+    });
+
+    function populateStaffDropdowns() {
+      const portalSel = document.getElementById("portalUserSelect");
+      const appSel = document.getElementById("empName");
+      const opts = STAFF_NAMES.map(n => `<option value="${n}" ${n === "Nguyễn Thị Thu Trà" ? "selected" : ""}>${n}</option>`).join("");
+      if (portalSel) portalSel.innerHTML = opts;
+      if (appSel) appSel.innerHTML = opts;
+    }
+
+    function loadCustomCriteriaConfig() {
+      const saved = localStorage.getItem("KPI_915_CUSTOM_ROLES");
+      if (saved) {
+        try {
+          KPI_ROLES = JSON.parse(saved);
+        } catch (e) {
+          KPI_ROLES = JSON.parse(JSON.stringify(DEFAULT_KPI_ROLES));
+        }
+      }
+    }
+
+    // ============================================================
+    // PHÂN HỆ 1: QUẢN TRỊ & XÁC THỰC NGƯỜI DÙNG (3 VAI TRÒ)
+    // ============================================================
+    function selectPortalAuthRole(role) {
+      currentAuthRole = role;
+      document.querySelectorAll(".portal-auth-btn").forEach(b => b.classList.remove("active"));
+      const btn = document.getElementById(`authrole-${role}`);
+      if (btn) btn.classList.add("active");
+    }
+
+    function togglePortalPwdVisibility() {
+      const pwdInput = document.getElementById("portalPasswordInput");
+      const toggleIcon = document.getElementById("portalPwdToggle");
+      if (!pwdInput) return;
+      if (pwdInput.type === "password") {
+        pwdInput.type = "text";
+        toggleIcon.className = "fa-solid fa-eye-slash portal-toggle-pwd";
+      } else {
+        pwdInput.type = "password";
+        toggleIcon.className = "fa-solid fa-eye portal-toggle-pwd";
+      }
+    }
+
+    function syncPortalUserToApp(name) {
+      const appEmpSelect = document.getElementById("empName");
+      if (appEmpSelect) {
+        appEmpSelect.value = name;
+        handleNameChange(name);
+      }
+    }
+
+    function submitPortalLogin() {
+      const pwdInput = document.getElementById("portalPasswordInput");
+      const errBox = document.getElementById("portalErrorBox");
+      const errText = document.getElementById("portalErrorText");
+      const pwd = pwdInput ? pwdInput.value.trim() : "";
+
+      if (pwd !== SYSTEM_PASSWORD) {
+        errBox.style.display = "flex";
+        errText.textContent = "MẬT KHẨU KHÔNG ĐÚNG! Vui lòng nhập đúng mật khẩu trường cấp (01112026).";
+        pwdInput.focus();
+        return;
+      }
+
+      errBox.style.display = "none";
+      localStorage.setItem("KPI_915_AUTH", "LOGGED_IN");
+      localStorage.setItem("KPI_915_AUTH_ROLE", currentAuthRole);
+
+      const chosenUser = document.getElementById("portalUserSelect")?.value;
+      if (chosenUser) {
+        document.getElementById("empName").value = chosenUser;
+        handleNameChange(chosenUser);
+        document.getElementById("headerCurrentUserDisplay").textContent = chosenUser;
+      }
+
+      applyAuthRoleToWorkflow();
+      document.getElementById("portalLoginOverlay").classList.add("hidden");
+      renderApp();
+    }
+
+    function applyAuthRoleToWorkflow() {
+      if (currentAuthRole === "vc") currentWorkflow = "self";
+      else if (currentAuthRole === "tt") currentWorkflow = "lead";
+      else if (currentAuthRole === "bgh") currentWorkflow = "bgh";
+      updateAuthUI();
+    }
+
+    function updateAuthUI() {
+      const badge = document.getElementById("headerAuthRoleBadge");
+      const btnShareText = document.getElementById("btnShareLeadText");
+      const leadComment = document.getElementById("leadCommentInput");
+      const bghComment = document.getElementById("bghCommentInput");
+
+      if (currentAuthRole === "vc") {
+        badge.textContent = "Viên chức / NLĐ";
+        badge.style.background = "#0284c7";
+        btnShareText.textContent = "Gửi link cho Tổ trưởng";
+        if (leadComment) leadComment.setAttribute("readonly", true);
+        if (bghComment) bghComment.setAttribute("readonly", true);
+      } else if (currentAuthRole === "tt") {
+        badge.textContent = "Tổ trưởng CM";
+        badge.style.background = "#ea580c";
+        btnShareText.textContent = "Gửi link cho BGH";
+        if (leadComment) leadComment.removeAttribute("readonly");
+        if (bghComment) bghComment.setAttribute("readonly", true);
+      } else {
+        badge.textContent = "Ban Giám hiệu";
+        badge.style.background = "#15803d";
+        btnShareText.textContent = "Gửi kết quả cho Thư ký";
+        if (leadComment) leadComment.removeAttribute("readonly");
+        if (bghComment) bghComment.removeAttribute("readonly");
+      }
+    }
+
+    function checkPortalAuthOnLoad() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const isWorkflowLink = urlParams.get("mode") && urlParams.get("d");
+      const isAuthed = localStorage.getItem("KPI_915_AUTH") === "LOGGED_IN";
+      const savedRole = localStorage.getItem("KPI_915_AUTH_ROLE");
+      if (savedRole && !isWorkflowLink) {
+        currentAuthRole = savedRole;
+        selectPortalAuthRole(savedRole);
+        applyAuthRoleToWorkflow();
+      }
+
+      const overlay = document.getElementById("portalLoginOverlay");
+      if (isWorkflowLink || isAuthed) {
+        overlay.classList.add("hidden");
+        document.getElementById("headerCurrentUserDisplay").textContent = document.getElementById("empName").value;
+      } else {
+        overlay.classList.remove("hidden");
+      }
+    }
+
+    function logoutPortal() {
+      showCustomConfirm("Chị có chắc chắn muốn đăng xuất và quay lại Màn hình Đăng nhập?", () => {
+        localStorage.removeItem("KPI_915_AUTH");
+        document.getElementById("portalLoginOverlay").classList.remove("hidden");
+        document.getElementById("portalPasswordInput").value = "";
+      });
+    }
+
+    // ============================================================
+    // ĐIỀU HƯỚNG 3 TAB CHỨC NĂNG CHÍNH
+    // ============================================================
+    function switchMainModule(mod) {
+      document.querySelectorAll(".nav-module-btn").forEach(b => b.classList.remove("active"));
+      document.getElementById(`nav-${mod}`).classList.add("active");
+
+      document.getElementById("module-eval").style.display = mod === "eval" ? "block" : "none";
+      document.getElementById("module-config").style.display = mod === "config" ? "block" : "none";
+      document.getElementById("module-report").style.display = mod === "report" ? "block" : "none";
+
+      if (mod === "config") renderConfigTable();
+      if (mod === "report") renderReportModule();
+    }
+
+    // ============================================================
+    // PHÂN HỆ 2: THIẾT LẬP DANH MỤC & TIÊU CHÍ KPI
+    // ============================================================
+    function renderConfigTable() {
+      const roleKey = document.getElementById("configRoleSelect").value;
+      const cfg = KPI_ROLES[roleKey];
+      const isBGH = currentAuthRole === "bgh";
+
+      const permBadge = document.getElementById("configPermissionBadge");
+      permBadge.innerHTML = isBGH
+        ? `<span class="rank-badge rank-a"><i class="fa-solid fa-unlock"></i> Quyền Ban Giám hiệu: Được phép chỉnh sửa</span>`
+        : `<span class="rank-badge rank-c"><i class="fa-solid fa-lock"></i> Chế độ Chỉ xem (Chỉ BGH mới được sửa)</span>`;
+
+      document.getElementById("btnAddCriteria").style.display = isBGH ? "inline-flex" : "none";
+      document.getElementById("btnResetCriteria").style.display = isBGH ? "inline-flex" : "none";
+      document.getElementById("btnSaveCriteria").style.display = isBGH ? "inline-flex" : "none";
+
+      const tbody = document.getElementById("configTableBody");
+      tbody.innerHTML = "";
+      let totalW = 0;
+
+      cfg.items.forEach((item, idx) => {
+        totalW += Number(item.max) || 0;
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><input type="text" class="form-control" style="padding:5px; font-weight:700;" value="${item.code}" ${!isBGH ? 'disabled' : ''} onchange="updateCriteriaField('${roleKey}', ${idx}, 'code', this.value)"></td>
+          <td>
+            <select class="form-control" style="padding:5px; font-size:0.82rem;" ${!isBGH ? 'disabled' : ''} onchange="updateCriteriaPillar('${roleKey}', ${idx}, this.value)">
+              <option value="1" ${item.pillar === 1 ? 'selected' : ''}>Định tính (Tiêu chí chung)</option>
+              <option value="2" ${item.pillar === 2 ? 'selected' : ''}>Định lượng (Chuyên môn)</option>
+            </select>
+          </td>
+          <td><input type="text" class="form-control" style="padding:5px;" value="${item.title}" ${!isBGH ? 'disabled' : ''} onchange="updateCriteriaField('${roleKey}', ${idx}, 'title', this.value)"></td>
+          <td><input type="text" class="form-control" style="padding:5px; font-size:0.82rem;" value="${item.note}" ${!isBGH ? 'disabled' : ''} onchange="updateCriteriaField('${roleKey}', ${idx}, 'note', this.value)"></td>
+          <td style="text-align:center;"><input type="number" min="1" max="100" class="input-score" value="${item.max}" ${!isBGH ? 'disabled' : ''} oninput="updateCriteriaWeight('${roleKey}', ${idx}, this.value)"></td>
+          <td style="text-align:center;">
+            ${isBGH ? `<button class="btn btn-danger-outline" style="padding:5px 8px;" onclick="deleteCriteria('${roleKey}', ${idx})"><i class="fa-solid fa-trash"></i></button>` : '-'}
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById("configTotalWeight").textContent = totalW;
+    }
+
+    function updateCriteriaField(roleKey, idx, field, val) {
+      KPI_ROLES[roleKey].items[idx][field] = val;
+    }
+
+    function updateCriteriaPillar(roleKey, idx, val) {
+      const p = parseInt(val);
+      KPI_ROLES[roleKey].items[idx].pillar = p;
+      KPI_ROLES[roleKey].items[idx].pillarName = p === 1
+        ? "PHẦN I: TIÊU CHÍ CHUNG (ĐỊNH TÍNH)"
+        : "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)";
+    }
+
+    function updateCriteriaWeight(roleKey, idx, val) {
+      KPI_ROLES[roleKey].items[idx].max = parseFloat(val) || 0;
+      let totalW = 0;
+      KPI_ROLES[roleKey].items.forEach(it => totalW += Number(it.max) || 0);
+      document.getElementById("configTotalWeight").textContent = totalW;
+    }
+
+    function addNewCriteria() {
+      const roleKey = document.getElementById("configRoleSelect").value;
+      const count = KPI_ROLES[roleKey].items.length + 1;
+      KPI_ROLES[roleKey].items.push({
+        pillar: 2,
+        pillarName: "PHẦN II: TIÊU CHÍ CHUYÊN MÔN (ĐỊNH LƯỢNG)",
+        code: `KPI-${count < 10 ? '0' + count : count}`,
+        title: "Tiêu chí mới",
+        max: 10,
+        note: "Mô tả định lượng và minh chứng cần đạt."
+      });
+      renderConfigTable();
+    }
+
+    function deleteCriteria(roleKey, idx) {
+      KPI_ROLES[roleKey].items.splice(idx, 1);
+      renderConfigTable();
+    }
+
+    function saveCriteriaConfig() {
+      localStorage.setItem("KPI_915_CUSTOM_ROLES", JSON.stringify(KPI_ROLES));
+      renderApp();
+      showCustomModal("✅ Đã lưu cấu hình Danh mục & Trọng số KPI thành công! Bảng chấm điểm đã được cập nhật ngay lập tức.");
+    }
+
+    function resetCriteriaToDefault() {
+      showCustomConfirm("Khôi phục toàn bộ danh mục tiêu chí về mặc định của Quyết định 55/QĐ-TH&THCS915?", () => {
+        KPI_ROLES = JSON.parse(JSON.stringify(DEFAULT_KPI_ROLES));
+        localStorage.removeItem("KPI_915_CUSTOM_ROLES");
+        renderConfigTable();
+        renderApp();
+        showCustomModal("✅ Đã khôi phục danh mục tiêu chí mặc định.");
+      });
+    }
+
+    // ============================================================
+    // PHÂN HỆ 3 & 4: CHẤM ĐIỂM, TÍNH ĐIỂM & TỰ ĐỘNG XẾP LOẠI 4 MỨC
+    // ============================================================
+    function switchRole(tabType) {
+      currentMainTab = tabType;
+      document.querySelectorAll(".object-pill").forEach(el => el.classList.remove("active"));
+      document.getElementById(`tab-${tabType}`).classList.add("active");
+
+      const bghBox = document.getElementById("bghSubRoleBox");
+      const staffBox = document.getElementById("staffSubRoleBox");
+
+      if (tabType === "bgh") {
+        bghBox.style.display = "flex";
+        staffBox.style.display = "none";
+        const selectedBgh = document.getElementById("bghPositionSelect").value;
+        currentRoleKey = `bgh_${selectedBgh}`;
+        document.getElementById("empPosition").value = selectedBgh === "ht" ? "Hiệu trưởng" : "Phó Hiệu trưởng";
+        document.getElementById("empDepartment").value = "Ban Giám hiệu";
+        handleDepartmentChange("Ban Giám hiệu");
+      } else if (tabType === "nv") {
+        bghBox.style.display = "none";
+        staffBox.style.display = "flex";
+        const selectedStaff = document.getElementById("staffPositionSelect").value;
+        currentRoleKey = `nv_${selectedStaff}`;
+        document.getElementById("empPosition").value = document.getElementById("staffPositionSelect").selectedOptions[0].text;
+        document.getElementById("empDepartment").value = "Tổ Văn phòng";
+        handleDepartmentChange("Tổ Văn phòng");
+      } else {
+        bghBox.style.display = "none";
+        staffBox.style.display = "none";
+        currentRoleKey = tabType;
+        document.getElementById("empPosition").value = tabType === "gvcn" ? "Giáo viên chủ nhiệm" : "Giáo viên bộ môn";
+      }
+
+      initDefaultScores();
+      renderApp();
+      autoSave();
+    }
+
+    function switchBGHPosition(posKey) {
+      currentRoleKey = `bgh_${posKey}`;
+      document.getElementById("empPosition").value = posKey === "ht" ? "Hiệu trưởng" : "Phó Hiệu trưởng";
+      initDefaultScores();
+      renderApp();
+      autoSave();
+    }
+
+    function switchStaffPosition(posKey) {
+      currentRoleKey = `nv_${posKey}`;
+      document.getElementById("empPosition").value = document.getElementById("staffPositionSelect").selectedOptions[0].text;
+      initDefaultScores();
+      renderApp();
+      autoSave();
+    }
+
+    function handleNameChange(selectedName) {
+      document.getElementById("sigSelfName").textContent = selectedName || "...";
+      document.getElementById("headerCurrentUserDisplay").textContent = selectedName || "...";
+      autoSave();
+    }
+
+    function handleDepartmentChange(deptName) {
+      const leadInput = document.getElementById("leadApproverName");
+      if (leadInput && DEPT_LEADERS[deptName]) {
+        leadInput.value = DEPT_LEADERS[deptName];
+      }
+      autoSave();
+    }
+
+    function handlePositionInputChange() { autoSave(); }
+    function applyQuickPosition(val) {
+      if (!val) return;
+      document.getElementById("empPosition").value = val;
+      if (val === "Phó Hiệu trưởng" || val === "Hiệu trưởng") {
+        document.getElementById("empDepartment").value = "Ban Giám hiệu";
+        handleDepartmentChange("Ban Giám hiệu");
+      }
+      autoSave();
+    }
+
+    function initDefaultScores() {
+      currentScores = {};
+      activeBonuses.clear();
+      const cfg = KPI_ROLES[currentRoleKey] || KPI_ROLES["gvcn"];
+      cfg.items.forEach(item => {
+        currentScores[item.code] = { self: item.max, lead: '', bgh: '', note: "", files: [] };
+      });
+    }
+
+    function renderApp() {
+      const cfg = KPI_ROLES[currentRoleKey] || KPI_ROLES["gvcn"];
+      document.getElementById("tableHeaderTitle").textContent = cfg.title;
+
+      const tbody = document.getElementById("kpiTableBody");
+      tbody.innerHTML = "";
+      let currentPillar = null;
+
+      // Quyền chỉnh sửa từng cột theo vai trò đăng nhập
+      const canEditSelf = currentAuthRole === "vc" || currentAuthRole === "bgh";
+      const canEditLead = currentAuthRole === "tt" || currentAuthRole === "bgh";
+      const canEditBgh = currentAuthRole === "bgh";
+
+      cfg.items.forEach(item => {
+        if (item.pillar !== currentPillar) {
+          currentPillar = item.pillar;
+          const headerTr = document.createElement("tr");
+          headerTr.innerHTML = `
+            <td colspan="7" style="background: #f8fafc; font-weight: 800; color: var(--green-dark); padding: 8px 12px; text-transform: uppercase; border-left: 4px solid var(--orange-main);">
+              <i class="fa-solid fa-bookmark" style="color: var(--orange-main); margin-right: 6px;"></i> ${item.pillarName}
+            </td>
+          `;
+          tbody.appendChild(headerTr);
+        }
+
+        if (!currentScores[item.code]) {
+          currentScores[item.code] = { self: item.max, lead: '', bgh: '', note: "", files: [] };
+        }
+        const scoreObj = currentScores[item.code];
+        const tr = document.createElement("tr");
+
+        let filesHtml = "";
+        if (scoreObj.files && scoreObj.files.length > 0) {
+          filesHtml = scoreObj.files.map((f, fIdx) => `
+            <span class="file-tag">
+              <i class="fa-solid fa-file-lines"></i>
+              <span class="file-tag-name" title="${f.name}" onclick="previewFile('${item.code}', ${fIdx})">${f.name}</span>
+              ${canEditSelf ? `<span class="file-tag-remove" onclick="removeFile('${item.code}',${fIdx})">✕</span>` : ''}
+            </span>
+          `).join("");
+        }
+
+        const selfVal = (scoreObj.self !== undefined && scoreObj.self !== '') ? scoreObj.self : item.max;
+        const leadVal = (scoreObj.lead !== undefined) ? scoreObj.lead : '';
+        const bghVal = (scoreObj.bgh !== undefined) ? scoreObj.bgh : '';
+
+        tr.innerHTML = `
+          <td style="text-align: center; vertical-align: middle;"><span class="badge-code">${item.code}</span></td>
+          <td><strong style="color: #0f172a; font-size: 0.92rem;">${item.title}</strong><div class="rule-note">${item.note}</div></td>
+          <td style="text-align: center; vertical-align: middle; font-weight: 700; color: #475569;">${item.max}</td>
+          <td style="text-align: center; vertical-align: middle;">
+            <input type="number" step="0.5" min="0" max="${item.max}" class="input-score ${!canEditSelf ? 'locked-score' : ''}"
+              value="${selfVal}" ${!canEditSelf ? 'readonly' : ''}
+              oninput="handleScoreChange('${item.code}', 'self', this.value, ${item.max})" />
+          </td>
+          <td style="text-align: center; vertical-align: middle;">
+            <input type="number" step="0.5" min="0" max="${item.max}" class="input-score ${canEditLead ? 'highlight-lead' : 'locked-score'}"
+              value="${leadVal}" placeholder="-" ${!canEditLead ? 'readonly' : ''}
+              oninput="handleScoreChange('${item.code}', 'lead', this.value, ${item.max})" />
+          </td>
+          <td style="text-align: center; vertical-align: middle;">
+            <input type="number" step="0.5" min="0" max="${item.max}" class="input-score ${canEditBgh ? 'highlight-bgh' : 'locked-score'}"
+              value="${bghVal}" placeholder="-" ${!canEditBgh ? 'readonly' : ''}
+              oninput="handleScoreChange('${item.code}', 'bgh', this.value, ${item.max})" />
+          </td>
+          <td style="vertical-align: middle;">
+            <div class="evidence-cell">
+              <input type="text" class="input-text-sm" placeholder="Ghi chú / Link minh chứng..." value="${scoreObj.note || ''}" oninput="handleNoteChange('${item.code}', this.value)" />
+              <div class="file-attach-wrapper">
+                ${canEditSelf ? `
+                  <label class="btn-attach-file">
+                    <i class="fa-solid fa-paperclip"></i> Đính kèm tệp
+                    <input type="file" multiple onchange="handleFileAttachment('${item.code}', this.files)" />
+                  </label>
+                ` : ''}
+                <div class="file-badge-list">${filesHtml}</div>
+              </div>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      const bonusContainer = document.getElementById("bonusListContainer");
+      bonusContainer.innerHTML = "";
+      BONUS_KPI_LIST.forEach(b => {
+        const isChecked = activeBonuses.has(b.id);
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "bonus-item";
+        itemDiv.innerHTML = `
+          <input type="checkbox" id="chk-${b.id}" ${isChecked ? 'checked' : ''} onchange="toggleBonus('${b.id}')">
+          <label for="chk-${b.id}" style="cursor: pointer; flex: 1;">
+            <div class="bonus-item-desc">${b.text}</div>
+          </label>
+          <div class="bonus-pts">+${b.pts}đ</div>
+        `;
+        bonusContainer.appendChild(itemDiv);
+      });
+
+      calculateTotals();
+    }
+
+    function handleScoreChange(code, roleKey, val, maxVal) {
+      let num = val === '' ? '' : parseFloat(val);
+      if (num !== '' && isNaN(num)) num = 0;
+      if (num !== '' && num > maxVal) num = maxVal;
+      if (num !== '' && num < 0) num = 0;
+      if (!currentScores[code]) currentScores[code] = { self: maxVal, lead: '', bgh: '', note: "", files: [] };
+      currentScores[code][roleKey] = num;
+      calculateTotals();
+      autoSave();
+    }
+
+    function handleNoteChange(code, val) {
+      if (!currentScores[code]) currentScores[code] = { self: 0, lead: '', bgh: '', note: "", files: [] };
+      currentScores[code].note = val;
+      autoSave();
+    }
+
+    function toggleBonus(bonusId) {
+      if (activeBonuses.has(bonusId)) activeBonuses.delete(bonusId);
+      else activeBonuses.add(bonusId);
+      calculateTotals();
+      autoSave();
+    }
+
+    function handleFileAttachment(code, fileList) {
+      if (!fileList || fileList.length === 0) return;
+      if (!currentScores[code]) currentScores[code] = { self: '', lead: '', bgh: '', note: "", files: [] };
+      if (!currentScores[code].files) currentScores[code].files = [];
+      Array.from(fileList).forEach(file => {
+        currentScores[code].files.push({ name: file.name, url: URL.createObjectURL(file) });
+      });
+      renderApp();
+      autoSave();
+    }
+
+    function removeFile(code, fIdx) {
+      currentScores[code].files.splice(fIdx, 1);
+      renderApp();
+      autoSave();
+    }
+
+    function previewFile(code, fIdx) {
+      const f = currentScores[code].files[fIdx];
+      if (f && f.url) window.open(f.url, "_blank");
+    }
+
+    function calculateTotals() {
+      const cfg = KPI_ROLES[currentRoleKey] || KPI_ROLES["gvcn"];
+      let p1 = 0, p2 = 0, maxP1 = 0, maxP2 = 0;
+      let hasUnder70 = false;
+
+      const evalColKey = currentAuthRole === "tt" ? "lead" : (currentAuthRole === "bgh" ? "bgh" : "self");
+
+      cfg.items.forEach(item => {
+        if (item.pillar === 1) maxP1 += item.max;
+        else maxP2 += item.max;
+
+        let sc = 0;
+        const val = currentScores[item.code]?.[evalColKey];
+        if (val !== undefined && val !== '') {
+          sc = parseFloat(val);
+        } else {
+          // Nếu Tổ trưởng hoặc BGH chưa nhập, tạm fallback về điểm tự chấm để hiển thị ước tính
+          sc = currentScores[item.code]?.self !== '' ? parseFloat(currentScores[item.code].self || 0) : item.max;
+        }
+
+        if (sc < item.max * 0.7) hasUnder70 = true;
+        if (item.pillar === 1) p1 += sc;
+        else p2 += sc;
+      });
+
+      let bonusScore = 0;
+      BONUS_KPI_LIST.forEach(b => { if (activeBonuses.has(b.id)) bonusScore += b.pts; });
+      if (bonusScore > 10) bonusScore = 10;
+
+      const finalTotal = Math.min(110, p1 + p2 + bonusScore);
+
+      document.getElementById("val-col1").textContent = p1.toFixed(1);
+      document.getElementById("max-col1").textContent = maxP1;
+      document.getElementById("val-col2").textContent = p2.toFixed(1);
+      document.getElementById("max-col2").textContent = maxP2;
+      document.getElementById("max-total-base").textContent = maxP1 + maxP2;
+      document.getElementById("val-bonus").textContent = bonusScore.toFixed(1);
+      document.getElementById("bonusScoreText").textContent = bonusScore.toFixed(1);
+      document.getElementById("val-total").textContent = finalTotal.toFixed(1);
+
+      const badge = document.getElementById("badge-rank");
+      let rank = "", badgeClass = "";
+
+      if (finalTotal >= 90) {
+        if (hasUnder70) {
+          rank = "Hoàn thành tốt nhiệm vụ (Hạ bậc do tiêu chí < 70%)";
+          badgeClass = "rank-b";
+        } else {
+          rank = "Hoàn thành xuất sắc nhiệm vụ";
+          badgeClass = "rank-a";
+        }
+      } else if (finalTotal >= 70) {
+        rank = "Hoàn thành tốt nhiệm vụ";
+        badgeClass = "rank-b";
+      } else if (finalTotal >= 50) {
+        rank = "Hoàn thành nhiệm vụ";
+        badgeClass = "rank-c";
+      } else {
+        rank = "Không hoàn thành nhiệm vụ";
+        badgeClass = "rank-d";
+      }
+
+      badge.className = `rank-badge ${badgeClass}`;
+      badge.textContent = rank;
+      return { total: finalTotal, rank };
+    }
+
+    function saveCurrentRecordToUnit() {
+      const { total, rank } = calculateTotals();
+      const record = {
+        empName: document.getElementById("empName").value,
+        empPosition: document.getElementById("empPosition").value,
+        empDepartment: document.getElementById("empDepartment").value,
+        evalPeriod: document.getElementById("evalPeriod").value,
+        totalScore: total,
+        rank: rank.replace(" (Hạ bậc do tiêu chí < 70%)", "")
+      };
+
+      let list = JSON.parse(localStorage.getItem("KPI_915_UNIT_RECORDS") || "[]");
+      const existingIdx = list.findIndex(r => r.empName === record.empName && r.evalPeriod === record.evalPeriod);
+      if (existingIdx >= 0) list[existingIdx] = record;
+      else list.push(record);
+
+      localStorage.setItem("KPI_915_UNIT_RECORDS", JSON.stringify(list));
+      showCustomModal(`✅ Đã lưu hồ sơ đánh giá của đ/c <strong>${record.empName}</strong> (${total.toFixed(1)} điểm - ${record.rank}) vào danh sách tổng hợp đơn vị!`);
+    }
+
+    // ============================================================
+    // PHÂN HỆ 5: BÁO CÁO & KẾT XUẤT THỐNG KÊ
+    // ============================================================
+    function getCombinedUnitRecords() {
+      const saved = JSON.parse(localStorage.getItem("KPI_915_UNIT_RECORDS") || "[]");
+      const map = new Map();
+      DEFAULT_UNIT_RECORDS.forEach(r => map.set(r.empName, r));
+      saved.forEach(r => map.set(r.empName, r));
+      return Array.from(map.values());
+    }
+
+    function renderReportModule() {
+      const records = getCombinedUnitRecords();
+      const total = records.length || 1;
+      let xs = 0, tot = 0, ht = 0, kht = 0;
+
+      const tbody = document.getElementById("reportTableBody");
+      tbody.innerHTML = "";
+
+      records.forEach((r, idx) => {
+        let badgeCls = "rank-a";
+        if (r.rank.includes("xuất sắc")) xs++;
+        else if (r.rank.includes("tốt")) { tot++; badgeCls = "rank-b"; }
+        else if (r.rank.includes("Không")) { kht++; badgeCls = "rank-d"; }
+        else { ht++; badgeCls = "rank-c"; }
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td style="text-align: center; font-weight: 700;">${idx + 1}</td>
+          <td><strong>${r.empName}</strong></td>
+          <td>${r.empPosition}</td>
+          <td>${r.empDepartment}</td>
+          <td style="text-align: center;">${r.evalPeriod}</td>
+          <td style="text-align: center; font-weight: 800; color: var(--green-dark);">${Number(r.totalScore).toFixed(1)}</td>
+          <td style="text-align: center;"><span class="rank-badge ${badgeCls}">${r.rank}</span></td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById("stat-xs").innerHTML = `${xs} <span>(${((xs / total) * 100).toFixed(1)}%)</span>`;
+      document.getElementById("stat-tot").innerHTML = `${tot} <span>(${((tot / total) * 100).toFixed(1)}%)</span>`;
+      document.getElementById("stat-ht").innerHTML = `${ht} <span>(${((ht / total) * 100).toFixed(1)}%)</span>`;
+      document.getElementById("stat-kht").innerHTML = `${kht} <span>(${((kht / total) * 100).toFixed(1)}%)</span>`;
+    }
+
+    function exportReportToCSV() {
+      const records = getCombinedUnitRecords();
+      let csv = "\uFEFFSTT,Họ và tên,Chức vụ,Tổ chuyên môn,Kỳ đánh giá,Tổng điểm,Xếp loại KPI\n";
+      records.forEach((r, idx) => {
+        csv += `${idx + 1},"${r.empName}","${r.empPosition}","${r.empDepartment}","${r.evalPeriod}",${Number(r.totalScore).toFixed(1)},"${r.rank}"\n`;
+      });
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `Bao_cao_KPI_915_Gia_Sang_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function openMinutesModal() {
+      const records = getCombinedUnitRecords();
+      const dateStr = updatePrintDate();
+      let xs = 0, tot = 0, ht = 0, kht = 0;
+      records.forEach(r => {
+        if (r.rank.includes("xuất sắc")) xs++;
+        else if (r.rank.includes("tốt")) tot++;
+        else if (r.rank.includes("Không")) kht++;
+        else ht++;
+      });
+
+      const rowsHtml = records.map((r, i) => `
+        <tr>
+          <td style="text-align:center;">${i + 1}</td>
+          <td>${r.empName}</td>
+          <td>${r.empPosition}</td>
+          <td>${r.empDepartment}</td>
+          <td style="text-align:center; font-weight:bold;">${Number(r.totalScore).toFixed(1)}</td>
+          <td>${r.rank}</td>
+        </tr>
+      `).join("");
+
+      const minutesHtml = `
+        <div class="minutes-paper">
+          <table style="width:100%; border:none; margin-bottom:10px;">
+            <tr style="border:none;">
+              <td style="border:none; text-align:center; width:45%;">
+                <strong>UBND PHƯỜNG GIA SÀNG</strong><br>
+                <strong>TRƯỜNG TH & THCS 915 GIA SÀNG</strong>
+              </td>
+              <td style="border:none; text-align:center; width:55%;">
+                <strong>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</strong><br>
+                <strong>Độc lập - Tự do - Hạnh phúc</strong><br>
+                <span style="font-style:italic; font-size:0.85em;">${dateStr}</span>
+              </td>
+            </tr>
+          </table>
+          <h3 style="text-align:center; text-transform:uppercase; margin:12px 0;">BIÊN BẢN HỌP BÌNH XÉT THI ĐUA, XẾP LOẠI KPI ĐỊNH KỲ</h3>
+          <p><strong>1. Thời gian, địa điểm:</strong> Hồi 14h00 ngày ${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}, tại Phòng Hội đồng Trường Tiểu học và THCS 915 Gia Sàng.</p>
+          <p><strong>2. Thành phần tham dự:</strong> Ban Giám hiệu, Tổ trưởng các tổ chuyên môn/văn phòng và Thư ký Hội đồng thi đua.</p>
+          <p><strong>3. Kết quả tổng hợp xếp loại KPI toàn đơn vị (${records.length} CBGVNV):</strong></p>
+          <ul style="margin-left:20px; margin-bottom:10px;">
+            <li>Hoàn thành xuất sắc nhiệm vụ: <strong>${xs}</strong> đ/c</li>
+            <li>Hoàn thành tốt nhiệm vụ: <strong>${tot}</strong> đ/c</li>
+            <li>Hoàn thành nhiệm vụ: <strong>${ht}</strong> đ/c</li>
+            <li>Không hoàn thành nhiệm vụ: <strong>${kht}</strong> đ/c</li>
+          </ul>
+          <table>
+            <thead>
+              <tr><th>STT</th><th>Họ và tên</th><th>Chức vụ</th><th>Tổ CM</th><th>Điểm</th><th>Xếp loại</th></tr>
+            </thead>
+            <tbody>${rowsHtml}</tbody>
+          </table>
+          <div style="display:flex; justify-content:space-between; margin-top:24px; text-align:center;">
+            <div style="width:45%;"><strong>THƯ KÝ HỘI ĐỒNG</strong><br><br><br><em>Lê Thị Thu Thủy</em></div>
+            <div style="width:45%;"><strong>CHỦ TỌA (HIỆU TRƯỞNG)</strong><br><br><br><em>Bùi Thị Thanh Hoàn</em></div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("customModalBox").classList.add("wide-modal");
+      document.getElementById("customModalHeader").innerHTML = `<i class="fa-solid fa-file-signature"></i> XEM TRƯỚC BIÊN BẢN HỌP BÌNH XÉT THI ĐUA`;
+      const footerBtns = `
+        <button class="btn btn-orange-primary" onclick="printMinutes()"><i class="fa-solid fa-print"></i> In Biên bản (A4)</button>
+        <button class="btn btn-orange-outline" style="color:var(--gray-700); background:white;" onclick="closeCustomModal()">Đóng</button>
+      `;
+      showCustomModal(minutesHtml, footerBtns);
+    }
+
+    function printMinutes() {
+      document.body.classList.add("printing-minutes");
+      window.print();
+      setTimeout(() => document.body.classList.remove("printing-minutes"), 500);
+    }
+
+    function printEvaluationForm() {
+      document.body.classList.remove("printing-minutes");
+      window.print();
+    }
+
+    // ============================================================
+    // CHIA SẺ LINK & LƯU LOCALSTORAGE
+    // ============================================================
+    function encodeDataToUrl(obj) {
+      const bytes = new TextEncoder().encode(JSON.stringify(obj));
+      let binary = '';
+      for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    }
+
+    function decodeDataFromUrl(str) {
+      if (!str) return null;
+      str = str.replace(/-/g, '+').replace(/_/g, '/');
+      while (str.length % 4) str += '=';
+      const binary = atob(str);
+      const bytes = new Uint8Array(binary.length);
+      for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+      return JSON.parse(new TextDecoder().decode(bytes));
+    }
+
+    function checkUrlWorkflow() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const mode = urlParams.get("mode");
+      const dataStr = urlParams.get("d");
+      if (mode && dataStr) {
+        try {
+          const decoded = decodeDataFromUrl(dataStr);
+          if (!decoded) return false;
+          currentRoleKey = decoded.role || "gvcn";
+          if (decoded.empName) {
+            document.getElementById("empName").value = decoded.empName;
+            document.getElementById("sigSelfName").textContent = decoded.empName;
+          }
+          document.getElementById("empPosition").value = decoded.empPosition || "";
+          document.getElementById("empDepartment").value = decoded.empDepartment || "Tổ Khoa học Tự nhiên";
+          document.getElementById("evalPeriod").value = decoded.evalPeriod || "";
+          currentScores = decoded.scores || {};
+          activeBonuses = new Set(decoded.bonuses || []);
+          if (decoded.leadComment) document.getElementById("leadCommentInput").value = decoded.leadComment;
+          if (decoded.bghComment) document.getElementById("bghCommentInput").value = decoded.bghComment;
+
+          if (mode === "lead") currentAuthRole = "tt";
+          else if (mode === "bgh" || mode === "ht") currentAuthRole = "bgh";
+          updateAuthUI();
+
+          document.getElementById("flowBanner").style.display = "flex";
+          document.getElementById("flowBannerText").innerHTML = `<i class="fa-solid fa-user-check"></i> Đang mở hồ sơ của đ/c <strong>${decoded.empName}</strong> (${decoded.empDepartment})`;
+          return true;
+        } catch (e) {}
+      }
+      return false;
+    }
+
+    function clearWorkflowMode() { window.location.href = window.location.pathname; }
+
+    function handleShareButtonAction() {
+      const target = currentAuthRole === "vc" ? "lead" : (currentAuthRole === "tt" ? "bgh" : "thu_ky");
+      const dataToPack = {
+        role: currentRoleKey,
+        empName: document.getElementById("empName").value,
+        empPosition: document.getElementById("empPosition").value,
+        empDepartment: document.getElementById("empDepartment").value,
+        evalPeriod: document.getElementById("evalPeriod").value,
+        scores: currentScores,
+        bonuses: Array.from(activeBonuses),
+        leadComment: document.getElementById("leadCommentInput").value,
+        bghComment: document.getElementById("bghCommentInput").value
+      };
+      const fullUrl = `${window.location.origin}${window.location.pathname}?mode=${target}&d=${encodeDataToUrl(dataToPack)}`;
+      navigator.clipboard.writeText(fullUrl).then(() => {
+        showCustomModal(`✅ Đã sao chép link bàn giao thành công! Chị có thể dán (Ctrl+V) để gửi qua Zalo hoặc Email.`);
+      }).catch(() => {
+        showCustomModal(`Link bàn giao:<br><input type="text" class="form-control" value="${fullUrl}" onclick="this.select()">`);
+      });
+    }
+
+    function autoSave() {
+      const data = {
+        role: currentRoleKey,
+        empName: document.getElementById("empName").value,
+        empPosition: document.getElementById("empPosition").value,
+        empDepartment: document.getElementById("empDepartment").value,
+        evalPeriod: document.getElementById("evalPeriod").value,
+        scores: currentScores,
+        bonuses: Array.from(activeBonuses),
+        leadName: document.getElementById("leadApproverName").value,
+        leadComment: document.getElementById("leadCommentInput").value,
+        bghComment: document.getElementById("bghCommentInput").value
+      };
+      localStorage.setItem("KPI_915_V2", JSON.stringify(data));
+    }
+
+    function loadSavedData() {
+      const raw = localStorage.getItem("KPI_915_V2");
+      if (raw) {
+        try {
+          const data = JSON.parse(raw);
+          if (data.role && KPI_ROLES[data.role]) currentRoleKey = data.role;
+          if (data.empName) {
+            document.getElementById("empName").value = data.empName;
+            document.getElementById("sigSelfName").textContent = data.empName;
+          }
+          if (data.empPosition) document.getElementById("empPosition").value = data.empPosition;
+          if (data.empDepartment) document.getElementById("empDepartment").value = data.empDepartment;
+          if (data.evalPeriod) document.getElementById("evalPeriod").value = data.evalPeriod;
+          if (data.scores) currentScores = data.scores;
+          if (data.bonuses) activeBonuses = new Set(data.bonuses);
+          if (data.leadName) document.getElementById("leadApproverName").value = data.leadName;
+          if (data.leadComment) document.getElementById("leadCommentInput").value = data.leadComment;
+          if (data.bghComment) document.getElementById("bghCommentInput").value = data.bghComment;
+          return;
+        } catch (e) {}
+      }
+      initDefaultScores();
+    }
+
+    function updatePrintDate() {
+      const now = new Date();
+      const dateText = `Gia Sàng, ngày ${String(now.getDate()).padStart(2, '0')} tháng ${String(now.getMonth() + 1).padStart(2, '0')} năm ${now.getFullYear()}`;
+      const el = document.getElementById("printCurrentDate");
+      if (el) el.textContent = dateText;
+      return dateText;
+    }
+
+    function showCustomModal(msg, customFooterHtml = null) {
+      document.getElementById("customModalMessage").innerHTML = msg;
+      document.getElementById("customModalFooter").innerHTML = customFooterHtml || `<button class="btn btn-orange-primary" onclick="closeCustomModal()">Đã hiểu</button>`;
+      document.getElementById("customModal").style.display = "flex";
+    }
+
+    function showCustomConfirm(msg, onConfirm) {
+      document.getElementById("customModalHeader").innerHTML = `<i class="fa-solid fa-circle-question"></i> XÁC NHẬN`;
+      const footer = `
+        <button class="btn btn-orange-primary" id="btnConfirmYes">Đồng ý</button>
+        <button class="btn btn-orange-outline" style="color:var(--gray-700); background:white;" onclick="closeCustomModal()">Hủy</button>
+      `;
+      showCustomModal(msg, footer);
+      document.getElementById("btnConfirmYes").onclick = () => {
+        closeCustomModal();
+        onConfirm();
+      };
+    }
+
+    function closeCustomModal() {
+      document.getElementById("customModal").style.display = "none";
+      document.getElementById("customModalBox").classList.remove("wide-modal");
+      document.getElementById("customModalHeader").innerHTML = `<i class="fa-solid fa-circle-check"></i> THÔNG BÁO`;
+    }
+  </script>
+</body>
+</html>
