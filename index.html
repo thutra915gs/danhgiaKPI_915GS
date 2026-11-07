@@ -422,7 +422,7 @@
         <label><i class="fa-solid fa-lock" style="color: var(--orange-main); margin-right: 4px;"></i> 3. Mật khẩu truy cập nội bộ:</label>
         <div class="portal-input-wrap">
           <i class="fa-solid fa-key portal-input-icon"></i>
-          <input type="password" id="portalPasswordInput" class="portal-control" placeholder="Nhập mật khẩu trường cấp (01112026)..." onkeydown="if(event.key==='Enter') submitPortalLogin()" />
+          <input type="password" id="portalPasswordInput" class="portal-control" placeholder="Nhập mật khẩu trường cấp..." onkeydown="if(event.key==='Enter') submitPortalLogin()" />
           <i class="fa-solid fa-eye portal-toggle-pwd" id="portalPwdToggle" onclick="togglePortalPwdVisibility()" title="Ẩn/Hiện mật khẩu"></i>
         </div>
       </div>
@@ -1170,7 +1170,7 @@
 
       if (pwd !== SYSTEM_PASSWORD) {
         errBox.style.display = "flex";
-        errText.textContent = "MẬT KHẨU KHÔNG ĐÚNG! Vui lòng nhập đúng mật khẩu trường cấp (01112026).";
+        errText.textContent = "MẬT KHẨU KHÔNG ĐÚNG! Vui lòng nhập đúng mật khẩu trường cấp.";
         pwdInput.focus();
         return;
       }
@@ -1835,12 +1835,18 @@
     function openMinutesModal() {
       const currentDept = document.getElementById("empDepartment")?.value || "";
       const allRecords = getCombinedUnitRecords();
-      const records = currentDept ? allRecords.filter(r => r.empDepartment === currentDept) : allRecords;
-      const dateStr = updatePrintDate();
-      let xs = 0, tot = 0, ht = 0, kht = 0;
-
       const isTT = currentAuthRole === "tt";
       const isBGH = currentAuthRole === "bgh";
+
+      let records = isBGH
+        ? [...allRecords]
+        : (currentDept ? allRecords.filter(r => r.empDepartment === currentDept) : [...allRecords]);
+
+      // Sắp xếp danh sách theo alphabet (tiếng Việt)
+      records.sort((a, b) => (a.empName || "").localeCompare(b.empName || "", 'vi'));
+
+      const dateStr = updatePrintDate();
+      let xs = 0, tot = 0, ht = 0, kht = 0;
 
       const rowsHtml = records.map((r, i) => {
         const selfPt = r.selfScore !== undefined && r.selfScore !== null ? Number(r.selfScore).toFixed(1) : Number(r.totalScore).toFixed(1);
@@ -1924,7 +1930,7 @@
           <h3 style="text-align:center; text-transform:uppercase; margin:12px 0;">BIÊN BẢN HỌP BÌNH XÉT THI ĐUA, XẾP LOẠI KPI ĐỊNH KỲ</h3>
           <p><strong>1. Thời gian, địa điểm:</strong> Hồi 14h00 ngày ${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}, tại Phòng Hội đồng Trường Tiểu học và THCS 915 Gia Sàng.</p>
           <p><strong>2. Thành phần tham dự:</strong> Ban Giám hiệu, Tổ trưởng các tổ chuyên môn/văn phòng và Thư ký Hội đồng thi đua.</p>
-          <p><strong>3. Kết quả tổng hợp xếp loại KPI ${currentDept ? `(${currentDept})` : "toàn đơn vị"} (${records.length} CBGVNV đã lưu hồ sơ):</strong></p>
+          <p><strong>3. Kết quả tổng hợp xếp loại KPI ${isBGH ? "toàn trường" : (currentDept ? `(${currentDept})` : "toàn đơn vị")} (${records.length} CBGVNV đã lưu hồ sơ):</strong></p>
           <ul style="margin-left:20px; margin-bottom:10px;">
             <li>Mức 1 (Xuất sắc): <strong>${xs}</strong> đ/c</li>
             <li>Mức 2 (Tốt): <strong>${tot}</strong> đ/c</li>
