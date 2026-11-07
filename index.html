@@ -90,7 +90,7 @@
     .btn-danger-outline { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
     .btn-danger-outline:hover { background: #ef4444; color: white; }
 
-    /* MAIN NAVIGATION BAR (5 PHÂN HỆ) */
+    /* MAIN NAVIGATION BAR */
     .main-nav-bar {
       background: white;
       border-bottom: 1px solid var(--gray-200);
@@ -152,6 +152,13 @@
     .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--gray-700); }
     .form-control { padding: 9px 12px; border-radius: 8px; border: 1px solid var(--gray-300); font-size: 0.9rem; outline: none; background: white; }
     .form-control:focus { border-color: var(--orange-main); box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15); }
+    textarea.form-control-area {
+      width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--gray-300);
+      font-size: 0.86rem; line-height: 1.45; outline: none; background: white; resize: vertical;
+      min-height: 64px; font-family: inherit;
+    }
+    textarea.form-control-area:focus { border-color: var(--orange-main); box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15); }
+    textarea.form-control-area:disabled { background: #f8fafc; color: #334155; border-color: #e2e8f0; }
 
     .object-selector { display: flex; gap: 8px; background: var(--gray-100); padding: 6px; border-radius: 10px; margin-bottom: 20px; flex-wrap: wrap; }
     .object-pill {
@@ -186,14 +193,13 @@
     tbody tr:hover { background-color: var(--gray-50); }
 
     .badge-code { display: inline-block; padding: 2px 6px; background: #ecfdf5; color: var(--green-dark); font-weight: 700; border-radius: 4px; font-size: 0.75rem; border: 1px solid #a7f3d0; }
-    .rule-note { font-size: 0.8rem; color: #334155; margin-top: 4px; line-height: 1.45; }
+    .rule-note { font-size: 0.82rem; color: #334155; margin-top: 4px; line-height: 1.45; white-space: pre-wrap; }
 
     .input-score { width: 75px; padding: 6px 8px; border-radius: 6px; border: 1px solid var(--gray-300); text-align: center; font-weight: 700; font-size: 0.92rem; }
     .input-score:focus { border-color: var(--orange-main); outline: none; }
     .input-score.locked-score { background-color: #f1f5f9 !important; color: #64748b !important; cursor: not-allowed; border: 1px dashed #cbd5e1 !important; }
     .input-score.highlight-lead { border: 2px solid var(--orange-main) !important; background-color: #fff7ed; color: #9a3412; }
     .input-score.highlight-bgh { border: 2px solid var(--green-main) !important; background-color: #ecfdf5; color: var(--green-dark); }
-    .input-score.empty-input { border: 1px dashed var(--orange-main) !important; background-color: #fff7ed; color: #9a3412; }
 
     .evidence-cell { display: flex; flex-direction: column; gap: 6px; min-width: 220px; }
     .input-text-sm { width: 100%; padding: 6px 8px; border-radius: 6px; border: 1px solid var(--gray-300); font-size: 0.82rem; }
@@ -265,7 +271,7 @@
       box-shadow: 0 20px 25px -5px rgba(0,0,0,0.25); border-top: 5px solid var(--orange-main);
       max-height: 90vh; overflow-y: auto;
     }
-    .custom-modal-box.wide-modal { max-width: 900px; }
+    .custom-modal-box.wide-modal { max-width: 980px; }
     .custom-modal-header { font-size: 1.15rem; font-weight: 800; color: var(--green-dark); display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
     .custom-modal-header i { color: var(--orange-main); }
     .custom-modal-body { font-size: 0.92rem; color: #334155; line-height: 1.6; margin-bottom: 20px; }
@@ -474,7 +480,7 @@
     </div>
   </header>
 
-  <!-- THANH ĐIỀU HƯỚNG 5 PHÂN HỆ -->
+  <!-- THANH ĐIỀU HƯỚNG 3 PHÂN HỆ -->
   <nav class="main-nav-bar no-print">
     <div class="main-nav-inner">
       <button class="nav-module-btn active" id="nav-eval" onclick="switchMainModule('eval')">
@@ -499,7 +505,7 @@
     </div>
 
     <!-- =========================================================
-         PHÂN HỆ 3 & 4: CHẤM ĐIỂM, TÍNH ĐIỂM & TỰ ĐỘNG XẾP LOẠI
+         PHÂN HỆ 1: CHẤM ĐIỂM, TÍNH ĐIỂM & TỰ ĐỘNG XẾP LOẠI
          ========================================================= -->
     <div id="module-eval">
       <div class="print-header-admin">
@@ -752,8 +758,8 @@
               <tr>
                 <th style="width: 90px;">Mã KPI</th>
                 <th style="width: 170px;">Nhóm tiêu chuẩn</th>
-                <th style="min-width: 220px;">Tên tiêu chí</th>
-                <th style="min-width: 240px;">Mô tả / Hướng dẫn định lượng</th>
+                <th style="min-width: 240px;">Tên tiêu chí (Hiển thị đầy đủ)</th>
+                <th style="min-width: 300px;">Mô tả / Hướng dẫn định lượng (Hiển thị đầy đủ)</th>
                 <th style="width: 110px; text-align: center;">Trọng số (%) / Điểm</th>
                 <th style="width: 70px; text-align: center;">Xóa</th>
               </tr>
@@ -765,7 +771,7 @@
     </div>
 
     <!-- =========================================================
-         PHÂN HỆ 5: BÁO CÁO & KẾT XUẤT THỐNG KÊ
+         PHÂN HỆ 3: BÁO CÁO & KẾT XUẤT THỐNG KÊ
          ========================================================= -->
     <div id="module-report" style="display: none;">
       <div class="metrics-grid" id="reportMetricsGrid">
@@ -840,7 +846,7 @@
     </div>
   </footer>
 
-  <!-- MODAL DÙNG CHUNG (THÔNG BÁO / XÁC NHẬN / BIÊN BẢN HỌP) -->
+  <!-- MODAL DÙNG CHUNG -->
   <div id="customModal" class="custom-modal-overlay" style="display: none;">
     <div class="custom-modal-box" id="customModalBox">
       <div class="custom-modal-header" id="customModalHeader"><i class="fa-solid fa-circle-check"></i> THÔNG BÁO</div>
@@ -894,16 +900,6 @@
       "Ban Giám hiệu": "Bùi Thị Thanh Hoàn"
     };
 
-    const DEPT_EMAILS = {
-      "Tổ 1, 2, 3": "ngocbichgstn@gmail.com",
-      "Tổ 4, 5": "haihuyendinhhoa@gmail.com",
-      "Tổ Khoa học Tự nhiên": "haiyenxinh86@gmail.com",
-      "Tổ Khoa học Xã hội": "daovananhcvatn@gmail.com",
-      "Tổ Nghệ thuật": "ninhthithulua@gmail.com",
-      "Tổ Văn phòng": "duongthaihuyentt2@gmail.com"
-    };
-
-    const THU_KY_EMAIL = "lethuyk44a@gmail.com";
     const SYSTEM_PASSWORD = "01112026";
 
     const COMMON_PILLAR_ITEMS = [
@@ -1063,15 +1059,14 @@
       { id: "BONUS-04", text: "Giải Khuyến khích", pts: 1 }
     ];
 
-    // DỮ LIỆU MẪU BÁO CÁO ĐƠN VỊ
     const DEFAULT_UNIT_RECORDS = [
-      { empName: "Bùi Thị Thanh Hoàn", empPosition: "Hiệu trưởng", empDepartment: "Ban Giám hiệu", evalPeriod: "Tháng 11/2026", totalScore: 102.0, rank: "Hoàn thành xuất sắc nhiệm vụ" },
-      { empName: "Nguyễn Thị Thu Trà", empPosition: "Phó Hiệu trưởng", empDepartment: "Ban Giám hiệu", evalPeriod: "Tháng 11/2026", totalScore: 100.0, rank: "Hoàn thành xuất sắc nhiệm vụ" },
-      { empName: "Nguyễn Hải Yến", empPosition: "Tổ trưởng", empDepartment: "Tổ Khoa học Tự nhiên", evalPeriod: "Tháng 11/2026", totalScore: 96.5, rank: "Hoàn thành xuất sắc nhiệm vụ" },
-      { empName: "Nguyễn Ngọc Bích", empPosition: "Tổ trưởng", empDepartment: "Tổ 1, 2, 3", evalPeriod: "Tháng 11/2026", totalScore: 94.0, rank: "Hoàn thành xuất sắc nhiệm vụ" },
-      { empName: "Đào Thị Vân Anh", empPosition: "Tổ trưởng", empDepartment: "Tổ Khoa học Xã hội", evalPeriod: "Tháng 11/2026", totalScore: 88.5, rank: "Hoàn thành tốt nhiệm vụ" },
-      { empName: "Dương Thị Thái", empPosition: "Tổ trưởng", empDepartment: "Tổ Văn phòng", evalPeriod: "Tháng 11/2026", totalScore: 85.0, rank: "Hoàn thành tốt nhiệm vụ" },
-      { empName: "Trần Văn Khánh", empPosition: "Giáo viên", empDepartment: "Tổ Khoa học Tự nhiên", evalPeriod: "Tháng 11/2026", totalScore: 68.0, rank: "Hoàn thành nhiệm vụ" }
+      { empName: "Bùi Thị Thanh Hoàn", empPosition: "Hiệu trưởng", empDepartment: "Ban Giám hiệu", evalPeriod: "Tháng 11/2026", selfScore: 102.0, leadScore: 102.0, bghScore: 102.0, totalScore: 102.0, rank: "Hoàn thành xuất sắc nhiệm vụ" },
+      { empName: "Nguyễn Thị Thu Trà", empPosition: "Phó Hiệu trưởng", empDepartment: "Ban Giám hiệu", evalPeriod: "Tháng 11/2026", selfScore: 100.0, leadScore: 100.0, bghScore: 100.0, totalScore: 100.0, rank: "Hoàn thành xuất sắc nhiệm vụ" },
+      { empName: "Nguyễn Hải Yến", empPosition: "Tổ trưởng", empDepartment: "Tổ Khoa học Tự nhiên", evalPeriod: "Tháng 11/2026", selfScore: 98.0, leadScore: 97.0, bghScore: 96.5, totalScore: 96.5, rank: "Hoàn thành xuất sắc nhiệm vụ" },
+      { empName: "Nguyễn Ngọc Bích", empPosition: "Tổ trưởng", empDepartment: "Tổ 1, 2, 3", evalPeriod: "Tháng 11/2026", selfScore: 95.0, leadScore: 94.5, bghScore: 94.0, totalScore: 94.0, rank: "Hoàn thành xuất sắc nhiệm vụ" },
+      { empName: "Đào Thị Vân Anh", empPosition: "Tổ trưởng", empDepartment: "Tổ Khoa học Xã hội", evalPeriod: "Tháng 11/2026", selfScore: 90.0, leadScore: 89.0, bghScore: 88.5, totalScore: 88.5, rank: "Hoàn thành tốt nhiệm vụ" },
+      { empName: "Dương Thị Thái", empPosition: "Tổ trưởng", empDepartment: "Tổ Văn phòng", evalPeriod: "Tháng 11/2026", selfScore: 87.0, leadScore: 86.0, bghScore: 85.0, totalScore: 85.0, rank: "Hoàn thành tốt nhiệm vụ" },
+      { empName: "Trần Văn Khánh", empPosition: "Giáo viên", empDepartment: "Tổ Khoa học Tự nhiên", evalPeriod: "Tháng 11/2026", selfScore: 72.0, leadScore: 69.0, bghScore: 68.0, totalScore: 68.0, rank: "Hoàn thành nhiệm vụ" }
     ];
 
     let currentMainTab = "gvcn";
@@ -1079,11 +1074,7 @@
     let currentScores = {};
     let activeBonuses = new Set();
     let currentAuthRole = "vc"; // 'vc' | 'tt' | 'bgh'
-    let currentWorkflow = "self"; // 'self' | 'lead' | 'bgh'
 
-    // ============================================================
-    // KHỞI TẠO DỮ LIỆU
-    // ============================================================
     window.addEventListener("DOMContentLoaded", () => {
       populateStaffDropdowns();
       loadCustomCriteriaConfig();
@@ -1117,7 +1108,7 @@
     }
 
     // ============================================================
-    // PHÂN HỆ 1: QUẢN TRỊ & XÁC THỰC NGƯỜI DÙNG (3 VAI TRÒ)
+    // XÁC THỰC & PHÂN QUYỀN
     // ============================================================
     function selectPortalAuthRole(role) {
       currentAuthRole = role;
@@ -1171,16 +1162,9 @@
         document.getElementById("headerCurrentUserDisplay").textContent = chosenUser;
       }
 
-      applyAuthRoleToWorkflow();
+      updateAuthUI();
       document.getElementById("portalLoginOverlay").classList.add("hidden");
       renderApp();
-    }
-
-    function applyAuthRoleToWorkflow() {
-      if (currentAuthRole === "vc") currentWorkflow = "self";
-      else if (currentAuthRole === "tt") currentWorkflow = "lead";
-      else if (currentAuthRole === "bgh") currentWorkflow = "bgh";
-      updateAuthUI();
     }
 
     function updateAuthUI() {
@@ -1218,7 +1202,7 @@
       if (savedRole && !isWorkflowLink) {
         currentAuthRole = savedRole;
         selectPortalAuthRole(savedRole);
-        applyAuthRoleToWorkflow();
+        updateAuthUI();
       }
 
       const overlay = document.getElementById("portalLoginOverlay");
@@ -1238,9 +1222,6 @@
       });
     }
 
-    // ============================================================
-    // ĐIỀU HƯỚNG 3 TAB CHỨC NĂNG CHÍNH
-    // ============================================================
     function switchMainModule(mod) {
       document.querySelectorAll(".nav-module-btn").forEach(b => b.classList.remove("active"));
       document.getElementById(`nav-${mod}`).classList.add("active");
@@ -1254,8 +1235,16 @@
     }
 
     // ============================================================
-    // PHÂN HỆ 2: THIẾT LẬP DANH MỤC & TIÊU CHÍ KPI
+    // PHÂN HỆ 2: CẤU HÌNH TIÊU CHÍ & TRỌNG SỐ KPI (HIỂN THỊ ĐẦY ĐỦ)
     // ============================================================
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
     function renderConfigTable() {
       const roleKey = document.getElementById("configRoleSelect").value;
       const cfg = KPI_ROLES[roleKey];
@@ -1278,17 +1267,17 @@
         totalW += Number(item.max) || 0;
         const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td><input type="text" class="form-control" style="padding:5px; font-weight:700;" value="${item.code}" ${!isBGH ? 'disabled' : ''} onchange="updateCriteriaField('${roleKey}', ${idx}, 'code', this.value)"></td>
+          <td><input type="text" class="form-control" style="padding:6px; font-weight:700; width:100%;" value="${escapeHtml(item.code)}" ${!isBGH ? 'disabled' : ''} onchange="updateCriteriaField('${roleKey}', ${idx}, 'code', this.value)"></td>
           <td>
-            <select class="form-control" style="padding:5px; font-size:0.82rem;" ${!isBGH ? 'disabled' : ''} onchange="updateCriteriaPillar('${roleKey}', ${idx}, this.value)">
+            <select class="form-control" style="padding:6px; font-size:0.82rem; width:100%;" ${!isBGH ? 'disabled' : ''} onchange="updateCriteriaPillar('${roleKey}', ${idx}, this.value)">
               <option value="1" ${item.pillar === 1 ? 'selected' : ''}>Định tính (Tiêu chí chung)</option>
               <option value="2" ${item.pillar === 2 ? 'selected' : ''}>Định lượng (Chuyên môn)</option>
             </select>
           </td>
-          <td><input type="text" class="form-control" style="padding:5px;" value="${item.title}" ${!isBGH ? 'disabled' : ''} onchange="updateCriteriaField('${roleKey}', ${idx}, 'title', this.value)"></td>
-          <td><input type="text" class="form-control" style="padding:5px; font-size:0.82rem;" value="${item.note}" ${!isBGH ? 'disabled' : ''} onchange="updateCriteriaField('${roleKey}', ${idx}, 'note', this.value)"></td>
-          <td style="text-align:center;"><input type="number" min="1" max="100" class="input-score" value="${item.max}" ${!isBGH ? 'disabled' : ''} oninput="updateCriteriaWeight('${roleKey}', ${idx}, this.value)"></td>
-          <td style="text-align:center;">
+          <td><textarea class="form-control-area" rows="2" ${!isBGH ? 'disabled' : ''} onchange="updateCriteriaField('${roleKey}', ${idx}, 'title', this.value)">${escapeHtml(item.title)}</textarea></td>
+          <td><textarea class="form-control-area" rows="3" ${!isBGH ? 'disabled' : ''} onchange="updateCriteriaField('${roleKey}', ${idx}, 'note', this.value)">${escapeHtml(item.note)}</textarea></td>
+          <td style="text-align:center; vertical-align:middle;"><input type="number" min="1" max="100" class="input-score" value="${item.max}" ${!isBGH ? 'disabled' : ''} oninput="updateCriteriaWeight('${roleKey}', ${idx}, this.value)"></td>
+          <td style="text-align:center; vertical-align:middle;">
             ${isBGH ? `<button class="btn btn-danger-outline" style="padding:5px 8px;" onclick="deleteCriteria('${roleKey}', ${idx})"><i class="fa-solid fa-trash"></i></button>` : '-'}
           </td>
         `;
@@ -1353,7 +1342,7 @@
     }
 
     // ============================================================
-    // PHÂN HỆ 3 & 4: CHẤM ĐIỂM, TÍNH ĐIỂM & TỰ ĐỘNG XẾP LOẠI 4 MỨC
+    // PHÂN HỆ 1: CHẤM ĐIỂM & TỰ ĐỘNG XẾP LOẠI
     // ============================================================
     function switchRole(tabType) {
       currentMainTab = tabType;
@@ -1438,532 +1427,3 @@
       const cfg = KPI_ROLES[currentRoleKey] || KPI_ROLES["gvcn"];
       cfg.items.forEach(item => {
         currentScores[item.code] = { self: item.max, lead: '', bgh: '', note: "", files: [] };
-      });
-    }
-
-    function renderApp() {
-      const cfg = KPI_ROLES[currentRoleKey] || KPI_ROLES["gvcn"];
-      document.getElementById("tableHeaderTitle").textContent = cfg.title;
-
-      const tbody = document.getElementById("kpiTableBody");
-      tbody.innerHTML = "";
-      let currentPillar = null;
-
-      // Quyền chỉnh sửa từng cột theo vai trò đăng nhập
-      const canEditSelf = currentAuthRole === "vc" || currentAuthRole === "bgh";
-      const canEditLead = currentAuthRole === "tt" || currentAuthRole === "bgh";
-      const canEditBgh = currentAuthRole === "bgh";
-
-      cfg.items.forEach(item => {
-        if (item.pillar !== currentPillar) {
-          currentPillar = item.pillar;
-          const headerTr = document.createElement("tr");
-          headerTr.innerHTML = `
-            <td colspan="7" style="background: #f8fafc; font-weight: 800; color: var(--green-dark); padding: 8px 12px; text-transform: uppercase; border-left: 4px solid var(--orange-main);">
-              <i class="fa-solid fa-bookmark" style="color: var(--orange-main); margin-right: 6px;"></i> ${item.pillarName}
-            </td>
-          `;
-          tbody.appendChild(headerTr);
-        }
-
-        if (!currentScores[item.code]) {
-          currentScores[item.code] = { self: item.max, lead: '', bgh: '', note: "", files: [] };
-        }
-        const scoreObj = currentScores[item.code];
-        const tr = document.createElement("tr");
-
-        let filesHtml = "";
-        if (scoreObj.files && scoreObj.files.length > 0) {
-          filesHtml = scoreObj.files.map((f, fIdx) => `
-            <span class="file-tag">
-              <i class="fa-solid fa-file-lines"></i>
-              <span class="file-tag-name" title="${f.name}" onclick="previewFile('${item.code}', ${fIdx})">${f.name}</span>
-              ${canEditSelf ? `<span class="file-tag-remove" onclick="removeFile('${item.code}',${fIdx})">✕</span>` : ''}
-            </span>
-          `).join("");
-        }
-
-        const selfVal = (scoreObj.self !== undefined && scoreObj.self !== '') ? scoreObj.self : item.max;
-        const leadVal = (scoreObj.lead !== undefined) ? scoreObj.lead : '';
-        const bghVal = (scoreObj.bgh !== undefined) ? scoreObj.bgh : '';
-
-        tr.innerHTML = `
-          <td style="text-align: center; vertical-align: middle;"><span class="badge-code">${item.code}</span></td>
-          <td><strong style="color: #0f172a; font-size: 0.92rem;">${item.title}</strong><div class="rule-note">${item.note}</div></td>
-          <td style="text-align: center; vertical-align: middle; font-weight: 700; color: #475569;">${item.max}</td>
-          <td style="text-align: center; vertical-align: middle;">
-            <input type="number" step="0.5" min="0" max="${item.max}" class="input-score ${!canEditSelf ? 'locked-score' : ''}"
-              value="${selfVal}" ${!canEditSelf ? 'readonly' : ''}
-              oninput="handleScoreChange('${item.code}', 'self', this.value, ${item.max})" />
-          </td>
-          <td style="text-align: center; vertical-align: middle;">
-            <input type="number" step="0.5" min="0" max="${item.max}" class="input-score ${canEditLead ? 'highlight-lead' : 'locked-score'}"
-              value="${leadVal}" placeholder="-" ${!canEditLead ? 'readonly' : ''}
-              oninput="handleScoreChange('${item.code}', 'lead', this.value, ${item.max})" />
-          </td>
-          <td style="text-align: center; vertical-align: middle;">
-            <input type="number" step="0.5" min="0" max="${item.max}" class="input-score ${canEditBgh ? 'highlight-bgh' : 'locked-score'}"
-              value="${bghVal}" placeholder="-" ${!canEditBgh ? 'readonly' : ''}
-              oninput="handleScoreChange('${item.code}', 'bgh', this.value, ${item.max})" />
-          </td>
-          <td style="vertical-align: middle;">
-            <div class="evidence-cell">
-              <input type="text" class="input-text-sm" placeholder="Ghi chú / Link minh chứng..." value="${scoreObj.note || ''}" oninput="handleNoteChange('${item.code}', this.value)" />
-              <div class="file-attach-wrapper">
-                ${canEditSelf ? `
-                  <label class="btn-attach-file">
-                    <i class="fa-solid fa-paperclip"></i> Đính kèm tệp
-                    <input type="file" multiple onchange="handleFileAttachment('${item.code}', this.files)" />
-                  </label>
-                ` : ''}
-                <div class="file-badge-list">${filesHtml}</div>
-              </div>
-            </div>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-
-      const bonusContainer = document.getElementById("bonusListContainer");
-      bonusContainer.innerHTML = "";
-      BONUS_KPI_LIST.forEach(b => {
-        const isChecked = activeBonuses.has(b.id);
-        const itemDiv = document.createElement("div");
-        itemDiv.className = "bonus-item";
-        itemDiv.innerHTML = `
-          <input type="checkbox" id="chk-${b.id}" ${isChecked ? 'checked' : ''} onchange="toggleBonus('${b.id}')">
-          <label for="chk-${b.id}" style="cursor: pointer; flex: 1;">
-            <div class="bonus-item-desc">${b.text}</div>
-          </label>
-          <div class="bonus-pts">+${b.pts}đ</div>
-        `;
-        bonusContainer.appendChild(itemDiv);
-      });
-
-      calculateTotals();
-    }
-
-    function handleScoreChange(code, roleKey, val, maxVal) {
-      let num = val === '' ? '' : parseFloat(val);
-      if (num !== '' && isNaN(num)) num = 0;
-      if (num !== '' && num > maxVal) num = maxVal;
-      if (num !== '' && num < 0) num = 0;
-      if (!currentScores[code]) currentScores[code] = { self: maxVal, lead: '', bgh: '', note: "", files: [] };
-      currentScores[code][roleKey] = num;
-      calculateTotals();
-      autoSave();
-    }
-
-    function handleNoteChange(code, val) {
-      if (!currentScores[code]) currentScores[code] = { self: 0, lead: '', bgh: '', note: "", files: [] };
-      currentScores[code].note = val;
-      autoSave();
-    }
-
-    function toggleBonus(bonusId) {
-      if (activeBonuses.has(bonusId)) activeBonuses.delete(bonusId);
-      else activeBonuses.add(bonusId);
-      calculateTotals();
-      autoSave();
-    }
-
-    function handleFileAttachment(code, fileList) {
-      if (!fileList || fileList.length === 0) return;
-      if (!currentScores[code]) currentScores[code] = { self: '', lead: '', bgh: '', note: "", files: [] };
-      if (!currentScores[code].files) currentScores[code].files = [];
-      Array.from(fileList).forEach(file => {
-        currentScores[code].files.push({ name: file.name, url: URL.createObjectURL(file) });
-      });
-      renderApp();
-      autoSave();
-    }
-
-    function removeFile(code, fIdx) {
-      currentScores[code].files.splice(fIdx, 1);
-      renderApp();
-      autoSave();
-    }
-
-    function previewFile(code, fIdx) {
-      const f = currentScores[code].files[fIdx];
-      if (f && f.url) window.open(f.url, "_blank");
-    }
-
-    function calculateTotals() {
-      const cfg = KPI_ROLES[currentRoleKey] || KPI_ROLES["gvcn"];
-      let p1 = 0, p2 = 0, maxP1 = 0, maxP2 = 0;
-      let hasUnder70 = false;
-
-      const evalColKey = currentAuthRole === "tt" ? "lead" : (currentAuthRole === "bgh" ? "bgh" : "self");
-
-      cfg.items.forEach(item => {
-        if (item.pillar === 1) maxP1 += item.max;
-        else maxP2 += item.max;
-
-        let sc = 0;
-        const val = currentScores[item.code]?.[evalColKey];
-        if (val !== undefined && val !== '') {
-          sc = parseFloat(val);
-        } else {
-          // Nếu Tổ trưởng hoặc BGH chưa nhập, tạm fallback về điểm tự chấm để hiển thị ước tính
-          sc = currentScores[item.code]?.self !== '' ? parseFloat(currentScores[item.code].self || 0) : item.max;
-        }
-
-        if (sc < item.max * 0.7) hasUnder70 = true;
-        if (item.pillar === 1) p1 += sc;
-        else p2 += sc;
-      });
-
-      let bonusScore = 0;
-      BONUS_KPI_LIST.forEach(b => { if (activeBonuses.has(b.id)) bonusScore += b.pts; });
-      if (bonusScore > 10) bonusScore = 10;
-
-      const finalTotal = Math.min(110, p1 + p2 + bonusScore);
-
-      document.getElementById("val-col1").textContent = p1.toFixed(1);
-      document.getElementById("max-col1").textContent = maxP1;
-      document.getElementById("val-col2").textContent = p2.toFixed(1);
-      document.getElementById("max-col2").textContent = maxP2;
-      document.getElementById("max-total-base").textContent = maxP1 + maxP2;
-      document.getElementById("val-bonus").textContent = bonusScore.toFixed(1);
-      document.getElementById("bonusScoreText").textContent = bonusScore.toFixed(1);
-      document.getElementById("val-total").textContent = finalTotal.toFixed(1);
-
-      const badge = document.getElementById("badge-rank");
-      let rank = "", badgeClass = "";
-
-      if (finalTotal >= 90) {
-        if (hasUnder70) {
-          rank = "Hoàn thành tốt nhiệm vụ (Hạ bậc do tiêu chí < 70%)";
-          badgeClass = "rank-b";
-        } else {
-          rank = "Hoàn thành xuất sắc nhiệm vụ";
-          badgeClass = "rank-a";
-        }
-      } else if (finalTotal >= 70) {
-        rank = "Hoàn thành tốt nhiệm vụ";
-        badgeClass = "rank-b";
-      } else if (finalTotal >= 50) {
-        rank = "Hoàn thành nhiệm vụ";
-        badgeClass = "rank-c";
-      } else {
-        rank = "Không hoàn thành nhiệm vụ";
-        badgeClass = "rank-d";
-      }
-
-      badge.className = `rank-badge ${badgeClass}`;
-      badge.textContent = rank;
-      return { total: finalTotal, rank };
-    }
-
-    function saveCurrentRecordToUnit() {
-      const { total, rank } = calculateTotals();
-      const record = {
-        empName: document.getElementById("empName").value,
-        empPosition: document.getElementById("empPosition").value,
-        empDepartment: document.getElementById("empDepartment").value,
-        evalPeriod: document.getElementById("evalPeriod").value,
-        totalScore: total,
-        rank: rank.replace(" (Hạ bậc do tiêu chí < 70%)", "")
-      };
-
-      let list = JSON.parse(localStorage.getItem("KPI_915_UNIT_RECORDS") || "[]");
-      const existingIdx = list.findIndex(r => r.empName === record.empName && r.evalPeriod === record.evalPeriod);
-      if (existingIdx >= 0) list[existingIdx] = record;
-      else list.push(record);
-
-      localStorage.setItem("KPI_915_UNIT_RECORDS", JSON.stringify(list));
-      showCustomModal(`✅ Đã lưu hồ sơ đánh giá của đ/c <strong>${record.empName}</strong> (${total.toFixed(1)} điểm - ${record.rank}) vào danh sách tổng hợp đơn vị!`);
-    }
-
-    // ============================================================
-    // PHÂN HỆ 5: BÁO CÁO & KẾT XUẤT THỐNG KÊ
-    // ============================================================
-    function getCombinedUnitRecords() {
-      const saved = JSON.parse(localStorage.getItem("KPI_915_UNIT_RECORDS") || "[]");
-      const map = new Map();
-      DEFAULT_UNIT_RECORDS.forEach(r => map.set(r.empName, r));
-      saved.forEach(r => map.set(r.empName, r));
-      return Array.from(map.values());
-    }
-
-    function renderReportModule() {
-      const records = getCombinedUnitRecords();
-      const total = records.length || 1;
-      let xs = 0, tot = 0, ht = 0, kht = 0;
-
-      const tbody = document.getElementById("reportTableBody");
-      tbody.innerHTML = "";
-
-      records.forEach((r, idx) => {
-        let badgeCls = "rank-a";
-        if (r.rank.includes("xuất sắc")) xs++;
-        else if (r.rank.includes("tốt")) { tot++; badgeCls = "rank-b"; }
-        else if (r.rank.includes("Không")) { kht++; badgeCls = "rank-d"; }
-        else { ht++; badgeCls = "rank-c"; }
-
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td style="text-align: center; font-weight: 700;">${idx + 1}</td>
-          <td><strong>${r.empName}</strong></td>
-          <td>${r.empPosition}</td>
-          <td>${r.empDepartment}</td>
-          <td style="text-align: center;">${r.evalPeriod}</td>
-          <td style="text-align: center; font-weight: 800; color: var(--green-dark);">${Number(r.totalScore).toFixed(1)}</td>
-          <td style="text-align: center;"><span class="rank-badge ${badgeCls}">${r.rank}</span></td>
-        `;
-        tbody.appendChild(tr);
-      });
-
-      document.getElementById("stat-xs").innerHTML = `${xs} <span>(${((xs / total) * 100).toFixed(1)}%)</span>`;
-      document.getElementById("stat-tot").innerHTML = `${tot} <span>(${((tot / total) * 100).toFixed(1)}%)</span>`;
-      document.getElementById("stat-ht").innerHTML = `${ht} <span>(${((ht / total) * 100).toFixed(1)}%)</span>`;
-      document.getElementById("stat-kht").innerHTML = `${kht} <span>(${((kht / total) * 100).toFixed(1)}%)</span>`;
-    }
-
-    function exportReportToCSV() {
-      const records = getCombinedUnitRecords();
-      let csv = "\uFEFFSTT,Họ và tên,Chức vụ,Tổ chuyên môn,Kỳ đánh giá,Tổng điểm,Xếp loại KPI\n";
-      records.forEach((r, idx) => {
-        csv += `${idx + 1},"${r.empName}","${r.empPosition}","${r.empDepartment}","${r.evalPeriod}",${Number(r.totalScore).toFixed(1)},"${r.rank}"\n`;
-      });
-      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `Bao_cao_KPI_915_Gia_Sang_${new Date().toISOString().slice(0, 10)}.csv`;
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    function openMinutesModal() {
-      const records = getCombinedUnitRecords();
-      const dateStr = updatePrintDate();
-      let xs = 0, tot = 0, ht = 0, kht = 0;
-      records.forEach(r => {
-        if (r.rank.includes("xuất sắc")) xs++;
-        else if (r.rank.includes("tốt")) tot++;
-        else if (r.rank.includes("Không")) kht++;
-        else ht++;
-      });
-
-      const rowsHtml = records.map((r, i) => `
-        <tr>
-          <td style="text-align:center;">${i + 1}</td>
-          <td>${r.empName}</td>
-          <td>${r.empPosition}</td>
-          <td>${r.empDepartment}</td>
-          <td style="text-align:center; font-weight:bold;">${Number(r.totalScore).toFixed(1)}</td>
-          <td>${r.rank}</td>
-        </tr>
-      `).join("");
-
-      const minutesHtml = `
-        <div class="minutes-paper">
-          <table style="width:100%; border:none; margin-bottom:10px;">
-            <tr style="border:none;">
-              <td style="border:none; text-align:center; width:45%;">
-                <strong>UBND PHƯỜNG GIA SÀNG</strong><br>
-                <strong>TRƯỜNG TH & THCS 915 GIA SÀNG</strong>
-              </td>
-              <td style="border:none; text-align:center; width:55%;">
-                <strong>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</strong><br>
-                <strong>Độc lập - Tự do - Hạnh phúc</strong><br>
-                <span style="font-style:italic; font-size:0.85em;">${dateStr}</span>
-              </td>
-            </tr>
-          </table>
-          <h3 style="text-align:center; text-transform:uppercase; margin:12px 0;">BIÊN BẢN HỌP BÌNH XÉT THI ĐUA, XẾP LOẠI KPI ĐỊNH KỲ</h3>
-          <p><strong>1. Thời gian, địa điểm:</strong> Hồi 14h00 ngày ${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}, tại Phòng Hội đồng Trường Tiểu học và THCS 915 Gia Sàng.</p>
-          <p><strong>2. Thành phần tham dự:</strong> Ban Giám hiệu, Tổ trưởng các tổ chuyên môn/văn phòng và Thư ký Hội đồng thi đua.</p>
-          <p><strong>3. Kết quả tổng hợp xếp loại KPI toàn đơn vị (${records.length} CBGVNV):</strong></p>
-          <ul style="margin-left:20px; margin-bottom:10px;">
-            <li>Hoàn thành xuất sắc nhiệm vụ: <strong>${xs}</strong> đ/c</li>
-            <li>Hoàn thành tốt nhiệm vụ: <strong>${tot}</strong> đ/c</li>
-            <li>Hoàn thành nhiệm vụ: <strong>${ht}</strong> đ/c</li>
-            <li>Không hoàn thành nhiệm vụ: <strong>${kht}</strong> đ/c</li>
-          </ul>
-          <table>
-            <thead>
-              <tr><th>STT</th><th>Họ và tên</th><th>Chức vụ</th><th>Tổ CM</th><th>Điểm</th><th>Xếp loại</th></tr>
-            </thead>
-            <tbody>${rowsHtml}</tbody>
-          </table>
-          <div style="display:flex; justify-content:space-between; margin-top:24px; text-align:center;">
-            <div style="width:45%;"><strong>THƯ KÝ HỘI ĐỒNG</strong><br><br><br><em>Lê Thị Thu Thủy</em></div>
-            <div style="width:45%;"><strong>CHỦ TỌA (HIỆU TRƯỞNG)</strong><br><br><br><em>Bùi Thị Thanh Hoàn</em></div>
-          </div>
-        </div>
-      `;
-
-      document.getElementById("customModalBox").classList.add("wide-modal");
-      document.getElementById("customModalHeader").innerHTML = `<i class="fa-solid fa-file-signature"></i> XEM TRƯỚC BIÊN BẢN HỌP BÌNH XÉT THI ĐUA`;
-      const footerBtns = `
-        <button class="btn btn-orange-primary" onclick="printMinutes()"><i class="fa-solid fa-print"></i> In Biên bản (A4)</button>
-        <button class="btn btn-orange-outline" style="color:var(--gray-700); background:white;" onclick="closeCustomModal()">Đóng</button>
-      `;
-      showCustomModal(minutesHtml, footerBtns);
-    }
-
-    function printMinutes() {
-      document.body.classList.add("printing-minutes");
-      window.print();
-      setTimeout(() => document.body.classList.remove("printing-minutes"), 500);
-    }
-
-    function printEvaluationForm() {
-      document.body.classList.remove("printing-minutes");
-      window.print();
-    }
-
-    // ============================================================
-    // CHIA SẺ LINK & LƯU LOCALSTORAGE
-    // ============================================================
-    function encodeDataToUrl(obj) {
-      const bytes = new TextEncoder().encode(JSON.stringify(obj));
-      let binary = '';
-      for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
-      return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-    }
-
-    function decodeDataFromUrl(str) {
-      if (!str) return null;
-      str = str.replace(/-/g, '+').replace(/_/g, '/');
-      while (str.length % 4) str += '=';
-      const binary = atob(str);
-      const bytes = new Uint8Array(binary.length);
-      for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-      return JSON.parse(new TextDecoder().decode(bytes));
-    }
-
-    function checkUrlWorkflow() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const mode = urlParams.get("mode");
-      const dataStr = urlParams.get("d");
-      if (mode && dataStr) {
-        try {
-          const decoded = decodeDataFromUrl(dataStr);
-          if (!decoded) return false;
-          currentRoleKey = decoded.role || "gvcn";
-          if (decoded.empName) {
-            document.getElementById("empName").value = decoded.empName;
-            document.getElementById("sigSelfName").textContent = decoded.empName;
-          }
-          document.getElementById("empPosition").value = decoded.empPosition || "";
-          document.getElementById("empDepartment").value = decoded.empDepartment || "Tổ Khoa học Tự nhiên";
-          document.getElementById("evalPeriod").value = decoded.evalPeriod || "";
-          currentScores = decoded.scores || {};
-          activeBonuses = new Set(decoded.bonuses || []);
-          if (decoded.leadComment) document.getElementById("leadCommentInput").value = decoded.leadComment;
-          if (decoded.bghComment) document.getElementById("bghCommentInput").value = decoded.bghComment;
-
-          if (mode === "lead") currentAuthRole = "tt";
-          else if (mode === "bgh" || mode === "ht") currentAuthRole = "bgh";
-          updateAuthUI();
-
-          document.getElementById("flowBanner").style.display = "flex";
-          document.getElementById("flowBannerText").innerHTML = `<i class="fa-solid fa-user-check"></i> Đang mở hồ sơ của đ/c <strong>${decoded.empName}</strong> (${decoded.empDepartment})`;
-          return true;
-        } catch (e) {}
-      }
-      return false;
-    }
-
-    function clearWorkflowMode() { window.location.href = window.location.pathname; }
-
-    function handleShareButtonAction() {
-      const target = currentAuthRole === "vc" ? "lead" : (currentAuthRole === "tt" ? "bgh" : "thu_ky");
-      const dataToPack = {
-        role: currentRoleKey,
-        empName: document.getElementById("empName").value,
-        empPosition: document.getElementById("empPosition").value,
-        empDepartment: document.getElementById("empDepartment").value,
-        evalPeriod: document.getElementById("evalPeriod").value,
-        scores: currentScores,
-        bonuses: Array.from(activeBonuses),
-        leadComment: document.getElementById("leadCommentInput").value,
-        bghComment: document.getElementById("bghCommentInput").value
-      };
-      const fullUrl = `${window.location.origin}${window.location.pathname}?mode=${target}&d=${encodeDataToUrl(dataToPack)}`;
-      navigator.clipboard.writeText(fullUrl).then(() => {
-        showCustomModal(`✅ Đã sao chép link bàn giao thành công! Chị có thể dán (Ctrl+V) để gửi qua Zalo hoặc Email.`);
-      }).catch(() => {
-        showCustomModal(`Link bàn giao:<br><input type="text" class="form-control" value="${fullUrl}" onclick="this.select()">`);
-      });
-    }
-
-    function autoSave() {
-      const data = {
-        role: currentRoleKey,
-        empName: document.getElementById("empName").value,
-        empPosition: document.getElementById("empPosition").value,
-        empDepartment: document.getElementById("empDepartment").value,
-        evalPeriod: document.getElementById("evalPeriod").value,
-        scores: currentScores,
-        bonuses: Array.from(activeBonuses),
-        leadName: document.getElementById("leadApproverName").value,
-        leadComment: document.getElementById("leadCommentInput").value,
-        bghComment: document.getElementById("bghCommentInput").value
-      };
-      localStorage.setItem("KPI_915_V2", JSON.stringify(data));
-    }
-
-    function loadSavedData() {
-      const raw = localStorage.getItem("KPI_915_V2");
-      if (raw) {
-        try {
-          const data = JSON.parse(raw);
-          if (data.role && KPI_ROLES[data.role]) currentRoleKey = data.role;
-          if (data.empName) {
-            document.getElementById("empName").value = data.empName;
-            document.getElementById("sigSelfName").textContent = data.empName;
-          }
-          if (data.empPosition) document.getElementById("empPosition").value = data.empPosition;
-          if (data.empDepartment) document.getElementById("empDepartment").value = data.empDepartment;
-          if (data.evalPeriod) document.getElementById("evalPeriod").value = data.evalPeriod;
-          if (data.scores) currentScores = data.scores;
-          if (data.bonuses) activeBonuses = new Set(data.bonuses);
-          if (data.leadName) document.getElementById("leadApproverName").value = data.leadName;
-          if (data.leadComment) document.getElementById("leadCommentInput").value = data.leadComment;
-          if (data.bghComment) document.getElementById("bghCommentInput").value = data.bghComment;
-          return;
-        } catch (e) {}
-      }
-      initDefaultScores();
-    }
-
-    function updatePrintDate() {
-      const now = new Date();
-      const dateText = `Gia Sàng, ngày ${String(now.getDate()).padStart(2, '0')} tháng ${String(now.getMonth() + 1).padStart(2, '0')} năm ${now.getFullYear()}`;
-      const el = document.getElementById("printCurrentDate");
-      if (el) el.textContent = dateText;
-      return dateText;
-    }
-
-    function showCustomModal(msg, customFooterHtml = null) {
-      document.getElementById("customModalMessage").innerHTML = msg;
-      document.getElementById("customModalFooter").innerHTML = customFooterHtml || `<button class="btn btn-orange-primary" onclick="closeCustomModal()">Đã hiểu</button>`;
-      document.getElementById("customModal").style.display = "flex";
-    }
-
-    function showCustomConfirm(msg, onConfirm) {
-      document.getElementById("customModalHeader").innerHTML = `<i class="fa-solid fa-circle-question"></i> XÁC NHẬN`;
-      const footer = `
-        <button class="btn btn-orange-primary" id="btnConfirmYes">Đồng ý</button>
-        <button class="btn btn-orange-outline" style="color:var(--gray-700); background:white;" onclick="closeCustomModal()">Hủy</button>
-      `;
-      showCustomModal(msg, footer);
-      document.getElementById("btnConfirmYes").onclick = () => {
-        closeCustomModal();
-        onConfirm();
-      };
-    }
-
-    function closeCustomModal() {
-      document.getElementById("customModal").style.display = "none";
-      document.getElementById("customModalBox").classList.remove("wide-modal");
-      document.getElementById("customModalHeader").innerHTML = `<i class="fa-solid fa-circle-check"></i> THÔNG BÁO`;
-    }
-  </script>
-</body>
-</html>
