@@ -539,7 +539,7 @@
         <i class="fa-solid fa-sliders"></i> 3. Cấu hình Tiêu chí & Trọng số KPI
       </button>
       <button class="nav-module-btn" id="nav-report" onclick="switchMainModule('report')">
-        <i class="fa-solid fa-chart-pie"></i> 4. Báo cáo & Theo dõi Nhân sự (<span id="navMissingCountBadge">131</span> chưa nhập)
+        <i class="fa-solid fa-chart-pie"></i> 4. Báo cáo & Theo dõi Nhân sự (<span id="navMissingCountBadge">122</span> chưa nhập)
       </button>
       <button class="nav-module-btn" id="nav-cloud" onclick="switchMainModule('cloud')">
         <i class="fa-solid fa-cloud-arrow-up"></i> 5. Kết nối Google Sheets
@@ -674,10 +674,10 @@
             <label>Tổ Chuyên môn / Bộ phận:</label>
             <select id="empDepartment" class="form-control" onchange="handleDepartmentChange(this.value)">
               <option value="Tổ 1, 2, 3">Tổ 1, 2, 3</option>
-              <option value="Tổ 4, 5">Tổ 4, 5</option>
-              <option value="Tổ Khoa học Tự nhiên" selected>Tổ Khoa học Tự nhiên</option>
-              <option value="Tổ Khoa học Xã hội">Tổ Khoa học Xã hội</option>
-              <option value="Tổ Nghệ thuật">Tổ Nghệ thuật</option>
+              <option value="Tổ 4, 5" selected>Tổ 4, 5</option>
+              <option value="Tổ KHXH">Tổ KHXH</option>
+              <option value="Tổ KHTN">Tổ KHTN</option>
+              <option value="Tổ Ngoại ngữ - GDTC - NT">Tổ Ngoại ngữ - GDTC - NT</option>
               <option value="Tổ Văn phòng">Tổ Văn phòng</option>
               <option value="Ban Giám hiệu">Ban Giám hiệu</option>
             </select>
@@ -873,7 +873,7 @@
       <div class="metrics-grid" id="reportMetricsGrid">
         <div class="metric-card">
           <div class="metric-title">Tiến độ nộp KPI</div>
-          <div class="metric-value" id="stat-progress" style="color: var(--green-dark);">0 / 131</div>
+          <div class="metric-value" id="stat-progress" style="color: var(--green-dark);">0 / 122</div>
           <div class="metric-desc" id="stat-progress-desc">Chưa có nhân sự nộp</div>
         </div>
         <div class="metric-card">
@@ -917,13 +917,13 @@
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
             <label style="font-weight:700; font-size:0.84rem;">Lọc Tổ chuyên môn:</label>
-            <select id="reportFilterDept" class="form-control" style="width:210px; font-weight:700;" onchange="renderReportModule()">
+            <select id="reportFilterDept" class="form-control" style="width:225px; font-weight:700;" onchange="renderReportModule()">
               <option value="ALL">Tất cả các Tổ (Toàn trường)</option>
               <option value="Tổ 1, 2, 3">Tổ 1, 2, 3</option>
               <option value="Tổ 4, 5">Tổ 4, 5</option>
-              <option value="Tổ Khoa học Tự nhiên">Tổ Khoa học Tự nhiên</option>
-              <option value="Tổ Khoa học Xã hội">Tổ Khoa học Xã hội</option>
-              <option value="Tổ Nghệ thuật">Tổ Nghệ thuật</option>
+              <option value="Tổ KHXH">Tổ KHXH</option>
+              <option value="Tổ KHTN">Tổ KHTN</option>
+              <option value="Tổ Ngoại ngữ - GDTC - NT">Tổ Ngoại ngữ - GDTC - NT</option>
               <option value="Tổ Văn phòng">Tổ Văn phòng</option>
               <option value="Ban Giám hiệu">Ban Giám hiệu</option>
             </select>
@@ -933,7 +933,7 @@
               <i class="fa-solid fa-check-circle"></i> Đã nhập đánh giá (<span id="cntSubmittedTab">0</span>)
             </button>
             <button class="btn btn-danger-outline" id="btnSubReportMissing" onclick="switchReportSubTab('missing')">
-              <i class="fa-solid fa-user-clock"></i> Nhân sự chưa nhập (<span id="cntMissingTab">131</span>)
+              <i class="fa-solid fa-user-clock"></i> Nhân sự chưa nhập (<span id="cntMissingTab">122</span>)
             </button>
           </div>
         </div>
@@ -1076,42 +1076,401 @@
   <script>
     const EMBEDDED_SCHOOL_LOGO = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%23064e3b' stroke='%23ea580c' stroke-width='6'/><text x='50' y='57' font-size='28' font-weight='bold' text-anchor='middle' fill='white' font-family='Arial'>915</text></svg>";
 
+    const DEPT_MEMBERS = {
+      "Tổ 1, 2, 3": [
+            "Hoàng Thị Thu Hằng",
+            "Nguyễn Thùy Linh",
+            "Đặng Thị Nguyệt",
+            "Bùi Thị Hảo",
+            "Hứa Thu Hiền",
+            "Trần Lệ Thu",
+            "Lý Thị Trang",
+            "Nguyễn Thị Thu Hằng",
+            "Dương Thu Hường",
+            "Vi Thị Nga",
+            "Luân Thị Hoài Thương",
+            "Nguyễn Thị Quỳnh",
+            "Nguyễn Thị Huyền Trang",
+            "Nguyễn Thị Chiên",
+            "Tô Thị Đông",
+            "Lý Thu Thảo",
+            "Nguyễn Thị Minh Huệ",
+            "Nguyễn Thi Thu Hà",
+            "Bạch Thị Kim Oanh",
+            "Đặng Thị Xiêm",
+            "Nguyễn Ngọc Bích",
+            "Hà Thanh Huyền",
+            "Trần Thị Hồng Anh",
+            "Nguyễn Thu Hằng",
+            "Lưu Vũ Huyền Nhung",
+            "Lê Thanh Hương",
+            "Chu Hải Anh",
+            "Nguyễn Thị Thu Hà",
+            "Trần Lan Phương",
+            "Trần Xuân Quý",
+            "Chu Yến Nhi",
+            "Hoàng Hồng Thuý",
+            "Dương Ngọc Mai"
+      ],
+      "Tổ 4, 5": [
+            "Nguyễn Đàm Lâm",
+            "Lê Thị Nhàn",
+            "Trần Thu Trang",
+            "Lưu Thị Huệ",
+            "Dương Thị Lan",
+            "Trương Thị Hồng Nhung",
+            "Nguyễn Thị Thanh Xuân",
+            "Nguyễn Thị Hà Giang",
+            "Nguyễn Thị Huyền",
+            "Vũ Thị Thi",
+            "Ân Tiến Dũng",
+            "Hứa Kim Chi",
+            "Ngô Minh Thuỳ",
+            "Nguyễn Hà Thu",
+            "Nguyễn Thị Thơm",
+            "Nguyễn Thị Thanh Thảo",
+            "Nguyễn Thị Thu Trà",
+            "Dương Ngọc Ánh",
+            "Đoàn Thanh Tuấn",
+            "Nguyễn Thị Nga",
+            "Nguyễn Thị Hiền",
+            "Nguyễn Thị Kim Hoa",
+            "Nguyễn Thị Thu Thương",
+            "Nguyễn Thị Hải",
+            "Nguyễn Quỳnh Anh",
+            "Vũ Minh Hiếu",
+            "Nguyễn Huy Hoàng",
+            "Vũ Thị Loan"
+      ],
+      "Tổ KHXH": [
+            "Hà Thị Phương Loan",
+            "Vương Thị Thủy",
+            "Trần Thị Thu Hoài",
+            "Nguyễn Thị Khánh Hiền",
+            "Nguyễn Thị Kiều",
+            "Mai Phương Thảo",
+            "Ma Thị Uyên",
+            "Nguyễn Thị Anh Ngọc",
+            "Lê Khắc Phúc",
+            "Phạm Thị Bảo Yến",
+            "Đào Thị Vân Anh",
+            "Nguyễn Thị Thuỳ Linh",
+            "Nguyễn Thị Hạnh",
+            "Trần Thị Thanh Xuyên",
+            "Đào Thị Phương Nhung",
+            "Đinh Thị Thanh Nam",
+            "Trần Thị Hương"
+      ],
+      "Tổ KHTN": [
+            "Nguyễn Hải Yến",
+            "Dương Thị Hương",
+            "Phan Thị Hà",
+            "Dương Thị Kiều Anh",
+            "Dương Thị Uyên",
+            "Lê Thị Thanh Thuỷ",
+            "Nguyễn Lệ Quyên",
+            "Phạm Hữu Phúc",
+            "Nguyễn Ngọc Anh",
+            "Nguyễn Thị Hoàng Nguyên",
+            "Ngô Thị Thu Thuỷ",
+            "Lê Thị Hồng",
+            "Bùi Ngọc Viễn",
+            "Nguyễn Thị Đoan Trang",
+            "Nguyễn Thị Thu",
+            "Thân Thị Hường",
+            "Nguyễn Thị Thùy Linh",
+            "Đỗ Thị Thu Hiền",
+            "Lê Minh Ngọc"
+      ],
+      "Tổ Ngoại ngữ - GDTC - NT": [
+            "Ninh Thị Bích Lụa",
+            "Trần Thị Anh",
+            "Hoàng Anh Tuấn",
+            "Vũ Thị Tuyết Nhung",
+            "Đào Thị Ngát",
+            "Dương Ngọc Lan",
+            "Trần Thị Thanh Hải",
+            "Ngô Thị Tân",
+            "Phan Thị Hồng",
+            "Nguyễn Thị Liên Hương",
+            "Lê Quỳnh Anh",
+            "Trương Minh Quang",
+            "Phạm Thị Loan",
+            "Trần Thảo My"
+      ],
+      "Tổ Văn phòng": [
+            "Dương Thị Thái",
+            "Phạm Thị Mơ",
+            "Dương Thị Vân",
+            "Trần Thị Thu Thảo",
+            "Lê Thị Phương",
+            "Kim Thị Tâm",
+            "Hoàng Thị Huệ",
+            "Nguyễn Thị Liễu",
+            "Hoàng Thị Hương"
+      ],
+      "Ban Giám hiệu": [
+            "Bùi Thị Thanh Hoàn",
+            "Bùi Thị Nhíp"
+      ]
+};
+
+    const STAFF_DEPT_MAP = {
+      "Hoàng Thị Thu Hằng": "Tổ 1, 2, 3",
+      "Nguyễn Thùy Linh": "Tổ 1, 2, 3",
+      "Đặng Thị Nguyệt": "Tổ 1, 2, 3",
+      "Bùi Thị Hảo": "Tổ 1, 2, 3",
+      "Hứa Thu Hiền": "Tổ 1, 2, 3",
+      "Trần Lệ Thu": "Tổ 1, 2, 3",
+      "Lý Thị Trang": "Tổ 1, 2, 3",
+      "Nguyễn Thị Thu Hằng": "Tổ 1, 2, 3",
+      "Dương Thu Hường": "Tổ 1, 2, 3",
+      "Vi Thị Nga": "Tổ 1, 2, 3",
+      "Luân Thị Hoài Thương": "Tổ 1, 2, 3",
+      "Nguyễn Thị Quỳnh": "Tổ 1, 2, 3",
+      "Nguyễn Thị Huyền Trang": "Tổ 1, 2, 3",
+      "Nguyễn Thị Chiên": "Tổ 1, 2, 3",
+      "Tô Thị Đông": "Tổ 1, 2, 3",
+      "Lý Thu Thảo": "Tổ 1, 2, 3",
+      "Nguyễn Thị Minh Huệ": "Tổ 1, 2, 3",
+      "Nguyễn Thi Thu Hà": "Tổ 1, 2, 3",
+      "Bạch Thị Kim Oanh": "Tổ 1, 2, 3",
+      "Đặng Thị Xiêm": "Tổ 1, 2, 3",
+      "Nguyễn Ngọc Bích": "Tổ 1, 2, 3",
+      "Hà Thanh Huyền": "Tổ 1, 2, 3",
+      "Trần Thị Hồng Anh": "Tổ 1, 2, 3",
+      "Nguyễn Thu Hằng": "Tổ 1, 2, 3",
+      "Lưu Vũ Huyền Nhung": "Tổ 1, 2, 3",
+      "Lê Thanh Hương": "Tổ 1, 2, 3",
+      "Chu Hải Anh": "Tổ 1, 2, 3",
+      "Nguyễn Thị Thu Hà": "Tổ 1, 2, 3",
+      "Trần Lan Phương": "Tổ 1, 2, 3",
+      "Trần Xuân Quý": "Tổ 1, 2, 3",
+      "Chu Yến Nhi": "Tổ 1, 2, 3",
+      "Hoàng Hồng Thuý": "Tổ 1, 2, 3",
+      "Dương Ngọc Mai": "Tổ 1, 2, 3",
+      "Nguyễn Đàm Lâm": "Tổ 4, 5",
+      "Lê Thị Nhàn": "Tổ 4, 5",
+      "Trần Thu Trang": "Tổ 4, 5",
+      "Lưu Thị Huệ": "Tổ 4, 5",
+      "Dương Thị Lan": "Tổ 4, 5",
+      "Trương Thị Hồng Nhung": "Tổ 4, 5",
+      "Nguyễn Thị Thanh Xuân": "Tổ 4, 5",
+      "Nguyễn Thị Hà Giang": "Tổ 4, 5",
+      "Nguyễn Thị Huyền": "Tổ 4, 5",
+      "Vũ Thị Thi": "Tổ 4, 5",
+      "Ân Tiến Dũng": "Tổ 4, 5",
+      "Hứa Kim Chi": "Tổ 4, 5",
+      "Ngô Minh Thuỳ": "Tổ 4, 5",
+      "Nguyễn Hà Thu": "Tổ 4, 5",
+      "Nguyễn Thị Thơm": "Tổ 4, 5",
+      "Nguyễn Thị Thanh Thảo": "Tổ 4, 5",
+      "Nguyễn Thị Thu Trà": "Tổ 4, 5",
+      "Dương Ngọc Ánh": "Tổ 4, 5",
+      "Đoàn Thanh Tuấn": "Tổ 4, 5",
+      "Nguyễn Thị Nga": "Tổ 4, 5",
+      "Nguyễn Thị Hiền": "Tổ 4, 5",
+      "Nguyễn Thị Kim Hoa": "Tổ 4, 5",
+      "Nguyễn Thị Thu Thương": "Tổ 4, 5",
+      "Nguyễn Thị Hải": "Tổ 4, 5",
+      "Nguyễn Quỳnh Anh": "Tổ 4, 5",
+      "Vũ Minh Hiếu": "Tổ 4, 5",
+      "Nguyễn Huy Hoàng": "Tổ 4, 5",
+      "Vũ Thị Loan": "Tổ 4, 5",
+      "Hà Thị Phương Loan": "Tổ KHXH",
+      "Vương Thị Thủy": "Tổ KHXH",
+      "Trần Thị Thu Hoài": "Tổ KHXH",
+      "Nguyễn Thị Khánh Hiền": "Tổ KHXH",
+      "Nguyễn Thị Kiều": "Tổ KHXH",
+      "Mai Phương Thảo": "Tổ KHXH",
+      "Ma Thị Uyên": "Tổ KHXH",
+      "Nguyễn Thị Anh Ngọc": "Tổ KHXH",
+      "Lê Khắc Phúc": "Tổ KHXH",
+      "Phạm Thị Bảo Yến": "Tổ KHXH",
+      "Đào Thị Vân Anh": "Tổ KHXH",
+      "Nguyễn Thị Thuỳ Linh": "Tổ KHXH",
+      "Nguyễn Thị Hạnh": "Tổ KHXH",
+      "Trần Thị Thanh Xuyên": "Tổ KHXH",
+      "Đào Thị Phương Nhung": "Tổ KHXH",
+      "Đinh Thị Thanh Nam": "Tổ KHXH",
+      "Trần Thị Hương": "Tổ KHXH",
+      "Nguyễn Hải Yến": "Tổ KHTN",
+      "Dương Thị Hương": "Tổ KHTN",
+      "Phan Thị Hà": "Tổ KHTN",
+      "Dương Thị Kiều Anh": "Tổ KHTN",
+      "Dương Thị Uyên": "Tổ KHTN",
+      "Lê Thị Thanh Thuỷ": "Tổ KHTN",
+      "Nguyễn Lệ Quyên": "Tổ KHTN",
+      "Phạm Hữu Phúc": "Tổ KHTN",
+      "Nguyễn Ngọc Anh": "Tổ KHTN",
+      "Nguyễn Thị Hoàng Nguyên": "Tổ KHTN",
+      "Ngô Thị Thu Thuỷ": "Tổ KHTN",
+      "Lê Thị Hồng": "Tổ KHTN",
+      "Bùi Ngọc Viễn": "Tổ KHTN",
+      "Nguyễn Thị Đoan Trang": "Tổ KHTN",
+      "Nguyễn Thị Thu": "Tổ KHTN",
+      "Thân Thị Hường": "Tổ KHTN",
+      "Nguyễn Thị Thùy Linh": "Tổ KHTN",
+      "Đỗ Thị Thu Hiền": "Tổ KHTN",
+      "Lê Minh Ngọc": "Tổ KHTN",
+      "Ninh Thị Bích Lụa": "Tổ Ngoại ngữ - GDTC - NT",
+      "Trần Thị Anh": "Tổ Ngoại ngữ - GDTC - NT",
+      "Hoàng Anh Tuấn": "Tổ Ngoại ngữ - GDTC - NT",
+      "Vũ Thị Tuyết Nhung": "Tổ Ngoại ngữ - GDTC - NT",
+      "Đào Thị Ngát": "Tổ Ngoại ngữ - GDTC - NT",
+      "Dương Ngọc Lan": "Tổ Ngoại ngữ - GDTC - NT",
+      "Trần Thị Thanh Hải": "Tổ Ngoại ngữ - GDTC - NT",
+      "Ngô Thị Tân": "Tổ Ngoại ngữ - GDTC - NT",
+      "Phan Thị Hồng": "Tổ Ngoại ngữ - GDTC - NT",
+      "Nguyễn Thị Liên Hương": "Tổ Ngoại ngữ - GDTC - NT",
+      "Lê Quỳnh Anh": "Tổ Ngoại ngữ - GDTC - NT",
+      "Trương Minh Quang": "Tổ Ngoại ngữ - GDTC - NT",
+      "Phạm Thị Loan": "Tổ Ngoại ngữ - GDTC - NT",
+      "Trần Thảo My": "Tổ Ngoại ngữ - GDTC - NT",
+      "Dương Thị Thái": "Tổ Văn phòng",
+      "Phạm Thị Mơ": "Tổ Văn phòng",
+      "Dương Thị Vân": "Tổ Văn phòng",
+      "Trần Thị Thu Thảo": "Tổ Văn phòng",
+      "Lê Thị Phương": "Tổ Văn phòng",
+      "Kim Thị Tâm": "Tổ Văn phòng",
+      "Hoàng Thị Huệ": "Tổ Văn phòng",
+      "Nguyễn Thị Liễu": "Tổ Văn phòng",
+      "Hoàng Thị Hương": "Tổ Văn phòng",
+      "Bùi Thị Thanh Hoàn": "Ban Giám hiệu",
+      "Bùi Thị Nhíp": "Ban Giám hiệu"
+};
+
     const STAFF_NAMES = [
-      "Chu Hải Anh","Dương Ngọc Ánh","Dương Thị Kiều Anh","Lê Quỳnh Anh","Nguyễn Ngọc Anh",
-      "Nguyễn Quỳnh Anh","Trần Thị Anh","Trần Thị Hồng Anh","Đào Thị Vân Anh","Nguyễn Ngọc Bích",
-      "Trịnh Ngọc Bích","Hứa Kim Chi","Nguyễn Thị Chiên","Ân Tiến Dũng","Nông Văn Dương",
-      "Tô Thị Đông","Nguyễn Thị Hà Giang","Nguyễn Thị Thu Hà","Phan Thị Hà","Nguyễn Thị Hải",
-      "Trần Thị Thanh Hải","Hoàng Thị Thu Hằng","Nguyễn Thị Thu Hằng","Nguyễn Thu Hằng","Bùi Thị Hảo",
-      "Hứa Thu Hiền","Nguyễn Thị Hiền","Nguyễn Thị Khánh Hiền","Đỗ Thị Thu Hiền","Vũ Minh Hiếu",
-      "Nguyễn Thị Kim Hoa","Trần Thị Thu Hoài","Trần Thu Hoài","Bùi Thị Thanh Hoàn","Nguyễn Huy Hoàng",
-      "Lê Thị Hồng","Phan Thị Hồng","Hoàng Minh Huệ","Hoàng Thị Huệ","Lưu Thị Huệ",
-      "Nguyễn Thị Minh Huệ","Nguyễn Thị Hạnh","Dương Thị Hương","Dương Thu Hường","Hoàng Thị Hương",
-      "Lê Thanh Hương","Nguyễn Thị Liên Hương","Thân Thị Hường","Hà Thanh Huyền","Nguyễn Thị Huyền",
-      "Trần Văn Khánh","Nguyễn Thị Kiều","Nguyễn Đàm Lâm","Dương Ngọc Lan","Dương Thị Lan",
-      "Nguyễn Thị Cẩm Lệ","Nguyễn Thị Thuỳ Linh","Nguyễn Thị Liễu","Nguyễn Thùy Linh","Hà Thị Phương Loan",
-      "Phạm Thị Loan","Vũ Thị Loan","Ninh Thị Bích Lụa","Dương Ngọc Mai","Phạm Thị Mơ",
-      "Trần Thảo My","Đinh Thị Thanh Nam","Nguyễn Thị Nga","Vi Thị Nga","Đào Thị Ngát",
-      "Lê Minh Ngọc","Nguyễn Thị Anh Ngọc","Nguyễn Thị Hoàng Nguyên","Đặng Thị Nguyệt","Lê Thị Nhàn",
-      "Chu Yến Nhi","Bùi Thị Nhíp","Lưu Vũ Huyền Nhung","Trương Thị Hồng Nhung","Vũ Thị Tuyết Nhung",
-      "Đào Thị Phương Nhung","Bạch Thị Kim Oanh","Lê Khắc Phúc","Phạm Hữu Phúc","Lê Thị Phương",
-      "Nguyễn Thị Minh Phương","Trần Lan Phương","Trương Minh Quang","Trần Xuân Quý","Nguyễn Lệ Quyên",
-      "Nguyễn Thị Quỳnh","Ngô Mạnh Tấn","Ngô Thị Tân","Dương Thị Thái","Lý Thu Thảo",
-      "Mai Phương Thảo","Nguyễn Thị Thanh Thảo","Trần Thị Thu Thảo","Sầm Thị Thi","Vũ Thị Thi",
-      "Nguyễn Thị Thơm","Nguyễn Hà Thu","Nguyễn Thị Thu","Trần Lệ Thu","Luân Thị Hoài Thương",
-      "Lương Thị Thu Thương","Hoàng Hồng Thúy","Lê Thị Thanh Thủy","Ngô Minh Thùy","Ngô Thị Thu Thuỷ",
-      "Vương Thị Thủy","Kim Thị Tâm","Hạng Minh Tiến","Nguyễn Thị Thu Trà","Lý Thị Trang",
-      "Nguyễn Thị Huyền Trang","Nguyễn Thị Đoan Trang","Trần Thu Trang","Đặng Thị Tranh","Hoàng Anh Tuấn",
-      "Đoàn Thanh Tuấn","Dương Thị Uyên","Ma Thị Uyên","Dương Thị Vân","Nguyễn Thị Hồng Vân",
-      "Bùi Ngọc Viễn","Đặng Thị Xiêm","Nguyễn Thị Thanh Xuân","Trần Thị Thanh Xuyên","Nguyễn Hải Yến",
-      "Phạm Thị Bảo Yến"
-    ];
+      "Hoàng Thị Thu Hằng",
+      "Nguyễn Thùy Linh",
+      "Đặng Thị Nguyệt",
+      "Bùi Thị Hảo",
+      "Hứa Thu Hiền",
+      "Trần Lệ Thu",
+      "Lý Thị Trang",
+      "Nguyễn Thị Thu Hằng",
+      "Dương Thu Hường",
+      "Vi Thị Nga",
+      "Luân Thị Hoài Thương",
+      "Nguyễn Thị Quỳnh",
+      "Nguyễn Thị Huyền Trang",
+      "Nguyễn Thị Chiên",
+      "Tô Thị Đông",
+      "Lý Thu Thảo",
+      "Nguyễn Thị Minh Huệ",
+      "Nguyễn Thi Thu Hà",
+      "Bạch Thị Kim Oanh",
+      "Đặng Thị Xiêm",
+      "Nguyễn Ngọc Bích",
+      "Hà Thanh Huyền",
+      "Trần Thị Hồng Anh",
+      "Nguyễn Thu Hằng",
+      "Lưu Vũ Huyền Nhung",
+      "Lê Thanh Hương",
+      "Chu Hải Anh",
+      "Nguyễn Thị Thu Hà",
+      "Trần Lan Phương",
+      "Trần Xuân Quý",
+      "Chu Yến Nhi",
+      "Hoàng Hồng Thuý",
+      "Dương Ngọc Mai",
+      "Nguyễn Đàm Lâm",
+      "Lê Thị Nhàn",
+      "Trần Thu Trang",
+      "Lưu Thị Huệ",
+      "Dương Thị Lan",
+      "Trương Thị Hồng Nhung",
+      "Nguyễn Thị Thanh Xuân",
+      "Nguyễn Thị Hà Giang",
+      "Nguyễn Thị Huyền",
+      "Vũ Thị Thi",
+      "Ân Tiến Dũng",
+      "Hứa Kim Chi",
+      "Ngô Minh Thuỳ",
+      "Nguyễn Hà Thu",
+      "Nguyễn Thị Thơm",
+      "Nguyễn Thị Thanh Thảo",
+      "Nguyễn Thị Thu Trà",
+      "Dương Ngọc Ánh",
+      "Đoàn Thanh Tuấn",
+      "Nguyễn Thị Nga",
+      "Nguyễn Thị Hiền",
+      "Nguyễn Thị Kim Hoa",
+      "Nguyễn Thị Thu Thương",
+      "Nguyễn Thị Hải",
+      "Nguyễn Quỳnh Anh",
+      "Vũ Minh Hiếu",
+      "Nguyễn Huy Hoàng",
+      "Vũ Thị Loan",
+      "Hà Thị Phương Loan",
+      "Vương Thị Thủy",
+      "Trần Thị Thu Hoài",
+      "Nguyễn Thị Khánh Hiền",
+      "Nguyễn Thị Kiều",
+      "Mai Phương Thảo",
+      "Ma Thị Uyên",
+      "Nguyễn Thị Anh Ngọc",
+      "Lê Khắc Phúc",
+      "Phạm Thị Bảo Yến",
+      "Đào Thị Vân Anh",
+      "Nguyễn Thị Thuỳ Linh",
+      "Nguyễn Thị Hạnh",
+      "Trần Thị Thanh Xuyên",
+      "Đào Thị Phương Nhung",
+      "Đinh Thị Thanh Nam",
+      "Trần Thị Hương",
+      "Nguyễn Hải Yến",
+      "Dương Thị Hương",
+      "Phan Thị Hà",
+      "Dương Thị Kiều Anh",
+      "Dương Thị Uyên",
+      "Lê Thị Thanh Thuỷ",
+      "Nguyễn Lệ Quyên",
+      "Phạm Hữu Phúc",
+      "Nguyễn Ngọc Anh",
+      "Nguyễn Thị Hoàng Nguyên",
+      "Ngô Thị Thu Thuỷ",
+      "Lê Thị Hồng",
+      "Bùi Ngọc Viễn",
+      "Nguyễn Thị Đoan Trang",
+      "Nguyễn Thị Thu",
+      "Thân Thị Hường",
+      "Nguyễn Thị Thùy Linh",
+      "Đỗ Thị Thu Hiền",
+      "Lê Minh Ngọc",
+      "Ninh Thị Bích Lụa",
+      "Trần Thị Anh",
+      "Hoàng Anh Tuấn",
+      "Vũ Thị Tuyết Nhung",
+      "Đào Thị Ngát",
+      "Dương Ngọc Lan",
+      "Trần Thị Thanh Hải",
+      "Ngô Thị Tân",
+      "Phan Thị Hồng",
+      "Nguyễn Thị Liên Hương",
+      "Lê Quỳnh Anh",
+      "Trương Minh Quang",
+      "Phạm Thị Loan",
+      "Trần Thảo My",
+      "Dương Thị Thái",
+      "Phạm Thị Mơ",
+      "Dương Thị Vân",
+      "Trần Thị Thu Thảo",
+      "Lê Thị Phương",
+      "Kim Thị Tâm",
+      "Hoàng Thị Huệ",
+      "Nguyễn Thị Liễu",
+      "Hoàng Thị Hương",
+      "Bùi Thị Thanh Hoàn",
+      "Bùi Thị Nhíp"
+];
 
     const DEPT_LEADERS = {
       "Tổ 1, 2, 3": "Nguyễn Ngọc Bích",
       "Tổ 4, 5": "Nguyễn Thị Huyền",
-      "Tổ Khoa học Tự nhiên": "Nguyễn Hải Yến",
-      "Tổ Khoa học Xã hội": "Đào Thị Vân Anh",
-      "Tổ Nghệ thuật": "Ninh Thị Bích Lụa",
+      "Tổ KHXH": "Đào Thị Vân Anh",
+      "Tổ KHTN": "Nguyễn Hải Yến",
+      "Tổ Ngoại ngữ - GDTC - NT": "Ninh Thị Bích Lụa",
       "Tổ Văn phòng": "Dương Thị Thái",
       "Ban Giám hiệu": "Bùi Thị Thanh Hoàn"
     };
@@ -1119,9 +1478,9 @@
     const DEPT_EMAILS = {
       "Tổ 1, 2, 3": "ngocbichgstn@gmail.com",
       "Tổ 4, 5": "haihuyendinhhoa@gmail.com",
-      "Tổ Khoa học Tự nhiên": "haiyenxinh86@gmail.com",
-      "Tổ Khoa học Xã hội": "daovananhcvatn@gmail.com",
-      "Tổ Nghệ thuật": "ninhthithulua@gmail.com",
+      "Tổ KHXH": "daovananhcvatn@gmail.com",
+      "Tổ KHTN": "haiyenxinh86@gmail.com",
+      "Tổ Ngoại ngữ - GDTC - NT": "ninhthithulua@gmail.com",
       "Tổ Văn phòng": "duongthaihuyentt2@gmail.com"
     };
 
@@ -1136,7 +1495,7 @@
     };
 
     const BGH_NAMES = ["Bùi Thị Thanh Hoàn", "Bùi Thị Nhíp"];
-    const THU_KY_NAMES = ["Lê Thị Thanh Thủy", "Nguyễn Thị Thu Trà"];
+    const THU_KY_NAMES = ["Lê Thị Thanh Thuỷ", "Nguyễn Thị Thu Trà"];
 
     /**
      * Xác định luồng đánh giá của người đang được chấm trên phiếu:
@@ -1273,6 +1632,7 @@
       }
       syncCategoryFromRoleKey(currentRoleKey);
       checkPortalAuthOnLoad();
+      handleNameChange(document.getElementById("empName").value);
       updateAuthUI();
       renderApp();
     });
@@ -1553,6 +1913,22 @@
     // ĐIỀU HƯỚNG 4 PHÂN HỆ CHỨC NĂNG
     // ============================================================
     function switchMainModule(mod) {
+      // Kiểm tra phân quyền khi bấm các chức năng quản lý trên thanh công cụ
+      if (currentAuthRole === "vc" && (mod === "config" || mod === "report" || mod === "cloud")) {
+        showCustomModal(`<div style="text-align:center; padding:8px 0;">
+          <i class="fa-solid fa-lock" style="font-size:2.2rem; color:#dc2626; margin-bottom:10px;"></i><br>
+          <strong style="font-size:1.02rem; color:#991b1b;">Bạn chưa được cấp quyền hoặc không phải đối tượng sử dụng chức năng này</strong>
+        </div>`);
+        return;
+      }
+      if ((currentAuthRole === "tt" || currentAuthRole === "tk") && (mod === "config" || mod === "cloud")) {
+        showCustomModal(`<div style="text-align:center; padding:8px 0;">
+          <i class="fa-solid fa-lock" style="font-size:2.2rem; color:#dc2626; margin-bottom:10px;"></i><br>
+          <strong style="font-size:1.02rem; color:#991b1b;">Bạn chưa được cấp quyền hoặc không phải đối tượng sử dụng chức năng này</strong>
+        </div>`);
+        return;
+      }
+
       document.querySelectorAll(".nav-module-btn").forEach(b => b.classList.remove("active"));
       document.getElementById(`nav-${mod}`).classList.add("active");
 
@@ -1560,6 +1936,7 @@
       document.getElementById("module-vtvl").style.display = mod === "vtvl" ? "block" : "none";
       document.getElementById("module-config").style.display = mod === "config" ? "block" : "none";
       document.getElementById("module-report").style.display = mod === "report" ? "block" : "none";
+      document.getElementById("module-cloud").style.display = mod === "cloud" ? "block" : "none";
 
       if (mod === "config") renderConfigTable();
       if (mod === "report") renderReportModule();
@@ -1675,6 +2052,17 @@
       document.getElementById("sigSelfName").textContent = selectedName || "...";
       document.getElementById("headerCurrentUserDisplay").textContent = selectedName || "...";
 
+      // Tự động gắn đúng Tổ chuyên môn / Bộ phận theo danh sách chuẩn 17/11/2026
+      const mappedDept = STAFF_DEPT_MAP[(selectedName || "").trim()];
+      const deptSel = document.getElementById("empDepartment");
+      if (mappedDept && deptSel && deptSel.value !== mappedDept) {
+        deptSel.value = mappedDept;
+        const leadInput = document.getElementById("leadApproverName");
+        if (leadInput && DEPT_LEADERS[mappedDept]) {
+          leadInput.value = DEPT_LEADERS[mappedDept];
+        }
+      }
+
       if (selectedName === "Bùi Thị Thanh Hoàn" && currentRoleKey !== "bgh_ht") {
         syncCategoryFromRoleKey("bgh_ht");
         switchSpecificVTVL("bgh_ht");
@@ -1686,6 +2074,7 @@
         return;
       }
 
+      handleNameChange(document.getElementById("empName").value);
       updateAuthUI();
       renderApp();
       autoSave();
@@ -2317,7 +2706,7 @@
             document.getElementById("sigSelfName").textContent = decoded.empName;
           }
           document.getElementById("empPosition").value = decoded.empPosition || "";
-          document.getElementById("empDepartment").value = decoded.empDepartment || "Tổ Khoa học Tự nhiên";
+          document.getElementById("empDepartment").value = decoded.empDepartment || STAFF_DEPT_MAP[decoded.empName] || "Tổ 4, 5";
           document.getElementById("evalPeriod").value = decoded.evalPeriod || "";
           currentScores = decoded.scores || {};
           activeBonuses = new Set(decoded.bonuses || []);
@@ -2880,11 +3269,13 @@ function doPost(e) {
       const loggedUser = localStorage.getItem("KPI_915_LOGGED_USER") || "";
       const flowType = getEvaluationFlowType();
 
+      // Luôn giữ hiển thị đầy đủ các nút chức năng trên thanh công cụ cho mọi đối tượng
+      if (navConfig) navConfig.style.display = "inline-flex";
+      if (navReport) navReport.style.display = "inline-flex";
+      if (navCloud)  navCloud.style.display = "inline-flex";
+
       if (currentAuthRole === "vc") {
         if (badge) { badge.textContent = "Viên chức / NLĐ"; badge.style.background = "#0284c7"; }
-        if (navConfig) navConfig.style.display = "none";
-        if (navReport) navReport.style.display = "none";
-        if (navCloud)  navCloud.style.display = "none";
         if (empDeptSelect) empDeptSelect.disabled = false;
         if (empNameSelect) empNameSelect.disabled = false;
         if (btnShareText) btnShareText.textContent = "Gửi phiếu lên Sheets";
@@ -2896,9 +3287,6 @@ function doPost(e) {
         }
       } else if (currentAuthRole === "tt") {
         if (badge) { badge.textContent = "Tổ trưởng CM"; badge.style.background = "#ea580c"; }
-        if (navConfig) navConfig.style.display = "none";
-        if (navReport) navReport.style.display = "inline-flex";
-        if (navCloud)  navCloud.style.display = "none";
         if (empDeptSelect) empDeptSelect.disabled = true;
         if (empNameSelect) empNameSelect.disabled = false;
         if (reportDeptFilter && empDeptSelect) {
@@ -2919,9 +3307,6 @@ function doPost(e) {
         }
       } else if (currentAuthRole === "tk") {
         if (badge) { badge.textContent = "Thư ký Hội đồng"; badge.style.background = "#7c3aed"; }
-        if (navConfig) navConfig.style.display = "none";
-        if (navReport) navReport.style.display = "inline-flex";
-        if (navCloud)  navCloud.style.display = "none";
         if (empDeptSelect) empDeptSelect.disabled = false;
         if (empNameSelect) empNameSelect.disabled = false;
         if (reportDeptFilter) reportDeptFilter.disabled = false;
@@ -2961,14 +3346,29 @@ function doPost(e) {
       document.getElementById("subtab-missing").style.display = tab === "missing" ? "block" : "none";
     }
 
+    function normalizeDeptName(rawDept, empName) {
+      const nameClean = (empName || "").trim();
+      if (STAFF_DEPT_MAP[nameClean]) return STAFF_DEPT_MAP[nameClean];
+      const d = (rawDept || "").trim();
+      if (d === "Tổ Khoa học Tự nhiên") return "Tổ KHTN";
+      if (d === "Tổ Khoa học Xã hội") return "Tổ KHXH";
+      if (d === "Tổ Nghệ thuật") return "Tổ Ngoại ngữ - GDTC - NT";
+      return d || "Chưa phân tổ";
+    }
+
     function getFilteredRecordsAndMissing() {
       const period = (document.getElementById("reportFilterPeriod")?.value || document.getElementById("evalPeriod")?.value || "Tháng 11/2026").trim();
       const dept = document.getElementById("reportFilterDept")?.value || "ALL";
 
-      const submittedInPeriod = cloudUnitRecords.filter(r =>
-        (r.evalPeriod || "").trim() === period &&
-        (dept === "ALL" || r.empDepartment === dept)
-      );
+      const submittedInPeriod = cloudUnitRecords
+        .map(r => ({
+          ...r,
+          empDepartment: normalizeDeptName(r.empDepartment, r.empName)
+        }))
+        .filter(r =>
+          (r.evalPeriod || "").trim() === period &&
+          (dept === "ALL" || r.empDepartment === dept)
+        );
 
       const submittedNamesSet = new Set(
         cloudUnitRecords
@@ -2976,27 +3376,22 @@ function doPost(e) {
           .map(r => (r.empName || "").trim())
       );
 
-      // Map tên nhân sự -> Tổ chuyên môn gần nhất (nếu đã từng nộp kỳ khác)
-      const knownDeptMap = {};
-      cloudUnitRecords.forEach(r => {
-        if (r.empName && r.empDepartment) knownDeptMap[r.empName.trim()] = r.empDepartment;
-      });
-      Object.entries(DEPT_LEADERS).forEach(([dName, leaderName]) => {
-        knownDeptMap[leaderName] = dName;
-      });
-
       let missingList = STAFF_NAMES
         .filter(name => !submittedNamesSet.has(name.trim()))
         .map(name => ({
           empName: name,
-          empDepartment: knownDeptMap[name] || "Chưa phân tổ trên hệ thống"
+          empDepartment: STAFF_DEPT_MAP[name.trim()] || "Chưa phân tổ trên hệ thống"
         }));
 
       if (dept !== "ALL") {
         missingList = missingList.filter(m => m.empDepartment === dept);
       }
 
-      return { period, dept, submittedInPeriod, missingList, totalStaff: STAFF_NAMES.length };
+      const totalStaffInScope = dept === "ALL"
+        ? STAFF_NAMES.length
+        : (DEPT_MEMBERS[dept] ? DEPT_MEMBERS[dept].length : STAFF_NAMES.length);
+
+      return { period, dept, submittedInPeriod, missingList, totalStaff: totalStaffInScope };
     }
 
     function refreshMissingCountBadge() {
