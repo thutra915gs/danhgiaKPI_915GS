@@ -2482,7 +2482,7 @@ function doPost(e) {
         localStorage.removeItem("KPI_915_GAS_URL");
         document.getElementById("kpiGasUrlInput").value = KPI_GAS_URL;
         updateCloudStatusBadge();
-        msgEl.innerHTML = "✅ Đã khôi phục liên kết Google Sheets mặc định (<strong>trantt.915giasang.tn@gmail.com</strong>).";
+        msgEl.textContent = "Đã khôi phục liên kết Google Sheets mặc định của Trường Tiểu học và THCS 915 Gia Sàng.";
         return;
       }
       if (!val.startsWith("https://script.google.com/")) {
@@ -2508,7 +2508,7 @@ function doPost(e) {
     function copyKpiShareUrl() {
       const cleanUrl = window.location.href.split("?")[0];
       navigator.clipboard.writeText(cleanUrl).then(() => {
-        showCustomModal(`✅ Đã copy đường link chính thức (<strong>${cleanUrl}</strong>)!<br><br>Hệ thống đã gắn sẵn kết nối Google Sheets (<strong>trantt.915giasang.tn@gmail.com</strong>) bên trong, thầy/cô chỉ cần gửi link này cho toàn thể CBGVNV, Tổ trưởng và BGH để sử dụng ngay.`);
+        showCustomModal(`✅ Đã copy đường link chính thức (<strong>${cleanUrl}</strong>)!<br><br>Hệ thống đã gắn sẵn kết nối Google Sheets (<code>trantt.915giasang.tn@gmail.com</code>) bên trong. Toàn thể CBGVNV, Tổ trưởng và BGH chỉ cần mở link này, chấm điểm và bấm <strong>Gửi phiếu lên Sheets</strong> là tự động đồng bộ 3 cấp.`);
       });
     }
 
