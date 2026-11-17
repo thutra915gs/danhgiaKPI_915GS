@@ -2435,7 +2435,7 @@ function doPost(e) {
   }
 }
 `;
-    const DEFAULT_KPI_GAS_URL = ""; // Dán URL Web App vào đây nếu muốn gắn cứng vĩnh viễn
+    const DEFAULT_KPI_GAS_URL = "https://script.google.com/macros/s/AKfycbzowZACQdxhxwC2UjCBv_yypGQuAPAMqoe_bTDq8EbCnT4JKkB2yaO4JTdTXmIvfytM/exec";
 
     const kpiUrlParams = new URLSearchParams(window.location.search);
     if (kpiUrlParams.get("gas")) {
@@ -2478,10 +2478,11 @@ function doPost(e) {
       const val = document.getElementById("kpiGasUrlInput").value.trim();
       const msgEl = document.getElementById("kpiGasStatusMsg");
       if (!val) {
-        KPI_GAS_URL = "";
+        KPI_GAS_URL = DEFAULT_KPI_GAS_URL;
         localStorage.removeItem("KPI_915_GAS_URL");
+        document.getElementById("kpiGasUrlInput").value = KPI_GAS_URL;
         updateCloudStatusBadge();
-        msgEl.textContent = "Đã gỡ liên kết Google Sheets.";
+        msgEl.innerHTML = "✅ Đã khôi phục liên kết Google Sheets mặc định (<strong>trantt.915giasang.tn@gmail.com</strong>).";
         return;
       }
       if (!val.startsWith("https://script.google.com/")) {
@@ -2505,14 +2506,9 @@ function doPost(e) {
     }
 
     function copyKpiShareUrl() {
-      if (!KPI_GAS_URL) {
-        showCustomModal("⚠️ Chị vui lòng dán và lưu URL Google Apps Script Web App ở trên trước khi copy link gửi toàn trường!");
-        return;
-      }
-      const baseUrl = window.location.href.split("?")[0];
-      const shareUrl = `${baseUrl}?gas=${encodeURIComponent(KPI_GAS_URL)}`;
-      navigator.clipboard.writeText(shareUrl).then(() => {
-        showCustomModal(`✅ Đã copy đường link tích hợp sẵn Google Sheets!<br><br>Chị chỉ cần gửi đường link này cho toàn thể CBGVNV, Tổ trưởng và BGH. Mọi người mở lên nhập điểm và bấm <strong>Gửi kết quả lên Google Sheets</strong> là tự động đồng bộ 3 cấp mà không cần dán link qua Zalo/Email nữa.`);
+      const cleanUrl = window.location.href.split("?")[0];
+      navigator.clipboard.writeText(cleanUrl).then(() => {
+        showCustomModal(`✅ Đã copy đường link chính thức (<strong>${cleanUrl}</strong>)!<br><br>Hệ thống đã gắn sẵn kết nối Google Sheets (<strong>trantt.915giasang.tn@gmail.com</strong>) bên trong, thầy/cô chỉ cần gửi link này cho toàn thể CBGVNV, Tổ trưởng và BGH để sử dụng ngay.`);
       });
     }
 
