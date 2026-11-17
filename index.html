@@ -191,6 +191,7 @@
     .form-group label { font-size: 0.83rem; font-weight: 700; color: var(--gray-700); }
     .form-control { padding: 9px 12px; border-radius: 8px; border: 1px solid var(--gray-300); font-size: 0.88rem; outline: none; background: white; }
     .form-control:focus { border-color: var(--orange-main); box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15); }
+    .form-control:disabled { background-color: #f1f5f9; color: #475569; cursor: not-allowed; }
 
     /* NHÓM VỊ TRÍ VIỆC LÀM THEO BIỂU C1 */
     .object-selector { display: flex; gap: 8px; background: var(--gray-100); padding: 6px; border-radius: 10px; margin-bottom: 14px; flex-wrap: wrap; }
@@ -368,7 +369,7 @@
     .portal-control:focus { background: #ffffff; border-color: var(--orange-main); box-shadow: 0 0 0 4px rgba(234, 88, 12, 0.15); }
     .portal-toggle-pwd { position: absolute; right: 14px; color: #94a3b8; cursor: pointer; font-size: 1rem; padding: 4px; }
 
-    .portal-auth-roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+    .portal-auth-roles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 14px; }
     .portal-auth-btn {
       padding: 10px 6px; border: 1.5px solid var(--gray-200); border-radius: 10px; background: #f8fafc;
       font-size: 0.78rem; font-weight: 700; color: var(--gray-700); text-align: center; cursor: pointer;
@@ -441,15 +442,19 @@
         <div class="portal-auth-roles">
           <div class="portal-auth-btn active" id="authrole-vc" onclick="selectPortalAuthRole('vc')">
             <i class="fa-solid fa-user"></i>
-            <span>Viên chức / NLĐ</span>
+            <span>Viên chức</span>
           </div>
           <div class="portal-auth-btn" id="authrole-tt" onclick="selectPortalAuthRole('tt')">
             <i class="fa-solid fa-user-check"></i>
-            <span>Tổ trưởng CM</span>
+            <span>Tổ trưởng</span>
+          </div>
+          <div class="portal-auth-btn" id="authrole-tk" onclick="selectPortalAuthRole('tk')">
+            <i class="fa-solid fa-file-signature"></i>
+            <span>Thư ký</span>
           </div>
           <div class="portal-auth-btn" id="authrole-bgh" onclick="selectPortalAuthRole('bgh')">
             <i class="fa-solid fa-crown"></i>
-            <span>Ban Giám hiệu</span>
+            <span>BGH</span>
           </div>
         </div>
       </div>
@@ -556,7 +561,7 @@
          ========================================================= -->
     <div id="module-eval">
       <!-- QUY TRÌNH 3 BƯỚC CHUẨN HÓA THEO KPI.THAINGUYEN.GOV.VN -->
-      <div class="tn-stepper no-print">
+      <div class="tn-stepper no-print" id="tnStepperBar">
         <div class="tn-step active" id="step-ind-1">
           <div class="tn-step-num">1</div>
           <div class="tn-step-info">
@@ -735,12 +740,12 @@
         </div>
 
         <!-- Ý KIẾN NHẬN XÉT CỦA TỔ TRƯỞNG & BGH -->
-        <div class="comment-box-grid">
-          <div class="comment-panel">
+        <div class="comment-box-grid" id="commentBoxGrid">
+          <div class="comment-panel" id="leadCommentPanel">
             <label><i class="fa-solid fa-comment-dots" style="color: var(--orange-main);"></i> Ý kiến nhận xét của Tổ trưởng chuyên môn:</label>
             <textarea id="leadCommentInput" placeholder="Tổ trưởng chuyên môn ghi nhận xét, thẩm định ưu/khuyết điểm..." oninput="autoSave()"></textarea>
           </div>
-          <div class="comment-panel">
+          <div class="comment-panel" id="bghCommentPanel">
             <label><i class="fa-solid fa-stamp" style="color: var(--green-main);"></i> Ý kiến phê duyệt của Ban Giám hiệu:</label>
             <textarea id="bghCommentInput" placeholder="Ban Giám hiệu ghi ý kiến phê duyệt kết quả xếp loại..." oninput="autoSave()"></textarea>
           </div>
@@ -771,7 +776,7 @@
             <div class="sig-sub">(Ký số / Ký nhận xét và đánh giá)</div>
             <div><input type="text" id="leadApproverName" class="sig-input-name" placeholder="Nhập tên Tổ trưởng..." value="Nguyễn Hải Yến" oninput="autoSave()"></div>
           </div>
-          <div>
+          <div id="sigColBgh">
             <div class="sig-role">Hiệu Trưởng Phê Duyệt</div>
             <div class="sig-sub">(Ký số và đóng dấu điện tử)</div>
             <div class="sig-name">Bùi Thị Thanh Hoàn</div>
@@ -1121,7 +1126,45 @@
     };
 
     const THU_KY_EMAIL = "lethuyk44a@gmail.com";
-    const SYSTEM_PASSWORD = "01112026";
+
+    // MẬT KHẨU RIÊNG CHO TỪNG VAI TRÒ (Thầy/cô có thể chỉnh sửa lại trực tiếp tại đây)
+    const ROLE_PASSWORDS = {
+      vc: "01112026",     // Mật khẩu chung cho Viên chức / NLĐ
+      tt: "tt9152026",    // Mật khẩu riêng cho Tổ trưởng chuyên môn
+      tk: "tk9152026",    // Mật khẩu riêng cho Thư ký Hội đồng
+      bgh: "bgh9152026"   // Mật khẩu riêng cho Ban Giám hiệu
+    };
+
+    const BGH_NAMES = ["Bùi Thị Thanh Hoàn", "Bùi Thị Nhíp"];
+    const THU_KY_NAMES = ["Lê Thị Thanh Thủy", "Nguyễn Thị Thu Trà"];
+
+    /**
+     * Xác định luồng đánh giá của người đang được chấm trên phiếu:
+     * - "ht_only": Hiệu trưởng -> Chỉ có cột 1 (Tự chấm)
+     * - "bgh_direct": Tổ trưởng CM hoặc Phó Hiệu trưởng -> Có cột 1 (Tự chấm) + cột 3 (BGH duyệt), KHÔNG có cột 2 (Tổ thẩm định)
+     * - "full_3": Giáo viên, nhân viên thường -> Có đủ 3 cột (Tự chấm -> Tổ thẩm định -> BGH duyệt)
+     */
+    function getEvaluationFlowType(empNameArg, empPosArg, roleKeyArg) {
+      const name = (empNameArg !== undefined ? empNameArg : (document.getElementById("empName")?.value || "")).trim();
+      const pos = (empPosArg !== undefined ? empPosArg : (document.getElementById("empPosition")?.value || "")).toLowerCase();
+      const rKey = roleKeyArg !== undefined ? roleKeyArg : currentRoleKey;
+
+      // 1. Hiệu trưởng: chỉ có tự chấm
+      if (rKey === "bgh_ht" || name === "Bùi Thị Thanh Hoàn" || (pos.includes("hiệu trưởng") && !pos.includes("phó"))) {
+        return "ht_only";
+      }
+      // 2. Phó Hiệu trưởng: chỉ có tự chấm + BGH chấm
+      if (rKey === "bgh_pht" || name === "Bùi Thị Nhíp" || pos.includes("phó hiệu trưởng")) {
+        return "bgh_direct";
+      }
+      // 3. Tổ trưởng chuyên môn: chỉ có tự chấm + BGH chấm
+      const deptLeaderNames = Object.values(DEPT_LEADERS).filter(n => n !== "Bùi Thị Thanh Hoàn");
+      if (deptLeaderNames.includes(name) || pos.includes("tổ trưởng") || pos.includes("to truong")) {
+        return "bgh_direct";
+      }
+      // 4. Giáo viên, nhân viên thường: đủ 3 cấp
+      return "full_3";
+    }
 
     // BẢNG TỔNG HỢP DANH MỤC VỊ TRÍ VIỆC LÀM (BIỂU C1 - FILE EXCEL)
     const BIEU_C1_LIST = [
@@ -1364,6 +1407,21 @@
       document.querySelectorAll(".portal-auth-btn").forEach(b => b.classList.remove("active"));
       const btn = document.getElementById(`authrole-${role}`);
       if (btn) btn.classList.add("active");
+
+      const portalSel = document.getElementById("portalUserSelect");
+      if (!portalSel) return;
+
+      let allowedList = STAFF_NAMES;
+      if (role === "tt") {
+        allowedList = Object.values(DEPT_LEADERS).filter(n => n !== "Bùi Thị Thanh Hoàn");
+      } else if (role === "tk") {
+        allowedList = THU_KY_NAMES;
+      } else if (role === "bgh") {
+        allowedList = BGH_NAMES;
+      }
+
+      portalSel.innerHTML = allowedList.map(n => `<option value="${n}">${n}</option>`).join("");
+      if (allowedList.length > 0) syncPortalUserToApp(allowedList[0]);
     }
 
     function togglePortalPwdVisibility() {
@@ -1393,9 +1451,10 @@
       const errText = document.getElementById("portalErrorText");
       const pwd = pwdInput ? pwdInput.value.trim() : "";
 
-      if (pwd !== SYSTEM_PASSWORD) {
+      const expectedPwd = ROLE_PASSWORDS[currentAuthRole];
+      if (pwd !== expectedPwd) {
         errBox.style.display = "flex";
-        errText.textContent = "MẬT KHẨU KHÔNG ĐÚNG! Vui lòng nhập đúng mật khẩu trường cấp.";
+        errText.textContent = "MẬT KHẨU KHÔNG ĐÚNG với vai trò đã chọn! Vui lòng kiểm tra lại.";
         pwdInput.focus();
         return;
       }
@@ -1406,9 +1465,18 @@
 
       const chosenUser = document.getElementById("portalUserSelect")?.value;
       if (chosenUser) {
+        localStorage.setItem("KPI_915_LOGGED_USER", chosenUser);
         document.getElementById("empName").value = chosenUser;
         handleNameChange(chosenUser);
         document.getElementById("headerCurrentUserDisplay").textContent = chosenUser;
+
+        if (currentAuthRole === "tt") {
+          const foundDept = Object.keys(DEPT_LEADERS).find(d => DEPT_LEADERS[d] === chosenUser);
+          if (foundDept) {
+            document.getElementById("empDepartment").value = foundDept;
+            handleDepartmentChange(foundDept);
+          }
+        }
       }
 
       updateAuthUI();
@@ -1606,6 +1674,20 @@
     function handleNameChange(selectedName) {
       document.getElementById("sigSelfName").textContent = selectedName || "...";
       document.getElementById("headerCurrentUserDisplay").textContent = selectedName || "...";
+
+      if (selectedName === "Bùi Thị Thanh Hoàn" && currentRoleKey !== "bgh_ht") {
+        syncCategoryFromRoleKey("bgh_ht");
+        switchSpecificVTVL("bgh_ht");
+        return;
+      }
+      if (selectedName === "Bùi Thị Nhíp" && currentRoleKey !== "bgh_pht") {
+        syncCategoryFromRoleKey("bgh_pht");
+        switchSpecificVTVL("bgh_pht");
+        return;
+      }
+
+      updateAuthUI();
+      renderApp();
       autoSave();
     }
 
@@ -1635,20 +1717,66 @@
       const cfg = KPI_ROLES[currentRoleKey] || KPI_ROLES["gv_tieuhoc"];
       document.getElementById("tableHeaderTitle").textContent = cfg.title;
 
+      const flowType = getEvaluationFlowType();
+      const showLeadCol = flowType === "full_3";
+      const showBghCol = flowType === "full_3" || flowType === "bgh_direct";
+      const totalCols = 6 + (showLeadCol ? 1 : 0) + (showBghCol ? 1 : 0);
+
+      // Ẩn/hiện tiêu đề cột bảng điểm
+      const thLead = document.getElementById("th-lead");
+      const thBgh = document.getElementById("th-bgh");
+      if (thLead) thLead.style.display = showLeadCol ? "" : "none";
+      if (thBgh) {
+        thBgh.style.display = showBghCol ? "" : "none";
+        thBgh.textContent = showLeadCol ? "3. BGH duyệt" : "2. BGH duyệt";
+      }
+
+      // Ẩn/hiện khung nhận xét & chữ ký tương ứng
+      const leadCommentPanel = document.getElementById("leadCommentPanel");
+      const bghCommentPanel = document.getElementById("bghCommentPanel");
+      const commentGrid = document.getElementById("commentBoxGrid");
+      if (leadCommentPanel) leadCommentPanel.style.display = showLeadCol ? "block" : "none";
+      if (bghCommentPanel) bghCommentPanel.style.display = showBghCol ? "block" : "none";
+      if (commentGrid) commentGrid.style.display = (showLeadCol || showBghCol) ? "grid" : "none";
+
+      const sigColLead = document.getElementById("sigColLead");
+      const sigColBgh = document.getElementById("sigColBgh");
+      const sigGrid = document.getElementById("signatureGrid");
+      if (sigColLead) sigColLead.style.display = showLeadCol ? "block" : "none";
+      if (sigColBgh) sigColBgh.style.display = showBghCol ? "block" : "none";
+      if (sigGrid) {
+        const sigCount = 1 + (showLeadCol ? 1 : 0) + (showBghCol ? 1 : 0);
+        sigGrid.style.gridTemplateColumns = `repeat(${sigCount}, 1fr)`;
+      }
+
+      // Ẩn/hiện các bước trên thanh quy trình
+      const step2 = document.getElementById("step-ind-2");
+      const step3 = document.getElementById("step-ind-3");
+      if (step2) step2.style.display = showLeadCol ? "flex" : "none";
+      if (step3) {
+        step3.style.display = showBghCol ? "flex" : "none";
+        const num3 = step3.querySelector(".tn-step-num");
+        if (num3) num3.textContent = showLeadCol ? "3" : "2";
+      }
+
       const tbody = document.getElementById("kpiTableBody");
       tbody.innerHTML = "";
       let currentPillar = null;
 
-      const canEditSelf = currentAuthRole === "vc" || currentAuthRole === "bgh";
-      const canEditLead = currentAuthRole === "tt" || currentAuthRole === "bgh";
-      const canEditBgh = currentAuthRole === "bgh";
+      // Quyền chỉnh sửa từng cột
+      const currentEmpName = document.getElementById("empName")?.value || "";
+      const loggedUser = localStorage.getItem("KPI_915_LOGGED_USER") || "";
+      const isEditingOwnSelf = (currentAuthRole === "vc" || currentAuthRole === "tt" || currentAuthRole === "tk") && (!loggedUser || loggedUser === currentEmpName);
+      const canEditSelf = isEditingOwnSelf || currentAuthRole === "bgh";
+      const canEditLead = showLeadCol && (currentAuthRole === "tt" || currentAuthRole === "bgh");
+      const canEditBgh = showBghCol && (currentAuthRole === "bgh");
 
       cfg.items.forEach(item => {
         if (item.pillar !== currentPillar) {
           currentPillar = item.pillar;
           const headerTr = document.createElement("tr");
           headerTr.innerHTML = `
-            <td colspan="8" style="background: #f8fafc; font-weight: 800; color: var(--green-dark); padding: 9px 12px; text-transform: uppercase; border-left: 4px solid var(--orange-main);">
+            <td colspan="${totalCols}" style="background: #f8fafc; font-weight: 800; color: var(--green-dark); padding: 9px 12px; text-transform: uppercase; border-left: 4px solid var(--orange-main);">
               <i class="fa-solid fa-bookmark" style="color: var(--orange-main); margin-right: 6px;"></i> ${item.pillarName}
             </td>
           `;
@@ -1677,6 +1805,22 @@
         const leadVal = (scoreObj.lead !== undefined) ? scoreObj.lead : '';
         const bghVal = (scoreObj.bgh !== undefined) ? scoreObj.bgh : '';
 
+        const leadTdHtml = showLeadCol ? `
+          <td style="text-align: center; vertical-align: middle;">
+            <input type="number" step="0.5" min="0" max="${item.max}" class="input-score ${canEditLead ? 'highlight-lead' : 'locked-score'}"
+              value="${leadVal}" placeholder="-" ${!canEditLead ? 'readonly' : ''}
+              oninput="handleScoreChange('${item.code}', 'lead', this.value, ${item.max})" />
+          </td>
+        ` : '';
+
+        const bghTdHtml = showBghCol ? `
+          <td style="text-align: center; vertical-align: middle;">
+            <input type="number" step="0.5" min="0" max="${item.max}" class="input-score ${canEditBgh ? 'highlight-bgh' : 'locked-score'}"
+              value="${bghVal}" placeholder="-" ${!canEditBgh ? 'readonly' : ''}
+              oninput="handleScoreChange('${item.code}', 'bgh', this.value, ${item.max})" />
+          </td>
+        ` : '';
+
         tr.innerHTML = `
           <td style="text-align: center; vertical-align: middle;"><span class="badge-code">${item.code}</span></td>
           <td>
@@ -1694,16 +1838,8 @@
               value="${selfVal}" ${!canEditSelf ? 'readonly' : ''}
               oninput="handleScoreChange('${item.code}', 'self', this.value, ${item.max})" />
           </td>
-          <td style="text-align: center; vertical-align: middle;">
-            <input type="number" step="0.5" min="0" max="${item.max}" class="input-score ${canEditLead ? 'highlight-lead' : 'locked-score'}"
-              value="${leadVal}" placeholder="-" ${!canEditLead ? 'readonly' : ''}
-              oninput="handleScoreChange('${item.code}', 'lead', this.value, ${item.max})" />
-          </td>
-          <td style="text-align: center; vertical-align: middle;">
-            <input type="number" step="0.5" min="0" max="${item.max}" class="input-score ${canEditBgh ? 'highlight-bgh' : 'locked-score'}"
-              value="${bghVal}" placeholder="-" ${!canEditBgh ? 'readonly' : ''}
-              oninput="handleScoreChange('${item.code}', 'bgh', this.value, ${item.max})" />
-          </td>
+          ${leadTdHtml}
+          ${bghTdHtml}
           <td style="vertical-align: middle;">
             <div class="evidence-cell">
               <input type="text" class="input-text-sm" placeholder="Link / Tên sản phẩm minh chứng..." value="${scoreObj.note || ''}" oninput="handleNoteChange('${item.code}', this.value)" />
@@ -1798,7 +1934,15 @@
       let p1 = 0, p2 = 0, maxP1 = 0, maxP2 = 0;
       let hasUnder70 = false;
 
-      const evalColKey = currentAuthRole === "tt" ? "lead" : (currentAuthRole === "bgh" ? "bgh" : "self");
+      const flowType = getEvaluationFlowType();
+      let evalColKey = "self";
+      if (flowType === "ht_only") {
+        evalColKey = "self";
+      } else if (flowType === "bgh_direct") {
+        evalColKey = currentAuthRole === "bgh" ? "bgh" : "self";
+      } else {
+        evalColKey = currentAuthRole === "tt" ? "lead" : (currentAuthRole === "bgh" ? "bgh" : "self");
+      }
 
       cfg.items.forEach(item => {
         if (item.pillar === 1) maxP1 += item.max;
@@ -1904,9 +2048,10 @@
         return "Mức 4 (Cần cố gắng)";
       };
 
+      const flowType = getEvaluationFlowType();
       const selfTotal = Math.min(110, selfSum + bonusScore);
-      const leadTotal = hasLeadInput ? Math.min(110, leadSum + bonusScore) : null;
-      const bghTotal = hasBghInput ? Math.min(110, bghSum + bonusScore) : null;
+      const leadTotal = (flowType === "full_3" && hasLeadInput) ? Math.min(110, leadSum + bonusScore) : null;
+      const bghTotal = (flowType !== "ht_only" && hasBghInput) ? Math.min(110, bghSum + bonusScore) : null;
 
       const selfRank = getRank(selfTotal, selfUnder70);
       const leadRank = leadTotal !== null ? getRank(leadTotal, leadUnder70) : selfRank;
@@ -1914,12 +2059,22 @@
 
       let activeTotal = selfTotal;
       let activeRank = selfRank;
-      if (currentAuthRole === "tt" && leadTotal !== null) {
-        activeTotal = leadTotal;
-        activeRank = leadRank;
-      } else if (currentAuthRole === "bgh") {
-        activeTotal = bghTotal !== null ? bghTotal : (leadTotal !== null ? leadTotal : selfTotal);
-        activeRank = bghRank;
+      if (flowType === "ht_only") {
+        activeTotal = selfTotal;
+        activeRank = selfRank;
+      } else if (flowType === "bgh_direct") {
+        if (currentAuthRole === "bgh") {
+          activeTotal = bghTotal !== null ? bghTotal : selfTotal;
+          activeRank = bghRank;
+        }
+      } else {
+        if (currentAuthRole === "tt" && leadTotal !== null) {
+          activeTotal = leadTotal;
+          activeRank = leadRank;
+        } else if (currentAuthRole === "bgh") {
+          activeTotal = bghTotal !== null ? bghTotal : (leadTotal !== null ? leadTotal : selfTotal);
+          activeRank = bghRank;
+        }
       }
 
       return { selfTotal, leadTotal, bghTotal, selfRank, leadRank, bghRank, activeTotal, activeRank };
@@ -2591,9 +2746,14 @@ function doPost(e) {
         return;
       }
 
+      if (currentAuthRole === "tk") {
+        banner.style.display = "none";
+        return;
+      }
       let filtered = cloudUnitRecords.filter(r => r.evalPeriod === evalPeriod);
       if (currentAuthRole === "tt") {
-        filtered = filtered.filter(r => r.empDepartment === myDept);
+        const loggedUser = localStorage.getItem("KPI_915_LOGGED_USER") || "";
+        filtered = filtered.filter(r => r.empDepartment === myDept && r.empName !== loggedUser);
         title.textContent = `Hồ sơ thuộc ${myDept} đã nộp (${filtered.length} phiếu) — Chọn để Tổ trưởng thẩm định:`;
       } else {
         title.textContent = `Hồ sơ toàn trường đã nộp (${filtered.length} phiếu) — Chọn để Ban Giám hiệu duyệt:`;
@@ -2623,9 +2783,16 @@ function doPost(e) {
       const evalPeriod = document.getElementById("evalPeriod").value;
       const scores3 = calculateAllRoleScores();
 
+      const flowType = getEvaluationFlowType();
       let workflowStatus = "1. Cá nhân đã tự chấm";
-      if (currentAuthRole === "tt") workflowStatus = "2. Tổ trưởng đã thẩm định";
-      if (currentAuthRole === "bgh") workflowStatus = "3. BGH đã phê duyệt";
+      if (flowType === "ht_only") {
+        workflowStatus = "Hiệu trưởng đã tự chấm (Hoàn thành)";
+      } else if (flowType === "bgh_direct") {
+        workflowStatus = currentAuthRole === "bgh" ? "2. BGH đã phê duyệt" : "1. Cá nhân đã tự chấm (Chờ BGH duyệt)";
+      } else {
+        if (currentAuthRole === "tt") workflowStatus = "2. Tổ trưởng đã thẩm định";
+        if (currentAuthRole === "bgh") workflowStatus = "3. BGH đã phê duyệt";
+      }
 
       const detailPayload = {
         role: currentRoleKey,
@@ -2701,17 +2868,86 @@ function doPost(e) {
     const _origUpdateAuthUI = updateAuthUI;
     updateAuthUI = function() {
       _origUpdateAuthUI();
+      const badge = document.getElementById("headerAuthRoleBadge");
       const btnShareText = document.getElementById("btnShareLeadText");
       const mainBtnText = document.getElementById("btnMainSubmitText");
+      const navConfig = document.getElementById("nav-config");
+      const navReport = document.getElementById("nav-report");
+      const navCloud  = document.getElementById("nav-cloud");
+      const empDeptSelect = document.getElementById("empDepartment");
+      const empNameSelect = document.getElementById("empName");
+      const reportDeptFilter = document.getElementById("reportFilterDept");
+      const loggedUser = localStorage.getItem("KPI_915_LOGGED_USER") || "";
+      const flowType = getEvaluationFlowType();
+
       if (currentAuthRole === "vc") {
+        if (badge) { badge.textContent = "Viên chức / NLĐ"; badge.style.background = "#0284c7"; }
+        if (navConfig) navConfig.style.display = "none";
+        if (navReport) navReport.style.display = "none";
+        if (navCloud)  navCloud.style.display = "none";
+        if (empDeptSelect) empDeptSelect.disabled = false;
+        if (empNameSelect) empNameSelect.disabled = false;
         if (btnShareText) btnShareText.textContent = "Gửi phiếu lên Sheets";
         if (mainBtnText) mainBtnText.textContent = "1. Gửi phiếu tự chấm lên Google Sheets";
+        if (document.getElementById("module-config")?.style.display === "block" ||
+            document.getElementById("module-report")?.style.display === "block" ||
+            document.getElementById("module-cloud")?.style.display === "block") {
+          switchMainModule("eval");
+        }
       } else if (currentAuthRole === "tt") {
-        if (btnShareText) btnShareText.textContent = "Lưu thẩm định lên Sheets";
-        if (mainBtnText) mainBtnText.textContent = "2. Lưu điểm Tổ trưởng thẩm định lên Sheets";
+        if (badge) { badge.textContent = "Tổ trưởng CM"; badge.style.background = "#ea580c"; }
+        if (navConfig) navConfig.style.display = "none";
+        if (navReport) navReport.style.display = "inline-flex";
+        if (navCloud)  navCloud.style.display = "none";
+        if (empDeptSelect) empDeptSelect.disabled = true;
+        if (empNameSelect) empNameSelect.disabled = false;
+        if (reportDeptFilter && empDeptSelect) {
+          reportDeptFilter.value = empDeptSelect.value;
+          reportDeptFilter.disabled = true;
+        }
+        const isSelfSheet = loggedUser && empNameSelect && empNameSelect.value === loggedUser;
+        if (isSelfSheet) {
+          if (btnShareText) btnShareText.textContent = "Gửi phiếu lên Sheets";
+          if (mainBtnText) mainBtnText.textContent = "1. Gửi phiếu tự chấm lên Google Sheets";
+        } else {
+          if (btnShareText) btnShareText.textContent = "Lưu thẩm định lên Sheets";
+          if (mainBtnText) mainBtnText.textContent = "2. Lưu điểm Tổ trưởng thẩm định lên Sheets";
+        }
+        if (document.getElementById("module-config")?.style.display === "block" ||
+            document.getElementById("module-cloud")?.style.display === "block") {
+          switchMainModule("eval");
+        }
+      } else if (currentAuthRole === "tk") {
+        if (badge) { badge.textContent = "Thư ký Hội đồng"; badge.style.background = "#7c3aed"; }
+        if (navConfig) navConfig.style.display = "none";
+        if (navReport) navReport.style.display = "inline-flex";
+        if (navCloud)  navCloud.style.display = "none";
+        if (empDeptSelect) empDeptSelect.disabled = false;
+        if (empNameSelect) empNameSelect.disabled = false;
+        if (reportDeptFilter) reportDeptFilter.disabled = false;
+        if (btnShareText) btnShareText.textContent = "Gửi phiếu lên Sheets";
+        if (mainBtnText) mainBtnText.textContent = "1. Gửi phiếu tự chấm lên Google Sheets";
+        if (document.getElementById("module-config")?.style.display === "block" ||
+            document.getElementById("module-cloud")?.style.display === "block") {
+          switchMainModule("report");
+        }
       } else {
-        if (btnShareText) btnShareText.textContent = "Phê duyệt lên Sheets";
-        if (mainBtnText) mainBtnText.textContent = "3. BGH Phê duyệt chính thức lên Sheets";
+        if (badge) { badge.textContent = "Ban Giám hiệu"; badge.style.background = "#15803d"; }
+        if (navConfig) navConfig.style.display = "inline-flex";
+        if (navReport) navReport.style.display = "inline-flex";
+        if (navCloud)  navCloud.style.display = "inline-flex";
+        if (empDeptSelect) empDeptSelect.disabled = false;
+        if (empNameSelect) empNameSelect.disabled = false;
+        if (reportDeptFilter) reportDeptFilter.disabled = false;
+        if (flowType === "ht_only") {
+          if (btnShareText) btnShareText.textContent = "Lưu phiếu Hiệu trưởng";
+          if (mainBtnText) mainBtnText.textContent = "Lưu kết quả tự chấm Hiệu trưởng lên Sheets";
+        } else {
+          if (btnShareText) btnShareText.textContent = "Phê duyệt lên Sheets";
+          if (mainBtnText) mainBtnText.textContent = flowType === "bgh_direct"
+            ? "2. BGH Phê duyệt chính thức lên Sheets"
+            : "3. BGH Phê duyệt chính thức lên Sheets";
+        }
       }
       populateReviewQueueDropdown();
     };
